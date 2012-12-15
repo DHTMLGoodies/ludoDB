@@ -1,10 +1,6 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: borrow
- * Date: 03.11.12
- * Time: 01:45
- * To change this template use File | Settings | File Templates.
+ * Representation of a ludoDB table
  */
 class LudoDbTable
 {
