@@ -249,7 +249,7 @@ class DBTest extends PHPUnit_Framework_TestCase
     }
 
     private function connect(){
-        $res = mysql_connect("localhost", "root", "Kaffien2");
+        $res = mysql_connect("localhost", "root", "administrator");
         mysql_select_db('test', $res);
 
         $this->connected = true;

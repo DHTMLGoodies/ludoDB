@@ -27,12 +27,12 @@ class TestTable extends LudoDbTable
     }
 
     public function getFirstname(){
-        return $this->getColumnValue('firstname');
+        return $this->getValue('firstname');
     }
     public function setLastname($value){
         $this->setValue('lastname', $value);
     }
     public function getLastname(){
-        return $this->getColumnValue('lastname');
+        return $this->getValue('lastname');
     }
 }

@@ -2,7 +2,7 @@
 /**
  * Representation of a ludoDB table
  */
-class LudoDbTable
+abstract class LudoDbTable
 {
     protected $db;
     protected $tableName;
@@ -123,7 +123,7 @@ class LudoDbTable
         }
     }
 
-    protected function getColumnValue($column)
+    protected function getValue($column)
     {
         if(isset($this->updates) && isset($this->updates[$column])){
             return $this->updates[$column];

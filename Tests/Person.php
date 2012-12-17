@@ -33,6 +33,6 @@ class Person extends LudoDbTable
     }
 
     public function getCity(){
-        return $this->getColumnValue('city');
+        return $this->getValue('city');
     }
 }
