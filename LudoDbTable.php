@@ -142,11 +142,11 @@ abstract class LudoDbTable
     /**
      * Commit changes to database
      * @method commit
-     * @return id
+     * @return {String|Number} id
      */
     public function commit()
     {
-        if (!isset($this->updates)) return;
+        if (!isset($this->updates)) return null;
         if ($this->getId()) {
             $this->update();
         } else {
@@ -171,7 +171,6 @@ abstract class LudoDbTable
         $sql .= "(" . implode(",", array_keys($this->updates)) . ")";
         $sql .= "values('" . implode("','", array_values($this->updates)) . "')";
         $this->db->query($sql);
-
         $this->id = mysql_insert_id();
     }
 
@@ -263,17 +262,12 @@ abstract class LudoDbTable
 
     public function getCollection($key)
     {
-        $config = $this->getCollectionConfig($key);
-        if (isset($config['columns'])) {
-            $columns = "c." . implode(",c.", $config['columns']);
-        } else {
-            $columns = "c.*";
-        }
-        $sql = " select $columns from " . $config['table'] . " c where c." . $config['pk'] . "='" . $this->getValue($config['fk']) . "'";
+        $config = $this->config['collections'][$key];
+        $sql = " select ". $this->getColumnsForCollection($key).
+            " from " . $config['table'] . " c where c." . $config['pk'] . "='" . $this->getValue($config['fk']) . "'";
         if (isset($config['orderBy'])) $sql .= " order by c." . $config['orderBy'];
-
         $result = $this->db->query($sql);
-        ;
+
         $ret = array();
         while ($row = mysql_fetch_assoc($result)) {
             $ret[] = $row;
@@ -281,9 +275,9 @@ abstract class LudoDbTable
         return $ret;
     }
 
-    private function getCollectionConfig($key)
-    {
-        return $this->config['collections'][$key];
+    private function getColumnsForCollection($collection){
+        $c = $this->config['collections'][$collection];
+        return isset($c['columns']) ? "c." . implode(",c.", $c['columns']) : 'c.*';
     }
 
     private function createIndexes()
