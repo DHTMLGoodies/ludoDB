@@ -6,13 +6,14 @@
  * Time: 02:15
  * To change this template use File | Settings | File Templates.
  */
-error_reporting(E_ALL);
-ini_set('display_errors','on');
 require_once(__DIR__ . "/../autoload.php");
 
 class DBTest extends PHPUnit_Framework_TestCase
 {
     private $connected = false;
+    private $dbUser = 'root';
+    private $dbPassword = 'administrator';
+
     public function setUp(){
         if(!$this->connected)$this->connect();
 
@@ -20,6 +21,7 @@ class DBTest extends PHPUnit_Framework_TestCase
         $tbl = new TestTable();
         $tbl->createTable();
     }
+
     /**
      * @test
      */
@@ -286,7 +288,7 @@ class DBTest extends PHPUnit_Framework_TestCase
     }
 
     private function connect(){
-        $res = mysql_connect("localhost", "root", "administrator");
+        $res = mysql_connect("localhost", $this->dbUser, $this->dbPassword);
         mysql_select_db('test', $res);
 
         $this->connected = true;

@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: borrow
- * Date: 19.11.12
- * Time: 23:28
- * To change this template use File | Settings | File Templates.
- */
 class Person extends LudoDbTable
 {
     protected $tableName = 'Person';
