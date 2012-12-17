@@ -8,6 +8,7 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'city' => '/Tests/City.php',
+                'country' => '/Tests/Country.php',
                 'dbtest' => '/Tests/DBTest.php',
                 'ludodb' => '/LudoDB.php',
                 'ludodbtable' => '/LudoDbTable.php',

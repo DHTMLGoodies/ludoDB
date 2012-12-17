@@ -36,18 +36,17 @@ abstract class LudoDbTable
     public function __construct($ref = null)
     {
         $this->db = new LudoDb();
-        if(isset($ref))$this->populate($ref);
+        if (isset($ref)) $this->populate($ref);
 
     }
 
     private function populate($ref)
     {
-        if(!isset($this->compiledSql)){
+        if (!isset($this->compiledSql)) {
             $this->compileSql();
         }
         if (is_numeric($ref)) {
-            $data = $this->db->one($this->compiledSql. " and t." . $this->idField . "='" . $ref . "'");
-
+            $data = $this->db->one($this->compiledSql . " and t." . $this->idField . "='" . $ref . "'");
         } else {
             if (count($this->searchFields)) {
                 $data = $this->getBySearchFields($ref);
@@ -62,37 +61,39 @@ abstract class LudoDbTable
 
     }
 
-    private function compileSql(){
+    private function compileSql()
+    {
         $sql = "select t.*";
         $joins = $this->getSQLJoin();
-        if(count($joins['columns'])){
-            $sql.=','.implode(",", $joins['columns']);
+        if (count($joins['columns'])) {
+            $sql .= ',' . implode(",", $joins['columns']);
         }
-        $sql.=" from ". $this->tableName. " t";
-        if(count($joins['from'])){
-            $sql.=",". implode($joins['from'], ",");
+        $sql .= " from " . $this->tableName . " t";
+        if (count($joins['from'])) {
+            $sql .= "," . implode($joins['from'], ",");
         }
-        $sql.=" where 1=1";
-        if(count($joins['where'])){
-            $sql.=" and ". implode($joins['where'],' and ');
+        $sql .= " where 1=1";
+        if (count($joins['where'])) {
+            $sql .= " and " . implode($joins['where'], ' and ');
         }
         $this->compiledSql = $sql;
     }
 
 
-    private function getSQLJoin(){
+    private function getSQLJoin()
+    {
         $ret = array(
             'columns' => array(),
             'from' => array(),
             'where' => array()
         );
-        if(!isset($this->config['join']))return $ret;
+        if (!isset($this->config['join'])) return $ret;
         $joins = $this->config['join'];
-        $i=1;
-        foreach($joins as $join){
-            $ret['columns'][] = 't'.$i. ".".implode($join['columns'], ",t".$i.".");
-            $ret['from'][]  = $join['table'] . " t". $i;
-            $ret['where'][] = 't.'.$join['fk']."=t".$i.".".$join['pk'];
+        $i = 1;
+        foreach ($joins as $join) {
+            $ret['columns'][] = 't' . $i . "." . implode($join['columns'], ",t" . $i . ".");
+            $ret['from'][] = $join['table'] . " t" . $i;
+            $ret['where'][] = 't.' . $join['fk'] . "=t" . $i . "." . $join['pk'];
             $i++;
         }
         return $ret;
@@ -125,7 +126,7 @@ abstract class LudoDbTable
 
     protected function getValue($column)
     {
-        if(isset($this->updates) && isset($this->updates[$column])){
+        if (isset($this->updates) && isset($this->updates[$column])) {
             return $this->updates[$column];
         }
         return isset($this->data[$column]) ? $this->data[$column] : null;
@@ -133,47 +134,58 @@ abstract class LudoDbTable
 
     protected function setValue($column, $value)
     {
-        if(!isset($this->updates))$this->updates = array();
-        if(is_string($value))$value = mysql_real_escape_string($value);
+        if (!isset($this->updates)) $this->updates = array();
+        if (is_string($value)) $value = mysql_real_escape_string($value);
         $this->updates[$column] = $value;
     }
 
+    /**
+     * Commit changes to database
+     * @method commit
+     * @return id
+     */
     public function commit()
     {
         if (!isset($this->updates)) return;
-        if($this->getId()){
+        if ($this->getId()) {
             $this->update();
-        }else{
+        } else {
             $this->insert();
         }
         foreach ($this->updates as $key => $value) {
             $this->data[$key] = $value;
         }
         $this->updates = null;
+        return $this->getId();
     }
 
-    private function update(){
+    private function update()
+    {
         $sql = "update " . $this->tableName . " set " . $this->getUpdatesForSql() . " where " . $this->idField . " = '" . $this->getId() . "'";
         $this->db->query($sql);
-
     }
 
-    private function insert(){
-        $sql  ="insert into ". $this->tableName;
-        $sql.="(". implode(",", array_keys($this->updates)). ")";
-        $sql.="values('". implode("','", array_values($this->updates))."')";
+    private function insert()
+    {
+        $sql = "insert into " . $this->tableName;
+        $sql .= "(" . implode(",", array_keys($this->updates)) . ")";
+        $sql .= "values('" . implode("','", array_values($this->updates)) . "')";
         $this->db->query($sql);
 
         $this->id = mysql_insert_id();
-
     }
 
+    /**
+     * Rollback changes
+     * @method rollback
+     */
     public function rollback()
     {
         $this->updates = null;
     }
 
-    public function getUpdates(){
+    public function getUpdates()
+    {
         return $this->updates;
     }
 
@@ -186,40 +198,105 @@ abstract class LudoDbTable
         return implode(",", $updates);
     }
 
-    public function setId($id){
+    public function setId($id)
+    {
         $this->setValue($this->idField, $id);
     }
+
     public function getId()
     {
         return $this->id;
     }
 
-    public function getTableName(){
+    public function getTableName()
+    {
         return $this->tableName;
     }
 
-    public function construct(){
-        $sql = "create table ". $this->getTableName()."(";
+    /**
+     * Create DB table
+     * @method createTable
+     */
+    public function createTable()
+    {
+        $sql = "create table " . $this->getTableName() . "(";
         $columns = array();
-        foreach($this->config['columns'] as $name=>$type){
-            $columns[] =  $name." ". $type;
+        foreach ($this->config['columns'] as $name => $type) {
+            $columns[] = $name . " " . $type;
         }
         $sql .= implode(",", $columns);
-        $sql.=")";
+        $sql .= ")";
         mysql_query($sql) or die($sql);
+
+        $this->createIndexes();
     }
 
-    public function exists(){
+    /**
+     * Returns true if database table exists.
+     * @return bool
+     */
+    public function exists()
+    {
         return mysql_num_rows(
-            mysql_query("show tables like '". $this->getTableName() . "'")
+            mysql_query("show tables like '" . $this->getTableName() . "'")
         ) > 0;
     }
 
-    public function drop(){
-        mysql_query("drop table ". $this->getTableName());
+    /**
+     * Drop database table
+     * @method drop
+     */
+
+    public function drop()
+    {
+        mysql_query("drop table " . $this->getTableName());
     }
 
-    public function deleteAll(){
-        mysql_query("delete from ". $this->getTableName());
+    /**
+     * Delete all records from database table
+     * @method deleteAll
+     */
+    public function deleteAll()
+    {
+        mysql_query("delete from " . $this->getTableName());
+    }
+
+    public function getCollection($key)
+    {
+        $config = $this->getCollectionConfig($key);
+        if (isset($config['columns'])) {
+            $columns = "c." . implode(",c.", $config['columns']);
+        } else {
+            $columns = "c.*";
+        }
+        $sql = " select $columns from " . $config['table'] . " c where c." . $config['pk'] . "='" . $this->getValue($config['fk']) . "'";
+        if (isset($config['orderBy'])) $sql .= " order by c." . $config['orderBy'];
+
+        $result = $this->db->query($sql);
+        ;
+        $ret = array();
+        while ($row = mysql_fetch_assoc($result)) {
+            $ret[] = $row;
+        }
+        return $ret;
+    }
+
+    private function getCollectionConfig($key)
+    {
+        return $this->config['collections'][$key];
+    }
+
+    private function createIndexes()
+    {
+        if (!isset($this->config['indexes'])) return;
+        $indexes = $this->config['indexes'];
+        foreach ($indexes as $index) {
+            $this->db->query("create index " . $this->getIndexName($index) . " on " . $this->tableName . "(" . $index . ")");
+        }
+    }
+
+    private function getIndexName($field)
+    {
+        return 'IND_' . md5($this->tableName . $field);
     }
 }

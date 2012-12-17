@@ -13,8 +13,10 @@ class City extends LudoDbTable
     protected $config = array(
         'columns' => array(
             'zip' => 'varchar(32) primary key',
-            'city' => 'varchar(64)'
-        )
+            'city' => 'varchar(64)',
+            'countryId' => 'int'
+        ),
+        'indexes' => array('countryId')
     );
 
     public function setZip($zip){
@@ -23,5 +25,9 @@ class City extends LudoDbTable
 
     public function setCity($city){
         $this->setValue('city', $city);
+    }
+
+    public function setCountryId($countryId){
+        $this->setValue('countryId', $countryId);
     }
 }

@@ -18,7 +18,7 @@ class DBTest extends PHPUnit_Framework_TestCase
 
         $this->dropTable();
         $tbl = new TestTable();
-        $tbl->construct();
+        $tbl->createTable();
     }
     /**
      * @test
@@ -40,7 +40,6 @@ class DBTest extends PHPUnit_Framework_TestCase
         // then
         $this->assertEquals(1, count($table->getUpdates()));
         $this->assertEquals(array('firstname' => 'Alf Magne'), $table->getUpdates());
-
     }
 
     /**
@@ -65,7 +64,7 @@ class DBTest extends PHPUnit_Framework_TestCase
     public function shouldBeAbleToCreateTable(){
         $this->dropTable();
         $table = new TestTable();
-        $table->construct();
+        $table->createTable();
     }
 
     /**
@@ -83,7 +82,7 @@ class DBTest extends PHPUnit_Framework_TestCase
     public function shouldReturnTrueIfTableExists(){
         $this->dropTable();
         $table = new TestTable();
-        $table->construct();
+        $table->createTable();
         $this->assertTrue($table->exists());
     }
 
@@ -210,14 +209,14 @@ class DBTest extends PHPUnit_Framework_TestCase
     public function shouldBeAbleToHaveJoins(){
         // given
         $person = new Person();
-        if(!$person->exists())$person->construct();
+        if(!$person->exists())$person->createTable();
         $person->deleteAll();
         $person->setId('1');
         $person->setFirstname('John');
         $person->setZip('4330');
         $person->commit();
         $city = new City();
-        if(!$city->exists())$city->construct();
+        if(!$city->exists())$city->createTable();
         $city->deleteAll();
         $city->setZip(4330);
         $city->setCity('Algard');
@@ -228,8 +227,46 @@ class DBTest extends PHPUnit_Framework_TestCase
 
         // then
         $this->assertEquals('Algard', $person->getCity());
+    }
 
+    /**
+     * @test
+     */
+    public function shouldBeAbleToHaveCollections(){
+        $countryId = $this->createCountryData();
 
+        // given
+        $country = new Country($countryId);
+        $this->assertEquals('Norway', $country->getName());
+
+        // when
+        $cities = $country->getCollection('cities');
+
+        // then
+        $this->assertEquals(4, count($cities));
+    }
+
+    private function createCountryData(){
+        $country = new Country();
+        if(!$country->exists())$country->createTable();
+        $country->setName('Norway');
+        $country->commit();
+        $id = $country->getId();
+
+        $cities = array('Oslo','Bergen','Stavanger','Sandnes');
+        $city = new City();
+        if($city->exists())$city->drop();
+        $city->createTable();
+        $i=0;
+        foreach($cities as $cityName){
+            $city = new City();
+            $city->setCity($cityName);
+            $city->setZip(5000 + $i);
+            $city->setCountryId($id);
+            $city->commit();
+            $i++;
+        }
+        return $country->getId();
     }
 
     private function getExistingRecord(){
