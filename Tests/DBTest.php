@@ -248,6 +248,28 @@ class DBTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(4, count($cities));
     }
 
+    /**
+     * @test
+     */
+    public function shouldBeAbleToDefineDefaultData(){
+        // given
+        $car = new Car();
+        if($car->exists())$car->drop();
+        $car->createTable();
+
+        new Car();
+
+        $res = mysql_query("select count(id) as num from car");
+        $row = mysql_fetch_assoc($res);
+
+        // then
+        $this->assertEquals(3, $row['num']);
+
+        $car = new Car(1);
+        $this->assertEquals('Opel', $car->getBrand());
+
+    }
+
     private function createCountryData(){
         $country = new Country();
         if(!$country->exists())$country->createTable();

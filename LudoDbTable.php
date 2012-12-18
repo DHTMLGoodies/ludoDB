@@ -228,6 +228,7 @@ abstract class LudoDbTable
         mysql_query($sql) or die($sql);
 
         $this->createIndexes();
+        $this->insertDefaultData();
     }
 
     /**
@@ -292,5 +293,18 @@ abstract class LudoDbTable
     private function getIndexName($field)
     {
         return 'IND_' . md5($this->tableName . $field);
+    }
+
+    private function insertDefaultData(){
+        if(!isset($this->config['data']))return;
+        $data = $this->config['data'];
+        $className = get_class($this);
+        foreach($data as $item){
+            $cl = new $className();
+            foreach($item as $key=>$value){
+                $cl->setValue($key, $value);
+            }
+            $cl->commit();
+        }
     }
 }
