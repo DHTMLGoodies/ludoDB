@@ -249,7 +249,9 @@ abstract class LudoDbTable
 
     public function drop()
     {
-        mysql_query("drop table " . $this->getTableName());
+        if($this->exists()){
+            mysql_query("drop table " . $this->getTableName());
+        }
     }
 
     /**
