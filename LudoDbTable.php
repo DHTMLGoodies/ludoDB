@@ -21,11 +21,12 @@ abstract class LudoDbTable
     public function __construct($id = null, Finder $finder = null)
     {
         $this->db = new LudoDb();
-        if (isset($id)) $this->populate($id);
+        $this->populate($id);
     }
 
     public function populate($id)
     {
+        if(!isset($id))return;
         if (!isset($this->compiledSql)) {
             $this->compileSql();
         }
@@ -71,24 +72,6 @@ abstract class LudoDbTable
             $i++;
         }
         return $ret;
-    }
-
-    private function getBySearchFields($ref)
-    {
-        foreach ($this->searchFields as $field) {
-            $data = $this->db->one($this->compiledSql . " and t." . $field . " = '" . $ref . "'");
-            if (isset($data)) return $data;
-        }
-        return null;
-    }
-
-    private function getByLikeFields($ref)
-    {
-        foreach ($this->likeFields as $field) {
-            $data = $this->db->one($this->compiledSql . " and t." . $field . " like '%" . $ref . "%'");
-            if (isset($data)) return $data;
-        }
-        return null;
     }
 
     private function populateWith($data)

@@ -20,7 +20,6 @@ class FinderTest extends TestBase
 
         // then
         $this->assertEquals('Opel', $car->getBrand());
-
     }
 
     /**
