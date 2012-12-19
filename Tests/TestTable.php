@@ -16,7 +16,6 @@ class TestTable extends LudoDbTable
           'lastname' => 'varchar(32)',
           'address' => 'varchar(64)'
       ),
-
     );
 
     protected $searchFields = array('firstname');

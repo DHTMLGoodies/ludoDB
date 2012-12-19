@@ -7,13 +7,17 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
+                'alltests' => '/Tests/AllTests.php',
                 'car' => '/Tests/Car.php',
                 'city' => '/Tests/City.php',
                 'country' => '/Tests/Country.php',
                 'dbtest' => '/Tests/DBTest.php',
+                'finder' => '/Finder.php',
+                'findertest' => '/Tests/FinderTest.php',
                 'ludodb' => '/LudoDB.php',
                 'ludodbtable' => '/LudoDbTable.php',
                 'person' => '/Tests/Person.php',
+                'testbase' => '/Tests/TestBase.php',
                 'testtable' => '/Tests/TestTable.php'
             );
         }

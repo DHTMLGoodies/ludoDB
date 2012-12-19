@@ -1,10 +1,9 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: borrow
+ * MySql DB layer
+ * User: Alf Magne Kalleland
  * Date: 03.11.12
  * Time: 01:37
- * To change this template use File | Settings | File Templates.
  */
 class LudoDB
 {
@@ -30,6 +29,45 @@ class LudoDB
         if($row = mysql_fetch_assoc($res)){
             return $row;
         }
+        return null;
+    }
+
+    /**
+     * Return number of rows in query
+     * @method countRows
+     * @param String $sql
+     * @return int
+     */
+    public function countRows($sql){
+        return mysql_num_rows($this->query($sql));
+    }
+
+    /**
+     * Get last insert id
+     * @method getInsertId
+     * @return int
+     */
+    public function getInsertId(){
+        return mysql_insert_id();
+    }
+
+    public function getRows($sql){
+        $ret = array();
+        $result = $this->query($sql);
+        while ($row = mysql_fetch_assoc($result)) {
+            $ret[] = $row;
+        }
+        return $ret;
+    }
+
+    /**
+     * Returns value of first column in query
+     * @param $sql
+     */
+    public function getValue($sql){
+        $result = $this->query($sql." limit 1");
+        $row = mysql_fetch_row($result);
+        if(isset($row))return $row[0];
         return null;
     }
 }

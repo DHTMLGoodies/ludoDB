@@ -13,52 +13,26 @@ abstract class LudoDbTable
         )
     );
 
-    /**
-     * Array of search fields. if non-numeric value is sent to constructor, this object can be
-     * populated by using search fields
-     * @var array search fields
-     */
-    protected $searchFields = array();
-
-    /**
-     * Array of search fields. if non-numeric value is sent to constructor, this object can
-     * be populated by using like queries on these fields
-     * @var array likeFields
-     *
-     */
-    protected $likeFields = array();
-
     private $id;
     private $data = array();
     private $updates;
     private $compiledSql = null;
 
-    public function __construct($ref = null)
+    public function __construct($id = null, Finder $finder = null)
     {
         $this->db = new LudoDb();
-        if (isset($ref)) $this->populate($ref);
-
+        if (isset($id)) $this->populate($id);
     }
 
-    private function populate($ref)
+    public function populate($id)
     {
         if (!isset($this->compiledSql)) {
             $this->compileSql();
         }
-        if (is_numeric($ref)) {
-            $data = $this->db->one($this->compiledSql . " and t." . $this->idField . "='" . $ref . "'");
-        } else {
-            if (count($this->searchFields)) {
-                $data = $this->getBySearchFields($ref);
-            }
-            if (!isset($data) && count($this->likeFields)) {
-                $data = $this->getByLikeFields($ref);
-            }
-        }
+        $data = $this->db->one($this->compiledSql . " and t." . $this->idField . "='" . $id . "'");
         if (isset($data)) {
             $this->populateWith($data);
         }
-
     }
 
     private function compileSql()
@@ -171,7 +145,7 @@ abstract class LudoDbTable
         $sql .= "(" . implode(",", array_keys($this->updates)) . ")";
         $sql .= "values('" . implode("','", array_values($this->updates)) . "')";
         $this->db->query($sql);
-        $this->id = mysql_insert_id();
+        $this->id = $this->db->getInsertId();
     }
 
     /**
@@ -223,9 +197,8 @@ abstract class LudoDbTable
         foreach ($this->config['columns'] as $name => $type) {
             $columns[] = $name . " " . $type;
         }
-        $sql .= implode(",", $columns);
-        $sql .= ")";
-        mysql_query($sql) or die($sql);
+        $sql .= implode(",", $columns) .")";
+        $this->db->query($sql);
 
         $this->createIndexes();
         $this->insertDefaultData();
@@ -237,9 +210,7 @@ abstract class LudoDbTable
      */
     public function exists()
     {
-        return mysql_num_rows(
-            mysql_query("show tables like '" . $this->getTableName() . "'")
-        ) > 0;
+        return $this->db->countRows("show tables like '" . $this->getTableName() . "'") > 0;
     }
 
     /**
@@ -250,7 +221,7 @@ abstract class LudoDbTable
     public function drop()
     {
         if($this->exists()){
-            mysql_query("drop table " . $this->getTableName());
+            $this->db->query("drop table " . $this->getTableName());
         }
     }
 
@@ -260,7 +231,7 @@ abstract class LudoDbTable
      */
     public function deleteAll()
     {
-        mysql_query("delete from " . $this->getTableName());
+        $this->db->query("delete from " . $this->getTableName());
     }
 
     public function getCollection($key)
@@ -269,13 +240,7 @@ abstract class LudoDbTable
         $sql = " select ". $this->getColumnsForCollection($key).
             " from " . $config['table'] . " c where c." . $config['pk'] . "='" . $this->getValue($config['fk']) . "'";
         if (isset($config['orderBy'])) $sql .= " order by c." . $config['orderBy'];
-        $result = $this->db->query($sql);
-
-        $ret = array();
-        while ($row = mysql_fetch_assoc($result)) {
-            $ret[] = $row;
-        }
-        return $ret;
+        return $this->db->getRows($sql);
     }
 
     private function getColumnsForCollection($collection){
@@ -299,14 +264,21 @@ abstract class LudoDbTable
 
     private function insertDefaultData(){
         if(!isset($this->config['data']))return;
-        $data = $this->config['data'];
         $className = get_class($this);
-        foreach($data as $item){
-            $cl = new $className();
+        foreach($this->config['data'] as $item){
+            $cl = new $className;
             foreach($item as $key=>$value){
                 $cl->setValue($key, $value);
             }
             $cl->commit();
         }
+    }
+
+    public function hasColumn($column){
+        return isset($this->config['columns'][$column]);
+    }
+
+    public function getIdField(){
+        return $this->idField;
     }
 }

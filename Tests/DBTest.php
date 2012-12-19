@@ -1,25 +1,16 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: borrow
+ * PHPUnit tests ludoDB
+ * User: Alf Magne Kalleland
  * Date: 04.11.12
  * Time: 02:15
- * To change this template use File | Settings | File Templates.
  */
 require_once(__DIR__ . "/../autoload.php");
 
-class DBTest extends PHPUnit_Framework_TestCase
+class DBTest extends TestBase
 {
-    private $connected = false;
-    private $dbUser = 'root';
-    private $dbPassword = 'administrator';
-
     public function setUp(){
-        if(!$this->connected)$this->connect();
-
-        $this->dropTable();
-        $tbl = new TestTable();
-        $tbl->createTable();
+        parent::setUp();
     }
 
     /**
@@ -47,19 +38,6 @@ class DBTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function shouldBeAbleToInstantiateByName(){
-        // given
-        $table = new TestTable();
-        $table->setFirstname('Mike');
-        $table->commit();
-
-        // when
-        $table2 = new TestTable("Mike");
-
-        // then
-        $this->assertEquals('Mike', $table2->getFirstname());
-    }
-
     /**
      * @test
      */
@@ -167,24 +145,6 @@ class DBTest extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function testShouldBeAbleToGetByLikeFields(){
-        // given
-        $table = new TestTable();
-        $table->setFirstName('Jeff');
-        $table->setLastname('Jones');
-        $table->commit();
-
-        // when
-        $table = new TestTable('Jone');
-
-        // then
-        $this->assertEquals('Jones', $table->getLastname());
-        $this->assertEquals('Jeff', $table->getFirstname());
-    }
-
-    /**
-     * @test
-     */
     public function shouldBeAbleToUpdateExistingRow(){
         // given
         $table = $this->getExistingRecord();
@@ -263,7 +223,7 @@ class DBTest extends PHPUnit_Framework_TestCase
         $row = mysql_fetch_assoc($res);
 
         // then
-        $this->assertEquals(3, $row['num']);
+        $this->assertEquals(6, $row['num']);
 
         $car = new Car(1);
         $this->assertEquals('Opel', $car->getBrand());
@@ -302,17 +262,4 @@ class DBTest extends PHPUnit_Framework_TestCase
         return $table;
     }
 
-    private function clearTable(){
-        mysql_query("delete from TestTable");
-    }
-    private function dropTable(){
-        mysql_query("drop table TestTable");
-    }
-
-    private function connect(){
-        $res = mysql_connect("localhost", $this->dbUser, $this->dbPassword);
-        mysql_select_db('test', $res);
-
-        $this->connected = true;
-    }
 }
