@@ -156,7 +156,7 @@ abstract class LudoDbTable
         return implode(",", $updates);
     }
 
-    public function setId($id)
+    protected function setId($id)
     {
         $this->id = $id;
     }
@@ -249,6 +249,9 @@ abstract class LudoDbTable
 
     private function insertDefaultData(){
         if(!isset($this->config['data']))return;
+        /**
+         * @var LudoDBTable $className
+         */
         $className = get_class($this);
         foreach($this->config['data'] as $item){
             $cl = new $className;
