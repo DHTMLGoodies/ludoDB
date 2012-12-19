@@ -264,4 +264,13 @@ abstract class LudoDbTable
     public function getIdField(){
         return $this->idField;
     }
+
+    public function getJSON(){
+        $columns = $this->config['columns'];
+        $ret = array();
+        foreach($columns as $column => $def){
+            $ret[$column] = $this->getValue($column);
+        }
+        return json_encode($ret);
+    }
 }
