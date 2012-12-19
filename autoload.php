@@ -14,12 +14,12 @@ spl_autoload_register(
                 'collectiontest' => '/Tests/CollectionTest.php',
                 'country' => '/Tests/classes/Country.php',
                 'dbtest' => '/Tests/DBTest.php',
-                'finder' => '/Finder.php',
                 'findertest' => '/Tests/FinderTest.php',
                 'jsontest' => '/Tests/JSONTest.php',
                 'ludodb' => '/LudoDB.php',
                 'ludodbcollection' => '/LudoDbCollection.php',
                 'ludodbtable' => '/LudoDbTable.php',
+                'ludofinder' => '/LudoFinder.php',
                 'person' => '/Tests/classes/Person.php',
                 'testbase' => '/Tests/TestBase.php',
                 'testtable' => '/Tests/classes/TestTable.php'

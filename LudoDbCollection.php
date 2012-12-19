@@ -14,6 +14,7 @@ class LudoDbCollection
 
     public function by($column, $value){
 
+        return $this;
     }
 
     public function find(){

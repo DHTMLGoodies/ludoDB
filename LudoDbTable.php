@@ -26,7 +26,7 @@ abstract class LudoDbTable
 
     public function populate($id)
     {
-        if(!isset($id))return;
+        if (!isset($id)) return;
         if (!isset($this->compiledSql)) {
             $this->compileSql();
         }
@@ -92,7 +92,7 @@ abstract class LudoDbTable
 
     protected function setValue($column, $value)
     {
-        if(!$this->hasColumn($column))return;
+        if (!$this->hasColumn($column)) return;
         if (!isset($this->updates)) $this->updates = array();
         if (is_string($value)) $value = mysql_real_escape_string($value);
         $this->updates[$column] = $value;
@@ -120,17 +120,26 @@ abstract class LudoDbTable
 
     private function update()
     {
-        $sql = "update " . $this->tableName . " set " . $this->getUpdatesForSql() . " where " . $this->idField . " = '" . $this->getId() . "'";
-        $this->db->query($sql);
+        if ($this->isValid()) {
+            $sql = "update " . $this->tableName . " set " . $this->getUpdatesForSql() . " where " . $this->idField . " = '" . $this->getId() . "'";
+            $this->db->query($sql);
+        }
     }
 
     private function insert()
     {
-        $sql = "insert into " . $this->tableName;
-        $sql .= "(" . implode(",", array_keys($this->updates)) . ")";
-        $sql .= "values('" . implode("','", array_values($this->updates)) . "')";
-        $this->db->query($sql);
-        $this->setId($this->db->getInsertId());
+        if ($this->isValid()) {
+            $this->beforeInsert();
+            $sql = "insert into " . $this->tableName;
+            $sql .= "(" . implode(",", array_keys($this->updates)) . ")";
+            $sql .= "values('" . implode("','", array_values($this->updates)) . "')";
+            $this->db->query($sql);
+            $this->setId($this->db->getInsertId());
+        }
+    }
+
+    protected function beforeInsert(){
+
     }
 
     /**
@@ -182,7 +191,7 @@ abstract class LudoDbTable
         foreach ($this->config['columns'] as $name => $type) {
             $columns[] = $name . " " . $type;
         }
-        $sql .= implode(",", $columns) .")";
+        $sql .= implode(",", $columns) . ")";
         $this->db->query($sql);
 
         $this->createIndexes();
@@ -205,7 +214,7 @@ abstract class LudoDbTable
 
     public function drop()
     {
-        if($this->exists()){
+        if ($this->exists()) {
             $this->db->query("drop table " . $this->getTableName());
         }
     }
@@ -222,13 +231,14 @@ abstract class LudoDbTable
     public function getCollection($key)
     {
         $config = $this->config['collections'][$key];
-        $sql = " select ". $this->getColumnsForCollection($key).
+        $sql = " select " . $this->getColumnsForCollection($key) .
             " from " . $config['table'] . " c where c." . $config['pk'] . "='" . $this->getValue($config['fk']) . "'";
         if (isset($config['orderBy'])) $sql .= " order by c." . $config['orderBy'];
         return $this->db->getRows($sql);
     }
 
-    private function getColumnsForCollection($collection){
+    private function getColumnsForCollection($collection)
+    {
         $c = $this->config['collections'][$collection];
         return isset($c['columns']) ? "c." . implode(",c.", $c['columns']) : 'c.*';
     }
@@ -247,42 +257,52 @@ abstract class LudoDbTable
         return 'IND_' . md5($this->tableName . $field);
     }
 
-    private function insertDefaultData(){
-        if(!isset($this->config['data']))return;
+    private function insertDefaultData()
+    {
+        if (!isset($this->config['data'])) return;
         /**
          * @var LudoDBTable $className
          */
         $className = get_class($this);
-        foreach($this->config['data'] as $item){
+        foreach ($this->config['data'] as $item) {
             $cl = new $className;
-            foreach($item as $key=>$value){
+            foreach ($item as $key => $value) {
                 $cl->setValue($key, $value);
             }
             $cl->commit();
         }
     }
 
-    public function hasColumn($column){
+    public function hasColumn($column)
+    {
         return isset($this->config['columns'][$column]);
     }
 
-    public function getIdField(){
+    public function getIdField()
+    {
         return $this->idField;
     }
 
-    public function getJSON(){
+    public function getJSON()
+    {
         $columns = $this->config['columns'];
         $ret = array();
-        foreach($columns as $column => $def){
+        foreach ($columns as $column => $def) {
             $ret[$column] = $this->getValue($column);
         }
         return json_encode($ret);
     }
 
-    public function JSONPopulate(array $jsonAsArray){
-        foreach($jsonAsArray as $key=>$value){
+    public function JSONPopulate(array $jsonAsArray)
+    {
+        foreach ($jsonAsArray as $key => $value) {
             $this->setValue($key, $value);
         }
         $this->commit();
+    }
+
+    public function isValid()
+    {
+        return true;
     }
 }

@@ -7,6 +7,7 @@
  */
 class LudoDB
 {
+    private $debug = false;
     /**
      * Returns mySql result
      * @method query
@@ -14,6 +15,7 @@ class LudoDB
      * @return resource
      */
     public function query($sql){
+        if($this->debug)$this->log($sql);
         $res = mysql_query($sql) or die(mysql_error()."\nSQL:".$sql);
         return $res;
     }
@@ -25,6 +27,7 @@ class LudoDB
      * @return {Array} row
      */
     public function one($sql){
+        if($this->debug)$this->log($sql);
         $res = $this->query($sql." limit 1");
         if($row = mysql_fetch_assoc($res)){
             return $row;
@@ -39,6 +42,7 @@ class LudoDB
      * @return int
      */
     public function countRows($sql){
+        if($this->debug)$this->log($sql);
         return mysql_num_rows($this->query($sql));
     }
 
@@ -52,6 +56,7 @@ class LudoDB
     }
 
     public function getRows($sql){
+        if($this->debug)$this->log($sql);
         $ret = array();
         $result = $this->query($sql);
         while ($row = mysql_fetch_assoc($result)) {
@@ -65,9 +70,16 @@ class LudoDB
      * @param $sql
      */
     public function getValue($sql){
+        if($this->debug)$this->log($sql);
         $result = $this->query($sql." limit 1");
         $row = mysql_fetch_row($result);
         if(isset($row))return $row[0];
         return null;
+    }
+
+    private function log($sql){
+        $fh = fopen("sql.txt","w");
+        fwrite($fh, $sql."\n");
+        fclose($fh);
     }
 }

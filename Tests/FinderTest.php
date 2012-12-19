@@ -13,7 +13,7 @@ class FinderTest extends TestBase
      */
     public function shouldBeAbleToInstantiateByFinders(){
         // given
-        $finder = new Finder(new Car());
+        $finder = new LudoFinder(new Car());
 
         // when
         $car = $finder->where('brand', 'Opel')->find();
@@ -27,7 +27,7 @@ class FinderTest extends TestBase
      */
     public function shouldBeAbleToDefineMultipleSearchFields(){
         // given
-        $finder = new Finder(new Car());
+        $finder = new LudoFinder(new Car());
 
         // when
         $car = $finder->where('brand', 'Audi')->where('model', 'a4')->find();

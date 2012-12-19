@@ -5,7 +5,7 @@
  * Date: 19.12.12
  * Time: 16:07
  */
-class Finder
+class LudoFinder
 {
     private $sql;
     private $applyTo;
@@ -23,7 +23,7 @@ class Finder
      * @method where
      * @param $column
      * @param $value
-     * @return Finder
+     * @return LudoFinder
      */
     public function where($column, $value){
         if($this->applyTo->hasColumn($column)){
