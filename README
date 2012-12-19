@@ -4,7 +4,6 @@ Example:
 
 <?php
 
-<?php
 class Person extends LudoDbTable
 {
     protected $tableName = 'Person';
@@ -61,8 +60,10 @@ $person->setFirstname('John');
 $person->setLastname('Wayne');
 $person->commit();
 
+For creating a new Person record and save it to the database
+
 echo $person->getId();
 echo $person->getFirstname();
 echo $person->getLastname();
 
-For saving a new country to a mySql database
+Will output data for this record.
