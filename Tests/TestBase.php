@@ -21,7 +21,7 @@ class TestBase  extends PHPUnit_Framework_TestCase
 
     private function connect(){
         $res = mysql_connect("localhost", $this->dbUser, $this->dbPassword);
-        mysql_select_db('test', $res);
+        mysql_select_db('PHPUnit', $res);
 
         $this->connected = true;
     }

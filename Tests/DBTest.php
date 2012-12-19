@@ -112,6 +112,19 @@ class DBTest extends TestBase
         $this->assertEquals('Jane', $table->getFirstname(), "getter is wrong");
     }
 
+    /**
+     * @test
+     */
+    public function testShouldBeAbleToGetRecordById(){
+        $car = new Car();
+        $car->drop();
+        $car->createTable();
+        // when
+        $car = new Car(1);
+        // then
+        $this->assertEquals('Opel', $car->getBrand());
+        $this->assertEquals('1', $car->getId());
+    }
 
     /**
      * @test
@@ -173,10 +186,11 @@ class DBTest extends TestBase
         $person = new Person();
         if(!$person->exists())$person->createTable();
         $person->deleteAll();
-        $person->setId('1');
         $person->setFirstname('John');
         $person->setZip('4330');
         $person->commit();
+        $id = $person->getId();
+
         $city = new City();
         if(!$city->exists())$city->createTable();
         $city->deleteAll();
@@ -185,9 +199,11 @@ class DBTest extends TestBase
         $city->commit();
 
         // when
-        $person = new Person(1);
+        $person = new Person($id);
 
         // then
+        $this->assertEquals($id, $person->getId());
+        $this->assertEquals('4330', $person->getZip());
         $this->assertEquals('Algard', $person->getCity());
     }
 

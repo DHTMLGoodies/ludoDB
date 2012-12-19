@@ -12,6 +12,10 @@ class JSONTest extends TestBase
 {
     public function setUp(){
         parent::setUp();
+
+        $car = new Car();
+        $car->drop();
+        $car->createTable();
     }
 
     /**
@@ -28,5 +32,30 @@ class JSONTest extends TestBase
         // then
         $this->assertEquals('1', $asArray['id']);
         $this->assertEquals('Opel', $asArray['brand']);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToPopulateByJSON(){
+        // given
+        $car = new Car(1);
+        $this->assertEquals(1, $car->getId());
+        $json = $car->getJSON();
+        $array = json_decode($json, true);
+
+        // when
+        $array['brand'] = 'BMW';
+
+        $car->JSONPopulate($array);
+
+        $newCar = new Car(1);
+
+        // then
+        $this->assertEquals('BMW', $newCar->getBrand());
+
+
+
+
     }
 }

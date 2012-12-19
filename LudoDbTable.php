@@ -18,7 +18,7 @@ abstract class LudoDbTable
     private $updates;
     private $compiledSql = null;
 
-    public function __construct($id = null, Finder $finder = null)
+    public function __construct($id = null)
     {
         $this->db = new LudoDb();
         $this->populate($id);
@@ -34,6 +34,7 @@ abstract class LudoDbTable
         if (isset($data)) {
             $this->populateWith($data);
         }
+        $this->id = $id;
     }
 
     private function compileSql()
@@ -91,6 +92,7 @@ abstract class LudoDbTable
 
     protected function setValue($column, $value)
     {
+        if(!$this->hasColumn($column))return;
         if (!isset($this->updates)) $this->updates = array();
         if (is_string($value)) $value = mysql_real_escape_string($value);
         $this->updates[$column] = $value;
@@ -128,7 +130,7 @@ abstract class LudoDbTable
         $sql .= "(" . implode(",", array_keys($this->updates)) . ")";
         $sql .= "values('" . implode("','", array_values($this->updates)) . "')";
         $this->db->query($sql);
-        $this->id = $this->db->getInsertId();
+        $this->setId($this->db->getInsertId());
     }
 
     /**
@@ -156,7 +158,7 @@ abstract class LudoDbTable
 
     public function setId($id)
     {
-        $this->setValue($this->idField, $id);
+        $this->id = $id;
     }
 
     public function getId()
@@ -272,5 +274,12 @@ abstract class LudoDbTable
             $ret[$column] = $this->getValue($column);
         }
         return json_encode($ret);
+    }
+
+    public function JSONPopulate(array $jsonAsArray){
+        foreach($jsonAsArray as $key=>$value){
+            $this->setValue($key, $value);
+        }
+        $this->commit();
     }
 }

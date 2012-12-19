@@ -9,12 +9,12 @@ class Car extends LudoDbTable
             'model' => 'varchar(64)'
         ),
         'data' => array(
-            array('brand' => 'Opel'),
-            array('brand' => 'Volkswagen'),
-            array('brand' => 'Chevrolet'),
-            array('brand' => 'Audi', 'model' => 'A4'),
-            array('brand' => 'Audi', 'model' => 'A3'),
-            array('brand' => 'Audi', 'model' => 'A6'),
+            array('id'=>'1', 'brand' => 'Opel'),
+            array('id'=>'2', 'brand' => 'Volkswagen'),
+            array('id'=>'3', 'brand' => 'Chevrolet'),
+            array('id'=>'4', 'brand' => 'Audi', 'model' => 'A4'),
+            array('id'=>'5', 'brand' => 'Audi', 'model' => 'A3'),
+            array('id'=>'6', 'brand' => 'Audi', 'model' => 'A6'),
         )
     );
 
