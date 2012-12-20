@@ -65,6 +65,10 @@ class LudoDB
         return $ret;
     }
 
+    public function nextRow($result){
+        return mysql_fetch_assoc($result);
+    }
+
     /**
      * Returns value of first column in query
      * @param $sql
@@ -78,7 +82,7 @@ class LudoDB
     }
 
     private function log($sql){
-        $fh = fopen("sql.txt","w");
+        $fh = fopen("sql.txt","a+");
         fwrite($fh, $sql."\n");
         fclose($fh);
     }

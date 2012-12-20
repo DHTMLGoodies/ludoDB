@@ -11,6 +11,10 @@ class DBTest extends TestBase
 {
     public function setUp(){
         parent::setUp();
+
+        $phone = new Phone();
+        $phone->drop();
+        $phone->createTable();
     }
 
     /**
@@ -244,6 +248,46 @@ class DBTest extends TestBase
         $car = new Car(1);
         $this->assertEquals('Opel', $car->getBrand());
 
+    }
+
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToDefineColumnAsArrayJoin(){
+        // given
+        $person = $this->getPerson('Mike','Johnson');
+
+        $expectedPhones = array(
+            '555 8888','555 9999'
+        );
+        $this->getPhone($expectedPhones[0], $person->getId());
+        $this->getPhone($expectedPhones[1], $person->getId());
+
+        // when
+        $phone = $person->getPhone();
+
+        // then
+        $this->assertEquals(2, count($phone));
+        $this->assertEquals($expectedPhones, $phone);
+        $this->assertEquals('555 9999', $phone[1]);
+        $this->assertEquals('555 8888', $phone[0]);
+    }
+
+    private function getPerson($firstname, $lastname){
+        $person = new Person();
+        $person->setFirstname($firstname);
+        $person->setLastName($lastname);
+        $person->commit();
+        return $person;
+    }
+
+    private function getPhone($number, $userId){
+        $phone = new Phone();
+        if(!$phone->exists())$phone->createTable();
+        $phone->setPhone($number);
+        $phone->setUserId($userId);
+        $phone->commit();
     }
 
     private function createCountryData(){

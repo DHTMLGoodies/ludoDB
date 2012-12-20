@@ -9,7 +9,11 @@ class Person extends LudoDbTable
             'firstname' => 'varchar(32)',
             'lastname' => 'varchar(32)',
             'address' => 'varchar(64)',
-            'zip' => 'varchar(5)'
+            'zip' => 'varchar(5)',
+            'phone' => array(
+                'class' => 'PhoneCollection',
+                'lookup' => 'getId'
+            )
         ),
         'join' => array(
             array('table' => 'city', 'pk' => 'zip', 'fk' => 'zip', 'columns' => array('city'))
@@ -43,5 +47,9 @@ class Person extends LudoDbTable
 
     public function getCity(){
         return $this->getValue('city');
+    }
+
+    public function getPhone(){
+        return $this->getValue('phone');
     }
 }

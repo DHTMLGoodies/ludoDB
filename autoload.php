@@ -18,9 +18,12 @@ spl_autoload_register(
                 'jsontest' => '/Tests/JSONTest.php',
                 'ludodb' => '/LudoDB.php',
                 'ludodbcollection' => '/LudoDbCollection.php',
+                'ludodbobject' => '/LudoDBObject.php',
                 'ludodbtable' => '/LudoDbTable.php',
                 'ludofinder' => '/LudoFinder.php',
                 'person' => '/Tests/classes/Person.php',
+                'phone' => '/Tests/classes/Phone.php',
+                'phonecollection' => '/Tests/classes/PhoneCollection.php',
                 'testbase' => '/Tests/TestBase.php',
                 'testtable' => '/Tests/classes/TestTable.php'
             );
