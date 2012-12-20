@@ -13,39 +13,12 @@ class LudoDbCollection extends LudoDBObject implements Iterator
     protected $config = array();
     protected $data = null;
     private $position = 0;
+    private $result;
 
-    public function __construct(LudoDbTable $ref)
+    public function __construct()
     {
         $this->db = new LudoDB();
-        $this->ref = $ref;
         $this->position = 0;
-    }
-
-    public function setLookupValue($val)
-    {
-        $this->lookupValue = $val;
-    }
-
-    public function getValue()
-    {
-        if (!isset($this->data)) {
-            if ($this->config['returnNumeric']) {
-                $this->data = $this->getNumericArray();
-            } else {
-                $this->data = $this->getRows();
-            }
-        }
-        return $this->data;
-    }
-
-    private function getNumericArray()
-    {
-        $result = $this->getResult();
-        $ret = array();
-        while ($row = $this->db->nextRow($result)) {
-            $ret[] = $row[$this->config['columns'][0]];
-        }
-        return $ret;
     }
 
     protected function getResult()

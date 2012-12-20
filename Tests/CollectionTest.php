@@ -13,8 +13,6 @@ class CollectionTest extends TestBase
      * @text
      */
     public function shouldBeAbleToGetCollection(){
-        // given
-        $cars = new CarCollection();
-        $cars->by('model', 'Opel')->find();
+
     }
 }

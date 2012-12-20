@@ -13,8 +13,7 @@ class PhoneCollection extends LudoDbCollection
         'columns' => array(
             'phone'
         ),
-        'orderBy' => 'id',
-        'returnNumeric' => true
+        'orderBy' => 'id'
     );
 
 }

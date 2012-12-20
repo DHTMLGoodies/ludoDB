@@ -9,11 +9,7 @@ class Person extends LudoDbTable
             'firstname' => 'varchar(32)',
             'lastname' => 'varchar(32)',
             'address' => 'varchar(64)',
-            'zip' => 'varchar(5)',
-            'phone' => array(
-                'class' => 'PhoneCollection',
-                'lookup' => 'getId'
-            )
+            'zip' => 'varchar(5)'
         ),
         'join' => array(
             array('table' => 'city', 'pk' => 'zip', 'fk' => 'zip', 'columns' => array('city'))

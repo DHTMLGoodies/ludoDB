@@ -17,22 +17,11 @@ abstract class LudoDbTable extends LudoDBObject
     private $data = array();
     private $updates;
     private $compiledSql = null;
-    protected $dataClasses = array();
 
     public function __construct($id = null)
     {
         $this->db = new LudoDb();
-        $this->parseColumns();
         $this->populate($id);
-    }
-
-    private function parseColumns(){
-        foreach($this->config['columns'] as $key=>$value){
-            if(is_array($value)){
-                $class = $this->config['columns'][$key]['class'];
-                $this->dataClasses[$key] = new $class($this);
-            }
-        }
     }
 
     public function populate($id)
@@ -94,12 +83,6 @@ abstract class LudoDbTable extends LudoDBObject
 
     protected function getValue($column)
     {
-        if(isset($this->dataClasses[$column])){
-            $method = $this->config['columns'][$column]['lookup'];
-            $val = $this->{$method}();
-            $this->dataClasses[$column]->setLookupValue($val);
-            return $this->dataClasses[$column]->getValue();
-        }
         if (isset($this->updates) && isset($this->updates[$column])) {
             return $this->updates[$column];
         }
