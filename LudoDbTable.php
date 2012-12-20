@@ -66,7 +66,6 @@ abstract class LudoDbTable extends LudoDBObject
         $this->compiledSql = $sql;
     }
 
-
     private function getSQLJoin()
     {
         $ret = array(

@@ -14,7 +14,6 @@ class Phone extends LudoDbTable
             'phone' => 'varchar(32)',
             'user_id' => 'int'
         )
-
     );
 
     public function setPhone($number){

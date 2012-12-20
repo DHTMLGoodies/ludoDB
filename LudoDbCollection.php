@@ -5,18 +5,20 @@
  * Date: 19.12.12
  * Time: 21:31
  */
-class LudoDbCollection extends LudoDBObject
+class LudoDbCollection extends LudoDBObject implements Iterator
 {
     protected $db;
     protected $lookupValue;
     protected $ref;
     protected $config = array();
     protected $data = null;
+    private $position = 0;
 
     public function __construct(LudoDbTable $ref)
     {
         $this->db = new LudoDB();
         $this->ref = $ref;
+        $this->position = 0;
     }
 
     public function setLookupValue($val)
@@ -31,7 +33,6 @@ class LudoDbCollection extends LudoDBObject
                 $this->data = $this->getNumericArray();
             } else {
                 $this->data = $this->getRows();
-
             }
         }
         return $this->data;
@@ -79,5 +80,25 @@ class LudoDbCollection extends LudoDBObject
     private function getOrderBy()
     {
         return isset($this->config['orderBy']) ? ' order by ' . $this->config['orderBy'] : '';
+    }
+
+    function rewind() {
+        $this->position = 0;
+    }
+
+    function current() {
+        return $this->data[$this->position];
+    }
+
+    function key() {
+        return $this->position;
+    }
+
+    function next() {
+        ++$this->position;
+    }
+
+    function valid() {
+        return isset($this->data[$this->position]);
     }
 }
