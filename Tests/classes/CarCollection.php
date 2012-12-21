@@ -6,5 +6,9 @@
  */
 class CarCollection extends LudoDbCollection
 {
-
+    protected $tableName = 'Car';
+    protected $config = array(
+        'columns' => array('brand','model'),
+        'lookupField' => 'brand'
+    );
 }

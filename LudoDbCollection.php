@@ -5,20 +5,19 @@
  * Date: 19.12.12
  * Time: 21:31
  */
-class LudoDbCollection extends LudoDBObject implements Iterator
+class LudoDbCollection extends LudoDbIterator
 {
-    protected $db;
     protected $lookupValue;
     protected $ref;
-    protected $config = array();
-    protected $data = null;
-    private $position = 0;
-    private $result;
+    private $filter;
+    protected $config = array(
+        'columns' => array()
+    );
 
-    public function __construct()
-    {
-        $this->db = new LudoDB();
-        $this->position = 0;
+    public function __construct($lookupValue){
+        parent::__construct();
+        $this->lookupValue = $lookupValue;
+
     }
 
     protected function getResult()
@@ -26,12 +25,7 @@ class LudoDbCollection extends LudoDBObject implements Iterator
         return $this->db->query($this->getSql());
     }
 
-    protected function getRows()
-    {
-        return $this->db->getRows($this->getSql());
-    }
-
-    private function getSql()
+    protected function getSql()
     {
         return 'select ' . $this->getColumns() . " from " . $this->getTableName() . $this->getWhere() . $this->getOrderBy();
     }
@@ -44,7 +38,7 @@ class LudoDbCollection extends LudoDBObject implements Iterator
 
     private function getWhere()
     {
-        if (isset($this->config['lookupField'])) {
+        if ($this->lookupValue) {
             return ' where ' . $this->config['lookupField'] . " = '" . $this->lookupValue . "'";
         }
         return '';
@@ -53,25 +47,5 @@ class LudoDbCollection extends LudoDBObject implements Iterator
     private function getOrderBy()
     {
         return isset($this->config['orderBy']) ? ' order by ' . $this->config['orderBy'] : '';
-    }
-
-    function rewind() {
-        $this->position = 0;
-    }
-
-    function current() {
-        return $this->data[$this->position];
-    }
-
-    function key() {
-        return $this->position;
-    }
-
-    function next() {
-        ++$this->position;
-    }
-
-    function valid() {
-        return isset($this->data[$this->position]);
     }
 }

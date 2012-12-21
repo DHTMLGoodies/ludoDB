@@ -7,6 +7,8 @@
  */
 class LudoDBObject
 {
+    protected $db;
+
     public function getTableName()
     {
         return isset($this->tableName) ? $this->tableName : get_class($this);

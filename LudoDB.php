@@ -7,7 +7,7 @@
  */
 class LudoDB
 {
-    private $debug = false;
+    private $debug = true;
     /**
      * Returns mySql result
      * @method query
@@ -81,7 +81,7 @@ class LudoDB
         return null;
     }
 
-    private function log($sql){
+    public function log($sql){
         $fh = fopen("sql.txt","a+");
         fwrite($fh, $sql."\n");
         fclose($fh);
