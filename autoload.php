@@ -23,9 +23,13 @@ spl_autoload_register(
                 'ludodbobject' => '/LudoDBObject.php',
                 'ludodbtable' => '/LudoDbTable.php',
                 'ludofinder' => '/LudoFinder.php',
+                'ludosql' => '/LudoSQL.php',
+                'metadata' => '/Tests/classes/Metadata.php',
+                'metadatavalue' => '/Tests/classes/MetadataValue.php',
                 'person' => '/Tests/classes/Person.php',
                 'phone' => '/Tests/classes/Phone.php',
                 'phonecollection' => '/Tests/classes/PhoneCollection.php',
+                'sqltest' => '/Tests/SQLTest.php',
                 'testbase' => '/Tests/TestBase.php',
                 'testtable' => '/Tests/classes/TestTable.php'
             );

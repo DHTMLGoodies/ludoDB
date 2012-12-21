@@ -17,6 +17,7 @@ abstract class LudoDbTable extends LudoDBObject
     private $data = array();
     private $updates;
     private $compiledSql = null;
+    private $externalClasses = array();
 
     public function __construct($id = null)
     {
@@ -52,6 +53,7 @@ abstract class LudoDbTable extends LudoDBObject
         if (count($joins['where'])) {
             $sql .= " and " . implode($joins['where'], ' and ');
         }
+        $sql.=$this->getOrderBy();
         $this->compiledSql = $sql;
     }
 
@@ -83,10 +85,26 @@ abstract class LudoDbTable extends LudoDBObject
 
     protected function getValue($column)
     {
+        if($this->isExternalColumn($column)){
+            return $this->getExternalValue($column);
+        }
         if (isset($this->updates) && isset($this->updates[$column])) {
             return $this->updates[$column];
         }
         return isset($this->data[$column]) ? $this->data[$column] : null;
+    }
+
+    private function isExternalColumn($column){
+        return isset($this->config['columns'][$column]) && is_array($this->config['columns'][$column]);
+    }
+
+    private function getExternalValue($column){
+        if(!isset($this->externalClasses[$column])){
+            $class = $this->config['columns'][$column]['class'];
+            $this->externalClasses[$column] = new $class($this->getId());
+        }
+        $this->db->log(json_encode($this->externalClasses[$column]->getValue()), true);
+        return $this->externalClasses[$column]->getValue();
     }
 
     protected function setValue($column, $value)

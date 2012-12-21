@@ -12,9 +12,19 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
     private $_valid;
     private $position;
     private $currentRow;
+    private $singleValue;
+
+    protected $config = array(
+        'columns' => array()
+    );
+
+    // Return single value instead of assosicated array of fieldname:fieldValue
+    protected $returnSingleValue = false;
+
 
     public function __construct(){
         $this->db = new LudoDB();
+        $this->singleValue = count($this->config['columns']) === 1;
     }
 
     function rewind() {
@@ -32,6 +42,11 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
         return $this->currentRow;
     }
 
+    /**
+     * Return key used for iterator. default is numeric.
+     * @method key
+     * @return mixed
+     */
     function key() {
         $this->db->log('key');
         return $this->position;
@@ -42,6 +57,11 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
         ++$this->position;
         $this->currentRow = $this->db->nextRow($this->dbResource);
         $this->_valid = $this->currentRow ? true : false;
+        if($this->singleValue && $this->currentRow){
+            $this->db->log('Single value');
+            $this->currentRow = array_values($this->currentRow);
+            $this->currentRow = $this->currentRow[0];
+        }
     }
 
     public function valid() {

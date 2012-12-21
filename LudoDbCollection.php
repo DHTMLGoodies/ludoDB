@@ -8,21 +8,11 @@
 class LudoDbCollection extends LudoDbIterator
 {
     protected $lookupValue;
-    protected $ref;
-    private $filter;
-    protected $config = array(
-        'columns' => array()
-    );
 
-    public function __construct($lookupValue){
+    public function __construct($lookupValue = null){
         parent::__construct();
         $this->lookupValue = $lookupValue;
 
-    }
-
-    protected function getResult()
-    {
-        return $this->db->query($this->getSql());
     }
 
     protected function getSql()
@@ -30,11 +20,7 @@ class LudoDbCollection extends LudoDbIterator
         return 'select ' . $this->getColumns() . " from " . $this->getTableName() . $this->getWhere() . $this->getOrderBy();
     }
 
-    private function getColumns()
-    {
-        if (isset($this->config['columns'])) return implode(",", $this->config['columns']);
-        return '*';
-    }
+
 
     private function getWhere()
     {
@@ -44,8 +30,5 @@ class LudoDbCollection extends LudoDbIterator
         return '';
     }
 
-    private function getOrderBy()
-    {
-        return isset($this->config['orderBy']) ? ' order by ' . $this->config['orderBy'] : '';
-    }
+
 }

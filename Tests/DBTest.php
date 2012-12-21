@@ -11,10 +11,6 @@ class DBTest extends TestBase
 {
     public function setUp(){
         parent::setUp();
-
-        $phone = new Phone();
-        $phone->drop();
-        $phone->createTable();
     }
 
     /**
@@ -243,29 +239,11 @@ class DBTest extends TestBase
         $row = mysql_fetch_assoc($res);
 
         // then
-        $this->assertEquals(6, $row['num']);
+        $this->assertEquals(7, $row['num']);
 
         $car = new Car(1);
         $this->assertEquals('Opel', $car->getBrand());
 
-    }
-
-
-
-    private function getPerson($firstname, $lastname){
-        $person = new Person();
-        $person->setFirstname($firstname);
-        $person->setLastName($lastname);
-        $person->commit();
-        return $person;
-    }
-
-    private function getPhone($number, $userId){
-        $phone = new Phone();
-        if(!$phone->exists())$phone->createTable();
-        $phone->setPhone($number);
-        $phone->setUserId($userId);
-        $phone->commit();
     }
 
     private function createCountryData(){

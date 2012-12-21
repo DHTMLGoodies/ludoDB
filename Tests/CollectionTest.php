@@ -54,7 +54,35 @@ class CollectionTest extends TestBase
      * @test
      */
     public function shouldReturnValueWhenCollectionIsDefinedAsColumnForTable(){
-        
+        // given
+        $person = $this->getPersonWithPhone();
 
+        // when
+        $numbers = $person->getPhone();
+
+        // then
+        $this->assertEquals(2, count($numbers));
+        $this->assertEquals('555 888', $numbers[0]);
+        $this->assertEquals('555 999', $numbers[1]);
     }
+
+    private function getPersonWithPhone(){
+        $person = new Person();
+        $person->setFirstname('John');
+        $person->commit();
+        $id = $person->getId();
+
+        $phone = new Phone();
+        $phone->setUserId($id);
+        $phone->setPhone('555 888');
+        $phone->commit();
+
+        $phone = new Phone();
+        $phone->setUserId($id);
+        $phone->setPhone('555 999');
+        $phone->commit();
+        return new Person($id);
+    }
+
+
 }
