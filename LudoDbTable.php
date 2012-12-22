@@ -206,21 +206,6 @@ abstract class LudoDbTable extends LudoDBObject
         $this->db->query("delete from " . $this->getTableName());
     }
 
-    public function getCollection($key)
-    {
-        $config = $this->config['collections'][$key];
-        $sql = " select " . $this->getColumnsForCollection($key) .
-            " from " . $config['table'] . " c where c." . $config['pk'] . "='" . $this->getValue($config['fk']) . "'";
-        if (isset($config['orderBy'])) $sql .= " order by c." . $config['orderBy'];
-        return $this->db->getRows($sql);
-    }
-
-    private function getColumnsForCollection($collection)
-    {
-        $c = $this->config['collections'][$collection];
-        return isset($c['columns']) ? "c." . implode(",c.", $c['columns']) : 'c.*';
-    }
-
     private function createIndexes()
     {
         if (!isset($this->config['indexes'])) return;

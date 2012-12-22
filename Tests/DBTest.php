@@ -210,23 +210,6 @@ class DBTest extends TestBase
     /**
      * @test
      */
-    public function shouldBeAbleToHaveCollections(){
-        $countryId = $this->createCountryData();
-
-        // given
-        $country = new Country($countryId);
-        $this->assertEquals('Norway', $country->getName());
-
-        // when
-        $cities = $country->getCollection('cities');
-
-        // then
-        $this->assertEquals(4, count($cities));
-    }
-
-    /**
-     * @test
-     */
     public function shouldBeAbleToDefineDefaultData(){
         // given
         $car = new Car();
