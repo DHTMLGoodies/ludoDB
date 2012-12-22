@@ -7,8 +7,8 @@
  */
 class Phone extends LudoDbTable
 {
-    protected $tableName = 'phone';
     protected $config = array(
+        'table' => 'Phone',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'phone' => 'varchar(32)',

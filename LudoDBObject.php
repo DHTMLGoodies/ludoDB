@@ -11,17 +11,6 @@ class LudoDBObject
 
     public function getTableName()
     {
-        return isset($this->tableName) ? $this->tableName : get_class($this);
-    }
-
-    protected function getOrderBy()
-    {
-        return isset($this->config['orderBy']) ? ' order by ' . $this->config['orderBy'] : '';
-    }
-
-    protected function getColumns()
-    {
-        if (isset($this->config['columns'])) return implode(",", $this->config['columns']);
-        return '*';
+        return isset($this->config['table']) ? $this->config['table'] : get_class($this);
     }
 }

@@ -7,8 +7,8 @@
  */
 class PhoneCollection extends LudoDbCollection
 {
-    protected $tableName = 'phone';
     protected $config = array(
+        'table' => 'Phone',
         'lookupField' => 'user_id',
         'columns' => array(
             'phone'

@@ -4,6 +4,7 @@ class Person extends LudoDbTable
     protected $tableName = 'Person';
     protected $idField = 'id';
     protected $config = array(
+        'table' => 'Person',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'firstname' => 'varchar(32)',

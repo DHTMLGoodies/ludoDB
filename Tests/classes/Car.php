@@ -1,8 +1,8 @@
 <?php
 class Car extends LudoDbTable
 {
-    protected $tableName = 'Car';
     protected $config = array(
+        'table' => 'Car',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'brand' => 'varchar(64)',

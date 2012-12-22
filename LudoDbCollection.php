@@ -12,23 +12,11 @@ class LudoDbCollection extends LudoDbIterator
     public function __construct($lookupValue = null){
         parent::__construct();
         $this->lookupValue = $lookupValue;
-
     }
 
     protected function getSql()
     {
-        return 'select ' . $this->getColumns() . " from " . $this->getTableName() . $this->getWhere() . $this->getOrderBy();
+        $sql = new LudoSQL($this->config, $this->lookupValue);
+        return $sql->getSql();
     }
-
-
-
-    private function getWhere()
-    {
-        if ($this->lookupValue) {
-            return ' where ' . $this->config['lookupField'] . " = '" . $this->lookupValue . "'";
-        }
-        return '';
-    }
-
-
 }

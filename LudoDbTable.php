@@ -16,11 +16,11 @@ abstract class LudoDbTable extends LudoDBObject
     private $id;
     private $data = array();
     private $updates;
-    private $compiledSql = null;
     private $externalClasses = array();
 
     public function __construct($id = null)
     {
+        $this->config['lookupField'] = $this->idField;
         $this->db = new LudoDb();
         $this->populate($id);
     }
@@ -28,53 +28,20 @@ abstract class LudoDbTable extends LudoDBObject
     public function populate($id)
     {
         if (!isset($id)) return;
-        if (!isset($this->compiledSql)) {
-            $this->compileSql();
-        }
-        $data = $this->db->one($this->compiledSql . " and t." . $this->idField . "='" . $id . "'");
+        $data = $this->db->one($this->getSQL($id));
         if (isset($data)) {
             $this->populateWith($data);
         }
         $this->id = $id;
     }
 
-    private function compileSql()
-    {
-        $sql = "select t.*";
-        $joins = $this->getSQLJoin();
-        if (count($joins['columns'])) {
-            $sql .= ',' . implode(",", $joins['columns']);
-        }
-        $sql .= " from " . $this->tableName . " t";
-        if (count($joins['from'])) {
-            $sql .= "," . implode($joins['from'], ",");
-        }
-        $sql .= " where 1=1";
-        if (count($joins['where'])) {
-            $sql .= " and " . implode($joins['where'], ' and ');
-        }
-        $sql.=$this->getOrderBy();
-        $this->compiledSql = $sql;
+    private function getSQL($id){
+        $this->config['lookupField'] = $this->idField;
+        $sql = new LudoSQL($this->config, $id);
+        return $sql->getSql();
     }
 
-    private function getSQLJoin()
-    {
-        $ret = array(
-            'columns' => array(),
-            'from' => array(),
-            'where' => array()
-        );
-        if (!isset($this->config['join'])) return $ret;
-        $joins = $this->config['join'];
-        $i = 1;
-        foreach ($joins as $join) {
-            $ret['columns'][] = 't' . $i . "." . implode($join['columns'], ",t" . $i . ".");
-            $ret['from'][] = $join['table'] . " t" . $i;
-            $ret['where'][] = 't.' . $join['fk'] . "=t" . $i . "." . $join['pk'];
-            $i++;
-        }
-        return $ret;
-    }
+
 
     private function populateWith($data)
     {
@@ -103,7 +70,6 @@ abstract class LudoDbTable extends LudoDBObject
             $class = $this->config['columns'][$column]['class'];
             $this->externalClasses[$column] = new $class($this->getId());
         }
-        $this->db->log(json_encode($this->externalClasses[$column]->getValue()), true);
         return $this->externalClasses[$column]->getValue();
     }
 
@@ -138,7 +104,7 @@ abstract class LudoDbTable extends LudoDBObject
     private function update()
     {
         if ($this->isValid()) {
-            $sql = "update " . $this->tableName . " set " . $this->getUpdatesForSql() . " where " . $this->idField . " = '" . $this->getId() . "'";
+            $sql = "update " . $this->getTableName() . " set " . $this->getUpdatesForSql() . " where " . $this->idField . " = '" . $this->getId() . "'";
             $this->db->query($sql);
         }
     }
@@ -147,7 +113,7 @@ abstract class LudoDbTable extends LudoDBObject
     {
         if ($this->isValid()) {
             $this->beforeInsert();
-            $sql = "insert into " . $this->tableName;
+            $sql = "insert into " . $this->getTableName();
             $sql .= "(" . implode(",", array_keys($this->updates)) . ")";
             $sql .= "values('" . implode("','", array_values($this->updates)) . "')";
             $this->db->query($sql);
@@ -260,13 +226,13 @@ abstract class LudoDbTable extends LudoDBObject
         if (!isset($this->config['indexes'])) return;
         $indexes = $this->config['indexes'];
         foreach ($indexes as $index) {
-            $this->db->query("create index " . $this->getIndexName($index) . " on " . $this->tableName . "(" . $index . ")");
+            $this->db->query("create index " . $this->getIndexName($index) . " on " . $this->getTableName() . "(" . $index . ")");
         }
     }
 
     private function getIndexName($field)
     {
-        return 'IND_' . md5($this->tableName . $field);
+        return 'IND_' . md5($this->getTableName() . $field);
     }
 
     private function insertDefaultData()

@@ -2,9 +2,9 @@
 
 class City extends LudoDbTable
 {
-    protected $tableName = 'City';
     protected $idField = 'zip';
     protected $config = array(
+        'table' => 'City',
         'columns' => array(
             'zip' => 'varchar(32) primary key',
             'city' => 'varchar(64)',

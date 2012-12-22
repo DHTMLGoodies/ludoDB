@@ -8,30 +8,36 @@
  */
 class TestTable extends LudoDbTable
 {
-    protected $tableName = 'TestTable';
     protected $config = array(
-      'columns' => array(
-          'id' => 'int auto_increment not null primary key',
-          'firstname' => 'varchar(32)',
-          'lastname' => 'varchar(32)',
-          'address' => 'varchar(64)'
-      ),
+        'table' => 'TestTable',
+        'columns' => array(
+            'id' => 'int auto_increment not null primary key',
+            'firstname' => 'varchar(32)',
+            'lastname' => 'varchar(32)',
+            'address' => 'varchar(64)'
+        ),
     );
 
     protected $searchFields = array('firstname');
     protected $likeFields = array('firstname', 'lastname');
 
-    public function setFirstName($value){
+    public function setFirstName($value)
+    {
         $this->setValue('firstname', $value);
     }
 
-    public function getFirstname(){
+    public function getFirstname()
+    {
         return $this->getValue('firstname');
     }
-    public function setLastname($value){
+
+    public function setLastname($value)
+    {
         $this->setValue('lastname', $value);
     }
-    public function getLastname(){
+
+    public function getLastname()
+    {
         return $this->getValue('lastname');
     }
 }

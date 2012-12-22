@@ -1,8 +1,8 @@
 <?php
 
 class Country extends LudoDbTable{
-    protected $tableName = 'Country';
     protected $config = array(
+        'table' => 'Country',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'name' => 'varchar(64)'
