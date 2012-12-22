@@ -5,7 +5,6 @@
 abstract class LudoDbTable extends LudoDBObject
 {
     protected $db;
-    protected $tableName;
     protected $idField = 'id';
     protected $config = array(
         'columns' => array(
@@ -112,17 +111,12 @@ abstract class LudoDbTable extends LudoDBObject
     private function insert()
     {
         if ($this->isValid()) {
-            $this->beforeInsert();
             $sql = "insert into " . $this->getTableName();
             $sql .= "(" . implode(",", array_keys($this->updates)) . ")";
             $sql .= "values('" . implode("','", array_values($this->updates)) . "')";
             $this->db->query($sql);
             $this->setId($this->db->getInsertId());
         }
-    }
-
-    protected function beforeInsert(){
-
     }
 
     /**

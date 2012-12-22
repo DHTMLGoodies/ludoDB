@@ -67,3 +67,9 @@ echo $person->getFirstname();
 echo $person->getLastname();
 
 Will output data for this record.
+
+$person = new Person(1);
+$person->setLastname('Johnson');
+$person->commit();
+
+Will update lastname in db for person with id=1
