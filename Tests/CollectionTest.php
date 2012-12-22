@@ -14,6 +14,10 @@ class CollectionTest extends TestBase
         $car = new Car();
         $car->drop();
         $car->createTable();
+
+        $pr = new CarProperty();
+        $pr->drop();
+        $pr->createTable();
     }
     /**
      * @test
@@ -64,6 +68,43 @@ class CollectionTest extends TestBase
         $this->assertEquals(2, count($numbers));
         $this->assertEquals('555 888', $numbers[0]);
         $this->assertEquals('555 999', $numbers[1]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToGetCollectionAsKeyValue(){
+        // given
+        $car = new Car();
+        $car->setModel('Mercedez');
+        $car->commit();
+
+        $id = $car->getId();
+
+        $this->addCarProperty($id, 'weight','1450kg');
+        $this->addCarProperty($id, 'hp', '145');
+
+        // when
+        $car = new Car($id);
+        $properties = $car->getProperties();
+        $expected = array(
+            'weight' => '1450kg',
+            'hp' => '145'
+        );
+
+        // then
+        $this->assertEquals($expected, $properties);
+
+    }
+
+    private function addCarProperty($carId, $key, $value){
+        $pr = new CarProperty();
+        if(!$pr->exists())$pr->createTable();
+        $pr->setCarId($carId);
+        $pr->setProperty($key);
+        $pr->setPropertyValue($value);
+        $pr->commit();
+
     }
 
     private function getPersonWithPhone(){

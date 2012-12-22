@@ -6,7 +6,11 @@ class Car extends LudoDbTable
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'brand' => 'varchar(64)',
-            'model' => 'varchar(64)'
+            'model' => 'varchar(64)',
+            'properties' => array(
+                'class' => 'CarProperties',
+                'lookupField' => 'car_id'
+            )
         ),
         'data' => array(
             array('id'=>'1', 'brand' => 'Opel'),
@@ -18,6 +22,18 @@ class Car extends LudoDbTable
             array('id'=>'7', 'brand' => 'Audi', 'model' => 'A6'),
         )
     );
+
+    public function getProperties(){
+        return $this->getValue('properties');
+    }
+
+    public function setModel($model){
+        $this->setValue('model', $model);
+    }
+
+    public function setBrand($brand){
+        $this->setValue('brand', $brand);
+    }
 
     public function getBrand(){
         return $this->getValue('brand');

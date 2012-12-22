@@ -11,16 +11,12 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
     private $dbResource;
     private $_valid;
     private $position;
-    private $currentRow;
+    protected $currentRow;
     private $singleValue;
 
     protected $config = array(
         'columns' => array()
     );
-
-    // Return single value instead of assosicated array of fieldname:fieldValue
-    protected $returnSingleValue = false;
-
 
     public function __construct(){
         $this->db = new LudoDB();
@@ -28,7 +24,6 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
     }
 
     function rewind() {
-        $this->db->log('Rewind');
         if ($this->dbResource) {
             $this->dbResource = null;
         }
@@ -37,23 +32,30 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
         $this->_valid = false;
     }
 
+    /**
+     * Return current value when iterating collection
+     * @method current
+     * @return mixed
+     */
     function current() {
-        $this->db->log('current');
         return $this->currentRow;
     }
 
     /**
-     * Return key used for iterator. default is numeric.
-     * @method key
-     * @return mixed
+     Return key used for iterator. default is numeric.
+     @method key
+     @return mixed
+     @example
+        function key(){
+            return $this->currentRow['key']
+        }
+     to return key
      */
     function key() {
-        $this->db->log('key');
         return $this->position;
     }
 
     public function next() {
-        $this->db->log('next');
         ++$this->position;
         $this->currentRow = $this->db->nextRow($this->dbResource);
         $this->_valid = $this->currentRow ? true : false;
@@ -65,7 +67,6 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
     }
 
     public function valid() {
-        $this->db->log('valid');
         if (!$this->loaded) {
             $this->load();
         }
@@ -73,8 +74,6 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
     }
 
     private function load(){
-
-        $this->db->log('Load');
         $this->dbResource = $this->db->query($this->getSql());
         $this->loaded = true;
         $this->next();

@@ -161,7 +161,9 @@ abstract class LudoDbTable extends LudoDBObject
         $sql = "create table " . $this->getTableName() . "(";
         $columns = array();
         foreach ($this->config['columns'] as $name => $type) {
-            $columns[] = $name . " " . $type;
+            if(is_string($type)){
+                $columns[] = $name . " " . $type;
+            }
         }
         $sql .= implode(",", $columns) . ")";
         $this->db->query($sql);

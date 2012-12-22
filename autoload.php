@@ -10,6 +10,8 @@ spl_autoload_register(
                 'alltests' => '/Tests/AllTests.php',
                 'car' => '/Tests/classes/Car.php',
                 'carcollection' => '/Tests/classes/CarCollection.php',
+                'carproperties' => '/Tests/classes/CarProperties.php',
+                'carproperty' => '/Tests/classes/CarProperty.php',
                 'city' => '/Tests/classes/City.php',
                 'collectiontest' => '/Tests/CollectionTest.php',
                 'country' => '/Tests/classes/Country.php',
