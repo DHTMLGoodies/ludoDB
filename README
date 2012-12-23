@@ -55,21 +55,31 @@ class Person extends LudoDbTable
 ?>
 Usage:
 
+<?php
 $person = new Person();
 $person->setFirstname('John');
 $person->setLastname('Wayne');
 $person->commit();
-
+?>
 For creating a new Person record and save it to the database
 
+<?php
 echo $person->getId();
 echo $person->getFirstname();
 echo $person->getLastname();
+?>
 
 Will output data for this record.
 
+<?php
 $person = new Person(1);
 $person->setLastname('Johnson');
 $person->commit();
-
+?>
 Will update lastname in db for person with id=1
+
+<?php
+echo $person->getJSON();
+?>
+
+will output person data in JSON format.
