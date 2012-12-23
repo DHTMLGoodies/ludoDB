@@ -268,6 +268,18 @@ class DBTest extends TestBase
     /**
      * @test
      */
+    public function collectionShouldReturnEmptyValueForNewObjects(){
+        // given
+        $person = new Person();
+
+        // then
+        $this->assertEquals(0, count($person->getPhone()));
+
+    }
+
+    /**
+     * @test
+     */
     public function shouldBeAbleToGetReferenceToColumn(){
         // given
         $person = new Person();

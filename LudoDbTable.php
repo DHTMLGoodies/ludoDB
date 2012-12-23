@@ -155,6 +155,7 @@ abstract class LudoDbTable extends LudoDBObject
     protected function setId($id)
     {
         $this->id = $id;
+        $this->data[$this->getIdField()] = $id;
     }
 
     public function getId()

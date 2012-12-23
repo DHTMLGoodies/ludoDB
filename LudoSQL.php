@@ -35,7 +35,7 @@ class LudoSQL
         if(isset($this->config['columns'][0])){
             return $this->config['table']."." . implode(",". $this->config['table'].".",$this->config['columns']);
         }
-
+        $ret = array();
         $cols = $this->config['columns'];
         foreach($cols as $col => $value){
             if(! is_array($value)){
@@ -83,7 +83,7 @@ class LudoSQL
                 $ret[] = $this->config['table'].".".$join['fk']." = ".$join['table'].".".$join['pk'];
             }
         }
-        if($this->lookupValue){
+        if(isset($this->config['lookupField'])){
             $ret[] = $this->getTableAndColumn($this->config['lookupField'])."='". $this->lookupValue."'";
         }
         if(count($ret)){
