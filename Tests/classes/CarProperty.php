@@ -13,7 +13,8 @@ class CarProperty extends LudoDbTable
             'car_id' => 'int',
             'property' => 'varchar(32)',
             'propertyValue' => 'varchar(255)'
-        )
+        ),
+        'indexes' => array('car_id')
     );
 
     public function setCarId($id){

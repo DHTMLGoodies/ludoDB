@@ -8,6 +8,11 @@
 class LudoDBObject
 {
     protected $db;
+    protected $config = array();
+
+    public function __construct(){
+        $this->db = new LudoDb();
+    }
 
     public function getTableName()
     {

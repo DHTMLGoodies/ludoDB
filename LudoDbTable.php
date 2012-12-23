@@ -4,7 +4,7 @@
  */
 abstract class LudoDbTable extends LudoDBObject
 {
-    protected $db;
+    const DELETED = '__DELETED__';
     protected $idField = 'id';
     protected $config = array(
         'columns' => array(
@@ -19,8 +19,8 @@ abstract class LudoDbTable extends LudoDBObject
 
     public function __construct($id = null)
     {
+        parent::__construct();
         $this->config['lookupField'] = $this->idField;
-        $this->db = new LudoDb();
         $this->populate($id);
     }
 
@@ -34,13 +34,12 @@ abstract class LudoDbTable extends LudoDBObject
         $this->id = $id;
     }
 
-    private function getSQL($id){
+    private function getSQL($id)
+    {
         $this->config['lookupField'] = $this->idField;
         $sql = new LudoSQL($this->config, $id);
         return $sql->getSql();
     }
-
-
 
     private function populateWith($data)
     {
@@ -51,30 +50,41 @@ abstract class LudoDbTable extends LudoDBObject
 
     protected function getValue($column)
     {
-        if($this->isExternalColumn($column)){
+        if ($this->isExternalColumn($column)) {
             return $this->getExternalValue($column);
         }
         if (isset($this->updates) && isset($this->updates[$column])) {
-            return $this->updates[$column];
+            return $this->updates[$column] == self::DELETED ? null : $this->updates[$column];
         }
         return isset($this->data[$column]) ? $this->data[$column] : null;
     }
 
-    private function isExternalColumn($column){
+    private function isExternalColumn($column)
+    {
         return isset($this->config['columns'][$column]) && is_array($this->config['columns'][$column]);
     }
 
-    private function getExternalValue($column){
-        if(!isset($this->externalClasses[$column])){
+    private function getExternalValue($column)
+    {
+        return $this->getExternalClassFor($column)->getValue();
+    }
+
+    /**
+     * @param $column
+     * @return LudoDBCollection table
+     */
+    private function getExternalClassFor($column){
+        if (!isset($this->externalClasses[$column])) {
             $class = $this->config['columns'][$column]['class'];
             $this->externalClasses[$column] = new $class($this->getId());
         }
-        return $this->externalClasses[$column]->getValue();
+        return $this->externalClasses[$column];
     }
 
     protected function setValue($column, $value)
     {
-        if (!$this->hasColumn($column)) return;
+        if (!$this->hasColumn($column) || is_array($value)) return;
+        if (!isset($value)) $value = self::DELETED;
         if (!isset($this->updates)) $this->updates = array();
         if (is_string($value)) $value = mysql_real_escape_string($value);
         $this->updates[$column] = $value;
@@ -94,7 +104,7 @@ abstract class LudoDbTable extends LudoDBObject
             $this->insert();
         }
         foreach ($this->updates as $key => $value) {
-            $this->data[$key] = $value;
+            $this->data[$key] = $value === self::DELETED ? null : $value;
         }
         $this->updates = null;
         return $this->getId();
@@ -120,7 +130,7 @@ abstract class LudoDbTable extends LudoDBObject
     }
 
     /**
-     * Rollback changes
+     * Rollback updates
      * @method rollback
      */
     public function rollback()
@@ -137,7 +147,7 @@ abstract class LudoDbTable extends LudoDBObject
     {
         $updates = array();
         foreach ($this->updates as $key => $value) {
-            $updates[] = $key . "='" . $value . "'";
+            $updates[] = $key . "=" . ($value === self::DELETED ? 'NULL' : "'" . $value . "'");
         }
         return implode(",", $updates);
     }
@@ -161,7 +171,7 @@ abstract class LudoDbTable extends LudoDBObject
         $sql = "create table " . $this->getTableName() . "(";
         $columns = array();
         foreach ($this->config['columns'] as $name => $type) {
-            if(is_string($type)){
+            if (is_string($type)) {
                 $columns[] = $name . " " . $type;
             }
         }
@@ -185,7 +195,6 @@ abstract class LudoDbTable extends LudoDBObject
      * Drop database table
      * @method drop
      */
-
     public function drop()
     {
         if ($this->exists()) {
@@ -195,9 +204,9 @@ abstract class LudoDbTable extends LudoDBObject
 
     /**
      * Delete all records from database table
-     * @method deleteAll
+     * @method deleteTableData
      */
-    public function deleteAll()
+    public function deleteTableData()
     {
         $this->db->query("delete from " . $this->getTableName());
     }
@@ -219,17 +228,23 @@ abstract class LudoDbTable extends LudoDBObject
     private function insertDefaultData()
     {
         if (!isset($this->config['data'])) return;
-        /**
-         * @var LudoDBTable $className
-         */
-        $className = get_class($this);
+
         foreach ($this->config['data'] as $item) {
-            $cl = new $className;
+            $cl = $this->getNewInstance();
             foreach ($item as $key => $value) {
                 $cl->setValue($key, $value);
             }
             $cl->commit();
         }
+    }
+
+    /**
+     * @method getClassName
+     * @return LudoDBTable class
+     */
+    private function getNewInstance(){
+        $className = get_class($this);
+        return new $className;
     }
 
     public function hasColumn($column)
@@ -263,5 +278,9 @@ abstract class LudoDbTable extends LudoDBObject
     public function isValid()
     {
         return true;
+    }
+
+    public function getColumn($column){
+        return $this->getExternalClassFor($column);
     }
 }

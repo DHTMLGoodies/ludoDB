@@ -59,7 +59,7 @@ class CollectionTest extends TestBase
      */
     public function shouldReturnValueWhenCollectionIsDefinedAsColumnForTable(){
         // given
-        $person = $this->getPersonWithPhone();
+        $person = $this->getPersonWithPhone('John', array('555 888', '555 999'));
 
         // when
         $numbers = $person->getPhone();
@@ -94,8 +94,8 @@ class CollectionTest extends TestBase
 
         // then
         $this->assertEquals($expected, $properties);
-
     }
+
 
     private function addCarProperty($carId, $key, $value){
         $pr = new CarProperty();
@@ -107,23 +107,22 @@ class CollectionTest extends TestBase
 
     }
 
-    private function getPersonWithPhone(){
+    private function getPersonWithPhone($firstname = '',$phoneNumbers = array()){
         $person = new Person();
-        $person->setFirstname('John');
+        $person->setFirstname($firstname);
         $person->commit();
         $id = $person->getId();
 
-        $phone = new Phone();
-        $phone->setUserId($id);
-        $phone->setPhone('555 888');
-        $phone->commit();
-
-        $phone = new Phone();
-        $phone->setUserId($id);
-        $phone->setPhone('555 999');
-        $phone->commit();
+        foreach($phoneNumbers as $number){
+            $this->addPhone($id, $number);
+        }
         return new Person($id);
     }
 
-
+    private function addPhone($personId, $number){
+        $phone = new Phone();
+        $phone->setUserId($personId);
+        $phone->setPhone($number);
+        $phone->commit();
+    }
 }

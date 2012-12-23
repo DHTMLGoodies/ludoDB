@@ -5,8 +5,12 @@
  * Date: 19.12.12
  * Time: 21:31
  */
-class LudoDbCollection extends LudoDbIterator
+abstract class LudoDbCollection extends LudoDbIterator
 {
+    /**
+     * Lookup value to use when instantiating collection. This value
+     * is used in join with config['lookupField']
+     */
     protected $lookupValue;
 
     public function __construct($lookupValue = null){
@@ -18,5 +22,9 @@ class LudoDbCollection extends LudoDbIterator
     {
         $sql = new LudoSQL($this->config, $this->lookupValue);
         return $sql->getSql();
+    }
+
+    public function setValue($value){
+
     }
 }

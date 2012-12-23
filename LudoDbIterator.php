@@ -19,7 +19,7 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
     );
 
     public function __construct(){
-        $this->db = new LudoDB();
+        parent::__construct();
         $this->singleValue = count($this->config['columns']) === 1;
     }
 

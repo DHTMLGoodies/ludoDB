@@ -185,7 +185,7 @@ class DBTest extends TestBase
         // given
         $person = new Person();
         if(!$person->exists())$person->createTable();
-        $person->deleteAll();
+        $person->deleteTableData();
         $person->setFirstname('John');
         $person->setZip('4330');
         $person->commit();
@@ -193,7 +193,7 @@ class DBTest extends TestBase
 
         $city = new City();
         if(!$city->exists())$city->createTable();
-        $city->deleteAll();
+        $city->deleteTableData();
         $city->setZip(4330);
         $city->setCity('Algard');
         $city->commit();
@@ -229,27 +229,56 @@ class DBTest extends TestBase
 
     }
 
-    private function createCountryData(){
-        $country = new Country();
-        if(!$country->exists())$country->createTable();
-        $country->setName('Norway');
-        $country->commit();
-        $id = $country->getId();
-
-        $cities = array('Oslo','Bergen','Stavanger','Sandnes');
+    /**
+     * @test
+     */
+    public function shouldBeAbleToDeleteColumnValue(){
+        // given
+        $person = new Person();
+        $person->setFirstname('John');
+        $person->setLastName('Wayne');
         $city = new City();
-        if($city->exists())$city->drop();
-        $city->createTable();
-        $i=0;
-        foreach($cities as $cityName){
-            $city = new City();
-            $city->setCity($cityName);
-            $city->setZip(5000 + $i);
-            $city->setCountryId($id);
-            $city->commit();
-            $i++;
-        }
-        return $country->getId();
+        $city->setZip('8642');
+        $city->commit();
+
+        $person->setZip('8642');
+        $person->commit();
+        $id = $person->getId();
+
+        $this->assertEquals('John', $person->getFirstname(), 'Initial first name');
+        $this->assertEquals('Wayne', $person->getLastname(), 'Initial last name');
+
+        $person->setLastname(null);
+        $person->commit();
+        $secondId = $person->getId();
+
+        $this->assertEquals($id, $secondId);
+        // when
+        $newPerson = new Person($person->getId());
+
+        $this->log($secondId);
+        // then
+        $this->assertNotNull($secondId);
+        $this->assertNull($person->getUpdates());
+        $this->assertEquals('8642', $newPerson->getZip());
+        $this->assertEquals('John', $newPerson->getFirstname());
+        $this->assertNull($newPerson->getLastname());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToGetReferenceToColumn(){
+        // given
+        $person = new Person();
+
+        // when
+        $col = $person->getColumn('phone');
+
+        // then
+        $this->assertEquals('PhoneCollection', get_class($col));
+
+
     }
 
     private function getExistingRecord(){

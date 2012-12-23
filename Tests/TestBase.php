@@ -32,6 +32,10 @@ class TestBase  extends PHPUnit_Framework_TestCase
     protected function dropTable(){
         mysql_query("drop table TestTable");
     }
-
+    public function log($sql){
+        $fh = fopen("sql.txt","a+");
+        fwrite($fh, $sql."\n");
+        fclose($fh);
+    }
 
 }
