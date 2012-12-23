@@ -11,6 +11,10 @@ class DBTest extends TestBase
 {
     public function setUp(){
         parent::setUp();
+
+        $city = new City();
+        $city->drop();
+        $city->createTable();
     }
 
     /**
@@ -274,6 +278,22 @@ class DBTest extends TestBase
 
         // then
         $this->assertEquals(0, count($person->getPhone()));
+
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetValueFromJoinsOnNewObjects(){
+        $person = new Person();
+        $person->setZip('7001');
+        $city = new City();
+        $city->setZip('7001');
+        $city->setCity('Somewhere');
+        $city->commit();
+
+        // then
+        $this->assertEquals('Somewhere', $person->getCity());
 
     }
 

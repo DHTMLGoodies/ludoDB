@@ -52,4 +52,8 @@ class Person extends LudoDbTable
     public function getPhone(){
         return $this->getValue('phone');
     }
+
+    public function setAddress($address){
+        $this->setValue('address',$address);
+    }
 }

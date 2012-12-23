@@ -73,7 +73,8 @@ abstract class LudoDbTable extends LudoDBObject
      * @param $column
      * @return LudoDBCollection table
      */
-    private function getExternalClassFor($column){
+    private function getExternalClassFor($column)
+    {
         if (!isset($this->externalClasses[$column])) {
             $class = $this->config['columns'][$column]['class'];
             $this->externalClasses[$column] = new $class($this->getId());
@@ -243,7 +244,8 @@ abstract class LudoDbTable extends LudoDBObject
      * @method getClassName
      * @return LudoDBTable class
      */
-    private function getNewInstance(){
+    private function getNewInstance()
+    {
         $className = get_class($this);
         return new $className;
     }
@@ -265,7 +267,21 @@ abstract class LudoDbTable extends LudoDBObject
         foreach ($columns as $column => $def) {
             $ret[$column] = $this->getValue($column);
         }
+        $ret = array_merge($ret, $this->getJoinColumns());
         return json_encode($ret);
+    }
+
+    private function getJoinColumns()
+    {
+        $ret = array();
+        if (isset($this->config['join'])) {
+            foreach ($this->config['join'] as $join) {
+                foreach ($join['columns'] as $col) {
+                    $ret[$col] = $this->getValue($col);
+                }
+            }
+        }
+        return $ret;
     }
 
     public function JSONPopulate(array $jsonAsArray)
@@ -281,7 +297,8 @@ abstract class LudoDbTable extends LudoDBObject
         return true;
     }
 
-    public function getColumn($column){
+    public function getColumn($column)
+    {
         return $this->getExternalClassFor($column);
     }
 }
