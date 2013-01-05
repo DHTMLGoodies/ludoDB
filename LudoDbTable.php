@@ -67,7 +67,13 @@ abstract class LudoDbTable extends LudoDBObject
 
     private function getExternalValue($column)
     {
-        return $this->getExternalClassFor($column)->getValues();
+        $method = $this->getMethodForExternalColumn($column);
+        return $this->getExternalClassFor($column)->$method();
+    }
+
+    private function getMethodForExternalColumn($column){
+        $method = $this->getColumnProperty($column, 'method');
+        return isset($method) ? $method : 'getValues';
     }
 
     /**
@@ -78,7 +84,9 @@ abstract class LudoDbTable extends LudoDBObject
     {
         if (!isset($this->externalClasses[$column])) {
             $class = $this->config['columns'][$column]['class'];
-            $this->externalClasses[$column] = new $class($this->getId());
+            $val = $this->getColumnProperty($column, 'fk');
+            if(isset($val))$val = $this->getValue($val); else $val = $this->getId();
+            $this->externalClasses[$column] = new $class($val);
         }
         return $this->externalClasses[$column];
     }
@@ -303,5 +311,20 @@ abstract class LudoDbTable extends LudoDBObject
     public function getColumn($column)
     {
         return $this->getExternalClassFor($column);
+    }
+
+    private function getColumnProperty($column, $property){
+        $val = $this->getClassProperty($column, $property);
+        if(isset($val))return $val;
+        $col = $this->config['columns'][$column];
+        return isset($col[$property]) ? $col[$property] : null;
+    }
+
+    private function getClassProperty($column, $property){
+        if(isset($this->config['classes']) && isset($this->config['classes'][$column])){
+            $cl = $this->config['classes'];
+            return isset($cl[$column]) && isset($cl[$column][$property]) ? $cl[$column][$property] : null;
+        }
+        return null;
     }
 }

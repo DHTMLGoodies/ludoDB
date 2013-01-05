@@ -24,4 +24,8 @@ class City extends LudoDbTable
     public function setCountryId($countryId){
         $this->setValue('countryId', $countryId);
     }
+
+    public function getCity(){
+        return $this->getValue('city');
+    }
 }

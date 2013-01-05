@@ -13,10 +13,16 @@ class Person extends LudoDbTable
             'zip' => 'varchar(5)',
             'phone' => array(
                 'class' => 'PhoneCollection'
+            ),
+            'city' => array(
+                'class' => 'City',
+                'method' => 'getCity'
             )
         ),
-        'join' => array(
-            array('table' => 'city', 'pk' => 'zip', 'fk' => 'zip', 'columns' => array('city'))
+        'classes' => array(
+            'city' => array(
+                'fk' => 'zip'
+            )
         )
     );
 

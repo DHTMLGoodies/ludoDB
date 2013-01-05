@@ -45,7 +45,7 @@ class CollectionTest extends TestBase
         // given
         $c = new CarCollection('Audi');
         // when
-        $cars = $c->getValue();
+        $cars = $c->getValues();
         // then
         $this->assertEquals('A3', $cars[0]['model']);
         $this->assertEquals('A4', $cars[1]['model']);
