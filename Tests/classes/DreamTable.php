@@ -15,14 +15,18 @@ class DreamTable extends LudoDbTable
             'lastname' => 'varchar(64)',
             'zip' => 'varchar(15)',
             'city' => array(
-                'class' => 'City',
-                'fk' => 'zip', 'pk' => 'zip',
+                'join' => 'City',
                 'get' => 'getCity',
                 'set' => 'setCity'
             ),
             'phone' => array(
                 'class' => 'PhoneCollection'
             )
+        ),
+        'joins' => array(
+            'class' => 'City',
+            'fk' => 'zip',
+            'pk' => 'zip'
         )
     );
 }

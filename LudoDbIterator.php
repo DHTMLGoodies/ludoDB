@@ -60,7 +60,6 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
         $this->currentRow = $this->db->nextRow($this->dbResource);
         $this->isValid = $this->currentRow ? true : false;
         if($this->singleValue && $this->currentRow){
-            $this->db->log('Single value');
             $this->currentRow = array_values($this->currentRow);
             $this->currentRow = $this->currentRow[0];
         }
@@ -79,7 +78,7 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
         $this->next();
     }
 
-    public function getValue(){
+    public function getValues(){
         $ret = array();
         foreach($this as $key=>$value){
             $ret[$key] = $value;

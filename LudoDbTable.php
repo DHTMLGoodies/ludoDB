@@ -67,7 +67,7 @@ abstract class LudoDbTable extends LudoDBObject
 
     private function getExternalValue($column)
     {
-        return $this->getExternalClassFor($column)->getValue();
+        return $this->getExternalClassFor($column)->getValues();
     }
 
     /**
@@ -110,6 +110,7 @@ abstract class LudoDbTable extends LudoDBObject
     private function update()
     {
         if ($this->isValid()) {
+            $this->beforeUpdate();
             $sql = "update " . $this->getTableName() . " set " . $this->getUpdatesForSql() . " where " . $this->idField . " = '" . $this->getId() . "'";
             $this->db->query($sql);
         }
@@ -135,6 +136,10 @@ abstract class LudoDbTable extends LudoDBObject
             $this->db->query($sql);
             $this->setId($this->db->getInsertId());
         }
+    }
+
+    protected function beforeUpdate(){
+
     }
 
     /**
@@ -256,13 +261,17 @@ abstract class LudoDbTable extends LudoDBObject
 
     public function getJSON()
     {
+
+        return json_encode($this->getValues());
+    }
+
+    protected function getValues(){
         $columns = $this->config['columns'];
         $ret = array();
         foreach ($columns as $column => $def) {
             $ret[$column] = $this->getValue($column);
         }
-        $ret = array_merge($ret, $this->getJoinColumns());
-        return json_encode($ret);
+        return array_merge($ret, $this->getJoinColumns());
     }
 
     private function getJoinColumns()
