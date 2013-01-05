@@ -23,8 +23,4 @@ abstract class LudoDbCollection extends LudoDbIterator
         $sql = new LudoSQL($this->config, $this->lookupValue);
         return $sql->getSql();
     }
-
-    public function setValue($value){
-
-    }
 }

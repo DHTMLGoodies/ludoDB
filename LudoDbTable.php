@@ -72,7 +72,7 @@ abstract class LudoDbTable extends LudoDBObject
     }
 
     private function getMethodForExternalColumn($column){
-        $method = $this->getColumnProperty($column, 'method');
+        $method = $this->getColumnProperty($column, 'get');
         return isset($method) ? $method : 'getValues';
     }
 
@@ -93,11 +93,21 @@ abstract class LudoDbTable extends LudoDBObject
 
     protected function setValue($column, $value)
     {
-        if (!$this->hasColumn($column) || is_array($value)) return;
-        if (is_string($value)) $value = mysql_real_escape_string($value);
-        if (!isset($value)) $value = self::DELETED;
-        if (!isset($this->updates)) $this->updates = array();
-        $this->updates[$column] = $value;
+        if($this->isExternalColumn($column)){
+            $this->setExternalValue($column, $value);
+        }else{
+            if (is_string($value)) $value = mysql_real_escape_string($value);
+            if (!isset($value)) $value = self::DELETED;
+            if (!isset($this->updates)) $this->updates = array();
+            $this->updates[$column] = $value;
+        }
+    }
+
+    private function setExternalValue($column, $value){
+        $method = $this->getColumnProperty($column, 'set');
+        if(isset($method)){
+            $this->getExternalClassFor($column)->$method($column, $value);
+        }
     }
 
     public function commit()
@@ -110,6 +120,9 @@ abstract class LudoDbTable extends LudoDBObject
         }
         foreach ($this->updates as $key => $value) {
             $this->data[$key] = $value === self::DELETED ? null : $value;
+        }
+        foreach($this->externalClasses as $class){
+            $class->commit();
         }
         $this->updates = null;
         return $this->getId();

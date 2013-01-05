@@ -1,7 +1,6 @@
 <?php
 class Person extends LudoDbTable
 {
-    protected $tableName = 'Person';
     protected $idField = 'id';
     protected $config = array(
         'table' => 'Person',
@@ -16,7 +15,7 @@ class Person extends LudoDbTable
             ),
             'city' => array(
                 'class' => 'City',
-                'method' => 'getCity'
+                'get' => 'getCity'
             )
         ),
         'classes' => array(

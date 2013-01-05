@@ -18,4 +18,8 @@ class LudoDBObject
     {
         return isset($this->config['table']) ? $this->config['table'] : get_class($this);
     }
+
+    public function commit(){
+
+    }
 }
