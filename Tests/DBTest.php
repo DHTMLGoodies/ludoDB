@@ -284,6 +284,18 @@ class DBTest extends TestBase
     /**
      * @test
      */
+    public function shouldSetIdOnCommit(){
+        $person = new Person();
+        $person->setFirstname('Alf');
+        $person->commit();
+
+        // then
+        $this->assertNotNull($person->getId());
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetValueFromJoinsOnNewObjects(){
         $person = new Person();
         $person->setZip('7001');

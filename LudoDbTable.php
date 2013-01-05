@@ -21,17 +21,18 @@ abstract class LudoDbTable extends LudoDBObject
     {
         parent::__construct();
         $this->config['lookupField'] = $this->idField;
-        $this->populate($id);
+        if($id){
+            $this->populate($id);
+        }
     }
 
     public function populate($id)
     {
-        if (!isset($id)) return;
         $data = $this->db->one($this->getSQL($id));
         if (isset($data)) {
             $this->populateWith($data);
+            $this->setId($id);
         }
-        $this->id = $id;
     }
 
     private function getSQL($id)
@@ -77,6 +78,7 @@ abstract class LudoDbTable extends LudoDBObject
     {
         if (!isset($this->externalClasses[$column])) {
             $class = $this->config['columns'][$column]['class'];
+            $this->db->log($this->getTableName().": " . $this->getid());
             $this->externalClasses[$column] = new $class($this->getId());
         }
         return $this->externalClasses[$column];
@@ -91,11 +93,6 @@ abstract class LudoDbTable extends LudoDBObject
         $this->updates[$column] = $value;
     }
 
-    /**
-     * Commit changes to database
-     * @method commit
-     * @return {String|Number} id
-     */
     public function commit()
     {
         if (!isset($this->updates)) return null;
@@ -117,6 +114,15 @@ abstract class LudoDbTable extends LudoDBObject
             $sql = "update " . $this->getTableName() . " set " . $this->getUpdatesForSql() . " where " . $this->idField . " = '" . $this->getId() . "'";
             $this->db->query($sql);
         }
+    }
+
+    private function getUpdatesForSql()
+    {
+        $updates = array();
+        foreach ($this->updates as $key => $value) {
+            $updates[] = $key . "=" . ($value === self::DELETED ? 'NULL' : "'" . $value . "'");
+        }
+        return implode(",", $updates);
     }
 
     private function insert()
@@ -153,19 +159,11 @@ abstract class LudoDbTable extends LudoDBObject
         return $this->updates;
     }
 
-    private function getUpdatesForSql()
-    {
-        $updates = array();
-        foreach ($this->updates as $key => $value) {
-            $updates[] = $key . "=" . ($value === self::DELETED ? 'NULL' : "'" . $value . "'");
-        }
-        return implode(",", $updates);
-    }
-
     protected function setId($id)
     {
         $this->id = $id;
         $this->data[$this->getIdField()] = $id;
+        $this->externalClasses = array();
     }
 
     public function getId()
@@ -179,15 +177,8 @@ abstract class LudoDbTable extends LudoDBObject
      */
     public function createTable()
     {
-        $sql = "create table " . $this->getTableName() . "(";
-        $columns = array();
-        foreach ($this->config['columns'] as $name => $type) {
-            if (is_string($type)) {
-                $columns[] = $name . " " . $type;
-            }
-        }
-        $sql .= implode(",", $columns) . ")";
-        $this->db->query($sql);
+        $sql = new LudoSQL($this->config);
+        $this->db->query($sql->getCreateTableSql());
 
         $this->createIndexes();
         $this->insertDefaultData();
@@ -199,7 +190,7 @@ abstract class LudoDbTable extends LudoDBObject
      */
     public function exists()
     {
-        return $this->db->countRows("show tables like '" . $this->getTableName() . "'") > 0;
+        return $this->db->tableExists($this->getTableName());
     }
 
     /**
@@ -213,10 +204,6 @@ abstract class LudoDbTable extends LudoDBObject
         }
     }
 
-    /**
-     * Delete all records from database table
-     * @method deleteTableData
-     */
     public function deleteTableData()
     {
         $this->db->query("delete from " . $this->getTableName());
@@ -225,8 +212,7 @@ abstract class LudoDbTable extends LudoDBObject
     private function createIndexes()
     {
         if (!isset($this->config['indexes'])) return;
-        $indexes = $this->config['indexes'];
-        foreach ($indexes as $index) {
+        foreach ($this->config['indexes'] as $index) {
             $this->db->query("create index " . $this->getIndexName($index) . " on " . $this->getTableName() . "(" . $index . ")");
         }
     }

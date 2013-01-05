@@ -18,7 +18,6 @@ class Person extends LudoDbTable
         'join' => array(
             array('table' => 'city', 'pk' => 'zip', 'fk' => 'zip', 'columns' => array('city'))
         )
-
     );
 
     public function setFirstname($value){

@@ -81,6 +81,10 @@ class LudoDB
         return null;
     }
 
+    public function tableExists($tableName){
+        return $this->countRows("show tables like '" . $tableName . "'") > 0;
+    }
+
     public function log($sql){
         $fh = fopen("sql.txt","a+");
         fwrite($fh, $sql."\n");

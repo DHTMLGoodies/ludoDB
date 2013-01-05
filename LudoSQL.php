@@ -1,6 +1,5 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
  * User: Alf Magne Kalleland
  * Date: 22.12.12
  * Time: 00:19
@@ -98,5 +97,17 @@ class LudoSQL
 
     private function getOrderBy(){
         return isset($this->config['orderBy']) ? ' order by ' . $this->config['orderBy'] : '';
+    }
+
+    public function getCreateTableSql(){
+        $sql = "create table " . $this->config['table'] . "(";
+        $columns = array();
+        foreach ($this->config['columns'] as $name => $type) {
+            if (is_string($type)) {
+                $columns[] = $name . " " . $type;
+            }
+        }
+        $sql .= implode(",", $columns) . ")";
+        return $sql;
     }
 }

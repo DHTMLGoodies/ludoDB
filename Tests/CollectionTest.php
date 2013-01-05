@@ -109,6 +109,8 @@ class CollectionTest extends TestBase
     private function getPersonWithPhone($firstname = '',$phoneNumbers = array()){
         $person = new Person();
         $person->setFirstname($firstname);
+        $this->createCity();
+        $person->setZip(4330);
         $person->commit();
         $id = $person->getId();
 
@@ -116,6 +118,15 @@ class CollectionTest extends TestBase
             $this->addPhone($id, $number);
         }
         return new Person($id);
+    }
+
+    private function createCity(){
+        $city = new City(4330);
+        if(!$city->getId()){
+            $city->setZip(4330);
+            $city->setCity("Somewhere");
+            $city->commit();
+        }
     }
 
     private function addPhone($personId, $number){
