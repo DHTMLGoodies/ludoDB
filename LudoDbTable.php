@@ -78,7 +78,6 @@ abstract class LudoDbTable extends LudoDBObject
     {
         if (!isset($this->externalClasses[$column])) {
             $class = $this->config['columns'][$column]['class'];
-            $this->db->log($this->getTableName().": " . $this->getid());
             $this->externalClasses[$column] = new $class($this->getId());
         }
         return $this->externalClasses[$column];
@@ -87,9 +86,9 @@ abstract class LudoDbTable extends LudoDBObject
     protected function setValue($column, $value)
     {
         if (!$this->hasColumn($column) || is_array($value)) return;
+        if (is_string($value)) $value = mysql_real_escape_string($value);
         if (!isset($value)) $value = self::DELETED;
         if (!isset($this->updates)) $this->updates = array();
-        if (is_string($value)) $value = mysql_real_escape_string($value);
         $this->updates[$column] = $value;
     }
 
