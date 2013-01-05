@@ -104,7 +104,6 @@ class CollectionTest extends TestBase
         $pr->setProperty($key);
         $pr->setPropertyValue($value);
         $pr->commit();
-
     }
 
     private function getPersonWithPhone($firstname = '',$phoneNumbers = array()){

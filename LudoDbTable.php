@@ -122,6 +122,8 @@ abstract class LudoDbTable extends LudoDBObject
     private function insert()
     {
         if ($this->isValid()) {
+            $this->beforeInsert();
+
             $sql = "insert into " . $this->getTableName();
             $sql .= "(" . implode(",", array_keys($this->updates)) . ")";
             $sql .= "values('" . implode("','", array_values($this->updates)) . "')";
@@ -130,6 +132,13 @@ abstract class LudoDbTable extends LudoDBObject
         }
     }
 
+    /**
+     * Method executed before new record is saved in db
+     * @method beforeInsert
+     */
+    protected function beforeInsert(){
+
+    }
     /**
      * Rollback updates
      * @method rollback
