@@ -2,6 +2,7 @@
 class Car extends LudoDbTable
 {
     protected $config = array(
+        'idField' => 'id',
         'table' => 'Car',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',

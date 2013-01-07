@@ -1,9 +1,9 @@
 <?php
 class Person extends LudoDbTable
 {
-    protected $idField = 'id';
     protected $config = array(
         'table' => 'Person',
+        'idField' => 'id',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'firstname' => 'varchar(32)',

@@ -8,6 +8,7 @@
 class CarProperty extends LudoDbTable
 {
     protected $config = array(
+        'idField' => 'id',
         'table' => 'CarProperty',
         'columns' => array(
             'car_id' => 'int',

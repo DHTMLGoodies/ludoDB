@@ -8,6 +8,7 @@
 class Phone extends LudoDbTable
 {
     protected $config = array(
+        'idField' => 'id',
         'table' => 'Phone',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',

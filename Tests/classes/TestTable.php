@@ -9,6 +9,7 @@
 class TestTable extends LudoDbTable
 {
     protected $config = array(
+        'idField' => 'id',
         'table' => 'TestTable',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',

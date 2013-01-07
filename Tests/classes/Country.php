@@ -2,6 +2,7 @@
 
 class Country extends LudoDbTable{
     protected $config = array(
+        'idField' => 'id',
         'table' => 'Country',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',

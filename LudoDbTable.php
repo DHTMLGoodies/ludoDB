@@ -5,8 +5,8 @@
 abstract class LudoDbTable extends LudoDBObject
 {
     const DELETED = '__DELETED__';
-    protected $idField = 'id';
     protected $config = array(
+        'idField' => 'id',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
         )
@@ -285,7 +285,7 @@ abstract class LudoDbTable extends LudoDBObject
     }
 
     public function getIdField(){
-        return isset($this->config['idField'])? $this->config['idField'] : $this->idField;
+        return isset($this->config['idField']) ? $this->config['idField'] : 'id';
     }
 
     public function getJSON()
