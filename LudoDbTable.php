@@ -20,24 +20,34 @@ abstract class LudoDbTable extends LudoDBObject
     public function __construct($id = null)
     {
         parent::__construct();
-        $this->config['lookupField'] = $this->idField;
+        $this->setLookupField();
         if($id){
             $this->populate($id);
         }
     }
 
+    private function setLookupField(){
+        if(!isset($this->config['lookupField'])){
+            $this->config['lookupField'] = $this->getIdField();
+        }
+    }
+
     public function populate($id)
     {
-        $data = $this->db->one($this->getSQL($id));
+        $data = $this->db->one($this->getSQL($this->getValidId($id)));
         if (isset($data)) {
             $this->populateWith($data);
-            $this->setId($id);
+            $this->setId($this->getValue($this->getIdField()));
         }
+    }
+
+    protected function getValidId($id){
+        return $id;
     }
 
     private function getSQL($id)
     {
-        $this->config['lookupField'] = $this->idField;
+        $this->config['lookupField'] = $this->getIdField();
         $sql = new LudoSQL($this->config, $id);
         return $sql->getSql();
     }
@@ -106,7 +116,7 @@ abstract class LudoDbTable extends LudoDBObject
     private function setExternalValue($column, $value){
         $method = $this->getColumnProperty($column, 'set');
         if(isset($method)){
-            $this->getExternalClassFor($column)->$method($column, $value);
+            $this->getExternalClassFor($column)->$method($value);
         }
     }
 
@@ -132,7 +142,7 @@ abstract class LudoDbTable extends LudoDBObject
     {
         if ($this->isValid()) {
             $this->beforeUpdate();
-            $sql = "update " . $this->getTableName() . " set " . $this->getUpdatesForSql() . " where " . $this->idField . " = '" . $this->getId() . "'";
+            $sql = "update " . $this->getTableName() . " set " . $this->getUpdatesForSql() . " where " . $this->getIdField() . " = '" . $this->getId() . "'";
             $this->db->query($sql);
         }
     }
@@ -275,9 +285,8 @@ abstract class LudoDbTable extends LudoDBObject
         return isset($this->config['columns'][$column]);
     }
 
-    public function getIdField()
-    {
-        return $this->idField;
+    public function getIdField(){
+        return isset($this->config['idField'])? $this->config['idField'] : $this->idField;
     }
 
     public function getJSON()
@@ -340,4 +349,6 @@ abstract class LudoDbTable extends LudoDBObject
         }
         return null;
     }
+
+
 }
