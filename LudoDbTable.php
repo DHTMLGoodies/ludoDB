@@ -47,7 +47,6 @@ abstract class LudoDbTable extends LudoDBObject
 
     private function getSQL($id)
     {
-        $this->config['lookupField'] = $this->getIdField();
         $sql = new LudoSQL($this->config, $id);
         return $sql->getSql();
     }

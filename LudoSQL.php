@@ -15,6 +15,7 @@ class LudoSQL
     }
 
     public function getSql(){
+        $this->log("select ". $this->getColumns(). " from ". $this->getTables().$this->getJoins().$this->getOrderBy());
         return "select ". $this->getColumns(). " from ". $this->getTables().$this->getJoins().$this->getOrderBy();
     }
 
@@ -83,7 +84,7 @@ class LudoSQL
             }
         }
         if(isset($this->config['lookupField'])){
-            $ret[] = $this->getTableAndColumn($this->config['lookupField'])."='". $this->lookupValue."'";
+            $ret[] = $this->getTableAndColumn($this->config['lookupField'])."='". mysql_real_escape_string($this->lookupValue)."'";
         }
         if(count($ret)){
             return " where ". implode(" and ", $ret);
@@ -109,5 +110,11 @@ class LudoSQL
         }
         $sql .= implode(",", $columns) . ")";
         return $sql;
+    }
+
+    public function log($sql){
+        $fh = fopen("sql.txt","a+");
+        fwrite($fh, $sql."\n");
+        fclose($fh);
     }
 }
