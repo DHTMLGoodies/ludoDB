@@ -325,6 +325,20 @@ class DBTest extends TestBase
 
     }
 
+    /**
+     * @test
+     */
+    public function shouldBeAbleToSaveNewWhenThereAreNoUpdates(){
+        // given
+        $person = new Person();
+
+        // when
+        $person->commit();
+
+        // then
+        $this->assertNotNull($person->getId());
+    }
+
     private function getExistingRecord(){
         $this->clearTable();
         $table = new TestTable();
