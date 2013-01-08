@@ -20,7 +20,7 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
 
     public function __construct(){
         parent::__construct();
-        $this->singleValue = count($this->config['columns']) === 1;
+        $this->singleValue = count($this->config['columns']) === 1 && !isset($this->config['join']);
     }
 
     function rewind() {
