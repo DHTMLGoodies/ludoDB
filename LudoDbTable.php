@@ -20,19 +20,19 @@ abstract class LudoDbTable extends LudoDBObject
     public function __construct($id = null)
     {
         parent::__construct();
-        $this->setLookupField();
+        $this->setLookupField($this->getIdField());
         if($id){
             $this->populate($id);
         }
     }
 
-    private function setLookupField(){
+    private function setLookupField($field){
         if(!isset($this->config['lookupField'])){
-            $this->config['lookupField'] = $this->getIdField();
+            $this->config['lookupField'] = $field;
         }
     }
 
-    public function populate($id)
+    protected function populate($id)
     {
         $data = $this->db->one($this->getSQL($this->getValidId($id)));
         if (isset($data)) {
@@ -348,6 +348,4 @@ abstract class LudoDbTable extends LudoDBObject
         }
         return null;
     }
-
-
 }

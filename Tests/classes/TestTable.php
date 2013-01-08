@@ -19,9 +19,6 @@ class TestTable extends LudoDbTable
         ),
     );
 
-    protected $searchFields = array('firstname');
-    protected $likeFields = array('firstname', 'lastname');
-
     public function setFirstName($value)
     {
         $this->setValue('firstname', $value);
