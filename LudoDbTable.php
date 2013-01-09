@@ -33,18 +33,19 @@ abstract class LudoDbTable extends LudoDBObject
         }
     }
 
-    protected function populate($id)
+
+    protected function populate($queryParams)
     {
-        $data = $this->db->one($this->getSQL($this->getValidId($id)));
+        $data = $this->db->one($this->getSQL($this->getValidQueryParams($queryParams)));
         if (isset($data)) {
             $this->populateWith($data);
             $this->setId($this->getValue($this->getIdField()));
         }
     }
 
-    protected function getValidId($id)
+    protected function getValidQueryParams($params)
     {
-        return $id;
+        return $params;
     }
 
     private function getSQL($id)
