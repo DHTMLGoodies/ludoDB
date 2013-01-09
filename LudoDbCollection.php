@@ -9,18 +9,18 @@ abstract class LudoDbCollection extends LudoDbIterator
 {
     /**
      * Lookup value to use when instantiating collection. This value
-     * is used in join with config['lookupField']
+     * is used in join with config['queryFields']
      */
-    protected $lookupValue;
+    protected $queryValues;
 
-    public function __construct($lookupValue = null){
+    public function __construct($queryValues = null){
         parent::__construct();
-        $this->lookupValue = $lookupValue;
+        $this->queryValues = $queryValues;
     }
 
     protected function getSql()
     {
-        $sql = new LudoSQL($this->config, $this->lookupValue);
+        $sql = new LudoSQL($this->config, $this->queryValues);
         return $sql->getSql();
     }
 }

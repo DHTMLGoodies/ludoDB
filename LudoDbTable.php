@@ -17,24 +17,24 @@ abstract class LudoDbTable extends LudoDBObject
     private $updates;
     private $externalClasses = array();
 
-    public function __construct($lookupValues = null)
+    public function __construct($queryValuess = null)
     {
         parent::__construct();
         $this->setLookupField($this->getIdField());
-        if (isset($lookupValues)) {
+        if (isset($queryValuess)) {
             $this->populate(func_get_args());
         }
     }
 
     private function setLookupField($field)
     {
-        if (!isset($this->config['lookupField'])) {
-            $this->config['lookupField'] = $field;
+        if (!isset($this->config['queryFields'])) {
+            $this->config['queryFields'] = $field;
         }
     }
 
 
-    protected function populate($queryParams)
+    public function populate($queryParams)
     {
         $data = $this->db->one($this->getSQL($this->getValidQueryParams($queryParams)));
         if (isset($data)) {
@@ -45,7 +45,14 @@ abstract class LudoDbTable extends LudoDBObject
 
     protected function getValidQueryParams($params)
     {
+        for($i=0,$count = count($params);$i<$count;$i++){
+            $params[$i] = $this->getValidQueryParam($this->config['queryFields'][$i], $params[$i]);
+        }
         return $params;
+    }
+
+    protected function getValidQueryParam($key, $value){
+        return $value;
     }
 
     private function getSQL($id)

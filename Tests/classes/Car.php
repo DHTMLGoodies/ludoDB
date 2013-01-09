@@ -10,7 +10,7 @@ class Car extends LudoDbTable
             'model' => 'varchar(64)',
             'properties' => array(
                 'class' => 'CarProperties',
-                'lookupField' => 'car_id'
+                'queryFields' => 'car_id'
             )
         ),
         'data' => array(

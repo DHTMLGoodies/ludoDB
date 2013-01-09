@@ -65,7 +65,7 @@ class SQLTest extends TestBase
                 'firstname' => 'varchar(32)',
                 'lastname' => 'varchar(32)'
             ),
-            'lookupField' => 'id'
+            'queryFields' => 'id'
         );
 
         // when
@@ -89,7 +89,7 @@ class SQLTest extends TestBase
                 'lastname' => 'varchar(32)',
                 'zip' => 'varchar(10)'
             ),
-            'lookupField' => array('id','city'),
+            'queryFields' => array('id','city'),
             'join' => array(
                 array(
                     'table' => 'City',
@@ -124,7 +124,7 @@ class SQLTest extends TestBase
                     'class' => 'PhoneCollection'
                 )
             ),
-            'lookupField' => 'id'
+            'queryFields' => 'id'
         );
 
         // when
@@ -148,7 +148,7 @@ class SQLTest extends TestBase
                 'lastname' => 'varchar(32)',
                 'zip' => 'varchar(15)'
             ),
-            'lookupField' => 'Person.id',
+            'queryFields' => 'Person.id',
             'join' => array(
                 array('table' => 'City', 'columns' => array('city'), 'fk' => 'zip', 'pk' => 'zip')
             )
@@ -162,9 +162,9 @@ class SQLTest extends TestBase
         $this->assertEquals($expected, $sql);
     }
 
-    private function getSQL($config, $lookupField = null)
+    private function getSQL($config, $queryFields = null)
     {
-        $sql = new LudoSQL($config, $lookupField);
+        $sql = new LudoSQL($config, $queryFields);
         return $sql->getSql();
     }
 }

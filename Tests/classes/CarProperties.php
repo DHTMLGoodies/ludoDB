@@ -10,7 +10,7 @@ class CarProperties extends LudoDbCollection
     protected $config = array(
         'table' => 'carProperty',
         'columns' => array('property','propertyValue'),
-        'lookupField' => 'car_id'
+        'queryFields' => 'car_id'
     );
 
     public function key(){
