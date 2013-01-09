@@ -17,12 +17,11 @@ abstract class LudoDbTable extends LudoDBObject
     private $updates;
     private $externalClasses = array();
 
-    public function __construct($queryValuess = null)
+    protected function onConstruct()
     {
-        parent::__construct();
         $this->setLookupField($this->getIdField());
-        if (isset($queryValuess)) {
-            $this->populate(func_get_args());
+        if (isset($this->queryValues)) {
+            $this->populate();
         }
     }
 
@@ -33,10 +32,9 @@ abstract class LudoDbTable extends LudoDBObject
         }
     }
 
-
-    public function populate($queryParams)
+    public function populate()
     {
-        $data = $this->db->one($this->getSQL($this->getValidQueryParams($queryParams)));
+        $data = $this->db->one($this->getSQL($this->getValidQueryParams($this->queryValues)));
         if (isset($data)) {
             $this->populateWith($data);
             $this->setId($this->getValue($this->getIdField()));
@@ -55,9 +53,9 @@ abstract class LudoDbTable extends LudoDBObject
         return $value;
     }
 
-    private function getSQL($id)
+    private function getSQL($params)
     {
-        $sql = new LudoSQL($this->config, $id);
+        $sql = new LudoSQL($this->config, $params);
         return $sql->getSql();
     }
 
@@ -323,9 +321,8 @@ abstract class LudoDbTable extends LudoDBObject
         return isset($this->config['idField']) ? $this->config['idField'] : 'id';
     }
 
-    public function getJSON()
+    public function asJSON()
     {
-
         return json_encode($this->getValues());
     }
 

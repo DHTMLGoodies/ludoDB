@@ -41,4 +41,4 @@ foreach ($numbers as $number) {
 }
 
 $person = new Person($person->getId());
-echo $person->getJSON();
+echo $person->asJSON();

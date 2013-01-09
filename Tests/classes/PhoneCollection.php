@@ -17,4 +17,11 @@ class PhoneCollection extends LudoDbCollection
         'orderBy' => 'id'
     );
 
+    public function getValues(){
+        $ret = array();
+        foreach($this as $value){
+            $ret[] = $value['phone'];
+        }
+        return $ret;
+    }
 }

@@ -121,6 +121,20 @@ class LudoSQL
         return $sql;
     }
 
+    public function getDeleteSQL(){
+        $sql = "delete from ". $this->config['table']. " where ";
+        $where = array();
+        for($i=0,$count = count($this->queryValues);$i<$count;$i++){
+            $val = $this->queryValues[$i];
+            if(is_string($val)){
+                $val = "'".$val."'";
+            }
+            $where[] = $this->config['queryFields'][$i]."=". $val;
+        }
+        $sql.=implode(" and ", $where);
+        return $sql;
+    }
+
     public function log($sql){
         $fh = fopen("sql.txt","a+");
         fwrite($fh, $sql."\n");

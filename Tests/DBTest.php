@@ -6,6 +6,8 @@
  * Time: 02:15
  */
 require_once(__DIR__ . "/../autoload.php");
+#error_reporting(E_ALL);
+ini_set('display_errors','on');
 
 class DBTest extends TestBase
 {
@@ -25,6 +27,17 @@ class DBTest extends TestBase
      */
     public function shouldBeAbleToRunTests(){
         $this->assertEquals(1,1);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCaptureQueryValues(){
+        // when
+        $city = new City(1);
+
+        // then
+        $this->assertEquals(1, count($city->getQueryValues()));
     }
 
     /**
@@ -281,7 +294,6 @@ class DBTest extends TestBase
 
         // then
         $this->assertEquals(0, count($person->getPhone()));
-
     }
 
     /**

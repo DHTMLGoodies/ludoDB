@@ -167,4 +167,8 @@ class SQLTest extends TestBase
         $sql = new LudoSQL($config, $queryFields);
         return $sql->getSql();
     }
+
+    private function getLudoClassMock($sql){
+
+    }
 }

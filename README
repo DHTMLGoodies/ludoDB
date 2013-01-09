@@ -79,7 +79,7 @@ $person->commit();
 Will update lastname in db for person with id=1
 
 <?php
-echo $person->getJSON();
+echo $person->asJSON();
 ?>
 
 will output person data in JSON format.

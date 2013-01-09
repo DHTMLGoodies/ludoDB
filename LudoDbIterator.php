@@ -12,16 +12,10 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
     private $isValid;
     private $position;
     protected $currentRow;
-    private $singleValue;
 
     protected $config = array(
         'columns' => array()
     );
-
-    public function __construct(){
-        parent::__construct();
-        $this->singleValue = count($this->config['columns']) === 1 && !isset($this->config['join']);
-    }
 
     function rewind() {
         if ($this->dbResource) {
@@ -59,10 +53,6 @@ abstract class LudoDbIterator extends LudoDBObject implements Iterator
         ++$this->position;
         $this->currentRow = $this->db->nextRow($this->dbResource);
         $this->isValid = $this->currentRow ? true : false;
-        if($this->singleValue && $this->currentRow){
-            $this->currentRow = array_values($this->currentRow);
-            $this->currentRow = $this->currentRow[0];
-        }
     }
 
     public function valid() {
