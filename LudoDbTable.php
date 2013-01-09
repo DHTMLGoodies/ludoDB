@@ -17,12 +17,12 @@ abstract class LudoDbTable extends LudoDBObject
     private $updates;
     private $externalClasses = array();
 
-    public function __construct($id = null)
+    public function __construct($lookupValues = null)
     {
         parent::__construct();
         $this->setLookupField($this->getIdField());
-        if ($id) {
-            $this->populate($id);
+        if (isset($lookupValues)) {
+            $this->populate(func_get_args());
         }
     }
 

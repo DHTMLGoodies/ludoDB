@@ -12,6 +12,12 @@ class LudoSQL
     public function __construct($config, $lookupValue = null){
         $this->config = $config;
         $this->lookupValue = $lookupValue;
+        $this->validate();
+    }
+
+    private function validate(){
+        if(isset($this->lookupValue) && !is_array($this->lookupValue))$this->lookupValue = array($this->lookupValue);
+        if(isset($this->config['lookupField']) && !is_array($this->config['lookupField']))$this->config['lookupField'] = array($this->config['lookupField']);
     }
 
     public function getSql(){
@@ -80,11 +86,14 @@ class LudoSQL
         $ret = array();
         if(isset($this->config['join'])){
             foreach($this->config['join'] as $join){
-                $ret[] = $this->config['table'].".".$join['fk']." = ".$join['table'].".".$join['pk'];
+                $ret[] = $this->config['table'].".".$join['fk']."=".$join['table'].".".$join['pk'];
             }
         }
         if(isset($this->config['lookupField'])){
-            $ret[] = $this->getTableAndColumn($this->config['lookupField'])."='". mysql_real_escape_string($this->lookupValue)."'";
+            for($i=0,$count=count($this->config['lookupField']);$i<$count; $i++){
+                $ret[] = $this->getTableAndColumn($this->config['lookupField'][$i])."='". mysql_real_escape_string($this->lookupValue[$i])."'";
+            }
+
         }
         if(count($ret)){
             return " where ". implode(" and ", $ret);

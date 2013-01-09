@@ -35,7 +35,8 @@ class SQLTest extends TestBase
     /**
      * @test
      */
-    public function shouldParseSimpleColumnArray(){
+    public function shouldParseSimpleColumnArray()
+    {
         // given
         $config = array(
             'table' => 'Person',
@@ -78,6 +79,39 @@ class SQLTest extends TestBase
     /**
      * @test
      */
+    public function shouldBeAbleToApplyMultipleValuesToWhereClause()
+    {
+        // given
+        $config = array(
+            'table' => 'Person',
+            'columns' => array(
+                'firstname' => 'varchar(32)',
+                'lastname' => 'varchar(32)',
+                'zip' => 'varchar(10)'
+            ),
+            'lookupField' => array('id','city'),
+            'join' => array(
+                array(
+                    'table' => 'City',
+                    'fk' => 'zip',
+                    'pk' => 'zip',
+                    'columns' => array('city')
+                )
+            )
+        );
+
+        // when
+        $sql = $this->getSQL($config, array(1,'Stavanger'));
+        $expected = "select Person.firstname,Person.lastname,Person.zip,City.city from Person,City where Person.zip=City.zip and Person.id='1' and Person.city='Stavanger'";
+
+        // then
+        $this->assertEquals($expected, $sql);
+
+    }
+
+    /**
+     * @test
+     */
     public function shouldNotSelectColumnsFromExternal()
     {
         // given
@@ -104,7 +138,8 @@ class SQLTest extends TestBase
     /**
      * @test
      */
-    public function shouldParseJoins(){
+    public function shouldParseJoins()
+    {
         // given
         $config = array(
             'table' => 'Person',
@@ -121,7 +156,7 @@ class SQLTest extends TestBase
 
         // when
         $sql = $this->getSQL($config, 1);
-        $expected = "select Person.firstname,Person.lastname,Person.zip,City.city from Person,City where Person.zip = City.zip and Person.id='1'";
+        $expected = "select Person.firstname,Person.lastname,Person.zip,City.city from Person,City where Person.zip=City.zip and Person.id='1'";
 
         // then
         $this->assertEquals($expected, $sql);

@@ -15,6 +15,9 @@ class DBTest extends TestBase
         $city = new City();
         $city->drop();
         $city->createTable();
+
+        $phone = new Phone();
+        if(!$phone->exists())$phone->createTable();
     }
 
     /**
