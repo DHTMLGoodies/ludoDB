@@ -16,7 +16,6 @@ abstract class LudoDbCollection extends LudoDbIterator
     protected $config;
 
     protected function onConstruct($queryValues = null){
-
         if(isset($this->config['queryFields']) && !is_array($this->config['queryFields'])){
             $this->config['queryFields'] = array($this->config['queryFields']);
         }
