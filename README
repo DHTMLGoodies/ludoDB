@@ -83,3 +83,59 @@ echo $person;
 ?>
 
 will output person data in JSON format.
+
+You can also configure the database in json files:
+
+Example
+
+PHP Class (Client.php)
+
+<?php
+class Client extends LudoDbTable
+{
+    protected $JSONConfig = true;
+
+}
+
+JSON file(Client.json) located in sub folder JSONConfig:
+
+{
+    "table":"Client",
+	"idField":"id",
+	"constructorParams":"id",
+	"columns":{
+		"id":"int auto_increment not null primary key",
+		"firstname":{
+			"db": "varchar(32)",
+			"access":"rw"
+		},
+		"lastname":{
+			"db": "varchar(32)",
+			"access": "rw"
+		},
+		"address":{
+			"db": "varchar(64)",
+			"access": "rw"
+		},
+		"zip":{
+			"db": "varchar(5)",
+			"access": "rw"
+		},
+		"phone":{
+			"class":"PhoneCollection"
+		},
+		"city":{
+			"class":"City",
+			"get":"getCity"
+		}
+
+	},
+	"classes":{
+		"city":{
+			"fk":"zip"
+		}
+	}
+}
+
+Which gives you automatic setters and getters for lastname, firstname, address and zip
+
