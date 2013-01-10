@@ -12,7 +12,7 @@ class LudoDBObject
     protected $constructorValues;
     private static $configParsers = array();
     private static $fileLocation;
-    protected $JSON = false;
+    protected $JSONConfig = false;
     private $JSONRead = false;
 
     public function __construct()
@@ -35,6 +35,7 @@ class LudoDBObject
             $content = file_get_contents($location);
             return JSON_decode($content, true);
         }
+        return null;
     }
 
     protected function getPathToJSONConfig()
@@ -58,7 +59,7 @@ class LudoDBObject
 
     public function getConfig()
     {
-        if($this->JSON && !$this->JSONRead){
+        if($this->JSONConfig && !$this->JSONRead){
             $this->JSONRead = true;
             $this->config = $this->getConfigFromFile();
         }
@@ -70,6 +71,9 @@ class LudoDBObject
 
     }
 
+    /**
+     * @return LudoDbConfigParser
+     */
     public function configParser()
     {
         $key = get_class($this);

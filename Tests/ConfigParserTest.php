@@ -66,6 +66,7 @@ class ConfigParserTest extends TestBase
         // then
         $this->assertTrue($person->configParser()->isExternalColumn('city'));
         $this->assertFalse($person->configParser()->isExternalColumn('firstname'));
+        $this->assertFalse($person->configParser()->isExternalColumn('address'));
     }
 
     /**
@@ -87,7 +88,7 @@ class ConfigParserTest extends TestBase
         $person = new PersonForConfigParser();
 
         // then
-        $this->assertTrue($person->configParser()->idIsAutoIncremented());
+        $this->assertTrue($person->configParser()->isIdAutoIncremented());
     }
 
     /**
@@ -117,6 +118,59 @@ class ConfigParserTest extends TestBase
 
         // then
         $this->assertEquals('zip', $foreignKey);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetColumnByMethodName(){
+        // given
+        $person = new PersonForConfigParser();
+
+        // when
+        $col = $person->configParser()->getColumnByMethod('setLastname');
+
+        // then
+        $this->assertEquals('lastname', $col);
+        // when
+        $col = $person->configParser()->getColumnByMethod('setAreaCode');
+
+        // then
+        $this->assertEquals('area_code', $col);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldFindColumnsWithWriteAccess(){
+        // given
+        $person = new PersonForConfigParser();
+
+        // when
+        $access = $person->configParser()->canWriteTo('address');
+
+        // then
+        $this->assertTrue($access);
+
+    }
+    /**
+     * @test
+     */
+    public function shouldFindColumnsWithReadAccess(){
+        // given
+        $person = new PersonForConfigParser();
+
+        // when
+        $access = $person->configParser()->canReadFrom('address');
+
+        // then
+        $this->assertFalse($access);
+        // when
+        $access = $person->configParser()->canReadFrom('area_code');
+
+        // then
+        $this->assertTrue($access);
+
     }
 
 }

@@ -1,0 +1,17 @@
+{
+	"table": "Game",
+	"id": "id",
+	"columns": {
+		"id": {
+			"db": "int auto_increment not null primary key"
+		},
+		"databaseId": {
+			"db": "int",
+			"access": "rw"
+		},
+		"player_id":{
+			"db": "int",
+			"access": "rw"
+		}
+	}
+}

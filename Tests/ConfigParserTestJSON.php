@@ -25,4 +25,5 @@ class ConfigParserTestJSON extends TestBase
         // then
         $this->assertEquals("Client", $table);
     }
+
 }

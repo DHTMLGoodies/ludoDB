@@ -39,11 +39,11 @@ class Person extends LudoDbTable
     }
 
     public function getFirstname(){
-        return $this->getvalue('firstname');
+        return $this->getValue('firstname');
     }
 
     public function getLastname(){
-        return $this->getvalue('lastname');
+        return $this->getValue('lastname');
     }
 
     public function getZip(){

@@ -1,7 +1,7 @@
 <?php
 class Client extends LudoDbTable
 {
-    protected $JSON = true;
+    protected $JSONConfig = true;
 
     public function setFirstname($value){
         $this->setValue('firstname', $value);
@@ -16,11 +16,11 @@ class Client extends LudoDbTable
     }
 
     public function getFirstname(){
-        return $this->getvalue('firstname');
+        return $this->getValue('firstname');
     }
 
     public function getLastname(){
-        return $this->getvalue('lastname');
+        return $this->getValue('lastname');
     }
 
     public function getZip(){

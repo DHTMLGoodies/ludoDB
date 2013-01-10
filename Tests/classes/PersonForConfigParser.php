@@ -16,7 +16,14 @@ class PersonForConfigParser extends LudoDbTable
             'id' => 'int auto_increment not null primary key',
             'firstname' => 'varchar(32)',
             'lastname' => 'varchar(32)',
-            'address' => 'varchar(64)',
+            'area_code' => array(
+                'db' => 'varchar(16)',
+                'access' => 'r'
+            ),
+            'address' => array(
+                'db' => 'varchar(64)',
+                'access' => 'w'
+            ),
             'zip' => 'varchar(5)',
             'phone' => array(
                 'class' => 'PhoneCollection'

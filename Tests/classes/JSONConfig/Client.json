@@ -1,23 +1,25 @@
 {
-	"table": "Client",
-	"idField": "id",
-	"constructorParams": "id",
-	"columns": {
-		"id": "int auto_increment not null primary key",
-		"firstname": "varchar(32)",
-		"lastname": "varchar(32)",
-		"address": "varchar(64)",
-		"zip" : "varchar(5)",
-		"phone" : {
-			"class": "PhoneCollection"
+	"table":"Client",
+	"idField":"id",
+	"constructorParams":"id",
+	"columns":{
+		"id":"int auto_increment not null primary key",
+		"firstname":"varchar(32)",
+		"lastname":"varchar(32)",
+		"address":"varchar(64)",
+		"zip":"varchar(5)",
+		"phone":{
+			"class":"PhoneCollection"
 		},
-		"city": {
-			"class": "City",
-			"get": "getCity"
-		},
-		"classes": {
-			"city" : { "fk": "zip"}
+		"city":{
+			"class":"City",
+			"get":"getCity"
 		}
 
+	},
+	"classes":{
+		"city":{
+			"fk":"zip"
+		}
 	}
 }

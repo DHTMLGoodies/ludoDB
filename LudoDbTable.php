@@ -46,6 +46,7 @@ abstract class LudoDbTable extends LudoDBObject
         return $value;
     }
 
+
     private function getSQL()
     {
         $sql = new LudoSQL($this);
@@ -84,9 +85,9 @@ abstract class LudoDbTable extends LudoDBObject
     {
         if (!isset($this->externalClasses[$column])) {
             $class = $this->configParser()->externalClassNameFor($column);
-            $val = $this->configParser()->foreignKeyFor($column);
-            if (isset($val)){
-                $val = $this->getValue($val);
+            $fk = $this->configParser()->foreignKeyFor($column);
+            if (isset($fk)){
+                $val = $this->getValue($fk);
             }  else {
                 if (!$this->getId()) $this->commit();
                 $val = $this->getId();
@@ -106,6 +107,7 @@ abstract class LudoDbTable extends LudoDBObject
             if (!isset($this->updates)) $this->updates = array();
             $this->updates[$column] = $value;
         }
+        return null;
     }
 
     private function setExternalValue($column, $value)
@@ -119,7 +121,7 @@ abstract class LudoDbTable extends LudoDBObject
     public function commit()
     {
         if (!isset($this->updates)) {
-            if ($this->getId() || !$this->configParser()->idIsAutoIncremented()) {
+            if ($this->getId() || !$this->configParser()->isIdAutoIncremented()) {
                 return null;
             }
         }
@@ -340,4 +342,21 @@ abstract class LudoDbTable extends LudoDBObject
     {
         return $this->getExternalClassFor($column);
     }
+
+    public function __call($name, $arguments){
+        if(substr($name,0,3) === 'set'){
+            $col = $this->configParser()->getColumnByMethod($name);
+            if(isset($col) && $this->configParser()->canWriteTo($col)){
+                return $this->setValue($col, $arguments[0]);
+            }
+        }
+        if(substr($name,0,3) === 'get'){
+            $col = $this->configParser()->getColumnByMethod($name);
+            if(isset($col) && $this->configParser()->canReadFrom($col)){
+                return $this->getValue($col);
+            }
+        }
+        return null;
+    }
+
 }
