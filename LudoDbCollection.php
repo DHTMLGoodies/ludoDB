@@ -24,7 +24,7 @@ abstract class LudoDbCollection extends LudoDbIterator
     public function deleteRecords(){
         if(isset($this->constructorValues)){
             $constructorParams = $this->configParser()->getConstructorParams();
-            $this->db->query("delete from ". $this->getTableName()." where ". $constructorParams[0]."='". $this->constructorValues[0]."'");
+            $this->db->query("delete from ". $this->configParser()->getTableName()." where ". $constructorParams[0]."='". $this->constructorValues[0]."'");
         }
     }
 }

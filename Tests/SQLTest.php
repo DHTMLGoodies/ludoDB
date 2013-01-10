@@ -164,6 +164,7 @@ class SQLTest extends TestBase
 
     private function getSQL($config, $constructorParams = null)
     {
+        ForSQLTest::clearParsers();
         $obj = new ForSQLTest();
         $obj->setConfig($config);
         $obj->setConstructorValues($constructorParams);

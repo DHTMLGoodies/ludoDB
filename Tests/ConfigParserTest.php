@@ -12,7 +12,6 @@ class ConfigParserTest extends TestBase
 {
     public function setUp(){
         parent::setUp();
-
     }
     /**
      * @test
@@ -110,6 +109,7 @@ class ConfigParserTest extends TestBase
      */
     public function shouldGetExternalClassProperties(){
          // given
+
         $person = new PersonForConfigParser();
 
         // when
@@ -118,4 +118,5 @@ class ConfigParserTest extends TestBase
         // then
         $this->assertEquals('zip', $foreignKey);
     }
+
 }

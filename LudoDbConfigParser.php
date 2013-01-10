@@ -9,9 +9,13 @@
 class LudoDbConfigParser
 {
     private $config;
+    private $obj;
+
     public function __construct(LudoDBObject $obj){
         $this->config = $this->getValidConfig($obj->getConfig());
     }
+
+
 
     private function getValidConfig($config){
         if(!isset($config['constructorParams']) && isset($config['idField'])){

@@ -7,14 +7,15 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
-                'alltests' => '/Tests/AllTests.php',
                 'car' => '/Tests/classes/Car.php',
                 'carcollection' => '/Tests/classes/CarCollection.php',
                 'carproperties' => '/Tests/classes/CarProperties.php',
                 'carproperty' => '/Tests/classes/CarProperty.php',
                 'city' => '/Tests/classes/City.php',
+                'client' => '/Tests/classes/Client.php',
                 'collectiontest' => '/Tests/CollectionTest.php',
                 'configparsertest' => '/Tests/ConfigParserTest.php',
+                'configparsertestjson' => '/Tests/ConfigParserTestJSON.php',
                 'country' => '/Tests/classes/Country.php',
                 'dbtest' => '/Tests/DBTest.php',
                 'dreamtable' => '/Tests/classes/DreamTable.php',

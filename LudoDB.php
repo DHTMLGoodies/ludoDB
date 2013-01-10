@@ -7,7 +7,7 @@
  */
 class LudoDB
 {
-    private $debug = true;
+    private $debug = false;
     /**
      * Returns mySql result
      * @method query

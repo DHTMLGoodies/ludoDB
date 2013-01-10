@@ -23,7 +23,6 @@ abstract class LudoDbTable extends LudoDBObject
         }
     }
 
-
     public function populate()
     {
         $this->constructorValues = $this->getValidQueryParams($this->constructorValues);

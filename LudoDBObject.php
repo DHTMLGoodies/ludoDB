@@ -10,40 +10,76 @@ class LudoDBObject
     protected $db;
     protected $config = array();
     protected $constructorValues;
-    private $configParser;
+    private static $configParsers = array();
+    private static $fileLocation;
+    protected $JSON = false;
+    private $JSONRead = false;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->db = new LudoDb();
-        if(func_num_args() > 0){
+        if (func_num_args() > 0) {
             $this->constructorValues = func_get_args();
         }
         $this->onConstruct();
     }
-    protected function onConstruct(){
+
+    protected function onConstruct()
+    {
 
     }
 
-    public function getConstructorValues(){
+    protected function getConfigFromFile(){
+        $location = $this->getPathToJSONConfig();
+        if(file_exists($location)){
+            $content = file_get_contents($location);
+            return JSON_decode($content, true);
+        }
+    }
+
+    protected function getPathToJSONConfig()
+    {
+        return $this->getFileLocation() . "/JSONConfig/" . get_class($this) . ".json";
+    }
+
+    protected function getFileLocation()
+    {
+        if (!isset(self::$fileLocation)) {
+            $obj = new ReflectionClass($this);
+            self::$fileLocation = dirname($obj->getFilename());
+        }
+        return self::$fileLocation;
+    }
+
+    public function getConstructorValues()
+    {
         return $this->constructorValues;
     }
 
-    public function getConfig(){
+    public function getConfig()
+    {
+        if($this->JSON && !$this->JSONRead){
+            $this->JSONRead = true;
+            $this->config = $this->getConfigFromFile();
+        }
         return $this->config;
     }
 
-    public function getTableName()
+    public function commit()
     {
-        return isset($this->config['table']) ? $this->config['table'] : get_class($this);
-    }
-
-    public function commit(){
 
     }
 
-    public function configParser(){
-        if(!isset($this->configParser)){
-            $this->configParser = new LudoDbConfigParser($this);
+    public function configParser()
+    {
+        $key = get_class($this);
+        if (!isset(self::$configParsers[$key])) {
+            self::$configParsers[$key] = new LudoDbConfigParser($this);
         }
-        return $this->configParser;
+        return self::$configParsers[$key];
+    }
+
+    public static function clearParsers(){
+        self::$configParsers = array();
     }
 }
