@@ -1,0 +1,9 @@
+{
+	"extends": "Client",
+	"columns": {
+		"salary":{
+			"db": "int"
+		},
+		"zip": "varchar(10)"
+	}
+}

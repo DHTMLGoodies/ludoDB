@@ -33,6 +33,7 @@ spl_autoload_register(
                 'ludodbtable' => '/LudoDbTable.php',
                 'ludofinder' => '/LudoFinder.php',
                 'ludosql' => '/LudoSQL.php',
+                'manager' => '/Tests/classes/Manager.php',
                 'person' => '/Tests/classes/Person.php',
                 'personforconfigparser' => '/Tests/classes/PersonForConfigParser.php',
                 'phone' => '/Tests/classes/Phone.php',

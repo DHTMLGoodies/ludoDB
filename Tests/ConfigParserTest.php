@@ -173,4 +173,19 @@ class ConfigParserTest extends TestBase
 
     }
 
+    /**
+     * @test
+     */
+    public function shouldBeAbleToExtendConfig(){
+        // given
+        $manager = new Manager();
+
+        // when
+        $columns = $manager->configParser()->getColumns();
+        // then
+        $this->assertTrue(isset($columns['address']));
+        $this->assertEquals('varchar(10)', $columns['zip']);
+
+    }
+
 }

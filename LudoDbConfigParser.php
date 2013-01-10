@@ -13,7 +13,30 @@ class LudoDbConfigParser
 
     public function __construct(LudoDBObject $obj)
     {
+        $this->buildConfig($obj);
+    }
+
+    private function buildConfig($obj){
         $this->config = $this->getValidConfig($obj->getConfig());
+        $extends = $this->getExtends();
+        if(isset($extends)){
+            $parent = new $extends;
+            $this->config = $this->getMergedConfigs($parent->configParser()->getConfig(), $this->config);
+        }
+    }
+
+    private function getMergedConfigs($config1, $config2)
+    {
+        if (!is_array($config1) or !is_array($config2)) { return $config2; }
+        foreach ($config2 AS $sKey2 => $sValue2)
+        {
+            $config1[$sKey2] = $this->getMergedConfigs(@$config1[$sKey2], $sValue2);
+        }
+        return $config1;
+    }
+    
+    public function getConfig(){
+        return $this->config;
     }
 
 
@@ -231,5 +254,9 @@ class LudoDbConfigParser
             return strstr($column['access'], "r") ? true : false;
         }
         return false;
+    }
+
+    private function getExtends(){
+        return $this->getProperty('extends');
     }
 }
