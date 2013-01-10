@@ -63,12 +63,6 @@ class LudoDbConfigParser
         return isset($this->config['idField']) ? $this->config['idField'] : 'id';
     }
 
-    public function log($sql){
-        $fh = fopen("sql.txt","a+");
-        fwrite($fh, $sql."\n");
-        fclose($fh);
-    }
-
     public function idIsAutoIncremented(){
         return strstr($this->config['columns'][$this->getIdField()], 'auto_increment') ? true : false;
     }
@@ -98,6 +92,30 @@ class LudoDbConfigParser
         return $this->getProperty('join');
     }
 
+    public function getJoinsForSQL(){
+        $joins = $this->getJoins();
+        $ret = array();
+        if(isset($joins)){
+            foreach($joins as $join){
+                $ret[] = $this->getTableName().".".$join['fk']."=". $join['table'].".".$join['pk'];
+            }
+        }
+        return $ret;
+    }
+
+    public function getColumnsFromJoins(){
+        $ret = array();
+        $joins = $this->getJoins();
+        if(isset($joins)){
+            foreach($joins as $join){
+                foreach($join['columns'] as $col){
+                    $ret[] = $join['table'].".".$col;
+                }
+            }
+        }
+        return $ret;
+    }
+
     public function getColumns(){
         return $this->getProperty('columns');
     }
@@ -106,11 +124,23 @@ class LudoDbConfigParser
         return $this->getProperty('orderBy');
     }
 
+    public function hasColumns(){
+        $cols = $this->getColumns();
+        return isset($cols) && is_array($cols) && count($cols) >0;
+    }
+
+    public function getTableNamesFromJoins(){
+        $ret = array();
+        $joins = $this->getJoins();
+        if(isset($joins)){
+            foreach($joins as $join){
+                $ret[] = $join['table'];
+            }
+        }
+        return $ret;
+    }
+
     private function getProperty($key){
         return isset($this->config[$key]) ? $this->config[$key] : null;
     }
-
-
-
-
 }

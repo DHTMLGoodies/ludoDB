@@ -11,10 +11,10 @@ class LudoSQL
     /**
      * @var LudoDBObject
      */
-    private $obj;
+    private $configParser;
 
     public function __construct(LudoDBObject $obj){
-        $this->obj = $obj;
+        $this->configParser = $obj->configParser();
         $this->config = $obj->getConfig();
         $this->constructorValues = $obj->getConstructorValues();
         $this->validate();
@@ -30,11 +30,11 @@ class LudoSQL
 
     private function getColumns(){
         $ret = array();
-        if($this->hasColumns()){
+        if($this->configParser->hasColumns()){
             $ret = $this->getColumnsForSql();
         }
         if(!$ret){
-            $ret = $this->obj->configParser()->getTableName().".*";
+            $ret = $this->configParser->getTableName().".*";
         }
         $ret.=$this->getColumnsFromJoins();
         return $ret;
@@ -42,58 +42,37 @@ class LudoSQL
 
     private function getColumnsForSql(){
         if(isset($this->config['columns'][0])){
-            return $this->obj->configParser()->getTableName()."." . implode(",". $this->obj->configParser()->getTableName().".",$this->config['columns']);
+            return $this->getColumnsForCollectionSQL();
         }
         $ret = array();
-        $cols = $this->config['columns'];
+        $cols = $this->configParser->getColumns();
         foreach($cols as $col => $value){
             if(! is_array($value)){
-                $ret[]=$this->obj->configParser()->getTableName().".". $col;
+                $ret[]=$this->configParser->getTableName().".". $col;
             }
         }
         return implode(",", $ret);
     }
 
+    private function getColumnsForCollectionSQL(){
+        return $this->configParser->getTableName()."." . implode(",". $this->configParser->getTableName().".",$this->configParser->getColumns());
+    }
+
     private function getColumnsFromJoins(){
-        $ret = array();
-        if(isset($this->config['join'])){
-            foreach($this->config['join'] as $join){
-                $columns = array();
-                foreach($join['columns'] as $col){
-                    $columns[] = $join['table'].".".$col;
-                }
-                $ret[] = implode(",", $columns);
-            }
-        }
-        if(count($ret)){
-            return ",". implode(",", $ret);
+        $joins = $this->configParser->getColumnsFromJoins();
+        if(count($joins)){
+            return ",". implode(",", $joins);
         }
         return '';
     }
 
-    private function hasColumns(){
-        return isset($this->config['columns']) && count($this->config['columns']) > 0;
-    }
-
     private function getTables(){
-        $ret = array($this->obj->configParser()->getTableName());
-        if(isset($this->config['join'])){
-            foreach($this->config['join'] as $join){
-                $ret[] = $join['table'];
-            }
-        }
-        return implode(",", $ret);
+        return implode(",", array_merge(array($this->configParser->getTableName()),$this->configParser->getTableNamesFromJoins()));
     }
 
     private function getJoins(){
-        $ret = array();
-        $joins = $this->obj->configParser()->getJoins();
-        if(isset($joins)){
-            foreach($joins as $join){
-                $ret[] = $this->obj->configParser()->getTableName().".".$join['fk']."=".$join['table'].".".$join['pk'];
-            }
-        }
-        $constructorParams = $this->obj->configParser()->getConstructorParams();
+        $ret = $this->configParser->getJoinsForSQL();
+        $constructorParams = $this->configParser->getConstructorParams();
         if(isset($constructorParams)){
             for($i=0,$count=count($this->constructorValues);$i<$count; $i++){
                 $ret[] = $this->getTableAndColumn($constructorParams[$i])."='". mysql_real_escape_string($this->constructorValues[$i])."'";
@@ -107,18 +86,18 @@ class LudoSQL
     }
 
     private function getTableAndColumn($column){
-        return strstr($column, ".") ? $column : $this->obj->configParser()->getTableName().".".$column;
+        return strstr($column, ".") ? $column : $this->configParser->getTableName().".".$column;
     }
 
     private function getOrderBy(){
-        $orderBy = $this->obj->configParser()->getOrderBy();
+        $orderBy = $this->configParser->getOrderBy();
         return isset($orderBy) ? ' order by ' . $orderBy : '';
     }
 
     public function getCreateTableSql(){
-        $sql = "create table " . $this->obj->configParser()->getTableName() . "(";
+        $sql = "create table " . $this->configParser->getTableName() . "(";
         $columns = array();
-        $configColumns = $this->obj->configParser()->getColumns();
+        $configColumns = $this->configParser->getColumns();
         foreach ($configColumns as $name => $type) {
             if (is_string($type)) {
                 $columns[] = $name . " " . $type;
@@ -129,9 +108,9 @@ class LudoSQL
     }
 
     public function getDeleteSQL(){
-        $sql = "delete from ". $this->obj->configParser()->getTableName(). " where ";
+        $sql = "delete from ". $this->configParser->getTableName(). " where ";
         $where = array();
-        $configParams = $this->obj->configParser()->getConstructorParams();
+        $configParams = $this->configParser->getConstructorParams();
         for($i=0,$count = count($this->constructorValues);$i<$count;$i++){
             $val = $this->constructorValues[$i];
             if(is_string($val)){
@@ -141,11 +120,5 @@ class LudoSQL
         }
         $sql.=implode(" and ", $where);
         return $sql;
-    }
-
-    public function log($sql){
-        $fh = fopen("sql.txt","a+");
-        fwrite($fh, $sql."\n");
-        fclose($fh);
     }
 }
