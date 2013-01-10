@@ -88,6 +88,7 @@ abstract class LudoDbTable extends LudoDBObject
             $fk = $this->configParser()->foreignKeyFor($column);
             if (isset($fk)){
                 $val = $this->getValue($fk);
+                $this->db->log("(".$column. ",".$fk. ",". $val.")");
             }  else {
                 if (!$this->getId()) $this->commit();
                 $val = $this->getId();
@@ -149,6 +150,10 @@ abstract class LudoDbTable extends LudoDBObject
             $sql = "update " . $this->configParser()->getTableName() . " set " . $this->getUpdatesForSql() . " where " . $this->configParser()->getIdField() . " = '" . $this->getId() . "'";
             $this->db->query($sql);
         }
+    }
+
+    public function getUncommitted(){
+        return $this->updates;
     }
 
     private function getUpdatesForSql()
@@ -349,13 +354,16 @@ abstract class LudoDbTable extends LudoDBObject
             if(isset($col) && $this->configParser()->canWriteTo($col)){
                 return $this->setValue($col, $arguments[0]);
             }
+            $this->db->log("Invalid set method call " . $name."(".$col.")");
         }
         if(substr($name,0,3) === 'get'){
             $col = $this->configParser()->getColumnByMethod($name);
             if(isset($col) && $this->configParser()->canReadFrom($col)){
                 return $this->getValue($col);
             }
+            $this->db->log($name);
         }
+
         return null;
     }
 

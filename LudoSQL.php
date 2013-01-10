@@ -44,14 +44,7 @@ class LudoSQL
         if(isset($this->config['columns'][0])){
             return $this->getColumnsForCollectionSQL();
         }
-        $ret = array();
-        $cols = $this->configParser->getColumns();
-        foreach($cols as $col => $value){
-            if(! is_array($value)){
-                $ret[]=$this->configParser->getTableName().".". $col;
-            }
-        }
-        return implode(",", $ret);
+        return implode(",", $this->configParser->getMyColumnsForSQL());
     }
 
     private function getColumnsForCollectionSQL(){
@@ -99,8 +92,12 @@ class LudoSQL
         $columns = array();
         $configColumns = $this->configParser->getColumns();
         foreach ($configColumns as $name => $type) {
-            if (is_string($type)) {
-                $columns[] = $name . " " . $type;
+            if(!$this->configParser->isExternalColumn($name)){
+                if (is_string($type)) {
+                    $columns[] = $name . " " . $type;
+                }else{
+                    $columns[] = $name . " " . $type['db'];
+                }
             }
         }
         $sql .= implode(",", $columns) . ")";

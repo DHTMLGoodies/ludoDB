@@ -25,6 +25,11 @@ class LudoDbConfigParser
         }
     }
 
+    public function setConstructorParams($params){
+        if(!is_array($params))$params = array($params);
+        $this->config['constructorParams'] = $params;
+    }
+
     private function getMergedConfigs($config1, $config2)
     {
         if (!is_array($config1) or !is_array($config2)) { return $config2; }
@@ -105,7 +110,12 @@ class LudoDbConfigParser
 
     public function isIdAutoIncremented()
     {
-        return strstr($this->config['columns'][$this->getIdField()], 'auto_increment') ? true : false;
+        return strstr($this->getDbDefinition($this->getIdField()), 'auto_increment') ? true : false;
+    }
+
+    private function getDbDefinition($column){
+        $col = $this->config['columns'][$column];
+        return is_array($col) ? $col['db'] : $col;
     }
 
     public function getSetMethod($column)
@@ -137,6 +147,18 @@ class LudoDbConfigParser
     public function getJoins()
     {
         return $this->getProperty('join');
+    }
+
+    public function getMyColumnsForSQL(){
+        $columns = $this->getColumns();
+        $ret = array();
+        foreach($columns as $col => $value){
+            if(!$this->isExternalColumn($col)){
+                $ret[] = $this->getTableName().".".$col;
+            }
+        }
+        return $ret;
+
     }
 
     public function getJoinsForSQL()
@@ -220,7 +242,7 @@ class LudoDbConfigParser
             if ($this->hasColumn($col)) return $this->saveInMappingCache($methodName, $col);
         }
 
-        return null;
+        return $col;
     }
 
     private function saveInMappingCache($methodName, $col){

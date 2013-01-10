@@ -1,5 +1,6 @@
 {
 	"extends": "Client",
+	"table": "Manager",
 	"columns": {
 		"salary":{
 			"db": "int"

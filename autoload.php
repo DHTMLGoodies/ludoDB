@@ -20,10 +20,8 @@ spl_autoload_register(
                 'configparsertestjson' => '/Tests/ConfigParserTestJSON.php',
                 'country' => '/Tests/classes/Country.php',
                 'dbtest' => '/Tests/DBTest.php',
-                'dreamtable' => '/Tests/classes/DreamTable.php',
                 'findertest' => '/Tests/FinderTest.php',
                 'forsqltest' => '/Tests/classes/ForSQLTest.php',
-                'game' => '/Tests/classes/Game.php',
                 'jsontest' => '/Tests/JSONTest.php',
                 'ludodb' => '/LudoDB.php',
                 'ludodbcollection' => '/LudoDbCollection.php',
@@ -40,6 +38,7 @@ spl_autoload_register(
                 'phonecollection' => '/Tests/classes/PhoneCollection.php',
                 'sqltest' => '/Tests/SQLTest.php',
                 'testbase' => '/Tests/TestBase.php',
+                'testgame' => '/Tests/classes/TestGame.php',
                 'testtable' => '/Tests/classes/TestTable.php'
             );
         }

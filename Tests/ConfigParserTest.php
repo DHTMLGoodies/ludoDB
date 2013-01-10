@@ -137,6 +137,39 @@ class ConfigParserTest extends TestBase
 
         // then
         $this->assertEquals('area_code', $col);
+
+        // given
+        $game = new TestGame();
+
+        // when
+        $col = $game->configParser()->getColumnByMethod('setDatabaseId');
+
+        // then
+        $this->assertEquals('databaseId', $col);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetColumnNameByMethodNameUsingCache(){
+         // given
+        $game = new TestGame();
+
+        // when
+        $col = $game->configParser()->getColumnByMethod('setDatabaseId');
+
+        // then
+        $this->assertEquals('databaseId', $col);
+
+                // given
+        $game = new TestGame();
+
+        // when
+        $col = $game->configParser()->getColumnByMethod('setDatabaseId');
+
+        // then
+        $this->assertEquals('databaseId', $col);
+
     }
 
     /**
@@ -185,6 +218,7 @@ class ConfigParserTest extends TestBase
         // then
         $this->assertTrue(isset($columns['address']));
         $this->assertEquals('varchar(10)', $columns['zip']);
+        $this->assertEquals("Manager", $manager->configParser()->getTableName());
 
     }
 

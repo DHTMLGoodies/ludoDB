@@ -10,6 +10,49 @@ require_once(__DIR__ . "/../autoload.php");
 
 class SQLTest extends TestBase
 {
+
+    /**
+     * @test
+     */
+    public function shouldGetTableCreationSQL(){
+        // given
+        $config = array(
+            'table' => 'Person',
+            'columns' => array(
+                'firstname' => 'varchar(32)',
+                'lastname' => 'varchar(32)'
+            )
+        );
+        // when
+        $expected ="create table Person(firstname varchar(32),lastname varchar(32))";
+        $sql = $this->getSqlObject($config)->getCreateTableSql();
+        // then
+        $this->assertEquals($expected, $sql);
+
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetTableCreationSQLWhenDefIsInArray(){
+        // given
+        $config = array(
+            'table' => 'Person',
+            'columns' => array(
+                'firstname' => 'varchar(32)',
+                'lastname' => array(
+                    'db' => 'varchar(32)'
+                )
+            )
+        );
+        // when
+        $expected ="create table Person(firstname varchar(32),lastname varchar(32))";
+        $sql = $this->getSqlObject($config)->getCreateTableSql();
+        // then
+        $this->assertEquals($expected, $sql);
+    }
+
+
     /**
      * @test
      */
@@ -25,12 +68,14 @@ class SQLTest extends TestBase
         );
 
         // when
-        $sql = $this->getSQL($config);
+        $sql = $this->getSqlObject($config)->getSql();
         $expected = "select Person.firstname,Person.lastname from Person";
 
         // then
         $this->assertEquals($expected, $sql);
     }
+
+
 
     /**
      * @test
@@ -46,7 +91,7 @@ class SQLTest extends TestBase
         );
 
         // when
-        $sql = $this->getSQL($config);
+        $sql = $this->getSqlObject($config)->getSql();
         $expected = "select Person.firstname,Person.lastname from Person";
 
         // then
@@ -69,7 +114,7 @@ class SQLTest extends TestBase
         );
 
         // when
-        $sql = $this->getSQL($config, 1);
+        $sql = $this->getSqlObject($config, 1)->getSql();
         $expected = "select Person.firstname,Person.lastname from Person where Person.id='1'";
 
         // then
@@ -101,7 +146,7 @@ class SQLTest extends TestBase
         );
 
         // when
-        $sql = $this->getSQL($config, array(1,'Stavanger'));
+        $sql = $this->getSqlObject($config, array(1,'Stavanger'))->getSql();
         $expected = "select Person.firstname,Person.lastname,Person.zip,City.city from Person,City where Person.zip=City.zip and Person.id='1' and Person.city='Stavanger'";
 
         // then
@@ -128,7 +173,7 @@ class SQLTest extends TestBase
         );
 
         // when
-        $sql = $this->getSQL($config, 1);
+        $sql = $this->getSqlObject($config, 1)->getSql();
         $expected = "select Person.firstname,Person.lastname from Person where Person.id='1'";
 
         // then
@@ -155,22 +200,24 @@ class SQLTest extends TestBase
         );
 
         // when
-        $sql = $this->getSQL($config, 1);
+        $sql = $this->getSqlObject($config, 1)->getSql();
         $expected = "select Person.firstname,Person.lastname,Person.zip,City.city from Person,City where Person.zip=City.zip and Person.id='1'";
 
         // then
         $this->assertEquals($expected, $sql);
     }
 
-    private function getSQL($config, $constructorParams = null)
+
+
+    private function getSqlObject($config, $constructorParams = null)
     {
         ForSQLTest::clearParsers();
         $obj = new ForSQLTest();
         $obj->setConfig($config);
         $obj->setConstructorValues($constructorParams);
 
-        $sql = new LudoSQL($obj);
-        return $sql->getSql();
+        return new LudoSQL($obj);
+
     }
 
 }
