@@ -10,6 +10,7 @@ class CarProperty extends LudoDbTable
     protected $config = array(
         'idField' => 'id',
         'table' => 'CarProperty',
+        'constructorParams' => 'id',
         'columns' => array(
             'car_id' => 'int',
             'property' => 'varchar(32)',

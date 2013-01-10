@@ -9,27 +9,21 @@ abstract class LudoDbCollection extends LudoDbIterator
 {
     /**
      * Lookup value to use when instantiating collection. This value
-     * is used in join with config['queryFields']
+     * is used in join with config['constructorParams']
      */
-    protected $queryValues;
+    protected $constructorValues;
 
     protected $config;
 
-    protected function onConstruct($queryValues = null){
-        if(isset($this->config['queryFields']) && !is_array($this->config['queryFields'])){
-            $this->config['queryFields'] = array($this->config['queryFields']);
-        }
-    }
-
     protected function getSql()
     {
-        $sql = new LudoSQL($this->config, $this->queryValues);
+        $sql = new LudoSQL($this);
         return $sql->getSql();
     }
 
     public function deleteRecords(){
-        if(isset($this->queryValues)){
-            $this->db->query("delete from ". $this->getTableName()." where ". $this->config['queryFields'][0]."='". $this->queryValues[0]."'");
+        if(isset($this->constructorValues)){
+            $this->db->query("delete from ". $this->getTableName()." where ". $this->config['constructorParams'][0]."='". $this->constructorValues[0]."'");
         }
     }
 }

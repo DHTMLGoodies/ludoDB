@@ -19,6 +19,7 @@ class AllTests
         $suite->addTestSuite("CollectionTest");
         $suite->addTestSuite("SQLTest");
         $suite->addTestSuite("JSONTest");
+        $suite->addTestSuite("ConfigParserTest");
         return $suite;
     }
 }

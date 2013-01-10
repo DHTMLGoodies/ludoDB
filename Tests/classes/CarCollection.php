@@ -10,6 +10,6 @@ class CarCollection extends LudoDbCollection
         'idField' => 'id',
         'table' => 'car',
         'columns' => array('brand','model'),
-        'queryFields' => 'brand'
+        'constructorParams' => 'brand'
     );
 }

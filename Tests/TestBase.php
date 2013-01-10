@@ -6,35 +6,55 @@
  * Time: 15:37
  * To change this template use File | Settings | File Templates.
  */
-class TestBase  extends PHPUnit_Framework_TestCase
+class TestBase extends PHPUnit_Framework_TestCase
 {
     private $connected = false;
     private $dbUser = 'root';
     private $dbPassword = 'administrator';
+    private static $logCleared = false;
 
-    public function setUp(){
-        if(!$this->connected)$this->connect();
+    public function setUp()
+    {
+        ini_set('display_errors', 'on');
+        $this->clearLog();
+        if (!$this->connected) $this->connect();
         $this->dropTable();
         $tbl = new TestTable();
         $tbl->createTable();
     }
 
-    private function connect(){
+    private function connect()
+    {
         $res = mysql_connect("localhost", $this->dbUser, $this->dbPassword);
         mysql_select_db('PHPUnit', $res);
 
         $this->connected = true;
     }
 
-    protected function clearTable(){
+    protected function clearTable()
+    {
         mysql_query("delete from TestTable");
     }
-    protected function dropTable(){
+
+    protected function dropTable()
+    {
         mysql_query("drop table TestTable");
     }
-    public function log($sql){
-        $fh = fopen("sql.txt","a+");
-        fwrite($fh, $sql."\n");
+
+    private function clearLog()
+    {
+        if (!self::$logCleared) {
+            self::$logCleared = true;
+            $fh = fopen("sql.txt", "w");
+            fwrite($fh, "\n");
+            fclose($fh);
+        }
+    }
+
+    public function log($sql)
+    {
+        $fh = fopen("sql.txt", "a+");
+        fwrite($fh, $sql . "\n");
         fclose($fh);
     }
 

@@ -81,11 +81,15 @@ class CollectionTest extends TestBase
 
         $id = $car->getId();
 
+        $this->assertTrue(is_numeric($id));
         $this->addCarProperty($id, 'weight','1450kg');
         $this->addCarProperty($id, 'hp', '145');
 
+        $this->log('CarID ' . $id);
         // when
         $car = new Car($id);
+
+        $this->assertEquals($id, $car->getId());
         $properties = $car->getProperties();
         $expected = array(
             'weight' => '1450kg',

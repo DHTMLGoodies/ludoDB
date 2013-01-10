@@ -10,7 +10,7 @@ class PhoneCollection extends LudoDbCollection
     protected $config = array(
         'idField' => 'id',
         'table' => 'Phone',
-        'queryFields' => 'user_id',
+        'constructorParams' => 'user_id',
         'columns' => array(
             'phone'
         ),

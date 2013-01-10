@@ -7,21 +7,24 @@
 class LudoSQL
 {
     private $config;
-    private $queryValues;
+    private $constructorValues;
+    /**
+     * @var LudoDBObject
+     */
+    private $obj;
 
-    public function __construct($config, $queryValues = null){
-        $this->config = $config;
-        $this->queryValues = $queryValues;
+    public function __construct(LudoDBObject $obj){
+        $this->obj = $obj;
+        $this->config = $obj->getConfig();
+        $this->constructorValues = $obj->getConstructorValues();
         $this->validate();
     }
 
     private function validate(){
-        if(isset($this->queryValues) && !is_array($this->queryValues))$this->queryValues = array($this->queryValues);
-        if(isset($this->config['queryFields']) && !is_array($this->config['queryFields']))$this->config['queryFields'] = array($this->config['queryFields']);
+        if(isset($this->constructorValues) && !is_array($this->constructorValues))$this->constructorValues = array($this->constructorValues);
     }
 
     public function getSql(){
-        $this->log("select ". $this->getColumns(). " from ". $this->getTables().$this->getJoins().$this->getOrderBy());
         return "select ". $this->getColumns(). " from ". $this->getTables().$this->getJoins().$this->getOrderBy();
     }
 
@@ -31,7 +34,7 @@ class LudoSQL
             $ret = $this->getColumnsForSql();
         }
         if(!$ret){
-            $ret = $this->config['table'].".*";
+            $ret = $this->obj->configParser()->getTableName().".*";
         }
         $ret.=$this->getColumnsFromJoins();
         return $ret;
@@ -39,13 +42,13 @@ class LudoSQL
 
     private function getColumnsForSql(){
         if(isset($this->config['columns'][0])){
-            return $this->config['table']."." . implode(",". $this->config['table'].".",$this->config['columns']);
+            return $this->obj->configParser()->getTableName()."." . implode(",". $this->obj->configParser()->getTableName().".",$this->config['columns']);
         }
         $ret = array();
         $cols = $this->config['columns'];
         foreach($cols as $col => $value){
             if(! is_array($value)){
-                $ret[]=$this->config['table'].".". $col;
+                $ret[]=$this->obj->configParser()->getTableName().".". $col;
             }
         }
         return implode(",", $ret);
@@ -73,7 +76,7 @@ class LudoSQL
     }
 
     private function getTables(){
-        $ret = array($this->config['table']);
+        $ret = array($this->obj->configParser()->getTableName());
         if(isset($this->config['join'])){
             foreach($this->config['join'] as $join){
                 $ret[] = $join['table'];
@@ -84,14 +87,16 @@ class LudoSQL
 
     private function getJoins(){
         $ret = array();
-        if(isset($this->config['join'])){
-            foreach($this->config['join'] as $join){
-                $ret[] = $this->config['table'].".".$join['fk']."=".$join['table'].".".$join['pk'];
+        $joins = $this->obj->configParser()->getJoins();
+        if(isset($joins)){
+            foreach($joins as $join){
+                $ret[] = $this->obj->configParser()->getTableName().".".$join['fk']."=".$join['table'].".".$join['pk'];
             }
         }
-        if(isset($this->config['queryFields'])){
-            for($i=0,$count=count($this->queryValues);$i<$count; $i++){
-                $ret[] = $this->getTableAndColumn($this->config['queryFields'][$i])."='". mysql_real_escape_string($this->queryValues[$i])."'";
+        $constructorParams = $this->obj->configParser()->getConstructorParams();
+        if(isset($constructorParams)){
+            for($i=0,$count=count($this->constructorValues);$i<$count; $i++){
+                $ret[] = $this->getTableAndColumn($constructorParams[$i])."='". mysql_real_escape_string($this->constructorValues[$i])."'";
             }
 
         }
@@ -102,17 +107,19 @@ class LudoSQL
     }
 
     private function getTableAndColumn($column){
-        return strstr($column, ".") ? $column : $this->config['table'].".".$column;
+        return strstr($column, ".") ? $column : $this->obj->configParser()->getTableName().".".$column;
     }
 
     private function getOrderBy(){
-        return isset($this->config['orderBy']) ? ' order by ' . $this->config['orderBy'] : '';
+        $orderBy = $this->obj->configParser()->getOrderBy();
+        return isset($orderBy) ? ' order by ' . $orderBy : '';
     }
 
     public function getCreateTableSql(){
-        $sql = "create table " . $this->config['table'] . "(";
+        $sql = "create table " . $this->obj->configParser()->getTableName() . "(";
         $columns = array();
-        foreach ($this->config['columns'] as $name => $type) {
+        $configColumns = $this->obj->configParser()->getColumns();
+        foreach ($configColumns as $name => $type) {
             if (is_string($type)) {
                 $columns[] = $name . " " . $type;
             }
@@ -122,14 +129,15 @@ class LudoSQL
     }
 
     public function getDeleteSQL(){
-        $sql = "delete from ". $this->config['table']. " where ";
+        $sql = "delete from ". $this->obj->configParser()->getTableName(). " where ";
         $where = array();
-        for($i=0,$count = count($this->queryValues);$i<$count;$i++){
-            $val = $this->queryValues[$i];
+        $configParams = $this->obj->configParser()->getConstructorParams();
+        for($i=0,$count = count($this->constructorValues);$i<$count;$i++){
+            $val = $this->constructorValues[$i];
             if(is_string($val)){
                 $val = "'".$val."'";
             }
-            $where[] = $this->config['queryFields'][$i]."=". $val;
+            $where[] = $configParams[$i]."=". $val;
         }
         $sql.=implode(" and ", $where);
         return $sql;

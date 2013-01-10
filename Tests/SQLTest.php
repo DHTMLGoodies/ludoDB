@@ -65,7 +65,7 @@ class SQLTest extends TestBase
                 'firstname' => 'varchar(32)',
                 'lastname' => 'varchar(32)'
             ),
-            'queryFields' => 'id'
+            'constructorParams' => 'id'
         );
 
         // when
@@ -89,7 +89,7 @@ class SQLTest extends TestBase
                 'lastname' => 'varchar(32)',
                 'zip' => 'varchar(10)'
             ),
-            'queryFields' => array('id','city'),
+            'constructorParams' => array('id','city'),
             'join' => array(
                 array(
                     'table' => 'City',
@@ -124,7 +124,7 @@ class SQLTest extends TestBase
                     'class' => 'PhoneCollection'
                 )
             ),
-            'queryFields' => 'id'
+            'constructorParams' => 'id'
         );
 
         // when
@@ -148,7 +148,7 @@ class SQLTest extends TestBase
                 'lastname' => 'varchar(32)',
                 'zip' => 'varchar(15)'
             ),
-            'queryFields' => 'Person.id',
+            'constructorParams' => 'Person.id',
             'join' => array(
                 array('table' => 'City', 'columns' => array('city'), 'fk' => 'zip', 'pk' => 'zip')
             )
@@ -162,13 +162,14 @@ class SQLTest extends TestBase
         $this->assertEquals($expected, $sql);
     }
 
-    private function getSQL($config, $queryFields = null)
+    private function getSQL($config, $constructorParams = null)
     {
-        $sql = new LudoSQL($config, $queryFields);
+        $obj = new ForSQLTest();
+        $obj->setConfig($config);
+        $obj->setConstructorValues($constructorParams);
+
+        $sql = new LudoSQL($obj);
         return $sql->getSql();
     }
 
-    private function getLudoClassMock($sql){
-
-    }
 }

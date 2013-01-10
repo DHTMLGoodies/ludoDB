@@ -9,23 +9,26 @@ class LudoDBObject
 {
     protected $db;
     protected $config = array();
-
-    protected $queryValues;
+    protected $constructorValues;
+    private $configParser;
 
     public function __construct(){
         $this->db = new LudoDb();
         if(func_num_args() > 0){
-            $this->queryValues = func_get_args();
+            $this->constructorValues = func_get_args();
         }
         $this->onConstruct();
     }
-
     protected function onConstruct(){
 
     }
 
-    public function getQueryValues(){
-        return $this->queryValues;
+    public function getConstructorValues(){
+        return $this->constructorValues;
+    }
+
+    public function getConfig(){
+        return $this->config;
     }
 
     public function getTableName()
@@ -37,7 +40,10 @@ class LudoDBObject
 
     }
 
-    public function getConfig(){
-        return $this->config;
+    public function configParser(){
+        if(!isset($this->configParser)){
+            $this->configParser = new LudoDbConfigParser($this);
+        }
+        return $this->configParser;
     }
 }

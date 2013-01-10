@@ -26,7 +26,7 @@ class JSONTest extends TestBase
         $car = new Car(1);
 
         // when
-        $json = $car->asJSON();
+        $json = $car;
         $asArray = json_decode($json, true);
 
         // then
@@ -41,7 +41,7 @@ class JSONTest extends TestBase
         // given
         $car = new Car(1);
         $this->assertEquals(1, $car->getId());
-        $json = $car->asJSON();
+        $json = $car;
         $array = json_decode($json, true);
 
         // when

@@ -44,7 +44,7 @@ class LudoFinder
     }
 
     private function getCompiledSql(){
-        $ret = "select ". $this->applyTo->getIdField()." as id from ". $this->applyTo->getTableName();
+        $ret = "select ". $this->applyTo->configParser()->getIdField()." as id from ". $this->applyTo->getTableName();
         if($this->sql)$ret.=" where ". implode(" and ", $this->sql);
         return $ret;
     }

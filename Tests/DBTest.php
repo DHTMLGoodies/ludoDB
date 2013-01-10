@@ -37,7 +37,7 @@ class DBTest extends TestBase
         $city = new City(1);
 
         // then
-        $this->assertEquals(1, count($city->getQueryValues()));
+        $this->assertEquals(1, count($city->getConstructorValues()));
     }
 
     /**
