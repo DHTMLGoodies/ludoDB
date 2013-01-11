@@ -222,4 +222,31 @@ class ConfigParserTest extends TestBase
 
     }
 
+    /**
+     * @test
+     */
+    public function shouldBeAbleToGetDefinition(){
+        // given
+        $person = new PersonForConfigParser();
+
+        // when
+        $type = $person->configParser()->getColumnType('lastname');
+
+        // then
+        $this->assertEquals('varchar(32)', $type);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetTypeForPreparedSql(){
+         // given
+        $person = new PersonForConfigParser();
+
+        // when
+        $type = $person->configParser()->getTypeForPreparedSQL('lastname');
+
+        // then
+        $this->assertEquals('s', $type);
+    }
 }

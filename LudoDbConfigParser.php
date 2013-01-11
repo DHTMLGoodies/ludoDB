@@ -16,11 +16,13 @@ class LudoDbConfigParser
         $this->buildConfig($obj);
     }
 
+    /**
+     * @param LudoDBObject $obj
+     */
     private function buildConfig($obj){
         $this->config = $this->getValidConfig($obj->getConfig());
-        $extends = $this->getExtends();
-        if(isset($extends)){
-            $parent = new $extends;
+        $parent = $this->getExtends();
+        if(isset($parent)){
             $this->config = $this->getMergedConfigs($parent->configParser()->getConfig(), $this->config);
         }
     }
@@ -278,7 +280,61 @@ class LudoDbConfigParser
         return false;
     }
 
+    /**
+     * @return LudoDBObject
+     */
     private function getExtends(){
-        return $this->getProperty('extends');
+        $className = $this->getProperty('extends');
+        if(isset($className)){
+            return new $className;
+
+        }
+        return null;
+    }
+
+    public function getColumnType($column){
+        if(isset($this->config['columns'][$column])){
+            $col = $this->config['columns'][$column];
+            return is_string($col) ? $col : $col['db'];
+        }
+        return null;
+    }
+
+    public function getTypesForPreparedSQL($columns){
+        $ret = array();
+        foreach($columns as $column){
+            $ret[$column] = $this->getTypeForPreparedSQL($column);
+        }
+        return $ret;
+    }
+
+
+    public function getTypeForPreparedSQL($column){
+        $type = $this->getColumnType($column);
+        if(isset($type)){
+            $tokens = preg_split("/[^a-z]/si", $type);
+            $type = strtolower($tokens[0]);
+
+            switch($type){
+                case 'varchar':
+                case 'char':
+                case 'text':
+                case 'mediumtext':
+                    return 's';
+                case 'shortint':
+                case 'mediumint':
+                case 'longint':
+                case 'int':
+                    return 'i';
+                case 'double':
+                case 'float':
+                    return 'd';
+                case 'blob':
+                    return 'b';
+                default:
+                    return 's';
+            }
+        }
+        return null;
     }
 }

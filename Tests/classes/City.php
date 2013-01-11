@@ -1,6 +1,6 @@
 <?php
 
-class City extends LudoDbTable
+class City extends LudoDBTable
 {
     protected $config = array(
         'idField' => 'zip',

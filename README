@@ -4,7 +4,7 @@ Example:
 
 <?php
 
-class Person extends LudoDbTable
+class Person extends LudoDBTable
 {
     protected $idField = 'id';
     protected $config = array(
@@ -91,7 +91,7 @@ Example
 PHP Class (Client.php)
 
 <?php
-class Client extends LudoDbTable
+class Client extends LudoDBTable
 {
     protected $JSONConfig = true;
 

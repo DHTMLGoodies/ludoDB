@@ -6,7 +6,7 @@
  * Time: 03:31
  * To change this template use File | Settings | File Templates.
  */
-class TestTable extends LudoDbTable
+class TestTable extends LudoDBTable
 {
     protected $config = array(
         'idField' => 'id',

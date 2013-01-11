@@ -5,7 +5,7 @@
  * Date: 20.12.12
  * Time: 14:12
  */
-class PhoneCollection extends LudoDbCollection
+class PhoneCollection extends LudoDBCollection
 {
     protected $config = array(
         'idField' => 'id',

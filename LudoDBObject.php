@@ -17,7 +17,7 @@ class LudoDBObject
 
     public function __construct()
     {
-        $this->db = new LudoDb();
+        $this->db = LudoDb::getInstance();
         if (func_num_args() > 0) {
             $this->constructorValues = func_get_args();
         }

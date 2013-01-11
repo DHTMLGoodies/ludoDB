@@ -11,7 +11,7 @@ class LudoFinder
     private $applyTo;
     private $db;
 
-    public function __construct(LudoDbTable $applyTo){
+    public function __construct(LudoDBTable $applyTo){
         $this->applyTo = $applyTo;
         $this->sql = array();
         $this->db = new LudoDB();
@@ -33,9 +33,9 @@ class LudoFinder
     }
 
     /**
-     * Populate LudoDbTable object and return it
+     * Populate LudoDBTable object and return it
      * @method find
-     * @return LudoDbTable
+     * @return LudoDBTable
      */
     public function find(){
         $id = $this->db->getValue($this->getCompiledSql());

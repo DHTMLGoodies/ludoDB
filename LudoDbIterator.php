@@ -5,7 +5,7 @@
  * Date: 21.12.12
  * Time: 22:39
  */
-abstract class LudoDbIterator extends LudoDBObject implements Iterator
+abstract class LudoDBIterator extends LudoDBObject implements Iterator
 {
     private $loaded;
     private $dbResource;

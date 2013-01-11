@@ -5,7 +5,7 @@
  * Date: 19.12.12
  * Time: 21:31
  */
-abstract class LudoDbCollection extends LudoDbIterator
+abstract class LudoDBCollection extends LudoDBIterator
 {
     /**
      * Lookup value to use when instantiating collection. This value

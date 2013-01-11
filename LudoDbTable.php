@@ -2,9 +2,8 @@
 /**
  * Representation of a ludoDB table
  */
-abstract class LudoDbTable extends LudoDBObject
+abstract class LudoDBTable extends LudoDBObject
 {
-    const DELETED = '__DELETED__';
     protected $config = array(
         'idField' => 'id',
         'columns' => array(
@@ -66,7 +65,7 @@ abstract class LudoDbTable extends LudoDBObject
             return $this->getExternalValue($column);
         }
         if (isset($this->updates) && isset($this->updates[$column])) {
-            return $this->updates[$column] == self::DELETED ? null : $this->updates[$column];
+            return $this->updates[$column] == LudoDB::DELETED ? null : $this->updates[$column];
         }
         return isset($this->data[$column]) ? $this->data[$column] : null;
     }
@@ -104,7 +103,7 @@ abstract class LudoDbTable extends LudoDBObject
             $this->setExternalValue($column, $value);
         } else {
             if (is_string($value)) $value = mysql_real_escape_string($value);
-            if (!isset($value)) $value = self::DELETED;
+            if (!isset($value)) $value = LudoDB::DELETED;
             if (!isset($this->updates)) $this->updates = array();
             $this->updates[$column] = $value;
         }
@@ -133,7 +132,7 @@ abstract class LudoDbTable extends LudoDBObject
         }
         if(isset($this->updates)){
             foreach ($this->updates as $key => $value) {
-                $this->data[$key] = $value === self::DELETED ? null : $value;
+                $this->data[$key] = $value === LudoDB::DELETED ? null : $value;
             }
         }
         foreach ($this->externalClasses as $class) {
@@ -147,8 +146,7 @@ abstract class LudoDbTable extends LudoDBObject
     {
         if ($this->isValid()) {
             $this->beforeUpdate();
-            $sql = "update " . $this->configParser()->getTableName() . " set " . $this->getUpdatesForSql() . " where " . $this->configParser()->getIdField() . " = '" . $this->getId() . "'";
-            $this->db->query($sql);
+            $this->db->update($this);
         }
     }
 
@@ -160,7 +158,7 @@ abstract class LudoDbTable extends LudoDBObject
     {
         $updates = array();
         foreach ($this->updates as $key => $value) {
-            $updates[] = $key . "=" . ($value === self::DELETED ? 'NULL' : "'" . $value . "'");
+            $updates[] = $key . "=" . ($value === LudoDB::DELETED ? 'NULL' : "'" . $value . "'");
         }
         return implode(",", $updates);
     }
@@ -169,16 +167,7 @@ abstract class LudoDbTable extends LudoDBObject
     {
         if ($this->isValid()) {
             $this->beforeInsert();
-
-            $sql = "insert into " . $this->configParser()->getTableName();
-            if (!isset($this->updates)) {
-                $sql.="(".$this->configParser()->getIdField().")values(NULL)";
-            } else {
-                $sql .= "(" . implode(",", array_keys($this->updates)) . ")";
-                $sql .= "values('" . implode("','", array_values($this->updates)) . "')";
-
-            }
-            $this->db->query($sql);
+            $this->db->insert($this);
             $this->setId($this->db->getInsertId());
         }
     }

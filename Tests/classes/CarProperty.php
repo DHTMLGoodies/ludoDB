@@ -5,7 +5,7 @@
  * Date: 23.12.12
  * Time: 00:34
  */
-class CarProperty extends LudoDbTable
+class CarProperty extends LudoDBTable
 {
     protected $config = array(
         'idField' => 'id',

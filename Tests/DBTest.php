@@ -238,8 +238,8 @@ class DBTest extends TestBase
 
         new Car();
 
-        $res = mysql_query("select count(id) as num from car");
-        $row = mysql_fetch_assoc($res);
+        $db = new LudoDB();
+        $row = $db->one("select count(id) as num from car");
 
         // then
         $this->assertEquals(7, $row['num']);

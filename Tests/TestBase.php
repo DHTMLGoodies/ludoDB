@@ -9,8 +9,6 @@
 class TestBase extends PHPUnit_Framework_TestCase
 {
     private $connected = false;
-    private $dbUser = 'root';
-    private $dbPassword = 'administrator';
     private static $logCleared = false;
 
     public function setUp()
@@ -25,20 +23,24 @@ class TestBase extends PHPUnit_Framework_TestCase
 
     private function connect()
     {
-        $res = mysql_connect("localhost", $this->dbUser, $this->dbPassword);
-        mysql_select_db('PHPUnit', $res);
+        LudoDB::setHost('localhost');
+        LudoDB::setUser('root');
+        LudoDB::setPassword('administrator');
+        LudoDB::setDb('PHPUnit');
 
         $this->connected = true;
     }
 
     protected function clearTable()
     {
-        mysql_query("delete from TestTable");
+        $db = new LudoDB();
+        $db->query("delete from TestTable");
     }
 
     protected function dropTable()
     {
-        mysql_query("drop table TestTable");
+        $db = new LudoDB();
+        $db->query("drop table TestTable");
     }
 
     private function clearLog()

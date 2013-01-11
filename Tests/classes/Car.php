@@ -1,5 +1,5 @@
 <?php
-class Car extends LudoDbTable
+class Car extends LudoDBTable
 {
     protected $config = array(
         'idField' => 'id',

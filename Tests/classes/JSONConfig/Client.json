@@ -4,10 +4,22 @@
 	"constructorParams":"id",
 	"columns":{
 		"id":"int auto_increment not null primary key",
-		"firstname":"varchar(32)",
-		"lastname":"varchar(32)",
-		"address":"varchar(64)",
-		"zip":"varchar(5)",
+		"firstname":{
+			"db": "varchar(32)",
+			"access":"rw"
+		},
+		"lastname":{
+			"db": "varchar(32)",
+			"access": "rw"
+		},
+		"address":{
+			"db": "varchar(64)",
+			"access": "rw"
+		},
+		"zip":{
+			"db": "varchar(5)",
+			"access": "rw"
+		},
 		"phone":{
 			"class":"PhoneCollection"
 		},
