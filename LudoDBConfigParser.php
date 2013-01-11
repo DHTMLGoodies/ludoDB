@@ -6,7 +6,7 @@
  * Time: 11:46
  * To change this template use File | Settings | File Templates.
  */
-class LudoDbConfigParser
+class LudoDBConfigParser
 {
     private $config;
     private static $columnMappingCache = array();

@@ -24,7 +24,7 @@ spl_autoload_register(
                 'jsontest' => '/Tests/JSONTest.php',
                 'ludodb' => '/LudoDB.php',
                 'ludodbcollection' => '/LudoDBCollection.php',
-                'ludodbconfigparser' => '/LudoDbConfigParser.php',
+                'ludodbconfigparser' => '/LudoDBConfigParser.php',
                 'ludodbiterator' => '/LudoDBIterator.php',
                 'ludodbobject' => '/LudoDBObject.php',
                 'ludodbregistry' => '/LudoDBRegistry.php',

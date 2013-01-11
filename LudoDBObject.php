@@ -72,13 +72,13 @@ class LudoDBObject
     }
 
     /**
-     * @return LudoDbConfigParser
+     * @return LudoDBConfigParser
      */
     public function configParser()
     {
         $key = get_class($this);
         if (!isset(self::$configParsers[$key])) {
-            self::$configParsers[$key] = new LudoDbConfigParser($this);
+            self::$configParsers[$key] = new LudoDBConfigParser($this);
         }
         return self::$configParsers[$key];
     }
