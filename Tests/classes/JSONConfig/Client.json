@@ -30,7 +30,7 @@
 
 	},
 	"classes":{
-		"city":{
+		"City":{
 			"fk":"zip"
 		}
 	}
