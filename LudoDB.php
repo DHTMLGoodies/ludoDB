@@ -17,22 +17,35 @@ class LudoDB
      */
     private static $conn;
 
-    public function __construct()
+    public function __construct($useMysqlI = true)
     {
         if (!isset(self::$mysqli)) {
-            self::$mysqli = class_exists("mysqli");
+            if (!$useMysqlI) self::$mysqli = false;
+            else self::$mysqli = class_exists("mysqli");
         }
         if (!isset(self::$conn)) {
             $this->connect();
         }
     }
 
-    public static function  getInstance()
+    public static function getInstance($useMysqlI = true)
     {
         if (!isset(self::$instance)) {
-            self::$instance = new LudoDB();
+            self::$instance = new LudoDB($useMysqlI);
         }
         return self::$instance;
+    }
+
+    public static function disableMySqli()
+    {
+
+        if (isset(self::$mysqli) && self::$mysqli) {
+            self::$mysqli = false;
+            if (isset(self::$conn)) {
+                self::$conn = null;
+                self::getInstance()->connect();
+            }
+        }
     }
 
     public static function setHost($host)
@@ -71,10 +84,8 @@ class LudoDB
     }
 
     /**
-     * Returns mySql result
-     * @method query
-     * @param {String} $sql
-     * @return resource
+     * @param $sql
+     * @return bool|mysqli_result|resource
      */
     public function query($sql)
     {
@@ -87,10 +98,8 @@ class LudoDB
     }
 
     /**
-     * Returns one row from sql query
-     * @method one
-     * @param {String} $sql
-     * @return {Array} row
+     * @param $sql
+     * @return array|null
      */
     public function one($sql)
     {
@@ -136,26 +145,10 @@ class LudoDB
         return mysql_insert_id();
     }
 
-    public function getRows($sql)
-    {
-        if ($this->debug) $this->log($sql);
-        $ret = array();
-        $result = $this->query($sql);
-
-        if (self::$mysqli) {
-            while ($row = $result->fetch_assoc()) {
-                $ret[] = $row;
-            }
-        } else {
-            while ($row = mysql_fetch_assoc($result)) {
-                $ret[] = $row;
-            }
-        }
-
-
-        return $ret;
-    }
-
+    /**
+     * @param mysqli_result|resource
+     * @return array
+     */
     public function nextRow($result)
     {
         if (self::$mysqli) {
@@ -165,16 +158,16 @@ class LudoDB
     }
 
     /**
-     * Returns value of first column in query
      * @param $sql
+     * @return null|array
      */
     public function getValue($sql)
     {
         if ($this->debug) $this->log($sql);
         $result = $this->query($sql . " limit 1");
-        if(self::$mysqli){
+        if (self::$mysqli) {
             $row = $result->fetch_row();
-        }else{
+        } else {
             $row = mysql_fetch_row($result);
         }
         if (isset($row)) return $row[0];

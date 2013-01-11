@@ -57,6 +57,21 @@ class CollectionTest extends TestBase
     /**
      * @test
      */
+    public function shouldBeAbleToDeleteRecordsInCollection(){
+        // given
+        $c = new CarCollection('Audi');
+        // when
+        $cars = $c->deleteRecords();
+        $c = new CarCollection('Audi');
+        $cars = $c->getValues();
+        // then
+        $this->assertEquals(0, count($cars));
+
+    }
+
+    /**
+     * @test
+     */
     public function shouldReturnValueWhenCollectionIsDefinedAsColumnForTable(){
         // given
         $person = $this->getPersonWithPhone('John', array('555 888', '555 999'));

@@ -136,10 +136,17 @@ abstract class LudoDBTable extends LudoDBObject
             }
         }
         foreach ($this->externalClasses as $class) {
-            $class->commit();
+            $this->commitExternal($class);
         }
         $this->updates = null;
         return $this->getId();
+    }
+
+    /**
+     * @param LudoDBObject $class
+     */
+    private function commitExternal($class){
+        $class->commit();
     }
 
     private function update()

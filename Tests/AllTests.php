@@ -22,6 +22,7 @@ class AllTests
         $suite->addTestSuite("ConfigParserTest");
         $suite->addTestSuite("ConfigParserTestJSON");
         $suite->addTestSuite("AccessorTest");
+        $suite->addTestSuite("MysqlTests");
         return $suite;
     }
 }
