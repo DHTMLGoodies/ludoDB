@@ -1,0 +1,38 @@
+{
+    "table": "Person",
+    "idField": "id",
+    "constructorParams": "id",
+    "columns": {
+        "id": "int auto_increment not null primary key",
+        "firstname": {
+            "db": "varchar(32)",
+            "access": "rw"
+        },
+        "lastname": {
+            "db": "varchar(32)",
+            "access" : "rw"
+        },
+        "address": {
+            "db": "varchar(128)",
+            "access": "rw"
+        },
+        "zip": {
+            "db": "varchar(5)",
+            "access": "rw"
+        },
+        "phone": {
+            "class": "PhoneCollection",
+            "access": "r"
+        },
+        "city": {
+            "class": "City",
+            "get": "getCity",
+            "access": "r"
+        }
+    },
+    "classes": {
+        "city": {
+            "fk": "zip"
+        }
+    }
+}

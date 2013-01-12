@@ -21,7 +21,7 @@ $person = new Person();
 $person->drop();
 $person->createTable();
 
-$person->setLastName('Kalleland');
+$person->setLastname('Kalleland');
 $person->setFirstname('Alf Magne');
 $person->setAddress('Rundaberget 27');
 $person->setZip('4330');

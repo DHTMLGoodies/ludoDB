@@ -405,4 +405,15 @@ abstract class LudoDBTable extends LudoDBObject
         return $this;
     }
 
+    public function setValues($data){
+        $valuesSet = false;
+        foreach($data as $column=>$value){
+            if($this->configParser()->canWriteTo($column)){
+                $this->setValue($column, $value);
+                $valuesSet = true;
+            }
+        }
+        return $valuesSet;
+    }
+
 }

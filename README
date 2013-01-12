@@ -26,7 +26,7 @@ class Person extends LudoDBTable
         $this->setValue('firstname', $value);
     }
 
-    public function setLastName($value){
+    public function setLastname($value){
         $this->setvalue('lastname', $value);
     }
 

@@ -256,7 +256,7 @@ class LudoDBTableTests extends TestBase
         // given
         $person = new Person();
         $person->setFirstname('John');
-        $person->setLastName('Wayne');
+        $person->setLastname('Wayne');
         $city = new City();
         $city->setZip('8642');
         $city->commit();
@@ -353,6 +353,32 @@ class LudoDBTableTests extends TestBase
         // then
         $this->assertNotNull($person->getId());
     }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToSetMultipleValues(){
+        // given
+        $p = new Person();
+        $data = array(
+            'firstname' => 'John',
+            'lastname' => 'Wayne'
+        );
+
+        // when
+        $p->setValues($data);
+        $p->commit();
+        $person = new Person($p->getId());
+
+        // then
+        $this->assertEquals('John', $person->getFirstname());
+        $this->assertEquals('Wayne', $person->getLastname());
+
+
+
+
+    }
+
 
     private function getExistingRecord(){
         $this->clearTable();

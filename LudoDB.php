@@ -103,7 +103,7 @@ class LudoDB
             if($res = self::$conn->query($sql)){
                 return $res;
             }
-            die(self::$conn->error);
+            throw new Exception("SQL ERROR: ". self::$conn->error."(".$sql.")");
 
         }
         $res = mysql_query($sql) or die(mysql_error() . "\nSQL:" . $sql);
@@ -204,7 +204,7 @@ class LudoDB
         $table = $obj->configParser()->getTableName();
         $data = $obj->getUpdates();
         if (!isset($data)) $data = array(
-            $obj->configParser()->getIdField() => NULL
+            $obj->configParser()->getIdField() => self::DELETED
         );
 
         $this->mysql_insert($table, $data);
@@ -216,6 +216,7 @@ class LudoDB
         $sql = "insert into " . $table;
         $sql .= "(" . implode(",", array_keys($data)) . ")";
         $sql .= "values('" . implode("','", array_values($data)) . "')";
+        $sql = str_replace("'". self::DELETED."'", "null", $sql);
         $this->query($sql);
     }
 

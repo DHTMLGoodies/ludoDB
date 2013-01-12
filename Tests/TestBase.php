@@ -40,7 +40,8 @@ class TestBase extends PHPUnit_Framework_TestCase
     protected function dropTable()
     {
         $db = new LudoDB();
-        $db->query("drop table TestTable");
+        $t = new TestTable();
+        $t->drop();
     }
 
     private function clearLog()
