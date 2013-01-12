@@ -1,0 +1,13 @@
+{
+    "table": "Section",
+    "columns": {
+        "id": {
+            "db": "int auto_increment not null primary key"
+        },
+        "written_by": {
+            "db": "int",
+            "alias": "writtenBy",
+            "access": "rw"
+        }
+    }
+}

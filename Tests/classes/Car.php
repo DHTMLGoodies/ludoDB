@@ -6,8 +6,14 @@ class Car extends LudoDBTable
         'table' => 'Car',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
-            'brand' => 'varchar(64)',
-            'model' => 'varchar(64)',
+            'brand' => array(
+                'db' =>'varchar(64)',
+                'access' => 'rw'
+            ),
+            'model' => array(
+                'db' =>'varchar(64)',
+                'access' => 'rw'
+            ),
             'properties' => array(
                 'class' => 'CarProperties',
                 'fk' => 'id'

@@ -16,6 +16,10 @@ class JSONTest extends TestBase
         $car = new Car();
         $car->drop();
         $car->createTable();
+
+        $section = new Section();
+        $section->drop();
+        $section->createTable();
     }
 
     /**
@@ -30,6 +34,7 @@ class JSONTest extends TestBase
         $asArray = json_decode($json, true);
 
         // then
+        $this->log($json);
         $this->assertEquals('1', $asArray['id']);
         $this->assertEquals('Opel', $asArray['brand']);
     }
@@ -53,5 +58,14 @@ class JSONTest extends TestBase
 
         // then
         $this->assertEquals('BMW', $newCar->getBrand());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetAliasNameOfColumns(){
+        // given
+        $section = new Section();
+
     }
 }

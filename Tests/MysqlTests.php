@@ -57,8 +57,8 @@ class MysqlTests extends TestBase
         $table->setFirstName('Alf Magne');
 
         // then
-        $this->assertEquals(1, count($table->getUpdates()));
-        $this->assertEquals(array('firstname' => 'Alf Magne'), $table->getUpdates());
+        $this->assertEquals(1, count($table->getUncommitted()));
+        $this->assertEquals(array('firstname' => 'Alf Magne'), $table->getUncommitted());
     }
     /**
       * @test

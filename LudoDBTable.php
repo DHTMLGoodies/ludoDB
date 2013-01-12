@@ -200,11 +200,6 @@ abstract class LudoDBTable extends LudoDBObject
         $this->updates = null;
     }
 
-    public function getUpdates()
-    {
-        return $this->updates;
-    }
-
     protected function setId($id)
     {
         $this->id = $id;
@@ -303,10 +298,11 @@ abstract class LudoDBTable extends LudoDBObject
 
     protected function getValues()
     {
-        $columns = $this->config['columns'];
+        $columns = $this->configParser()->getColumns();
         $ret = array();
         foreach ($columns as $column => $def) {
-            $ret[$column] = $this->getValue($column);
+            $colName = $this->configParser()->getPublicColumnName($column);
+            $ret[$colName] = $this->getValue($column);
         }
         return array_merge($ret, $this->getJoinColumns());
     }
@@ -326,10 +322,7 @@ abstract class LudoDBTable extends LudoDBObject
 
     public function JSONPopulate(array $jsonAsArray)
     {
-
-        foreach ($jsonAsArray as $key => $value) {
-            $this->setValue($key, $value);
-        }
+        $this->setValues($jsonAsArray);
         $this->commit();
     }
 

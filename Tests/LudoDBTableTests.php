@@ -51,8 +51,8 @@ class LudoDBTableTests extends TestBase
         $table->setFirstName('Alf Magne');
 
         // then
-        $this->assertEquals(1, count($table->getUpdates()));
-        $this->assertEquals(array('firstname' => 'Alf Magne'), $table->getUpdates());
+        $this->assertEquals(1, count($table->getUncommitted()));
+        $this->assertEquals(array('firstname' => 'Alf Magne'), $table->getUncommitted());
     }
 
     /**
@@ -125,7 +125,7 @@ class LudoDBTableTests extends TestBase
 
         // when
         $table->setFirstname('Jane');
-        $updates = $table->getUpdates();
+        $updates = $table->getUncommitted();
         // then
 
         $this->assertEquals('Jane', $updates['firstname'], "Updates are wrong");
@@ -279,7 +279,7 @@ class LudoDBTableTests extends TestBase
         $this->log($secondId);
         // then
         $this->assertNotNull($secondId);
-        $this->assertNull($person->getUpdates());
+        $this->assertNull($person->getUncommitted());
         $this->assertEquals('8642', $newPerson->getZip());
         $this->assertEquals('John', $newPerson->getFirstname());
         $this->assertNull($newPerson->getLastname());
@@ -373,10 +373,6 @@ class LudoDBTableTests extends TestBase
         // then
         $this->assertEquals('John', $person->getFirstname());
         $this->assertEquals('Wayne', $person->getLastname());
-
-
-
-
     }
 
 

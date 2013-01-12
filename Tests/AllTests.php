@@ -24,6 +24,7 @@ class AllTests
         $suite->addTestSuite("AccessorTest");
         $suite->addTestSuite("MysqlTests");
         $suite->addTestSuite("ObjectCreatorTest");
+        $suite->addTestSuite("ColumnAliasTest");
         return $suite;
     }
 }

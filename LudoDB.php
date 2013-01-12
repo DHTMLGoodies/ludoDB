@@ -7,7 +7,7 @@
  */
 class LudoDB
 {
-    private $debug = true;
+    private $debug = false;
     private static $mysqli;
     const DELETED = '__DELETED__';
     private static $instance;
@@ -95,6 +95,7 @@ class LudoDB
     /**
      * @param $sql
      * @return bool|mysqli_result|resource
+     * @throws Exception
      */
     public function query($sql)
     {
@@ -132,9 +133,7 @@ class LudoDB
     }
 
     /**
-     * Return number of rows in query
-     * @method countRows
-     * @param String $sql
+     * @param $sql
      * @return int
      */
     public function countRows($sql)
@@ -159,7 +158,7 @@ class LudoDB
     }
 
     /**
-     * @param mysqli_result|resource
+     * @param mysqli_result|resource $result
      * @return array
      */
     public function nextRow($result)
@@ -202,7 +201,7 @@ class LudoDB
     public function insert(LudoDBTable $obj)
     {
         $table = $obj->configParser()->getTableName();
-        $data = $obj->getUpdates();
+        $data = $obj->getUncommitted();
         if (!isset($data)) $data = array(
             $obj->configParser()->getIdField() => self::DELETED
         );
@@ -213,8 +212,7 @@ class LudoDB
 
     private function mysql_insert($table, $data)
     {
-        $sql = "insert into " . $table;
-        $sql .= "(" . implode(",", array_keys($data)) . ")";
+        $sql = "insert into " . $table."(" . implode(",", array_keys($data)) . ")";
         $sql .= "values('" . implode("','", array_values($data)) . "')";
         $sql = str_replace("'". self::DELETED."'", "null", $sql);
         $this->query($sql);
@@ -236,7 +234,7 @@ class LudoDB
 
     private function mysql_update(LudoDBTable $obj)
     {
-        return $this->query("update " . $obj->configParser()->getTableName() . " set " . $this->getUpdatesForSql($obj->getUpdates()) . " where " . $obj->configParser()->getIdField() . " = '" . $obj->getId() . "'");
+        return $this->query("update " . $obj->configParser()->getTableName() . " set " . $this->getUpdatesForSql($obj->getUncommitted()) . " where " . $obj->configParser()->getIdField() . " = '" . $obj->getId() . "'");
     }
 
     private function getUpdatesForSql($updates)

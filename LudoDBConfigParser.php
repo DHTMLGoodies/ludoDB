@@ -11,6 +11,8 @@ class LudoDBConfigParser
     private $config;
     private static $columnMappingCache = array();
     private $customConstructorParams;
+    private $aliasMapping = array();
+
     public function __construct(LudoDBObject $obj)
     {
         $this->buildConfig($obj);
@@ -19,30 +21,46 @@ class LudoDBConfigParser
     /**
      * @param LudoDBObject $obj
      */
-    private function buildConfig($obj){
+    private function buildConfig($obj)
+    {
         $this->config = $this->getValidConfig($obj->getConfig());
         $parent = $this->getExtends();
-        if(isset($parent)){
+        if (isset($parent)) {
             $this->config = $this->getMergedConfigs($parent->configParser()->getConfig(), $this->config);
+        }
+        $this->mapColumnAliases();
+    }
+
+    private function mapColumnAliases()
+    {
+        if (isset($this->config['columns'])) {
+            foreach ($this->config['columns'] as $colName => $col) {
+                if (is_array($col) && isset($col['alias'])) {
+                    $this->aliasMapping[$col['alias']] = $colName;
+                }
+            }
         }
     }
 
-    public function setConstructorParams($params){
-        if(!is_array($params))$params = array($params);
+    public function setConstructorParams($params)
+    {
+        if (!is_array($params)) $params = array($params);
         $this->customConstructorParams = $params;
     }
 
     private function getMergedConfigs($config1, $config2)
     {
-        if (!is_array($config1) or !is_array($config2)) { return $config2; }
-        foreach ($config2 AS $sKey2 => $sValue2)
-        {
+        if (!is_array($config1) or !is_array($config2)) {
+            return $config2;
+        }
+        foreach ($config2 AS $sKey2 => $sValue2) {
             $config1[$sKey2] = $this->getMergedConfigs(@$config1[$sKey2], $sValue2);
         }
         return $config1;
     }
-    
-    public function getConfig(){
+
+    public function getConfig()
+    {
         return $this->config;
     }
 
@@ -65,7 +83,7 @@ class LudoDBConfigParser
 
     public function getConstructorParams()
     {
-        if(isset($this->customConstructorParams))return $this->customConstructorParams;
+        if (isset($this->customConstructorParams)) return $this->customConstructorParams;
         return isset($this->config['constructorParams']) ? $this->config['constructorParams'] : null;
     }
 
@@ -116,7 +134,8 @@ class LudoDBConfigParser
         return strstr($this->getDbDefinition($this->getIdField()), 'auto_increment') ? true : false;
     }
 
-    private function getDbDefinition($column){
+    private function getDbDefinition($column)
+    {
         $col = $this->config['columns'][$column];
         return is_array($col) ? $col['db'] : $col;
     }
@@ -128,12 +147,14 @@ class LudoDBConfigParser
 
     public function getGetMethod($column)
     {
+        $column = $this->getActualColName($column);
         $method = $this->getColumnProperty($column, 'get');
         return isset($method) ? $method : 'getValues';
     }
 
     public function foreignKeyFor($column)
     {
+        $column = $this->getActualColName($column);
         return $this->getColumnProperty($column, 'fk');
     }
 
@@ -152,12 +173,13 @@ class LudoDBConfigParser
         return $this->getProperty('join');
     }
 
-    public function getMyColumnsForSQL(){
+    public function getMyColumnsForSQL()
+    {
         $columns = $this->getColumns();
         $ret = array();
-        foreach($columns as $col => $value){
-            if(!$this->isExternalColumn($col)){
-                $ret[] = $this->getTableName().".".$col;
+        foreach ($columns as $col => $value) {
+            if (!$this->isExternalColumn($col)) {
+                $ret[] = $this->getTableName() . "." . $col;
             }
         }
         return $ret;
@@ -195,8 +217,20 @@ class LudoDBConfigParser
         return $this->getProperty('columns');
     }
 
-    private function getColumn($column){
+    public function getPublicColumnName($name){
+        $col = $this->config['columns'][$name];
+        return is_array($col) && isset($col['alias']) ? $col['alias'] : $name;
+    }
+
+    public function getColumn($column)
+    {
+        $column = $this->getActualColName($column);
         return isset($this->config['columns'][$column]) ? $this->config['columns'][$column] : null;
+    }
+
+    private function getActualColName($column)
+    {
+        return (isset($this->aliasMapping[$column])) ? $this->aliasMapping[$column] : $column;
     }
 
     public function getOrderBy()
@@ -248,7 +282,8 @@ class LudoDBConfigParser
         return $col;
     }
 
-    private function saveInMappingCache($methodName, $col){
+    private function saveInMappingCache($methodName, $col)
+    {
         $t = $this->getTableName();
         if (!isset(self::$columnMappingCache[$t])) {
             self::$columnMappingCache[$t] = array();
@@ -266,16 +301,21 @@ class LudoDBConfigParser
         return isset(self::$columnMappingCache[$t][$methodName]) ? self::$columnMappingCache[$t][$methodName] : null;
     }
 
-    public function canWriteTo($column){
+    public function canWriteTo($column)
+    {
         $column = $this->getColumn($column);
-        if(isset($column) && isset($column['access'])){
+        if (isset($column) && isset($column['access'])) {
             return strstr($column['access'], "w") ? true : false;
         }
         return false;
     }
-    public function canReadFrom($column){
-        $column = $this->getColumn($column);
-        if(isset($column) && isset($column['access'])){
+
+    public function canReadFrom($name)
+    {
+        if($name === $this->getIdField())return true;
+        $column = $this->getColumn($name);
+
+        if (isset($column) && isset($column['access'])) {
             return strstr($column['access'], "r") ? true : false;
         }
         return false;
@@ -284,39 +324,44 @@ class LudoDBConfigParser
     /**
      * @return LudoDBObject
      */
-    private function getExtends(){
+    private function getExtends()
+    {
         $className = $this->getProperty('extends');
-        if(isset($className)){
+        if (isset($className)) {
             return new $className;
 
         }
         return null;
     }
 
-    public function getColumnType($column){
-        if(isset($this->config['columns'][$column])){
+    public function getColumnType($column)
+    {
+        $column = $this->getActualColName($column);
+        if (isset($this->config['columns'][$column])) {
             $col = $this->config['columns'][$column];
             return is_string($col) ? $col : $col['db'];
         }
         return null;
     }
 
-    public function getTypesForPreparedSQL($columns){
+    public function getTypesForPreparedSQL($columns)
+    {
         $ret = array();
-        foreach($columns as $column){
+        foreach ($columns as $column) {
             $ret[$column] = $this->getTypeForPreparedSQL($column);
         }
         return $ret;
     }
 
 
-    public function getTypeForPreparedSQL($column){
+    public function getTypeForPreparedSQL($column)
+    {
         $type = $this->getColumnType($column);
-        if(isset($type)){
+        if (isset($type)) {
             $tokens = preg_split("/[^a-z]/si", $type);
             $type = strtolower($tokens[0]);
 
-            switch($type){
+            switch ($type) {
                 case 'varchar':
                 case 'char':
                 case 'text':
@@ -339,10 +384,11 @@ class LudoDBConfigParser
         return null;
     }
 
-    public function canBePopulatedBy($column){
-        if($column == $this->getIdField())return true;
+    public function canBePopulatedBy($column)
+    {
+        if ($column == $this->getIdField()) return true;
         $col = $this->getColumn($column);
-        if(isset($this->config['constructorParams']) && in_array($column, $this->config['constructorParams'])){
+        if (isset($this->config['constructorParams']) && in_array($column, $this->config['constructorParams'])) {
             return true;
         }
         return is_array($col) && isset($col['canConstructBy']) ? $col['canConstructBy'] : false;

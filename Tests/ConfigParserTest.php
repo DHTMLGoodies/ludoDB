@@ -209,6 +209,21 @@ class ConfigParserTest extends TestBase
     /**
      * @test
      */
+
+    public function shouldBeAbleToReadId(){
+        // given
+        $person = new PersonForConfigParser();
+
+        // when
+        $access = $person->configParser()->canReadFrom('id');
+
+        // then
+        $this->assertTrue($access);
+    }
+
+    /**
+     * @test
+     */
     public function shouldBeAbleToExtendConfig(){
         // given
         $manager = new Manager();
