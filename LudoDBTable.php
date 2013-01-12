@@ -87,7 +87,6 @@ abstract class LudoDBTable extends LudoDBObject
             $fk = $this->configParser()->foreignKeyFor($column);
             if (isset($fk)){
                 $val = $this->getValue($fk);
-                $this->db->log("(".$column. ",".$fk. ",". $val.")");
             }  else {
                 if (!$this->getId()) $this->commit();
                 $val = $this->getId();
@@ -340,7 +339,6 @@ abstract class LudoDBTable extends LudoDBObject
             if(isset($col) && $this->configParser()->canReadFrom($col)){
                 return $this->getValue($col);
             }
-            $this->db->log($name);
         }
 
         throw new Exception("Invalid method call");

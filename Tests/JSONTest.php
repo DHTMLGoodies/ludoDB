@@ -34,7 +34,6 @@ class JSONTest extends TestBase
         $asArray = json_decode($json, true);
 
         // then
-        $this->log($json);
         $this->assertEquals('1', $asArray['id']);
         $this->assertEquals('Opel', $asArray['brand']);
     }

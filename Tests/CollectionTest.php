@@ -100,7 +100,6 @@ class CollectionTest extends TestBase
         $this->addCarProperty($id, 'weight','1450kg');
         $this->addCarProperty($id, 'hp', '145');
 
-        $this->log('CarID ' . $id);
         // when
         $car = new Car($id);
 
