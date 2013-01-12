@@ -68,7 +68,7 @@ class LudoSQL
         $constructorParams = $this->configParser->getConstructorParams();
         if(isset($constructorParams)){
             for($i=0,$count=count($this->constructorValues);$i<$count; $i++){
-                $ret[] = $this->getTableAndColumn($constructorParams[$i])."='". mysql_real_escape_string($this->constructorValues[$i])."'";
+                $ret[] = $this->getTableAndColumn($constructorParams[$i])."='". $this->constructorValues[$i]."'";
             }
 
         }

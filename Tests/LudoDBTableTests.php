@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../autoload.php");
 #error_reporting(E_ALL);
 ini_set('display_errors','on');
 
-class DBTest extends TestBase
+class LudoDBTableTests extends TestBase
 {
     public function setUp(){
         parent::setUp();

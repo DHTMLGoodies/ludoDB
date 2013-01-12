@@ -10,7 +10,7 @@ class LudoDBConfigParser
 {
     private $config;
     private static $columnMappingCache = array();
-
+    private $customConstructorParams;
     public function __construct(LudoDBObject $obj)
     {
         $this->buildConfig($obj);
@@ -29,7 +29,7 @@ class LudoDBConfigParser
 
     public function setConstructorParams($params){
         if(!is_array($params))$params = array($params);
-        $this->config['constructorParams'] = $params;
+        $this->customConstructorParams = $params;
     }
 
     private function getMergedConfigs($config1, $config2)
@@ -65,6 +65,7 @@ class LudoDBConfigParser
 
     public function getConstructorParams()
     {
+        if(isset($this->customConstructorParams))return $this->customConstructorParams;
         return isset($this->config['constructorParams']) ? $this->config['constructorParams'] : null;
     }
 
@@ -336,5 +337,11 @@ class LudoDBConfigParser
             }
         }
         return null;
+    }
+
+    public function canBePopulatedBy($column){
+        if($column == $this->getIdField())return true;
+        $col = $this->getColumn($column);
+        return is_array($col) && isset($col['canConstructBy']) ? $col['canConstructBy'] : false;
     }
 }

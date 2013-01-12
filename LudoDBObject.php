@@ -19,9 +19,16 @@ class LudoDBObject
     {
         $this->db = LudoDb::getInstance();
         if (func_num_args() > 0) {
-            $this->constructorValues = func_get_args();
+            $this->constructorValues = $this->getValidConstructorValues(func_get_args());
         }
         $this->onConstruct();
+    }
+
+    protected function getValidConstructorValues($values){
+        foreach($values as &$value){
+            $value = $this->db->escapeString($value);
+        }
+        return $values;
     }
 
     protected function onConstruct()

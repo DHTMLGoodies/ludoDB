@@ -7,7 +7,7 @@
  */
 class LudoDB
 {
-    private $debug = false;
+    private $debug = true;
     private static $mysqli;
     const DELETED = '__DELETED__';
     private static $instance;
@@ -83,6 +83,14 @@ class LudoDB
         }
     }
 
+    public function escapeString($string){
+        if(is_string($string)){
+            if(self::$mysqli)return self::$conn->escape_string($string);
+            return mysql_real_escape_string($string);
+        }
+        return $string;
+    }
+
     /**
      * @param $sql
      * @return bool|mysqli_result|resource
@@ -106,7 +114,7 @@ class LudoDB
         if ($this->debug) $this->log($sql);
         $res = $this->query($sql . " limit 1");
         if (self::$mysqli) {
-            if ($row = $res->fetch_assoc()) {
+            if ($res && $row = $res->fetch_assoc()) {
                 return $row;
             }
         } else {

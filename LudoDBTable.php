@@ -22,7 +22,7 @@ abstract class LudoDBTable extends LudoDBObject
         }
     }
 
-    public function populate()
+    private function populate()
     {
         $this->constructorValues = $this->getValidQueryParams($this->constructorValues);
         $data = $this->db->one($this->getSQL());
@@ -102,7 +102,7 @@ abstract class LudoDBTable extends LudoDBObject
         if ($this->configParser()->isExternalColumn($column)) {
             $this->setExternalValue($column, $value);
         } else {
-            if (is_string($value)) $value = mysql_real_escape_string($value);
+            $value = $this->db->escapeString($value);
             if (!isset($value)) $value = LudoDB::DELETED;
             if (!isset($this->updates)) $this->updates = array();
             $this->updates[$column] = $value;
@@ -361,6 +361,49 @@ abstract class LudoDBTable extends LudoDBObject
         }
 
         return null;
+    }
+
+    private $whereEqualsArray = null;
+
+    public function where($column){
+        if($this->configParser()->canBePopulatedBy($column)){
+            $this->createWhereEqualsArray();
+            $this->whereEqualsArray['where'][] = $column;
+        }
+        return $this;
+    }
+
+    public function equals($value){
+        $this->createWhereEqualsArray();
+        $index = count($this->whereEqualsArray['equals']);
+        if(isset($this->whereEqualsArray['where'][$index])){
+            $this->whereEqualsArray['equals'][] = $value;
+        }
+        return $this;
+    }
+
+    private function createWhereEqualsArray(){
+        if(!isset($this->whereEqualsArray)){
+            $this->whereEqualsArray = array(
+                'where' => array(),
+                'equals' => array()
+            );
+        }
+    }
+
+    /**
+     * Populate an object dynamically, example
+     * $pump = new WaterPump();
+     * $pump->where('category')->equals('10)->where('brand')->equals('Toshiba')->create();
+     *
+     * @return LudoDBTable
+     */
+    public function create(){
+        $this->configParser()->setConstructorParams($this->whereEqualsArray['where']);
+        $this->constructorValues = $this->whereEqualsArray['equals'];
+        $this->populate();
+        $this->whereEqualsArray = null;
+        return $this;
     }
 
 }

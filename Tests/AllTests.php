@@ -15,7 +15,7 @@ class AllTests
 
         $suite = new PHPUnit_Framework_TestSuite();
         $suite->setName('AllTests');
-        $suite->addTestSuite("DBTest");
+        $suite->addTestSuite("LudoDBTableTests");
         $suite->addTestSuite("CollectionTest");
         $suite->addTestSuite("SQLTest");
         $suite->addTestSuite("JSONTest");
@@ -23,6 +23,7 @@ class AllTests
         $suite->addTestSuite("ConfigParserTestJSON");
         $suite->addTestSuite("AccessorTest");
         $suite->addTestSuite("MysqlTests");
+        $suite->addTestSuite("ObjectCreatorTest");
         return $suite;
     }
 }

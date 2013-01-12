@@ -1,0 +1,24 @@
+{
+    "table": "Brand",
+    "columns": {
+        "id": "int auto_increment not null primary key",
+        "brand_name": {
+            "db": "varchar(128)",
+            "access": "rw"
+        },
+        "category": {
+            "db": "int",
+            "access": "rw",
+            "canConstructBy": true
+        },
+        "price": {
+            "db": "int",
+            "access": "rw",
+            "canConstructBy": true
+        },
+        "description": {
+            "db": "varchar(512)",
+            "access": "rw"
+        }
+    }
+}
