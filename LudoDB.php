@@ -7,7 +7,7 @@
  */
 class LudoDB
 {
-    private $debug = true;
+    private $debug = false;
     private static $mysqli;
     const DELETED = '__DELETED__';
     private static $instance;
