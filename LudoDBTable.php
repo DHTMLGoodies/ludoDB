@@ -161,15 +161,6 @@ abstract class LudoDBTable extends LudoDBObject
         return $this->updates;
     }
 
-    private function getUpdatesForSql()
-    {
-        $updates = array();
-        foreach ($this->updates as $key => $value) {
-            $updates[] = $key . "=" . ($value === LudoDB::DELETED ? 'NULL' : "'" . $value . "'");
-        }
-        return implode(",", $updates);
-    }
-
     private function insert()
     {
         if ($this->isValid()) {
@@ -352,7 +343,7 @@ abstract class LudoDBTable extends LudoDBObject
             $this->db->log($name);
         }
 
-        return null;
+        throw new Exception("Invalid method call");
     }
 
     private $whereEqualsArray = null;

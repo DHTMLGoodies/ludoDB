@@ -1,0 +1,18 @@
+{
+    "table": "Test_Timer",
+    "columns":{
+        "id": "int auto_increment not null primary key",
+        "test_name": {
+            "db": "varchar(256)",
+            "access": "rw"
+        },
+        "test_time": {
+            "db": "double",
+            "access": "rw"
+        },
+        "test_date": {
+            "db": "datetime",
+            "access" : "rw"
+        }
+    }
+}

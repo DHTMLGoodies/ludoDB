@@ -14,6 +14,7 @@ class TestBase extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         ini_set('display_errors', 'on');
+        date_default_timezone_set('Europe/Berlin');
         $this->clearLog();
         if (!$this->connected) $this->connect();
         $this->dropTable();
@@ -56,6 +57,7 @@ class TestBase extends PHPUnit_Framework_TestCase
 
     public function log($sql)
     {
+        if(is_array($sql))$sql = json_encode($sql);
         $fh = fopen("sql.txt", "a+");
         fwrite($fh, $sql . "\n");
         fclose($fh);

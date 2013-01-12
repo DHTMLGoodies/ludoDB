@@ -25,6 +25,7 @@ class AllTests
         $suite->addTestSuite("MysqlTests");
         $suite->addTestSuite("ObjectCreatorTest");
         $suite->addTestSuite("ColumnAliasTest");
+        $suite->addTestSuite("PerformanceTest");
         return $suite;
     }
 }

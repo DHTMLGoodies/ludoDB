@@ -7,7 +7,7 @@
  */
 class LudoDB
 {
-    private $debug = false;
+    private $debug = true;
     private static $mysqli;
     const DELETED = '__DELETED__';
     private static $instance;
@@ -138,7 +138,6 @@ class LudoDB
      */
     public function countRows($sql)
     {
-        if ($this->debug) $this->log($sql);
         if (self::$mysqli) {
             $res = $this->query($sql);
             return ($res) ? $res->num_rows : 0;

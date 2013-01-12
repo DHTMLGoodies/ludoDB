@@ -37,6 +37,7 @@ spl_autoload_register(
                 'manager' => '/Tests/classes/Manager.php',
                 'mysqltests' => '/Tests/MysqlTests.php',
                 'objectcreatortest' => '/Tests/ObjectCreatorTest.php',
+                'performancetest' => '/Tests/PerformanceTest.php',
                 'person' => '/Tests/classes/Person.php',
                 'personforconfigparser' => '/Tests/classes/PersonForConfigParser.php',
                 'phone' => '/Tests/classes/Phone.php',
@@ -45,7 +46,8 @@ spl_autoload_register(
                 'sqltest' => '/Tests/SQLTest.php',
                 'testbase' => '/Tests/TestBase.php',
                 'testgame' => '/Tests/classes/TestGame.php',
-                'testtable' => '/Tests/classes/TestTable.php'
+                'testtable' => '/Tests/classes/TestTable.php',
+                'testtimer' => '/Tests/classes/TestTimer.php'
             );
         }
         $cn = strtolower($class);
