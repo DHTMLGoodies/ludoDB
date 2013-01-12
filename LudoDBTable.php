@@ -22,7 +22,7 @@ abstract class LudoDBTable extends LudoDBObject
         }
     }
 
-    private function populate()
+    protected function populate()
     {
         $this->constructorValues = $this->getValidQueryParams($this->constructorValues);
         $data = $this->db->one($this->getSQL());
@@ -225,7 +225,6 @@ abstract class LudoDBTable extends LudoDBObject
     {
         $sql = new LudoSQL($this);
         $this->db->query($sql->getCreateTableSql());
-
         $this->createIndexes();
         $this->insertDefaultData();
     }

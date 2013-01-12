@@ -342,6 +342,9 @@ class LudoDBConfigParser
     public function canBePopulatedBy($column){
         if($column == $this->getIdField())return true;
         $col = $this->getColumn($column);
+        if(isset($this->config['constructorParams']) && in_array($column, $this->config['constructorParams'])){
+            return true;
+        }
         return is_array($col) && isset($col['canConstructBy']) ? $col['canConstructBy'] : false;
     }
 }

@@ -7,7 +7,7 @@
  */
 class LudoDB
 {
-    private $debug = false;
+    private $debug = true;
     private static $mysqli;
     const DELETED = '__DELETED__';
     private static $instance;
@@ -85,6 +85,7 @@ class LudoDB
 
     public function escapeString($string){
         if(is_string($string)){
+            $string = stripslashes($string);
             if(self::$mysqli)return self::$conn->escape_string($string);
             return mysql_real_escape_string($string);
         }
@@ -99,7 +100,11 @@ class LudoDB
     {
         if ($this->debug) $this->log($sql);
         if (self::$mysqli) {
-            return self::$conn->query($sql);
+            if($res = self::$conn->query($sql)){
+                return $res;
+            }
+            die(self::$conn->error);
+
         }
         $res = mysql_query($sql) or die(mysql_error() . "\nSQL:" . $sql);
         return $res;
@@ -137,7 +142,7 @@ class LudoDB
         if ($this->debug) $this->log($sql);
         if (self::$mysqli) {
             $res = $this->query($sql);
-            return $res->num_rows;
+            return ($res) ? $res->num_rows : 0;
         }
         return mysql_num_rows($this->query($sql));
     }
