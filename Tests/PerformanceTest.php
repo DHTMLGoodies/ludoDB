@@ -39,7 +39,6 @@ class PerformanceTest extends TestBase
         $time->setTestName("TEST: ". $test);
         $time->setTestTime($elapsed);
         $time->setTestDate(date("Y-m-d H:i:s"));
-        $this->log($time->getUncommitted());
         $time->commit();
 
     }
