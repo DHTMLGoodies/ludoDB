@@ -14,6 +14,7 @@ class LudoDBObject
     private static $fileLocation;
     protected $JSONConfig = false;
     private $JSONRead = false;
+    private $sql_handler;
 
     public function __construct()
     {
@@ -23,6 +24,14 @@ class LudoDBObject
         }
         $this->onConstruct();
     }
+
+    protected function sqlHandler(){
+        if(!isset($this->sql_handler)){
+            $this->sql_handler = new LudoSQL($this);
+        }
+        return $this->sql_handler;
+    }
+
 
     protected function getValidConstructorValues($values){
         foreach($values as &$value){
@@ -92,5 +101,13 @@ class LudoDBObject
 
     public static function clearParsers(){
         self::$configParsers = array();
+    }
+
+    public function getUncommitted(){
+        return array();
+    }
+
+    public function getId(){
+
     }
 }

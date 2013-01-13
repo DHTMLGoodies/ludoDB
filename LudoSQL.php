@@ -8,12 +8,15 @@ class LudoSQL
 {
     private $config;
     private $constructorValues;
+    private $obj;
+    const DELETED = '__DELETED__';
     /**
      * @var LudoDBObject
      */
     private $configParser;
 
     public function __construct(LudoDBObject $obj){
+        $this->obj = $obj;
         $this->configParser = $obj->configParser();
         $this->config = $obj->getConfig();
         $this->constructorValues = $obj->getConstructorValues();
@@ -117,5 +120,33 @@ class LudoSQL
         }
         $sql.=implode(" and ", $where);
         return $sql;
+    }
+
+    public function getInsertSQL(){
+        $table = $this->obj->configParser()->getTableName();
+        $data = $this->obj->getUncommitted();
+        if (!isset($data)) $data = array(
+            $this->obj->configParser()->getIdField() => self::DELETED
+        );
+
+        $sql = "insert into " . $table."(" . implode(",", array_keys($data)) . ")";
+        $sql .= "values('" . implode("','", array_values($data)) . "')";
+        $sql = str_replace("'". self::DELETED."'", "null", $sql);
+
+        return $sql;
+    }
+
+    public function getUpdateSql(){
+        return "update " . $this->obj->configParser()->getTableName() . " set " . $this->getUpdatesForSql($this->obj->getUncommitted()) . " where " . $this->obj->configParser()->getIdField() . " = '" . $this->obj->getId() . "'";
+
+    }
+
+    private function getUpdatesForSql($updates)
+    {
+        $ret = array();
+        foreach ($updates as $key => $value) {
+            $ret[] = $key . "=" . ($value === self::DELETED ? 'NULL' : "'" . $value . "'");
+        }
+        return implode(",", $ret);
     }
 }

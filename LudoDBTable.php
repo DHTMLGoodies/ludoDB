@@ -15,6 +15,7 @@ abstract class LudoDBTable extends LudoDBObject
     private $updates;
     private $externalClasses = array();
 
+
     protected function onConstruct()
     {
         if (isset($this->constructorValues)) {
@@ -25,7 +26,7 @@ abstract class LudoDBTable extends LudoDBObject
     protected function populate()
     {
         $this->constructorValues = $this->getValidQueryParams($this->constructorValues);
-        $data = $this->db->one($this->getSQL());
+        $data = $this->db->one($this->sqlHandler()->getSql());
         if (isset($data)) {
             $this->populateWith($data);
             $this->setId($this->getValue($this->configParser()->getIdField()));
@@ -52,6 +53,7 @@ abstract class LudoDBTable extends LudoDBObject
         return $sql->getSql();
     }
 
+
     private function populateWith($data)
     {
         foreach ($data as $key => $value) {
@@ -65,7 +67,7 @@ abstract class LudoDBTable extends LudoDBObject
             return $this->getExternalValue($column);
         }
         if (isset($this->updates) && isset($this->updates[$column])) {
-            return $this->updates[$column] == LudoDB::DELETED ? null : $this->updates[$column];
+            return $this->updates[$column] == LudoSQL::DELETED ? null : $this->updates[$column];
         }
         return isset($this->data[$column]) ? $this->data[$column] : null;
     }
@@ -102,7 +104,7 @@ abstract class LudoDBTable extends LudoDBObject
             $this->setExternalValue($column, $value);
         } else {
             $value = $this->db->escapeString($value);
-            if (!isset($value)) $value = LudoDB::DELETED;
+            if (!isset($value)) $value = LudoSQL::DELETED;
             if (!isset($this->updates)) $this->updates = array();
             $this->updates[$column] = $value;
         }
@@ -131,7 +133,7 @@ abstract class LudoDBTable extends LudoDBObject
         }
         if(isset($this->updates)){
             foreach ($this->updates as $key => $value) {
-                $this->data[$key] = $value === LudoDB::DELETED ? null : $value;
+                $this->data[$key] = $value === LudoSQL::DELETED ? null : $value;
             }
         }
         foreach ($this->externalClasses as $class) {
@@ -152,7 +154,7 @@ abstract class LudoDBTable extends LudoDBObject
     {
         if ($this->isValid()) {
             $this->beforeUpdate();
-            $this->db->update($this);
+            $this->db->query($this->sqlHandler()->getUpdateSql());
         }
     }
 
@@ -164,7 +166,7 @@ abstract class LudoDBTable extends LudoDBObject
     {
         if ($this->isValid()) {
             $this->beforeInsert();
-            $this->db->insert($this);
+            $this->db->query($this->sqlHandler()->getInsertSQL());
             $this->setId($this->db->getInsertId());
         }
     }

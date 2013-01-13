@@ -9,7 +9,6 @@ class LudoDB
 {
     private $debug = false;
     private static $mysqli;
-    const DELETED = '__DELETED__';
     private static $instance;
 
     /**
@@ -195,53 +194,5 @@ class LudoDB
         $fh = fopen("sql.txt", "a+");
         fwrite($fh, $sql . "\n");
         fclose($fh);
-    }
-
-    public function insert(LudoDBTable $obj)
-    {
-        $table = $obj->configParser()->getTableName();
-        $data = $obj->getUncommitted();
-        if (!isset($data)) $data = array(
-            $obj->configParser()->getIdField() => self::DELETED
-        );
-
-        $this->mysql_insert($table, $data);
-
-    }
-
-    private function mysql_insert($table, $data)
-    {
-        $sql = "insert into " . $table."(" . implode(",", array_keys($data)) . ")";
-        $sql .= "values('" . implode("','", array_values($data)) . "')";
-        $sql = str_replace("'". self::DELETED."'", "null", $sql);
-        $this->query($sql);
-    }
-
-    public function update(LudoDBTable $obj)
-    {
-        if (self::$mysqli) {
-            $this->mysqli_update($obj);
-        } else {
-            $this->mysql_update($obj);
-        }
-    }
-
-    private function mysqli_update(LudoDBTable $obj)
-    {
-        return $this->mysql_update($obj);
-    }
-
-    private function mysql_update(LudoDBTable $obj)
-    {
-        return $this->query("update " . $obj->configParser()->getTableName() . " set " . $this->getUpdatesForSql($obj->getUncommitted()) . " where " . $obj->configParser()->getIdField() . " = '" . $obj->getId() . "'");
-    }
-
-    private function getUpdatesForSql($updates)
-    {
-        $ret = array();
-        foreach ($updates as $key => $value) {
-            $ret[] = $key . "=" . ($value === self::DELETED ? 'NULL' : "'" . $value . "'");
-        }
-        return implode(",", $ret);
     }
 }

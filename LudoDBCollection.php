@@ -15,12 +15,6 @@ abstract class LudoDBCollection extends LudoDBIterator
 
     protected $config;
 
-    protected function getSql()
-    {
-        $sql = new LudoSQL($this);
-        return $sql->getSql();
-    }
-
     public function deleteRecords(){
         if(isset($this->constructorValues)){
             $constructorParams = $this->configParser()->getConstructorParams();

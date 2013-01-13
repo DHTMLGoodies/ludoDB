@@ -63,7 +63,7 @@ abstract class LudoDBIterator extends LudoDBObject implements Iterator
     }
 
     private function load(){
-        $this->dbResource = $this->db->query($this->getSql());
+        $this->dbResource = $this->db->query($this->sqlHandler()->getSql());
         $this->loaded = true;
         $this->next();
     }
@@ -80,6 +80,4 @@ abstract class LudoDBIterator extends LudoDBObject implements Iterator
         }
         return $ret;
     }
-
-    protected abstract function getSql();
 }

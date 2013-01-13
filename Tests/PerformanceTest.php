@@ -18,8 +18,6 @@ class PerformanceTest extends TestBase
         $person->deleteTableData();
     }
 
-
-
     private function getTime(){
         list($usec, $sec) = explode(" ", microtime());
         return ((float)$usec + (float)$sec);
@@ -34,13 +32,11 @@ class PerformanceTest extends TestBase
     private function logTime($test, $elapsed){
 
         $time = new TestTimer();
-        $time->drop();
         if(!$time->exists())$time->createTable();
         $time->setTestName("TEST: ". $test);
         $time->setTestTime($elapsed);
         $time->setTestDate(date("Y-m-d H:i:s"));
         $time->commit();
-
     }
 
     /**
@@ -60,6 +56,5 @@ class PerformanceTest extends TestBase
 
         // then
         $this->assertLessThan(.5, $time);
-
     }
 }
