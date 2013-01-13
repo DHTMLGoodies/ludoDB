@@ -210,8 +210,7 @@ abstract class LudoDBTable extends LudoDBObject
      */
     public function createTable()
     {
-        $sql = new LudoSQL($this);
-        $this->db->query($sql->getCreateTableSql());
+        $this->db->query($this->sqlHandler()->getCreateTableSql());
         $this->createIndexes();
         $this->insertDefaultData();
     }
