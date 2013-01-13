@@ -26,6 +26,7 @@ class AllTests
         $suite->addTestSuite("ObjectCreatorTest");
         $suite->addTestSuite("ColumnAliasTest");
         $suite->addTestSuite("PerformanceTest");
+        $suite->addTestSuite("RequestHandlerTest");
         return $suite;
     }
 }
