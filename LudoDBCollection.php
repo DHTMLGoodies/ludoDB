@@ -21,4 +21,8 @@ abstract class LudoDBCollection extends LudoDBIterator
             $this->db->query("delete from ". $this->configParser()->getTableName()." where ". $constructorParams[0]."='". $this->constructorValues[0]."'");
         }
     }
+
+    protected function getConfigParserInstance(){
+        return new LudoDBCollectionConfigParser($this);
+    }
 }

@@ -8,10 +8,11 @@
  */
 class LudoDBConfigParser
 {
-    private $config;
+    protected $config;
     private static $columnMappingCache = array();
     private $customConstructorParams;
     private $aliasMapping = array();
+
 
     public function __construct(LudoDBObject $obj)
     {
@@ -53,7 +54,7 @@ class LudoDBConfigParser
         if (!is_array($config1) or !is_array($config2)) {
             return $config2;
         }
-        foreach ($config2 AS $sKey2 => $sValue2) {
+        foreach ($config2 as $sKey2 => $sValue2) {
             $config1[$sKey2] = $this->getMergedConfigs(@$config1[$sKey2], $sValue2);
         }
         return $config1;
@@ -147,14 +148,14 @@ class LudoDBConfigParser
 
     public function getGetMethod($column)
     {
-        $column = $this->getActualColName($column);
+        $column = $this->getInternalColName($column);
         $method = $this->getColumnProperty($column, 'get');
         return isset($method) ? $method : 'getValues';
     }
 
     public function foreignKeyFor($column)
     {
-        $column = $this->getActualColName($column);
+        $column = $this->getInternalColName($column);
         return $this->getColumnProperty($column, 'fk');
     }
 
@@ -224,11 +225,11 @@ class LudoDBConfigParser
 
     public function getColumn($column)
     {
-        $column = $this->getActualColName($column);
+        $column = $this->getInternalColName($column);
         return isset($this->config['columns'][$column]) ? $this->config['columns'][$column] : null;
     }
 
-    private function getActualColName($column)
+    public function getInternalColName($column)
     {
         return (isset($this->aliasMapping[$column])) ? $this->aliasMapping[$column] : $column;
     }
@@ -330,56 +331,6 @@ class LudoDBConfigParser
         if (isset($className)) {
             return new $className;
 
-        }
-        return null;
-    }
-
-    public function getColumnType($column)
-    {
-        $column = $this->getActualColName($column);
-        if (isset($this->config['columns'][$column])) {
-            $col = $this->config['columns'][$column];
-            return is_string($col) ? $col : $col['db'];
-        }
-        return null;
-    }
-
-    public function getTypesForPreparedSQL($columns)
-    {
-        $ret = array();
-        foreach ($columns as $column) {
-            $ret[$column] = $this->getTypeForPreparedSQL($column);
-        }
-        return $ret;
-    }
-
-
-    public function getTypeForPreparedSQL($column)
-    {
-        $type = $this->getColumnType($column);
-        if (isset($type)) {
-            $tokens = preg_split("/[^a-z]/si", $type);
-            $type = strtolower($tokens[0]);
-
-            switch ($type) {
-                case 'varchar':
-                case 'char':
-                case 'text':
-                case 'mediumtext':
-                    return 's';
-                case 'shortint':
-                case 'mediumint':
-                case 'longint':
-                case 'int':
-                    return 'i';
-                case 'double':
-                case 'float':
-                    return 'd';
-                case 'blob':
-                    return 'b';
-                default:
-                    return 's';
-            }
         }
         return null;
     }

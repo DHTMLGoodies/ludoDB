@@ -10,11 +10,12 @@ class LudoDBObject
     protected $db;
     protected $config = array();
     protected $constructorValues;
-    private static $configParsers = array();
+    protected static $configParsers = array();
     private static $fileLocation;
     protected $JSONConfig = false;
     private $JSONRead = false;
     private $sql_handler;
+
 
     public function __construct()
     {
@@ -92,11 +93,22 @@ class LudoDBObject
      */
     public function configParser()
     {
-        $key = get_class($this);
+        $key = $this->getConfigParserKey();
         if (!isset(self::$configParsers[$key])) {
-            self::$configParsers[$key] = new LudoDBConfigParser($this);
+            self::$configParsers[$key] = $this->getConfigParserInstance();
         }
         return self::$configParsers[$key];
+    }
+
+    protected function getConfigParserInstance(){
+        return new LudoDBConfigParser($this);
+    }
+    private $configParserKey;
+    protected function getConfigParserKey(){
+        if(!isset($this->configParserKey)){
+            $this->configParserKey = get_class($this);
+        }
+        return $this->configParserKey;
     }
 
     public static function clearParsers(){
@@ -109,5 +121,14 @@ class LudoDBObject
 
     public function getId(){
 
+    }
+
+    protected function asJSON($data){
+        if(LudoDB::isLoggingEnabled()){
+            $data['__log'] = array(
+                'time' => LudoDB::getElapsed()
+            );
+        }
+        return json_encode($data);
     }
 }

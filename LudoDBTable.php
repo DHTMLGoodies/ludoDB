@@ -106,7 +106,7 @@ abstract class LudoDBTable extends LudoDBObject
             $value = $this->db->escapeString($value);
             if (!isset($value)) $value = LudoSQL::DELETED;
             if (!isset($this->updates)) $this->updates = array();
-            $this->updates[$column] = $value;
+            $this->updates[$this->configParser()->getInternalColName($column)] = $value;
         }
         return null;
     }
@@ -284,7 +284,7 @@ abstract class LudoDBTable extends LudoDBObject
 
     public function __toString()
     {
-        return json_encode($this->getValues());
+        return $this->asJSON($this->getValues());
     }
 
     protected function getValues()
@@ -333,16 +333,16 @@ abstract class LudoDBTable extends LudoDBObject
             if(isset($col) && $this->configParser()->canWriteTo($col)){
                 return $this->setValue($col, $arguments[0]);
             }
-            $this->db->log("Invalid set method call " . $name."(".$col.")");
         }
         if(substr($name,0,3) === 'get'){
             $col = $this->configParser()->getColumnByMethod($name);
             if(isset($col) && $this->configParser()->canReadFrom($col)){
                 return $this->getValue($col);
             }
-        }
 
-        throw new Exception("Invalid method call");
+        }
+        throw new Exception("Invalid method call ".$name);
+
     }
 
     private $whereEqualsArray = null;
@@ -398,5 +398,4 @@ abstract class LudoDBTable extends LudoDBObject
         }
         return $valuesSet;
     }
-
 }

@@ -7,6 +7,7 @@
 class CarCollection extends LudoDBCollection
 {
     protected $config = array(
+        'model' => 'Car',
         'idField' => 'id',
         'table' => 'car',
         'columns' => array('brand','model'),

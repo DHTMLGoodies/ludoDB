@@ -8,7 +8,7 @@
 class CarProperties extends LudoDBCollection
 {
     protected $config = array(
-        'table' => 'carProperty',
+        'model' => 'CarProperty',
         'columns' => array('property','propertyValue'),
         'constructorParams' => array('car_id')
     );

@@ -10,7 +10,8 @@ class LudoDB
     private $debug = false;
     private static $mysqli;
     private static $instance;
-
+    private static $loggingEnabled = false;
+    private static $startTime;
     /**
      * @var mysqli
      */
@@ -18,6 +19,9 @@ class LudoDB
 
     public function __construct($useMysqlI = true)
     {
+        if(self::$loggingEnabled){
+            self::$startTime = self::getTime();
+        }
         if (!isset(self::$mysqli)) {
             if (!$useMysqlI) self::$mysqli = false;
             else self::$mysqli = class_exists("mysqli");
@@ -25,6 +29,24 @@ class LudoDB
         if (!isset(self::$conn)) {
             $this->connect();
         }
+    }
+
+    public static function enableLogging(){
+        self::$loggingEnabled = true;
+    }
+
+    public static function isLoggingEnabled(){
+        return self::$loggingEnabled;
+    }
+
+    public  static function getElapsed(){
+        return self::getTime() - self::$startTime;
+    }
+
+    private static function getTime()
+    {
+        list($usec, $sec) = explode(" ", microtime());
+        return ((float)$usec + (float)$sec);
     }
 
     public static function getInstance($useMysqlI = true)

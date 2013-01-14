@@ -12,17 +12,27 @@ class LudoRequestHandler
     }
 
     private function handle($request){
-        $cl = $this->getClassName($request);
+        $cl = $this->getClassForHandler($request);
         if(isset($cl)){
-            $obj = new $cl;
-            $obj->setValues($request);
-            $obj->commit();
+            $cl->setValues($request);
+            $cl->commit();
         }
     }
 
     /**
      * @param $request
      * @return LudoDBObject|null
+     */
+
+    private function getClassForHandler($request){
+        $className = $this->getClassName($request);
+        if(isset($className))return new $className;
+        return null;
+    }
+
+    /**
+     * @param $request
+     * @return string|null
      */
     private function getClassName($request){
         if(isset($request['model'])) return $request['model'];

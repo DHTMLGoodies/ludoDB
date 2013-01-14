@@ -114,6 +114,13 @@ class CollectionTest extends TestBase
         $this->assertEquals($expected, $properties);
     }
 
+    /**
+     * @test
+     */
+    public function shouldGetPublicNamesDefinedInModelInCollection(){
+
+    }
+
 
     private function addCarProperty($carId, $key, $value){
         $pr = new CarProperty();
