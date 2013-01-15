@@ -93,17 +93,13 @@ class LudoDBConfigParser
         return $this->getColumnProperty($column, 'class');
     }
 
-    private function getColumnProperty($column, $property)
+    private function getColumnProperty($name, $property)
     {
-        if ($ret = $this->getExternalClassProperty($column, $property)) {
+        if ($ret = $this->getExternalClassProperty($name, $property)) {
             return $ret;
         }
-        if (isset($this->config['columns'][$column])) {
-            return is_array($this->config['columns'][$column])
-                && isset($this->config['columns'][$column][$property]) ?
-                $this->config['columns'][$column][$property] : null;
-        }
-        return null;
+        $col = $this->getColumn($name);
+        return isset($col) && is_array($col) && isset($col[$property]) ? $col[$property] : null;
     }
 
     private function getExternalClassProperty($column, $property)
@@ -115,13 +111,10 @@ class LudoDBConfigParser
         return null;
     }
 
-    public function isExternalColumn($column)
+    public function isExternalColumn($name)
     {
-        if (isset($this->config['columns'][$column]) && is_array($this->config['columns'][$column])) {
-            if (isset($this->config['columns'][$column]['db'])) return false;
-            return true;
-        }
-        return false;
+        $col = $this->getColumn($name);
+        return isset($col) && is_array($col) && !isset($col['db']);
     }
 
     public function getIdField()
@@ -183,7 +176,6 @@ class LudoDBConfigParser
             }
         }
         return $ret;
-
     }
 
     public function getJoinsForSQL()

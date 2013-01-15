@@ -8,6 +8,7 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'accessortest' => '/Tests/AccessorTest.php',
+                'alltests' => '/Tests/AllTests.php',
                 'brand' => '/Tests/classes/Brand.php',
                 'car' => '/Tests/classes/Car.php',
                 'carcollection' => '/Tests/classes/CarCollection.php',
@@ -37,6 +38,7 @@ spl_autoload_register(
                 'manager' => '/Tests/classes/Manager.php',
                 'mysqltests' => '/Tests/MysqlTests.php',
                 'objectcreatortest' => '/Tests/ObjectCreatorTest.php',
+                'people' => '/Tests/classes/People.php',
                 'performancetest' => '/Tests/PerformanceTest.php',
                 'person' => '/Tests/classes/Person.php',
                 'personforconfigparser' => '/Tests/classes/PersonForConfigParser.php',

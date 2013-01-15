@@ -18,6 +18,10 @@ class CollectionTest extends TestBase
         $pr = new CarProperty();
         $pr->drop();
         $pr->createTable();
+
+        $p = new Person();
+        $p->drop();
+        $p->createTable();
     }
     /**
      * @test
@@ -118,7 +122,29 @@ class CollectionTest extends TestBase
      * @test
      */
     public function shouldGetPublicNamesDefinedInModelInCollection(){
+        // given
+        $persons = array(
+            array('firstname' => 'John', 'lastname' => 'Johnson', 'zip' => '4330','nick' => 'Mr J'),
+            array('firstname' => 'Jane', 'lastname' => 'Hansen', 'zip' => '4330', 'nick' => 'Ms J'),
+            array('firstname' => 'Mike', 'lastname' => 'Peterson', 'zip' => '4330'),
+            array('firstname' => 'Hannah', 'lastname' => 'Jensin', 'zip' => '4330'),
+        );
 
+        foreach($persons as $person){
+            $p = new Person();
+            $p->setValues($person);
+            $p->commit();
+        }
+
+        // when
+        $people = new People(4330);
+        $values = $people->getValues();
+        $john = $values[0];
+        // then
+        $this->assertEquals(4, count($values));
+        $this->assertArrayNotHasKey('nick_name', $john);
+        $this->assertArrayHasKey('nick', $john);
+        $this->assertEquals('Mr J', $john['nick']);
     }
 
 

@@ -24,7 +24,8 @@ class LudoDBCollectionConfigParser extends LudoDBConfigParser
     private function getModel(){
         if(isset($this->config['model'])){
             if(!isset($this->model)){
-                $this->model = new $this->config['model'];
+                $modelName = $this->config['model'];
+                $this->model = new $modelName;
             }
             return $this->model;
         }

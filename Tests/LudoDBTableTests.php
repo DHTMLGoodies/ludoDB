@@ -276,7 +276,6 @@ class LudoDBTableTests extends TestBase
         // when
         $newPerson = new Person($person->getId());
 
-
         // then
         $this->assertNotNull($secondId);
         $this->assertNull($person->getUncommitted());

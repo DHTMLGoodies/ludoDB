@@ -15,7 +15,6 @@ abstract class LudoDBTable extends LudoDBObject
     private $updates;
     private $externalClasses = array();
 
-
     protected function onConstruct()
     {
         if (isset($this->constructorValues)) {
@@ -46,13 +45,11 @@ abstract class LudoDBTable extends LudoDBObject
         return $value;
     }
 
-
     private function getSQL()
     {
         $sql = new LudoSQL($this);
         return $sql->getSql();
     }
-
 
     private function populateWith($data)
     {

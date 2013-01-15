@@ -42,9 +42,9 @@ class PerformanceTest extends TestBase
     /**
      * @test
      */
-    public function shouldCreateRecordsInAcceptableTime(){
+    public function shouldCreate500RecordsInAcceptableTime(){
         // given
-        for($i=0;$i<100;$i++){
+        for($i=0;$i<500;$i++){
             $person = new Person();
             $person->setFirstname('John');
             $person->setLastname('Wayne');
@@ -52,9 +52,10 @@ class PerformanceTest extends TestBase
             $person->commit();
         }
 
+        // when
         $time = $this->getElapsed(__FUNCTION__);
 
         // then
-        $this->assertLessThan(.5, $time);
+        $this->assertLessThan(2.5, $time);
     }
 }
