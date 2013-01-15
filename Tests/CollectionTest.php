@@ -61,7 +61,7 @@ class CollectionTest extends TestBase
         // given
         $c = new CarCollection('Audi');
         // when
-        $cars = $c->deleteRecords();
+        $c->deleteRecords();
         $c = new CarCollection('Audi');
         $cars = $c->getValues();
         // then

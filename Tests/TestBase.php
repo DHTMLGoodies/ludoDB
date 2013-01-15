@@ -20,6 +20,14 @@ class TestBase extends PHPUnit_Framework_TestCase
         $this->dropTable();
         $tbl = new TestTable();
         $tbl->createTable();
+
+        $p = new Person();
+        $p->drop();
+        $p->createTable();
+
+        $p = new Phone();
+        $p->drop();
+        $p->createTable();
     }
 
     private function connect()

@@ -7,17 +7,7 @@
  */
 class CarProperty extends LudoDBTable
 {
-    protected $config = array(
-        'idField' => 'id',
-        'table' => 'CarProperty',
-        'constructorParams' => 'id',
-        'columns' => array(
-            'car_id' => 'int',
-            'property' => 'varchar(32)',
-            'propertyValue' => 'varchar(255)'
-        ),
-        'indexes' => array('car_id')
-    );
+    protected $JSONConfig = true;
 
     public function setCarId($id){
         $this->setValue('car_id', $id);

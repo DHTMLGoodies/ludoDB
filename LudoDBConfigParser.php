@@ -117,7 +117,6 @@ class LudoDBConfigParser
 
     public function isExternalColumn($column)
     {
-
         if (isset($this->config['columns'][$column]) && is_array($this->config['columns'][$column])) {
             if (isset($this->config['columns'][$column]['db'])) return false;
             return true;
@@ -169,7 +168,7 @@ class LudoDBConfigParser
         return $this->getProperty('data');
     }
 
-    public function getJoins()
+    private function getJoins()
     {
         return $this->getProperty('join');
     }
@@ -302,22 +301,21 @@ class LudoDBConfigParser
         return isset(self::$columnMappingCache[$t][$methodName]) ? self::$columnMappingCache[$t][$methodName] : null;
     }
 
-    public function canWriteTo($column)
+    public function canWriteTo($name)
     {
-        $column = $this->getColumn($column);
-        if (isset($column) && isset($column['access'])) {
-            return strstr($column['access'], "w") ? true : false;
-        }
-        return false;
+        return $this->hasColumnAccess($name, 'w');
     }
 
     public function canReadFrom($name)
     {
         if($name === $this->getIdField())return true;
-        $column = $this->getColumn($name);
+        return $this->hasColumnAccess($name, 'r');
+    }
 
+    private function hasColumnAccess($name, $access){
+        $column = $this->getColumn($name);
         if (isset($column) && isset($column['access'])) {
-            return strstr($column['access'], "r") ? true : false;
+            return strstr($column['access'], $access) ? true : false;
         }
         return false;
     }
@@ -328,11 +326,7 @@ class LudoDBConfigParser
     private function getExtends()
     {
         $className = $this->getProperty('extends');
-        if (isset($className)) {
-            return new $className;
-
-        }
-        return null;
+        return isset($className) ? new $className : null;
     }
 
     public function canBePopulatedBy($column)

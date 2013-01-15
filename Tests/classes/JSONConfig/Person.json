@@ -20,6 +20,10 @@
             "db": "varchar(5)",
             "access": "rw"
         },
+        "nick_name": {
+            "db": "varchar(32)",
+            "alias": "nick"
+        },
         "phone": {
             "class": "PhoneCollection",
             "access": "r"

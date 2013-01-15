@@ -1,4 +1,5 @@
 {
 	"model": "Person",
-	"columns": ['']
+    "constructorParams": "zip",
+	"columns": ["firstname","lastname","nick_name"]
 }

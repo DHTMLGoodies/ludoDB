@@ -59,7 +59,6 @@ class LudoDB
 
     public static function disableMySqli()
     {
-
         if (isset(self::$mysqli) && self::$mysqli) {
             self::$mysqli = false;
             if (isset(self::$conn)) {
@@ -195,7 +194,6 @@ class LudoDB
      */
     public function getValue($sql)
     {
-        if ($this->debug) $this->log($sql);
         $result = $this->query($sql . " limit 1");
         if (self::$mysqli) {
             $row = $result->fetch_row();

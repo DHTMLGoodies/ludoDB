@@ -1,0 +1,19 @@
+{
+    "table": "CarProperty",
+    "idField": "id",
+    "columns": {
+        "car_id" : {
+            "db" : "int",
+            "access": "rw"
+        },
+        "property": {
+            "db": "varchar(32)",
+            "access": "rw"
+        },
+        "propertyValue": {
+            "db": "varchar(32)",
+            "access": "rw"
+        }
+    },
+    "indexes": ["car_id"]
+}
