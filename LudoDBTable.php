@@ -279,11 +279,6 @@ abstract class LudoDBTable extends LudoDBObject
         return isset($this->config['columns'][$column]);
     }
 
-    public function __toString()
-    {
-        return $this->asJSON($this->getValues());
-    }
-
     protected function getValues()
     {
         $columns = $this->configParser()->getColumns();

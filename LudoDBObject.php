@@ -93,7 +93,13 @@ class LudoDBObject
 
     }
 
-    protected function asJSON($data){
+    public function __toString()
+    {
+        return $this->asJSON();
+    }
+
+    protected function asJSON(){
+        $data = $this->getValues();
         if(LudoDB::isLoggingEnabled()){
             $data['__log'] = array(
                 'time' => LudoDB::getElapsed()
