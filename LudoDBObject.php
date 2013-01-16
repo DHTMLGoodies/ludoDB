@@ -53,11 +53,6 @@ class LudoDBObject
         return $this->constructorValues;
     }
 
-    public function getConfig()
-    {
-        return $this->config;
-    }
-
     public function commit()
     {
 
@@ -76,7 +71,7 @@ class LudoDBObject
     }
 
     protected function getConfigParserInstance(){
-        return new LudoDBConfigParser($this);
+        return new LudoDBConfigParser($this, $this->config);
     }
     private $configParserKey;
     protected function getConfigParserKey(){

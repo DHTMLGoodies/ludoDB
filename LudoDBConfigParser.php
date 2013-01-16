@@ -15,18 +15,18 @@ class LudoDBConfigParser
     private $obj;
     private static $fileLocation;
 
-    public function __construct(LudoDBObject $obj)
+    public function __construct(LudoDBObject $obj, array $config = array())
     {
         $this->obj = $obj;
-        $this->buildConfig($obj);
+        $this->buildConfig($config);
     }
 
     /**
      * @param LudoDBObject $obj
      */
-    private function buildConfig($obj)
+    private function buildConfig($config)
     {
-        $this->config = $this->getValidConfig($obj->getConfig());
+        $this->config = $this->getValidConfig($config);
         $parent = $this->getExtends();
         if (isset($parent)) {
             $this->config = $this->getMergedConfigs($parent->configParser()->getConfig(), $this->config);

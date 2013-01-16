@@ -13,7 +13,7 @@ abstract class LudoDBCollection extends LudoDBIterator
      */
     protected $constructorValues;
 
-    protected $config;
+    protected $config = array();
 
     public function deleteRecords(){
         if(isset($this->constructorValues)){
@@ -23,6 +23,6 @@ abstract class LudoDBCollection extends LudoDBIterator
     }
 
     protected function getConfigParserInstance(){
-        return new LudoDBCollectionConfigParser($this);
+        return new LudoDBCollectionConfigParser($this, $this->config);
     }
 }
