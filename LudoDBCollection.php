@@ -12,7 +12,6 @@ abstract class LudoDBCollection extends LudoDBIterator
      * is used in join with config['constructorParams']
      */
     protected $constructorValues;
-
     protected $config = array();
 
     public function deleteRecords(){
@@ -24,5 +23,24 @@ abstract class LudoDBCollection extends LudoDBIterator
 
     protected function getConfigParserInstance(){
         return new LudoDBCollectionConfigParser($this, $this->config);
+    }
+
+    public function getValues(){
+        $model = $this->configParser()->getModel();
+        if(isset($model)){
+
+            $ret = array();
+            foreach($this as $key=>$value){
+                if(isset($value)){
+                    $model->setValues($value);
+                    $ret[$key] = $model->getValues();
+                }
+            }
+            return $ret;
+
+
+        }else{
+            return parent::getValues();
+        }
     }
 }

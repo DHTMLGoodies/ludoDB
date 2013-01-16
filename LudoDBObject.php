@@ -5,7 +5,7 @@
  * Date: 20.12.12
  * Time: 14:31
  */
-class LudoDBObject
+abstract class LudoDBObject
 {
     protected $db;
     protected $config = array();
@@ -107,4 +107,6 @@ class LudoDBObject
         }
         return json_encode($data);
     }
+
+    abstract public function getValues();
 }

@@ -8,7 +8,7 @@
 class CarProperties extends LudoDBCollection
 {
     protected $config = array(
-        'model' => 'CarProperty',
+        'sql' => "select property,propertyValue from carProperty where car_id='?'",
         'columns' => array('property','propertyValue'),
         'constructorParams' => array('car_id')
     );

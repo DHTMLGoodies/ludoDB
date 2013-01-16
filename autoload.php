@@ -39,6 +39,7 @@ spl_autoload_register(
                 'mysqltests' => '/Tests/MysqlTests.php',
                 'objectcreatortest' => '/Tests/ObjectCreatorTest.php',
                 'people' => '/Tests/classes/People.php',
+                'peopleplain' => '/Tests/classes/PeoplePlain.php',
                 'performancetest' => '/Tests/PerformanceTest.php',
                 'person' => '/Tests/classes/Person.php',
                 'personforconfigparser' => '/Tests/classes/PersonForConfigParser.php',

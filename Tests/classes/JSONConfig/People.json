@@ -1,3 +1,4 @@
 {
-	"sql": "select firstname,lastname, nick_name as nick from person where zip='?' order by ID"
+    "model": "Person",
+	"sql": "select firstname,lastname, nick_name from person where zip='?' order by ID"
 }

@@ -13,9 +13,13 @@ class PerformanceTest extends TestBase
 
     public function setUp(){
         parent::setUp();
-        $this->startTime = $this->getTime();
+        $this->startTimer();
         $person = new Person();
         $person->deleteTableData();
+    }
+
+    private function startTimer(){
+        $this->startTime = $this->getTime();
     }
 
     private function getTime(){
@@ -25,6 +29,7 @@ class PerformanceTest extends TestBase
 
     private function getElapsed($test){
         $ret = $this->getTime() - $this->startTime;
+        $ret = number_format($ret, 3);
         $this->logTime($test, $ret);
         return $ret;
     }
@@ -57,5 +62,50 @@ class PerformanceTest extends TestBase
 
         // then
         $this->assertLessThan(2.5, $time);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetValuesInCollectionInAcceptableTime(){
+        // given
+        for($i=0;$i<500;$i++){
+            $person = new Person();
+            $person->setFirstname('John');
+            $person->setLastname('Wayne');
+            $person->setAddress('Somewhere');
+            $person->setZip(4330);
+            $person->commit();
+        }
+        $this->startTimer();
+        // when
+        $people = new PeoplePlain(4330);
+        $values = $people->getValues();
+        $time = $this->getElapsed(__FUNCTION__);
+        // then
+        $this->assertEquals(500, count($values));
+        $this->assertLessThan(.1, $time);
+    }
+    /**
+     * @test
+     */
+    public function shouldGetValuesInModelCollectionInAcceptableTime(){
+        // given
+        for($i=0;$i<500;$i++){
+            $person = new Person();
+            $person->setFirstname('John');
+            $person->setLastname('Wayne');
+            $person->setAddress('Somewhere');
+            $person->setZip(4330);
+            $person->commit();
+        }
+        $this->startTimer();
+        // when
+        $people = new People(4330);
+        $values = $people->getValues();
+        $time = $this->getElapsed(__FUNCTION__);
+        // then
+        $this->assertEquals(500, count($values));
+        $this->assertLessThan(.5, $time);
     }
 }
