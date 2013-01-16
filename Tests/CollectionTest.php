@@ -145,7 +145,7 @@ class CollectionTest extends TestBase
         $city = new City();
         $city->drop();
         $city->createTable();
-        
+
         $city->setZip(4330);
         $city->setCity('Aalgaard');
         $city->commit();

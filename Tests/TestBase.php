@@ -57,7 +57,7 @@ class TestBase extends PHPUnit_Framework_TestCase
     {
         if (!self::$logCleared) {
             self::$logCleared = true;
-            $fh = fopen("sql.txt", "w");
+            $fh = fopen("test-log.txt", "w");
             fwrite($fh, "\n");
             fclose($fh);
         }
@@ -66,7 +66,7 @@ class TestBase extends PHPUnit_Framework_TestCase
     public function log($sql)
     {
         if(is_array($sql))$sql = json_encode($sql);
-        $fh = fopen("sql.txt", "a+");
+        $fh = fopen("test-log.txt", "a+");
         fwrite($fh, $sql . "\n");
         fclose($fh);
     }
