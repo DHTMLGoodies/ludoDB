@@ -11,11 +11,8 @@ class LudoDBObject
     protected $config = array();
     protected $constructorValues;
     protected static $configParsers = array();
-    private static $fileLocation;
     protected $JSONConfig = false;
-    private $JSONRead = false;
     private $sql_handler;
-
 
     public function __construct()
     {
@@ -46,27 +43,9 @@ class LudoDBObject
 
     }
 
-    protected function getConfigFromFile(){
-        $location = $this->getPathToJSONConfig();
-        if(file_exists($location)){
-            $content = file_get_contents($location);
-            return JSON_decode($content, true);
-        }
-        return null;
-    }
 
-    protected function getPathToJSONConfig()
-    {
-        return $this->getFileLocation() . "/JSONConfig/" . get_class($this) . ".json";
-    }
-
-    protected function getFileLocation()
-    {
-        if (!isset(self::$fileLocation)) {
-            $obj = new ReflectionClass($this);
-            self::$fileLocation = dirname($obj->getFilename());
-        }
-        return self::$fileLocation;
+    public function hasConfigInExternalFile(){
+        return $this->JSONConfig;
     }
 
     public function getConstructorValues()
@@ -76,10 +55,6 @@ class LudoDBObject
 
     public function getConfig()
     {
-        if($this->JSONConfig && !$this->JSONRead){
-            $this->JSONRead = true;
-            $this->config = $this->getConfigFromFile();
-        }
         return $this->config;
     }
 

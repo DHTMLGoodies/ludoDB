@@ -10,6 +10,7 @@ class LudoSQL
     private $constructorValues;
     private $obj;
     const DELETED = '__DELETED__';
+
     /**
      * @var LudoDBObject
      */
@@ -19,7 +20,7 @@ class LudoSQL
     {
         $this->obj = $obj;
         $this->configParser = $obj->configParser();
-        $this->config = $obj->getConfig();
+        $this->config = $obj->configParser()->getConfig();
         $this->constructorValues = $obj->getConstructorValues();
         $this->validate();
     }
@@ -32,8 +33,7 @@ class LudoSQL
     public function getSql()
     {
         if (isset($this->config['sql'])) {
-            $sql = str_replace("?","%s", $this->config['sql']);
-            return vsprintf($sql, $this->constructorValues);
+            return vsprintf($this->config['sql'], $this->constructorValues);
         } else {
             return $this->getCompiledSql();
         }

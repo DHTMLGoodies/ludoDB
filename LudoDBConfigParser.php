@@ -12,10 +12,12 @@ class LudoDBConfigParser
     private static $columnMappingCache = array();
     private $customConstructorParams;
     private $aliasMapping = array();
-
+    private $obj;
+    private static $fileLocation;
 
     public function __construct(LudoDBObject $obj)
     {
+        $this->obj = $obj;
         $this->buildConfig($obj);
     }
 
@@ -30,6 +32,29 @@ class LudoDBConfigParser
             $this->config = $this->getMergedConfigs($parent->configParser()->getConfig(), $this->config);
         }
         $this->mapColumnAliases();
+    }
+
+    private function getConfigFromFile(){
+        $location = $this->getPathToJSONConfig();
+        if(file_exists($location)){
+            $content = file_get_contents($location);
+            return JSON_decode($content, true);
+        }
+        return null;
+    }
+
+    private function getPathToJSONConfig()
+    {
+        return $this->getFileLocation() . "/JSONConfig/" . get_class($this->obj) . ".json";
+    }
+
+    protected function getFileLocation()
+    {
+        if (!isset(self::$fileLocation)) {
+            $obj = new ReflectionClass($this->obj);
+            self::$fileLocation = dirname($obj->getFilename());
+        }
+        return self::$fileLocation;
     }
 
     private function mapColumnAliases()
@@ -68,6 +93,12 @@ class LudoDBConfigParser
 
     private function getValidConfig($config)
     {
+        if($this->obj->hasConfigInExternalFile()){
+            $config = $this->getConfigFromFile();
+        }
+        if(isset($config['sql'])){
+            $config['sql'] = str_replace("?","%s", $config['sql']);
+        }
         if (!isset($config['constructorParams']) && isset($config['idField'])) {
             $config['constructorParams'] = array($config['idField']);
         }
