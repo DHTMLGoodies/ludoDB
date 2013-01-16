@@ -141,6 +141,7 @@ class CollectionTest extends TestBase
         $values = $people->getValues();
         $john = $values[0];
         // then
+        $this->log($john);
         $this->assertEquals(4, count($values));
         $this->assertArrayNotHasKey('nick_name', $john);
         $this->assertArrayHasKey('nick', $john);

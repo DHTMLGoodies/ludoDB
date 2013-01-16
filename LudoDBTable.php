@@ -279,6 +279,20 @@ abstract class LudoDBTable extends LudoDBObject
         return isset($this->config['columns'][$column]);
     }
 
+    public function getSomeValues($keys){
+        $ret = array();
+        foreach($keys as $key){
+            $col = $this->configParser()->getPublicColumnName($key);
+            $ret[$col] = $this->getValue($key);
+        }
+        return $ret;
+    }
+
+    public function clearValues(){
+        $this->data = array();
+        $this->updates = null;
+    }
+
     public function getValues()
     {
         $columns = $this->configParser()->getColumns();

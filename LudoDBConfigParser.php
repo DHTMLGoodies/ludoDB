@@ -34,9 +34,10 @@ class LudoDBConfigParser
         $this->mapColumnAliases();
     }
 
-    private function getConfigFromFile(){
+    private function getConfigFromFile()
+    {
         $location = $this->getPathToJSONConfig();
-        if(file_exists($location)){
+        if (file_exists($location)) {
             $content = file_get_contents($location);
             return JSON_decode($content, true);
         }
@@ -93,11 +94,11 @@ class LudoDBConfigParser
 
     private function getValidConfig($config)
     {
-        if($this->obj->hasConfigInExternalFile()){
+        if ($this->obj->hasConfigInExternalFile()) {
             $config = $this->getConfigFromFile();
         }
-        if(isset($config['sql'])){
-            $config['sql'] = str_replace("?","%s", $config['sql']);
+        if (isset($config['sql'])) {
+            $config['sql'] = str_replace("?", "%s", $config['sql']);
         }
         if (!isset($config['constructorParams']) && isset($config['idField'])) {
             $config['constructorParams'] = array($config['idField']);
@@ -240,7 +241,8 @@ class LudoDBConfigParser
         return $this->getProperty('columns');
     }
 
-    public function getPublicColumnName($name){
+    public function getPublicColumnName($name)
+    {
         $col = $this->config['columns'][$name];
         return is_array($col) && isset($col['alias']) ? $col['alias'] : $name;
     }
@@ -331,11 +333,12 @@ class LudoDBConfigParser
 
     public function canReadFrom($name)
     {
-        if($name === $this->getIdField())return true;
+        if ($name === $this->getIdField()) return true;
         return $this->hasColumnAccess($name, 'r');
     }
 
-    private function hasColumnAccess($name, $access){
+    private function hasColumnAccess($name, $access)
+    {
         $column = $this->getColumn($name);
         if (isset($column) && isset($column['access'])) {
             return strstr($column['access'], $access) ? true : false;

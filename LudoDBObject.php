@@ -59,7 +59,7 @@ abstract class LudoDBObject
     }
 
     /**
-     * @return LudoDBConfigParser
+     * @return LudoDBConfigParser|LudoDBCollectionConfigParser
      */
     public function configParser()
     {

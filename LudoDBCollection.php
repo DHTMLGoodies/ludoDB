@@ -28,17 +28,16 @@ abstract class LudoDBCollection extends LudoDBIterator
     public function getValues(){
         $model = $this->configParser()->getModel();
         if(isset($model)){
-
             $ret = array();
             foreach($this as $key=>$value){
+                if(!isset($columns))$columns = array_keys($value);
                 if(isset($value)){
+                    $model->clearValues();
                     $model->setValues($value);
-                    $ret[$key] = $model->getValues();
+                    $ret[$key] = $model->getSomeValues($columns);
                 }
             }
             return $ret;
-
-
         }else{
             return parent::getValues();
         }
