@@ -123,18 +123,7 @@ class CollectionTest extends TestBase
      */
     public function shouldGetPublicNamesDefinedInModelInCollection(){
         // given
-        $persons = array(
-            array('firstname' => 'John', 'lastname' => 'Johnson', 'zip' => '4330','nick' => 'Mr J'),
-            array('firstname' => 'Jane', 'lastname' => 'Hansen', 'zip' => '4330', 'nick' => 'Ms J'),
-            array('firstname' => 'Mike', 'lastname' => 'Peterson', 'zip' => '4330'),
-            array('firstname' => 'Hannah', 'lastname' => 'Jensin', 'zip' => '4330'),
-        );
-
-        foreach($persons as $person){
-            $p = new Person();
-            $p->setValues($person);
-            $p->commit();
-        }
+        $this->createPersons();
 
         // when
         $people = new People(4330);
@@ -148,6 +137,44 @@ class CollectionTest extends TestBase
         $this->assertEquals('Mr J', $john['nick']);
     }
 
+    /**
+     * @test
+     */
+    public function shouldGetValuesFromExternalTablesWhenUsingModel(){
+        // given
+        $city = new City();
+        $city->drop();
+        $city->createTable();
+        
+        $city->setZip(4330);
+        $city->setCity('Aalgaard');
+        $city->commit();
+
+        $this->createPersons();
+
+        // when
+        $people = new People(4330);
+        $values = $people->getValues();
+        $first = $values[0];
+        $this->log($first);
+
+        // then
+        $this->assertEquals('Aalgaard', $first['city']);
+    }
+
+    private function createPersons(){
+        $persons =  array(
+            array('firstname' => 'John', 'lastname' => 'Johnson', 'zip' => '4330','nick' => 'Mr J'),
+            array('firstname' => 'Jane', 'lastname' => 'Hansen', 'zip' => '4330', 'nick' => 'Ms J'),
+            array('firstname' => 'Mike', 'lastname' => 'Peterson', 'zip' => '4330'),
+            array('firstname' => 'Hannah', 'lastname' => 'Jensin', 'zip' => '4330'),
+        );
+        foreach($persons as $person){
+            $p = new Person();
+            $p->setValues($person);
+            $p->commit();
+        }
+    }
 
     private function addCarProperty($carId, $key, $value){
         $pr = new CarProperty();

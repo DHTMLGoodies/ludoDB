@@ -333,17 +333,27 @@ class LudoDBConfigParser
 
     public function canReadFrom($name)
     {
-        if ($name === $this->getIdField()) return true;
         return $this->hasColumnAccess($name, 'r');
     }
 
+    private $columnAccessCache = array();
+
     private function hasColumnAccess($name, $access)
     {
-        $column = $this->getColumn($name);
-        if (isset($column) && isset($column['access'])) {
-            return strstr($column['access'], $access) ? true : false;
+        $key = $name . "__" . $access;
+        if (!isset($this->columnAccessCache[$key])) {
+            if ($name === $this->getIdField()) {
+                $this->columnAccessCache[$key] = true;
+            }else{
+                $column = $this->getColumn($name);
+                if (isset($column) && isset($column['access'])) {
+                    $this->columnAccessCache[$key] = strstr($column['access'], $access) ? true : false;
+                }else{
+                    $this->columnAccessCache[$key] = false;
+                }
+            }
         }
-        return false;
+        return $this->columnAccessCache[$key];
     }
 
     /**

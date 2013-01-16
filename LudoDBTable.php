@@ -14,7 +14,7 @@ abstract class LudoDBTable extends LudoDBObject
     private $data = array();
     private $updates;
     private $externalClasses = array();
-
+    private $commitDisabled;
     protected function onConstruct()
     {
         if (isset($this->constructorValues)) {
@@ -116,8 +116,13 @@ abstract class LudoDBTable extends LudoDBObject
         }
     }
 
+    public function disableCommit(){
+        $this->commitDisabled = true;
+    }
+
     public function commit()
     {
+        if($this->commitDisabled)return null;
         if (!isset($this->updates)) {
             if ($this->getId() || !$this->configParser()->isIdAutoIncremented()) {
                 return null;

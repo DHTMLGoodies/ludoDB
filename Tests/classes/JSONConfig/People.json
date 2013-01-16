@@ -1,4 +1,5 @@
 {
     "model": "Person",
-	"sql": "select firstname,lastname, nick_name from person where zip='?' order by ID"
+    "sql": "select firstname, lastname, nick_name, p.zip,c.city from person p left join city c on c.zip = p.zip where p.zip='?'",
+    "columns": ["firstname", "lastname", "nick_name","zip", "city"]
 }
