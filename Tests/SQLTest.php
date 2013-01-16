@@ -28,7 +28,6 @@ class SQLTest extends TestBase
         $sql = $this->getSqlObject($config)->getCreateTableSql();
         // then
         $this->assertEquals($expected, $sql);
-
     }
 
     /**
@@ -207,6 +206,22 @@ class SQLTest extends TestBase
         $this->assertEquals($expected, $sql);
     }
 
+    /**
+     * @test
+     */
+    public function shouldBeAbleToHaveSQLDefinedInConfig(){
+        // given
+        $config = array(
+            'sql' => "select id,firstname,lastname from person where ID='?' and zip='?'"
+        );
+
+        // when
+        $sql = $this->getSqlObject($config, array(1,4330))->getSql();
+        $expectedSql = "select id,firstname,lastname from person where ID='1' and zip='4330'";
+        // then
+        $this->assertEquals($expectedSql, $sql);
+
+    }
 
 
     private function getSqlObject($config, $constructorParams = null)

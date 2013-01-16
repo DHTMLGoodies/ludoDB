@@ -22,7 +22,8 @@
         },
         "nick_name": {
             "db": "varchar(32)",
-            "alias": "nick"
+            "alias": "nick",
+            "access": "rw"
         },
         "phone": {
             "class": "PhoneCollection",

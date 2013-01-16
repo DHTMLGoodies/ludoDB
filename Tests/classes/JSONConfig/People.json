@@ -1,5 +1,3 @@
 {
-	"model": "Person",
-    "constructorParams": "zip",
-	"columns": ["firstname","lastname","nick_name"]
+	"sql": "select firstname,lastname, nick_name as nick from person where zip='?' order by ID"
 }
