@@ -15,6 +15,7 @@ abstract class LudoDBTable extends LudoDBObject
     private $updates;
     private $externalClasses = array();
     private $commitDisabled;
+
     protected function onConstruct()
     {
         if (isset($this->constructorValues)) {
@@ -24,7 +25,7 @@ abstract class LudoDBTable extends LudoDBObject
 
     protected function populate()
     {
-        $this->constructorValues = $this->getValidQueryParams($this->constructorValues);
+        $this->constructorValues = $this->getValidConstructByValues($this->constructorValues);
         $data = $this->db->one($this->sqlHandler()->getSql());
         if (isset($data)) {
             $this->populateWith($data);
@@ -32,16 +33,16 @@ abstract class LudoDBTable extends LudoDBObject
         }
     }
 
-    protected function getValidQueryParams($params)
+    private function getValidConstructByValues($params)
     {
         $paramNames = $this->configParser()->getConstructorParams();
         for($i=0,$count = count($params);$i<$count;$i++){
-            $params[$i] = $this->getValidQueryParam($paramNames[$i], $params[$i]);
+            $params[$i] = $this->getValidConstructByValue($paramNames[$i], $params[$i]);
         }
         return $params;
     }
 
-    protected function getValidQueryParam($key, $value){
+    protected function getValidConstructByValue($key, $value){
         return $value;
     }
 
@@ -279,11 +280,6 @@ abstract class LudoDBTable extends LudoDBObject
         return new $className;
     }
 
-    public function hasColumn($column)
-    {
-        return isset($this->config['columns'][$column]);
-    }
-
     public function getSomeValues($keys){
         $ret = array();
         foreach($keys as $key){
@@ -322,12 +318,6 @@ abstract class LudoDBTable extends LudoDBObject
         return $ret;
     }
 
-    public function JSONPopulate(array $jsonAsArray)
-    {
-        $this->setValues($jsonAsArray);
-        $this->commit();
-    }
-
     public function isValid()
     {
         return true;
@@ -347,7 +337,6 @@ abstract class LudoDBTable extends LudoDBObject
             }
         }
         throw new Exception("Invalid method call ".$name);
-
     }
 
     private $whereEqualsArray = null;

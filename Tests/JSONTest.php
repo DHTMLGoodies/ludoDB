@@ -51,7 +51,8 @@ class JSONTest extends TestBase
         // when
         $array['brand'] = 'BMW';
 
-        $car->JSONPopulate($array);
+        $car->setValues($array);
+        $car->commit();
 
         $newCar = new Car(1);
 
