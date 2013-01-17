@@ -333,11 +333,6 @@ abstract class LudoDBTable extends LudoDBObject
         return true;
     }
 
-    public function getColumn($column)
-    {
-        return $this->getExternalClassFor($column);
-    }
-
     public function __call($name, $arguments){
         if(substr($name,0,3) === 'set'){
             $col = $this->configParser()->getColumnByMethod($name);
@@ -350,7 +345,6 @@ abstract class LudoDBTable extends LudoDBObject
             if(isset($col) && $this->configParser()->canReadFrom($col)){
                 return $this->getValue($col);
             }
-
         }
         throw new Exception("Invalid method call ".$name);
 

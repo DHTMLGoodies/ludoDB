@@ -320,23 +320,6 @@ class LudoDBTableTests extends TestBase
 
         // then
         $this->assertEquals('Somewhere', $person->getCity());
-
-    }
-
-    /**
-     * @test
-     */
-    public function shouldBeAbleToGetReferenceToColumn(){
-        // given
-        $person = new Person();
-
-        // when
-        $col = $person->getColumn('phone');
-
-        // then
-        $this->assertEquals('PhoneCollection', get_class($col));
-
-
     }
 
     /**
