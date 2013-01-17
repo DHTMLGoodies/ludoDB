@@ -11,7 +11,7 @@ class PersonForConfigParser extends LudoDBTable
     protected $config = array(
         'table' => 'Person',
         'idField' => 'id',
-        'constructorParams' => 'id',
+        'constructBy' => 'id',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'firstname' => 'varchar(32)',

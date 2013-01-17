@@ -69,7 +69,7 @@ class LudoDBConfigParser
         }
     }
 
-    public function setConstructorParams($params)
+    public function setConstructBy($params)
     {
         if (!is_array($params)) $params = array($params);
         $this->customConstructorParams = $params;
@@ -100,11 +100,11 @@ class LudoDBConfigParser
         if (isset($config['sql'])) {
             $config['sql'] = str_replace("?", "%s", $config['sql']);
         }
-        if (!isset($config['constructorParams']) && isset($config['idField'])) {
-            $config['constructorParams'] = array($config['idField']);
+        if (!isset($config['constructBy']) && isset($config['idField'])) {
+            $config['constructBy'] = array($config['idField']);
         }
-        if (isset($config['constructorParams']) && !is_array($config['constructorParams'])) {
-            $config['constructorParams'] = array($config['constructorParams']);
+        if (isset($config['constructBy']) && !is_array($config['constructBy'])) {
+            $config['constructBy'] = array($config['constructBy']);
         }
         return $config;
     }
@@ -117,7 +117,7 @@ class LudoDBConfigParser
     public function getConstructorParams()
     {
         if (isset($this->customConstructorParams)) return $this->customConstructorParams;
-        return isset($this->config['constructorParams']) ? $this->config['constructorParams'] : null;
+        return isset($this->config['constructBy']) ? $this->config['constructBy'] : null;
     }
 
     public function externalClassNameFor($column)
@@ -369,7 +369,7 @@ class LudoDBConfigParser
     {
         if ($column == $this->getIdField()) return true;
         $col = $this->getColumn($column);
-        if (isset($this->config['constructorParams']) && in_array($column, $this->config['constructorParams'])) {
+        if (isset($this->config['constructBy']) && in_array($column, $this->config['constructBy'])) {
             return true;
         }
         return is_array($col) && isset($col['canConstructBy']) ? $col['canConstructBy'] : false;

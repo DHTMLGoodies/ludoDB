@@ -9,15 +9,15 @@ abstract class LudoDBCollection extends LudoDBIterator
 {
     /**
      * Lookup value to use when instantiating collection. This value
-     * is used in join with config['constructorParams']
+     * is used in join with config['constructBy']
      */
     protected $constructorValues;
     protected $config = array();
 
     public function deleteRecords(){
         if(isset($this->constructorValues)){
-            $constructorParams = $this->configParser()->getConstructorParams();
-            $this->db->query("delete from ". $this->configParser()->getTableName()." where ". $constructorParams[0]."='". $this->constructorValues[0]."'");
+            $constructBy = $this->configParser()->getConstructorParams();
+            $this->db->query("delete from ". $this->configParser()->getTableName()." where ". $constructBy[0]."='". $this->constructorValues[0]."'");
         }
     }
 

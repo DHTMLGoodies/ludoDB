@@ -392,7 +392,7 @@ abstract class LudoDBTable extends LudoDBObject
      * @return LudoDBTable
      */
     public function create(){
-        $this->configParser()->setConstructorParams($this->whereEqualsArray['where']);
+        $this->configParser()->setConstructBy($this->whereEqualsArray['where']);
         $this->constructorValues = $this->whereEqualsArray['equals'];
         $this->populate();
         $this->whereEqualsArray = null;

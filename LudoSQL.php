@@ -88,10 +88,10 @@ class LudoSQL
     private function getJoins()
     {
         $ret = $this->configParser->getJoinsForSQL();
-        $constructorParams = $this->configParser->getConstructorParams();
-        if (isset($constructorParams)) {
+        $constructBy = $this->configParser->getConstructorParams();
+        if (isset($constructBy)) {
             for ($i = 0, $count = count($this->constructorValues); $i < $count; $i++) {
-                $ret[] = $this->getTableAndColumn($constructorParams[$i]) . "='" . $this->constructorValues[$i] . "'";
+                $ret[] = $this->getTableAndColumn($constructBy[$i]) . "='" . $this->constructorValues[$i] . "'";
             }
 
         }

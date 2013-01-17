@@ -109,7 +109,7 @@ class SQLTest extends TestBase
                 'firstname' => 'varchar(32)',
                 'lastname' => 'varchar(32)'
             ),
-            'constructorParams' => 'id'
+            'constructBy' => 'id'
         );
 
         // when
@@ -133,7 +133,7 @@ class SQLTest extends TestBase
                 'lastname' => 'varchar(32)',
                 'zip' => 'varchar(10)'
             ),
-            'constructorParams' => array('id','city'),
+            'constructBy' => array('id','city'),
             'join' => array(
                 array(
                     'table' => 'City',
@@ -168,7 +168,7 @@ class SQLTest extends TestBase
                     'class' => 'PhoneCollection'
                 )
             ),
-            'constructorParams' => 'id'
+            'constructBy' => 'id'
         );
 
         // when
@@ -192,7 +192,7 @@ class SQLTest extends TestBase
                 'lastname' => 'varchar(32)',
                 'zip' => 'varchar(15)'
             ),
-            'constructorParams' => 'Person.id',
+            'constructBy' => 'Person.id',
             'join' => array(
                 array('table' => 'City', 'columns' => array('city'), 'fk' => 'zip', 'pk' => 'zip')
             )
@@ -224,12 +224,12 @@ class SQLTest extends TestBase
     }
 
 
-    private function getSqlObject($config, $constructorParams = null)
+    private function getSqlObject($config, $constructBy = null)
     {
         ForSQLTest::clearParsers();
         $obj = new ForSQLTest();
         $obj->setConfig($config);
-        $obj->setConstructorValues($constructorParams);
+        $obj->setConstructorValues($constructBy);
 
         return new LudoSQL($obj);
 

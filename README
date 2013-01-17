@@ -102,7 +102,7 @@ JSON file(Client.json) located in sub folder JSONConfig:
 {
     "table":"Client",
 	"idField":"id",
-	"constructorParams":"id",
+	"constructBy":"id",
 	"columns":{
 		"id":"int auto_increment not null primary key",
 		"firstname":{

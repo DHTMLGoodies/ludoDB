@@ -1,7 +1,7 @@
 {
 	"table":"Client",
 	"idField":"id",
-	"constructorParams":"id",
+	"constructBy":"id",
 	"columns":{
 		"id":"int auto_increment not null primary key",
 		"firstname":{
