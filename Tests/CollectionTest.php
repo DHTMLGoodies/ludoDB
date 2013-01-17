@@ -145,6 +145,7 @@ class CollectionTest extends TestBase
         $city = new City();
         $city->drop();
         $city->createTable();
+        $city->deleteTableData();
 
         $city->setZip(4330);
         $city->setCity('Aalgaard');
@@ -203,7 +204,7 @@ class CollectionTest extends TestBase
         $city = new City(4330);
         if(!$city->getId()){
             $city->setZip(4330);
-            $city->setCity("Somewhere");
+            $city->setCity("Aalgaard");
             $city->commit();
         }
     }

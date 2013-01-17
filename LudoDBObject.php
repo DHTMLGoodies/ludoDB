@@ -7,6 +7,9 @@
  */
 abstract class LudoDBObject
 {
+    /**
+     * @var LudoDB
+     */
     protected $db;
     protected $config = array();
     protected $constructorValues;
