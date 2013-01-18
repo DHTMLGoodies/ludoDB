@@ -34,12 +34,21 @@ abstract class LudoDBCollection extends LudoDBIterator
                 if(isset($value)){
                     $model->clearValues();
                     $model->setValues($value);
-                    $ret[$key] = $model->getSomeValues($columns);
+                    $ret[$key] = $this->getValuesFromModel($model, $columns);
                 }
             }
             return $ret;
         }else{
             return parent::getValues();
         }
+    }
+
+    /**
+     * @param LudoDBTable $model
+     * @param array $columns
+     * @return array
+     */
+    protected function getValuesFromModel($model, $columns){
+        return $model->getSomeValues($columns);
     }
 }

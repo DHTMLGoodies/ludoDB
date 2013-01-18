@@ -31,7 +31,7 @@ class LudoDBIterator extends LudoDBObject implements Iterator
      * @method current
      * @return mixed
      */
-    function current() {
+    public function current() {
         return $this->currentRow;
     }
 
@@ -76,7 +76,7 @@ class LudoDBIterator extends LudoDBObject implements Iterator
     public function getValues(){
         $ret = array();
         foreach($this as $key=>$value){
-            if(isset($value))$ret[$key] = $value;
+            $ret[$key] = $value;
         }
         return $ret;
     }

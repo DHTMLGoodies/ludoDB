@@ -280,11 +280,20 @@ abstract class LudoDBTable extends LudoDBObject
         return new $className;
     }
 
+    public function getSomeValuesFiltered($keys){
+        return $this->some($keys, true);
+    }
+
     public function getSomeValues($keys){
+        return $this->some($keys, false);
+    }
+
+    private function some($keys, $filtered = false){
         $ret = array();
         foreach($keys as $key){
             $col = $this->configParser()->getPublicColumnName($key);
-            $ret[$col] = $this->getValue($key);
+            $val = $this->getValue($key);
+            if(!$filtered || isset($val))$ret[$col] = $val;
         }
         return $ret;
     }
