@@ -303,7 +303,6 @@ class LudoDBConfigParser
             $col = strtolower(preg_replace("/([A-Z])/s", "_$1", $col));
             if ($this->hasColumn($col)) return $this->saveInMappingCache($methodName, $col);
         }
-
         return $col;
     }
 
@@ -359,10 +358,15 @@ class LudoDBConfigParser
     /**
      * @return LudoDBObject
      */
+    private static $extensionClasses = array();
     private function getExtends()
     {
         $className = $this->getProperty('extends');
-        return isset($className) ? new $className : null;
+        if(!isset($className))return null;
+        if(!isset(self::$extensionClasses[$className])){
+            self::$extensionClasses[$className] = new $className;
+        }
+        return self::$extensionClasses[$className];
     }
 
     public function canBePopulatedBy($column)
