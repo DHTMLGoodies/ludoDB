@@ -204,16 +204,21 @@ class LudoDBConfigParser
         return $this->getProperty('join');
     }
 
+    private $myColumns;
     public function getMyColumnsForSQL()
     {
-        $columns = $this->getColumns();
-        $ret = array();
-        foreach ($columns as $col => $value) {
-            if (!$this->isExternalColumn($col)) {
-                $ret[] = $this->getTableName() . "." . $col;
+        if(!isset($this->myColumns)){
+            $columns = $this->getColumns();
+            $ret = array();
+            foreach ($columns as $col => $value) {
+                if (!$this->isExternalColumn($col)) {
+                    $ret[] = $this->getTableName() . "." . $col;
+                }
             }
+            $this->myColumns = $ret;
         }
-        return $ret;
+
+        return $this->myColumns;
     }
 
     public function getJoinsForSQL()
