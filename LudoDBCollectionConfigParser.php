@@ -8,22 +8,26 @@
  */
 class LudoDBCollectionConfigParser extends LudoDBConfigParser
 {
-
     private $model = null;
+    private $tableName;
 
     public function getTableName()
     {
-        $model = $this->getModel();
-        if(isset($model))return $model->configParser()->getTableName();
-        return null;
+        if (!isset($this->tableName)) {
+            $model = $this->getModel();
+            if (isset($model)) $this->tableName = $model->configParser()->getTableName();
+        }
+
+        return $this->tableName ;
     }
 
     /**
      * @return LudoDBTable|null
      */
-    public function getModel(){
-        if(isset($this->config['model'])){
-            if(!isset($this->model)){
+    public function getModel()
+    {
+        if (isset($this->config['model'])) {
+            if (!isset($this->model)) {
                 $this->model = $this->getModelInstance();
             }
             $this->model->clearValues();
@@ -35,7 +39,8 @@ class LudoDBCollectionConfigParser extends LudoDBConfigParser
     /**
      * @return LudoDBTable
      */
-    private function getModelInstance(){
+    private function getModelInstance()
+    {
         $modelName = $this->config['model'];
         return new $modelName;
     }

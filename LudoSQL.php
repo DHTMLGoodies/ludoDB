@@ -148,7 +148,7 @@ class LudoSQL
 
     public function getInsertSQL()
     {
-        $table = $this->obj->configParser()->getTableName();
+        $table = $this->configParser->getTableName();
         $data = $this->obj->getUncommitted();
         if (!isset($data)) $data = array(
             $this->obj->configParser()->getIdField() => self::DELETED
