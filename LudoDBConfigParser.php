@@ -143,10 +143,16 @@ class LudoDBConfigParser
         return null;
     }
 
+    private $externalCache = array();
+
     public function isExternalColumn($name)
     {
-        $col = $this->getColumn($name);
-        return isset($col) && is_array($col) && !isset($col['db']);
+        if (!isset($this->externalCache[$name])) {
+            $col = $this->getColumn($name);
+            $this->externalCache[$name] = isset($col) && is_array($col) && !isset($col['db']);
+        }
+        return $this->externalCache[$name];
+
     }
 
     public function getIdField()
@@ -343,11 +349,11 @@ class LudoDBConfigParser
         if (!isset($this->columnAccessCache[$key])) {
             if ($name === $this->getIdField()) {
                 $this->columnAccessCache[$key] = true;
-            }else{
+            } else {
                 $column = $this->getColumn($name);
                 if (isset($column) && isset($column['access'])) {
                     $this->columnAccessCache[$key] = strstr($column['access'], $access) ? true : false;
-                }else{
+                } else {
                     $this->columnAccessCache[$key] = false;
                 }
             }
@@ -355,15 +361,16 @@ class LudoDBConfigParser
         return $this->columnAccessCache[$key];
     }
 
+    private static $extensionClasses = array();
+
     /**
      * @return LudoDBObject
      */
-    private static $extensionClasses = array();
     private function getExtends()
     {
         $className = $this->getProperty('extends');
-        if(!isset($className))return null;
-        if(!isset(self::$extensionClasses[$className])){
+        if (!isset($className)) return null;
+        if (!isset(self::$extensionClasses[$className])) {
             self::$extensionClasses[$className] = new $className;
         }
         return self::$extensionClasses[$className];

@@ -17,25 +17,30 @@ abstract class LudoDBObject
     protected $JSONConfig = false;
     private $sql_handler;
 
+    protected $parser;
+
     public function __construct()
     {
         $this->db = LudoDb::getInstance();
         if (func_num_args() > 0) {
             $this->constructorValues = $this->getValidConstructorValues(func_get_args());
         }
+        $this->parser = $this->configParser();
         $this->onConstruct();
     }
 
-    protected function sqlHandler(){
-        if(!isset($this->sql_handler)){
+    protected function sqlHandler()
+    {
+        if (!isset($this->sql_handler)) {
             $this->sql_handler = new LudoSQL($this);
         }
         return $this->sql_handler;
     }
 
 
-    protected function getValidConstructorValues($values){
-        foreach($values as &$value){
+    protected function getValidConstructorValues($values)
+    {
+        foreach ($values as &$value) {
             $value = $this->db->escapeString($value);
         }
         return $values;
@@ -47,7 +52,8 @@ abstract class LudoDBObject
     }
 
 
-    public function hasConfigInExternalFile(){
+    public function hasConfigInExternalFile()
+    {
         return $this->JSONConfig;
     }
 
@@ -66,33 +72,43 @@ abstract class LudoDBObject
      */
     public function configParser()
     {
-        $key = $this->getConfigParserKey();
-        if (!isset(self::$configParsers[$key])) {
-            self::$configParsers[$key] = $this->getConfigParserInstance();
+        if (!isset($this->parser)) {
+            $key = $this->getConfigParserKey();
+            if (!isset(self::$configParsers[$key])) {
+                self::$configParsers[$key] = $this->getConfigParserInstance();
+            }
+            $this->parser = self::$configParsers[$key];
         }
-        return self::$configParsers[$key];
+        return $this->parser;
     }
 
-    protected function getConfigParserInstance(){
+    protected function getConfigParserInstance()
+    {
         return new LudoDBConfigParser($this, $this->config);
     }
+
     private $configParserKey;
-    protected function getConfigParserKey(){
-        if(!isset($this->configParserKey)){
+
+    protected function getConfigParserKey()
+    {
+        if (!isset($this->configParserKey)) {
             $this->configParserKey = get_class($this);
         }
         return $this->configParserKey;
     }
 
-    public static function clearParsers(){
+    public static function clearParsers()
+    {
         self::$configParsers = array();
     }
 
-    public function getUncommitted(){
+    public function getUncommitted()
+    {
         return array();
     }
 
-    public function getId(){
+    public function getId()
+    {
 
     }
 
@@ -101,9 +117,10 @@ abstract class LudoDBObject
         return $this->asJSON();
     }
 
-    protected function asJSON(){
+    protected function asJSON()
+    {
         $data = $this->getValues();
-        if(LudoDB::isLoggingEnabled()){
+        if (LudoDB::isLoggingEnabled()) {
             $data['__log'] = array(
                 'time' => LudoDB::getElapsed()
             );

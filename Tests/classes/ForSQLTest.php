@@ -15,5 +15,6 @@ class ForSQLTest extends LudoDBTable
 
     public function setConstructorValues($values){
         $this->constructorValues = $values;
+        $this->parser = $this->getConfigParserInstance();
     }
 }

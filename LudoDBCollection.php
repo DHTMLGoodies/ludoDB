@@ -16,8 +16,8 @@ abstract class LudoDBCollection extends LudoDBIterator
 
     public function deleteRecords(){
         if(isset($this->constructorValues)){
-            $constructBy = $this->configParser()->getConstructorParams();
-            $this->db->query("delete from ". $this->configParser()->getTableName()." where ". $constructBy[0]."='". $this->constructorValues[0]."'");
+            $constructBy = $this->parser->getConstructorParams();
+            $this->db->query("delete from ". $this->parser->getTableName()." where ". $constructBy[0]."='". $this->constructorValues[0]."'");
         }
     }
 
@@ -26,8 +26,9 @@ abstract class LudoDBCollection extends LudoDBIterator
     }
 
     public function getValues(){
-        $model = $this->configParser()->getModel();
+        $model = $this->parser->getModel();
         if(isset($model)){
+            $model->disableCommit();
             $ret = array();
             foreach($this as $key=>$value){
                 if(!isset($columns))$columns = array_keys($value);
@@ -37,6 +38,7 @@ abstract class LudoDBCollection extends LudoDBIterator
                     $ret[$key] = $this->getValuesFromModel($model, $columns);
                 }
             }
+            $model->enableCommit();
             return $ret;
         }else{
             return parent::getValues();

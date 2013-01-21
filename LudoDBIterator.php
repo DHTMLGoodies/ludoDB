@@ -13,10 +13,6 @@ class LudoDBIterator extends LudoDBObject implements Iterator
     private $position;
     protected $currentRow;
 
-    protected $config = array(
-        'columns' => array()
-    );
-
     function rewind() {
         if ($this->dbResource) {
             $this->dbResource = null;

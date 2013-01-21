@@ -33,6 +33,7 @@ class LudoDB
 
     public static function enableLogging(){
         self::$loggingEnabled = true;
+        if(!isset(self::$startTime))self::$startTime = self::getTime();
     }
 
     public static function isLoggingEnabled(){
