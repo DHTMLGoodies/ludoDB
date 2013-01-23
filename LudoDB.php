@@ -12,6 +12,7 @@ class LudoDB
     private static $instance;
     private static $loggingEnabled = false;
     private static $startTime;
+    private static $queryCounter = 0;
     /**
      * @var mysqli
      */
@@ -42,6 +43,10 @@ class LudoDB
 
     public  static function getElapsed(){
         return self::getTime() - self::$startTime;
+    }
+
+    public static function getQueryCount(){
+        return self::$queryCounter;
     }
 
     private static function getTime()
@@ -121,6 +126,9 @@ class LudoDB
     public function query($sql)
     {
         if ($this->debug) $this->log($sql);
+        if(self::$loggingEnabled){
+            self::$queryCounter++;
+        }
         if (self::$mysqli) {
             if($res = self::$conn->query($sql)){
                 return $res;

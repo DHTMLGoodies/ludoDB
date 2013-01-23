@@ -122,7 +122,8 @@ abstract class LudoDBObject
         $data = $this->getValues();
         if (LudoDB::isLoggingEnabled()) {
             $data['__log'] = array(
-                'time' => LudoDB::getElapsed()
+                'time' => LudoDB::getElapsed(),
+                'queries' => LudoDB::getQueryCount()
             );
         }
         return json_encode($data);

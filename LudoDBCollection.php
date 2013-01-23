@@ -30,12 +30,12 @@ abstract class LudoDBCollection extends LudoDBIterator
         if(isset($model)){
             $model->disableCommit();
             $ret = array();
-            foreach($this as $key=>$value){
+            foreach($this as $value){
                 if(!isset($columns))$columns = array_keys($value);
                 if(isset($value)){
                     $model->clearValues();
                     $model->setValues($value);
-                    $ret[$key] = $this->getValuesFromModel($model, $columns);
+                    $ret[] = $this->getValuesFromModel($model, $columns);
                 }
             }
             $model->enableCommit();
