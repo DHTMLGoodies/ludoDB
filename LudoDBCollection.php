@@ -12,7 +12,6 @@ abstract class LudoDBCollection extends LudoDBIterator
      * is used in join with config['constructBy']
      */
     protected $constructorValues;
-    protected $config = array();
 
     public function deleteRecords(){
         if(isset($this->constructorValues)){

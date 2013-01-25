@@ -4,11 +4,6 @@
  */
 abstract class LudoDBTable extends LudoDBObject
 {
-    protected $config = array(
-        'idField' => 'id',
-        'columns' => array(
-        )
-    );
 
     private $id;
     private $data = array();
@@ -61,7 +56,7 @@ abstract class LudoDBTable extends LudoDBObject
 
     protected function getValue($column)
     {
-        if ($this->parser->isExternalColumn($column) && $this->getId()) {
+        if ($this->parser->isExternalColumn($column)) {
             return $this->getExternalValue($column);
         }
         if (isset($this->updates) && isset($this->updates[$column])) {

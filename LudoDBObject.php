@@ -11,11 +11,11 @@ abstract class LudoDBObject
      * @var LudoDB
      */
     protected $db;
-    protected $config = array();
     protected $constructorValues;
     protected static $configParsers = array();
     protected $JSONConfig = false;
     private $sql_handler;
+    protected $config;
 
     protected $parser;
 
@@ -84,7 +84,7 @@ abstract class LudoDBObject
 
     protected function getConfigParserInstance()
     {
-        return new LudoDBConfigParser($this, $this->config);
+        return new LudoDBConfigParser($this, isset($this->config) ? $this->config : array());
     }
 
     private $configParserKey;

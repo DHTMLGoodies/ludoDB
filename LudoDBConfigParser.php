@@ -15,7 +15,7 @@ class LudoDBConfigParser
     private $obj;
     private static $fileLocation;
 
-    public function __construct(LudoDBObject $obj, array $config = array())
+    public function __construct(LudoDBObject $obj, $config = array())
     {
         $this->obj = $obj;
         $this->buildConfig($config);
