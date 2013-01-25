@@ -61,7 +61,7 @@ abstract class LudoDBTable extends LudoDBObject
 
     protected function getValue($column)
     {
-        if ($this->parser->isExternalColumn($column)) {
+        if ($this->parser->isExternalColumn($column) && $this->getId()) {
             return $this->getExternalValue($column);
         }
         if (isset($this->updates) && isset($this->updates[$column])) {
