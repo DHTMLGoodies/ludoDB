@@ -1,6 +1,7 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * Request handler class for Front End Controller. This class will handle requests sent
+ * by Views and pass them to the correct LudoDBObjects.
  * User: Alf Magne Kalleland
  * Date: 13.01.13
  * Time: 16:24
@@ -21,9 +22,8 @@ class LudoRequestHandler
 
     /**
      * @param $request
-     * @return LudoDBObject|null
+     * @return LudoDBTable|LudoDBCollection|null
      */
-
     private function getClassForHandler($request){
         $className = $this->getClassName($request);
         if(isset($className))return new $className;

@@ -13,7 +13,6 @@ class LudoDBConfigParser
     private $customConstructorParams;
     private $aliasMapping = array();
     private $obj;
-    private static $fileLocation;
 
     public function __construct(LudoDBObject $obj, $config = array())
     {
@@ -40,6 +39,8 @@ class LudoDBConfigParser
         if (file_exists($location)) {
             $content = file_get_contents($location);
             return JSON_decode($content, true);
+        } else {
+            throw new Exception("Could not load config file $location");
         }
         return null;
     }
@@ -51,11 +52,8 @@ class LudoDBConfigParser
 
     protected function getFileLocation()
     {
-        if (!isset(self::$fileLocation)) {
-            $obj = new ReflectionClass($this->obj);
-            self::$fileLocation = dirname($obj->getFilename());
-        }
-        return self::$fileLocation;
+        $obj = new ReflectionClass($this->obj);
+        return dirname($obj->getFilename());
     }
 
     private function mapColumnAliases()
@@ -205,9 +203,10 @@ class LudoDBConfigParser
     }
 
     private $myColumns;
+
     public function getMyColumnsForSQL()
     {
-        if(!isset($this->myColumns)){
+        if (!isset($this->myColumns)) {
             $columns = $this->getColumns();
             $ret = array();
             foreach ($columns as $col => $value) {
