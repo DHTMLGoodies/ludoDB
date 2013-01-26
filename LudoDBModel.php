@@ -2,7 +2,7 @@
 /**
  * Representation of a ludoDB table
  */
-abstract class LudoDBTable extends LudoDBObject
+abstract class LudoDBModel extends LudoDBObject
 {
 
     private $id;
@@ -271,7 +271,7 @@ abstract class LudoDBTable extends LudoDBObject
 
     /**
      * @method getClassName
-     * @return LudoDBTable class
+     * @return LudoDBModel class
      */
     private function getNewInstance()
     {
@@ -381,7 +381,7 @@ abstract class LudoDBTable extends LudoDBObject
      * $pump = new WaterPump();
      * $pump->where('category')->equals('10)->where('brand')->equals('Toshiba')->create();
      *
-     * @return LudoDBTable
+     * @return LudoDBModel
      */
     public function create(){
         $this->parser->setConstructBy($this->whereEqualsArray['where']);

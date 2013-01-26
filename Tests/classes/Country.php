@@ -1,6 +1,6 @@
 <?php
 
-class Country extends LudoDBTable{
+class Country extends LudoDBModel{
     protected $config = array(
         'idField' => 'id',
         'table' => 'Country',

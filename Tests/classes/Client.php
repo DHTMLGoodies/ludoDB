@@ -1,5 +1,5 @@
 <?php
-class Client extends LudoDBTable
+class Client extends LudoDBModel
 {
     protected $JSONConfig = true;
 

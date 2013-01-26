@@ -43,7 +43,7 @@ abstract class LudoDBCollection extends LudoDBIterator
     }
 
     /**
-     * @param LudoDBTable $model
+     * @param LudoDBModel $model
      * @param array $columns
      * @return array
      */

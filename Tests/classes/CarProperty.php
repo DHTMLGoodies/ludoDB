@@ -5,7 +5,7 @@
  * Date: 23.12.12
  * Time: 00:34
  */
-class CarProperty extends LudoDBTable
+class CarProperty extends LudoDBModel
 {
     protected $JSONConfig = true;
 

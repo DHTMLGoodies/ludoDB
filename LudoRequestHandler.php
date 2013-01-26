@@ -22,7 +22,7 @@ class LudoRequestHandler
 
     /**
      * @param $request
-     * @return LudoDBTable|LudoDBCollection|null
+     * @return LudoDBModel|LudoDBCollection|null
      */
     private function getClassForHandler($request){
         $className = $this->getClassName($request);

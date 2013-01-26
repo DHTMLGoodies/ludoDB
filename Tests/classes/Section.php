@@ -5,7 +5,7 @@
  * Date: 12.01.13
  * Time: 19:30
  */
-class Section extends LudoDBTable
+class Section extends LudoDBModel
 {
     protected $JSONConfig = true;
 }

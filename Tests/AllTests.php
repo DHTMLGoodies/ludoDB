@@ -13,7 +13,7 @@ class AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite();
         $suite->setName('AllTests');
-        $suite->addTestSuite("LudoDBTableTests");
+        $suite->addTestSuite("LudoDBModelTests");
         $suite->addTestSuite("CollectionTest");
         $suite->addTestSuite("SQLTest");
         $suite->addTestSuite("JSONTest");

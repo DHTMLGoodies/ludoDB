@@ -6,7 +6,7 @@
  * Time: 15:51
  * To change this template use File | Settings | File Templates.
  */
-class TestGame extends LudoDBTable
+class TestGame extends LudoDBModel
 {
     protected $JSONConfig = true;
 

@@ -6,7 +6,7 @@
  * Time: 12:15
  * To change this template use File | Settings | File Templates.
  */
-class PersonForConfigParser extends LudoDBTable
+class PersonForConfigParser extends LudoDBModel
 {
     protected $config = array(
         'table' => 'Person',

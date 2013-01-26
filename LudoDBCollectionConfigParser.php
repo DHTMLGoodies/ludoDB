@@ -22,7 +22,7 @@ class LudoDBCollectionConfigParser extends LudoDBConfigParser
     }
 
     /**
-     * @return LudoDBTable|null
+     * @return LudoDBModel|null
      */
     public function getModel()
     {
@@ -37,7 +37,7 @@ class LudoDBCollectionConfigParser extends LudoDBConfigParser
     }
 
     /**
-     * @return LudoDBTable
+     * @return LudoDBModel
      */
     private function getModelInstance()
     {

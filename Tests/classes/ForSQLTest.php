@@ -6,7 +6,7 @@
  * Time: 11:26
  * To change this template use File | Settings | File Templates.
  */
-class ForSQLTest extends LudoDBTable
+class ForSQLTest extends LudoDBModel
 {
 
     public function setConfig($config){

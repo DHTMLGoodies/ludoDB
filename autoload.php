@@ -8,7 +8,6 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'accessortest' => '/Tests/AccessorTest.php',
-                'alltests' => '/Tests/AllTests.php',
                 'brand' => '/Tests/classes/Brand.php',
                 'car' => '/Tests/classes/Car.php',
                 'carcollection' => '/Tests/classes/CarCollection.php',
@@ -29,10 +28,10 @@ spl_autoload_register(
                 'ludodbcollectionconfigparser' => '/LudoDBCollectionConfigParser.php',
                 'ludodbconfigparser' => '/LudoDBConfigParser.php',
                 'ludodbiterator' => '/LudoDBIterator.php',
+                'ludodbmodel' => '/LudoDBModel.php',
+                'ludodbmodeltests' => '/Tests/LudoDBTableTests.php',
                 'ludodbobject' => '/LudoDBObject.php',
                 'ludodbregistry' => '/LudoDBRegistry.php',
-                'ludodbtable' => '/LudoDBTable.php',
-                'ludodbtabletests' => '/Tests/LudoDBTableTests.php',
                 'ludorequesthandler' => '/LudoRequestHandler.php',
                 'ludosql' => '/LudoSQL.php',
                 'manager' => '/Tests/classes/Manager.php',
