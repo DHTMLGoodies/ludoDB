@@ -30,12 +30,11 @@ class JSONTest extends TestBase
         $car = new Car(1);
 
         // when
-        $json = $car;
-        $asArray = json_decode($json, true);
+        $json = $car->getValues();
 
         // then
-        $this->assertEquals('1', $asArray['id']);
-        $this->assertEquals('Opel', $asArray['brand']);
+        $this->assertEquals('1', $json['id']);
+        $this->assertEquals('Opel', $json['brand']);
     }
 
     /**
@@ -58,6 +57,10 @@ class JSONTest extends TestBase
 
         // then
         $this->assertEquals('BMW', $newCar->getBrand());
+    }
+
+    public function shouldBeAbleToStoreJSONInJSONCache(){
+
     }
 
     /**

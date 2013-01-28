@@ -109,7 +109,7 @@ abstract class LudoDBObject
 
     public function getId()
     {
-
+        return null;
     }
 
     public function __toString()
@@ -130,4 +130,11 @@ abstract class LudoDBObject
     }
 
     abstract public function getValues();
+
+    public function getKey(){
+        if($this->getId()){
+            return get_class($this)."_".$this->getId();
+        }
+        return null;
+    }
 }

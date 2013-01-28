@@ -10,34 +10,44 @@ abstract class LudoDBModel extends LudoDBObject
     private $updates;
     private $externalClasses = array();
     private $commitDisabled;
+    private $populated = false;
 
     protected function onConstruct()
     {
-        if (isset($this->constructorValues)) {
-            $this->populate();
-        }
+
     }
 
     protected function populate()
     {
+        $this->populated = true;
         $this->constructorValues = $this->getValidConstructByValues($this->constructorValues);
         $data = $this->db->one($this->sqlHandler()->getSql());
         if (isset($data)) {
             $this->populateWith($data);
             $this->setId($this->getValue($this->parser->getIdField()));
         }
+
+    }
+
+    private function autoPopulate()
+    {
+        if (!$this->populated && isset($this->constructorValues)) {
+            $this->populate();
+        }
+
     }
 
     private function getValidConstructByValues($params)
     {
         $paramNames = $this->parser->getConstructorParams();
-        for($i=0,$count = count($params);$i<$count;$i++){
+        for ($i = 0, $count = count($params); $i < $count; $i++) {
             $params[$i] = $this->getValidConstructByValue($paramNames[$i], $params[$i]);
         }
         return $params;
     }
 
-    protected function getValidConstructByValue($key, $value){
+    protected function getValidConstructByValue($key, $value)
+    {
         return $value;
     }
 
@@ -56,6 +66,7 @@ abstract class LudoDBModel extends LudoDBObject
 
     protected function getValue($column)
     {
+        $this->autoPopulate();
         if ($this->parser->isExternalColumn($column)) {
             return $this->getExternalValue($column);
         }
@@ -80,9 +91,9 @@ abstract class LudoDBModel extends LudoDBObject
         if (!isset($this->externalClasses[$column])) {
             $class = $this->parser->externalClassNameFor($column);
             $fk = $this->parser->foreignKeyFor($column);
-            if (isset($fk)){
+            if (isset($fk)) {
                 $val = $this->getValue($fk);
-            }  else {
+            } else {
                 if (!$this->getId()) $this->commit();
                 $val = $this->getId();
             }
@@ -112,17 +123,19 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
-    public function disableCommit(){
+    public function disableCommit()
+    {
         $this->commitDisabled = true;
     }
 
-    public function enableCommit(){
+    public function enableCommit()
+    {
         $this->commitDisabled = false;
     }
 
     public function commit()
     {
-        if($this->commitDisabled)return null;
+        if ($this->commitDisabled) return null;
         if (!isset($this->updates)) {
             if ($this->getId() || !$this->parser->isIdAutoIncremented()) {
                 return null;
@@ -133,7 +146,7 @@ abstract class LudoDBModel extends LudoDBObject
         } else {
             $this->insert();
         }
-        if(isset($this->updates)){
+        if (isset($this->updates)) {
             foreach ($this->updates as $key => $value) {
                 $this->data[$key] = $value === LudoSQL::DELETED ? null : $value;
             }
@@ -148,7 +161,8 @@ abstract class LudoDBModel extends LudoDBObject
     /**
      * @param LudoDBObject $class
      */
-    private function commitExternal($class){
+    private function commitExternal($class)
+    {
         $class->commit();
     }
 
@@ -160,7 +174,8 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
-    public function getUncommitted(){
+    public function getUncommitted()
+    {
         return $this->updates;
     }
 
@@ -203,6 +218,7 @@ abstract class LudoDBModel extends LudoDBObject
 
     public function getId()
     {
+        $this->autoPopulate();
         return $this->id;
     }
 
@@ -279,25 +295,29 @@ abstract class LudoDBModel extends LudoDBObject
         return new $className;
     }
 
-    public function getSomeValuesFiltered($keys){
+    public function getSomeValuesFiltered($keys)
+    {
         return $this->some($keys, true);
     }
 
-    public function getSomeValues($keys){
+    public function getSomeValues($keys)
+    {
         return $this->some($keys, false);
     }
 
-    private function some($keys, $filtered = false){
+    private function some($keys, $filtered = false)
+    {
         $ret = array();
-        foreach($keys as $key){
+        foreach ($keys as $key) {
             $col = $this->parser->getPublicColumnName($key);
             $val = $this->getValue($key);
-            if(!$filtered || isset($val))$ret[$col] = $val;
+            if (!$filtered || isset($val)) $ret[$col] = $val;
         }
         return $ret;
     }
 
-    public function clearValues(){
+    public function clearValues()
+    {
         $this->id = null;
         $this->data = array();
         $this->updates = null;
@@ -305,6 +325,7 @@ abstract class LudoDBModel extends LudoDBObject
 
     public function getValues()
     {
+        $this->autoPopulate();
         $columns = $this->parser->getColumns();
         $ret = array();
         foreach ($columns as $column => $def) {
@@ -332,43 +353,47 @@ abstract class LudoDBModel extends LudoDBObject
         return true;
     }
 
-    public function __call($name, $arguments){
-        if(substr($name,0,3) === 'set'){
+    public function __call($name, $arguments)
+    {
+        if (substr($name, 0, 3) === 'set') {
             $col = $this->parser->getColumnByMethod($name);
-            if(isset($col) && $this->parser->canWriteTo($col)){
+            if (isset($col) && $this->parser->canWriteTo($col)) {
                 return $this->setValue($col, $arguments[0]);
             }
         }
-        if(substr($name,0,3) === 'get'){
+        if (substr($name, 0, 3) === 'get') {
             $col = $this->parser->getColumnByMethod($name);
-            if(isset($col) && $this->parser->canReadFrom($col)){
+            if (isset($col) && $this->parser->canReadFrom($col)) {
                 return $this->getValue($col);
             }
         }
-        throw new Exception("Invalid method call ".$name);
+        throw new Exception("Invalid method call " . $name);
     }
 
     private $whereEqualsArray = null;
 
-    public function where($column){
-        if($this->parser->canBePopulatedBy($column)){
+    public function where($column)
+    {
+        if ($this->parser->canBePopulatedBy($column)) {
             $this->createWhereEqualsArray();
             $this->whereEqualsArray['where'][] = $column;
         }
         return $this;
     }
 
-    public function equals($value){
+    public function equals($value)
+    {
         $this->createWhereEqualsArray();
         $index = count($this->whereEqualsArray['equals']);
-        if(isset($this->whereEqualsArray['where'][$index])){
+        if (isset($this->whereEqualsArray['where'][$index])) {
             $this->whereEqualsArray['equals'][] = $value;
         }
         return $this;
     }
 
-    private function createWhereEqualsArray(){
-        if(!isset($this->whereEqualsArray)){
+    private function createWhereEqualsArray()
+    {
+        if (!isset($this->whereEqualsArray)) {
             $this->whereEqualsArray = array(
                 'where' => array(),
                 'equals' => array()
@@ -383,18 +408,19 @@ abstract class LudoDBModel extends LudoDBObject
      *
      * @return LudoDBModel
      */
-    public function create(){
+    public function create()
+    {
         $this->parser->setConstructBy($this->whereEqualsArray['where']);
         $this->constructorValues = $this->whereEqualsArray['equals'];
-        $this->populate();
         $this->whereEqualsArray = null;
         return $this;
     }
 
-    public function setValues($data){
+    public function setValues($data)
+    {
         $valuesSet = false;
-        foreach($data as $column=>$value){
-            if($this->parser->canWriteTo($column)){
+        foreach ($data as $column => $value) {
+            if ($this->parser->canWriteTo($column)) {
                 $this->setValue($column, $value);
                 $valuesSet = true;
             }
