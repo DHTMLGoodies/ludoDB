@@ -7,7 +7,7 @@
  */
 class LudoDB
 {
-    private $debug = true;
+    private $debug = false;
     private static $mysqli;
     private static $instance;
     private static $loggingEnabled = false;
