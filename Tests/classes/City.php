@@ -6,9 +6,18 @@ class City extends LudoDBModel
         'idField' => 'zip',
         'table' => 'City',
         'columns' => array(
-            'zip' => 'varchar(32) primary key',
-            'city' => 'varchar(64)',
-            'countryId' => 'int'
+            'zip' => array(
+                'db' => 'varchar(32) primary key',
+                'access' => 'rw'
+            ),
+            'city' => array(
+                'db' => 'varchar(64)',
+                'access' => 'rw'
+            ),
+            'countryId' => array(
+                'db' => 'int',
+                'access' => 'rw'
+            )
         ),
         'indexes' => array('countryId')
     );

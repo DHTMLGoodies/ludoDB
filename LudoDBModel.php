@@ -34,7 +34,6 @@ abstract class LudoDBModel extends LudoDBObject
         if (!$this->populated && isset($this->constructorValues)) {
             $this->populate();
         }
-
     }
 
     private function getValidConstructByValues($params)
@@ -170,6 +169,7 @@ abstract class LudoDBModel extends LudoDBObject
     {
         if ($this->isValid()) {
             $this->beforeUpdate();
+            $this->clearCache();
             $this->db->query($this->sqlHandler()->getUpdateSql());
         }
     }
@@ -243,6 +243,7 @@ abstract class LudoDBModel extends LudoDBObject
     }
 
     private $riskyQuery;
+
     /**
      * Drop database table
      * @method drop
@@ -267,9 +268,14 @@ abstract class LudoDBModel extends LudoDBObject
      * $p = new Person();
      * $p->drop()->yesImSure();
      */
-    public function yesImSure(){
-        if(isset($this->riskyQuery)){
+    public function yesImSure()
+    {
+        if (isset($this->riskyQuery)) {
             $this->db->query($this->riskyQuery);
+            if ($this->JSONCaching) {
+                $json = new LudoDBJSONCache();
+                $json->deleteTableData()->yesImSure();
+            }
             $this->riskyQuery = null;
         }
     }
@@ -447,9 +453,11 @@ abstract class LudoDBModel extends LudoDBObject
     /**
      * Delete record
      */
-    public function delete(){
-        if(isset($this->constructorValues) && count($this->constructorValues)){
+    public function delete()
+    {
+        if (isset($this->constructorValues) && count($this->constructorValues)) {
             $this->db->query($this->sqlHandler()->getDeleteSQL());
+            $this->clearCache();
             $this->clearValues();
         }
     }

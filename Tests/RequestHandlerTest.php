@@ -24,7 +24,7 @@ class RequestHandlerTest extends TestBase
         parent::setUp();
 
         $person = new Person();
-        $person->drop();
+        $person->drop()->yesImSure();
         $person->createTable();
 
         foreach ($this->persons as $person) {

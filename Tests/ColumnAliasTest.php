@@ -13,7 +13,7 @@ class ColumnAliasTest extends TestBase
         parent::setUp();
 
         $s = new Section();
-        $s->drop();
+        $s->drop()->yesImSure();
         $s->createTable();
     }
 

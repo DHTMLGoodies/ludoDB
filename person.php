@@ -11,14 +11,14 @@ mysql_select_db('PHPUnit', $res);
 require_once(__DIR__ . "/autoload.php");
 
 $city = new City();
-$city->drop();
+$city->drop()->yesImSure();
 $city->createTable();
 $city->setZip('4330');
 $city->setCity('Ålgård');
 $city->commit();
 
 $person = new Person();
-$person->drop();
+$person->drop()->yesImSure();
 $person->createTable();
 
 $person->setLastname('Kalleland');
@@ -28,7 +28,7 @@ $person->setZip('4330');
 $person->commit();
 
 $phone = new Phone();
-$phone->drop();
+$phone->drop()->yesImSure();
 $phone->createTable();
 
 

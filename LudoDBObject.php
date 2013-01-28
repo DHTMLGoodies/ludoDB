@@ -13,7 +13,17 @@ abstract class LudoDBObject
     protected $db;
     protected $constructorValues;
     protected static $configParsers = array();
+    /**
+     * True when config is in JSONConfig/<class name>.json file
+     * @var bool
+     */
     protected $JSONConfig = false;
+    /**
+     * True to enable JSON caching
+     * @var bool
+     */
+    protected $JSONCaching = false;
+
     private $sql_handler;
     protected $config;
 
@@ -117,8 +127,18 @@ abstract class LudoDBObject
         return $this->asJSON();
     }
 
-    protected function asJSON()
+    /**
+     * @return string
+     * // TODO implement JSON caching here
+     */
+    public function asJSON()
     {
+        if($this->JSONCaching){
+            $json = $this->cache();
+            if($json->hasValue()){
+                return $json->getJSON();
+            }
+        }
         $data = $this->getValues();
         if (LudoDB::isLoggingEnabled()) {
             $data['__log'] = array(
@@ -126,15 +146,34 @@ abstract class LudoDBObject
                 'queries' => LudoDB::getQueryCount()
             );
         }
-        return json_encode($data);
+        $ret = json_encode($data);
+        if($this->JSONCaching){
+            $this->cache()->setJSON($ret)->commit();
+        }
+        return $ret;
     }
 
     abstract public function getValues();
 
-    public function getKey(){
-        if($this->getId()){
+    public function getJSONKey(){
+        if(isset($this->constructorValues) && count($this->constructorValues)){
             return get_class($this)."_".implode("_", $this->constructorValues);
         }
         return null;
+    }
+
+    private $jsonCacheInstance = null;
+    protected function cache(){
+        if(!isset($this->jsonCacheInstance)){
+            $this->jsonCacheInstance = new LudoDBJSONCache($this);
+        }
+        return $this->jsonCacheInstance;
+    }
+
+    protected function clearCache(){
+        if($this->JSONCaching){
+            LudoDBJSONCache::clearCacheBy($this->getJSONKey());
+            $this->jsonCacheInstance = null;
+        }
     }
 }

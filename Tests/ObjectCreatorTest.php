@@ -15,7 +15,7 @@ class ObjectCreatorTest extends TestBase
         parent::setUp();
 
         $brand = new Brand();
-        $brand->drop();
+        $brand->drop()->yesImSure();
         $brand->createTable();
 
         $brands = array(

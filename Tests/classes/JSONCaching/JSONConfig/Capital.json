@@ -1,0 +1,25 @@
+{
+	"table": "Capital",
+	"sql": "select * from capital where ID='?'",
+	"idField": "id",
+	"columns": {
+		"id": {
+			"db": "int auto_increment not null primary key",
+			"access": "rw"
+		},
+		"name": {
+			"db": "varchar(256)",
+			"access": "rw"
+		},
+		"zip": {
+			"db": "varchar(16)",
+			"access": "rw"
+		}
+	},
+	"data": [
+		{ "id": 1, "name": "Oslo" },
+		{ "id": 2, "name": "London" },
+		{ "id": 3, "name": "Madrid" },
+		{ "id": 4, "name": "Washington" }
+	]
+}

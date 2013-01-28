@@ -96,7 +96,8 @@ class LudoDBConfigParser
             $config = $this->getConfigFromFile();
         }
         if (isset($config['sql'])) {
-            $config['sql'] = str_replace("?", "%s", $config['sql']);
+            $config['sql'] = str_replace("?", "'%s'", $config['sql']);
+            $config['sql'] = str_replace("''", "'", $config['sql']);
         }
         if (!isset($config['constructBy']) && isset($config['idField'])) {
             $config['constructBy'] = array($config['idField']);

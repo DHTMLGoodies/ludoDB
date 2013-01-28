@@ -14,7 +14,7 @@ class AccessorTest extends TestBase
     public function setUp(){
         parent::setUp();
         $g = new TestGame();
-        $g->drop();
+        $g->drop()->yesImSure();
         $g->createTable();
     }
     /**

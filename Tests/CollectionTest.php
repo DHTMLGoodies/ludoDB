@@ -12,15 +12,15 @@ class CollectionTest extends TestBase
     public function setUp(){
         parent::setUp();
         $car = new Car();
-        $car->drop();
+        $car->drop()->yesImSure();
         $car->createTable();
 
         $pr = new CarProperty();
-        $pr->drop();
+        $pr->drop()->yesImSure();
         $pr->createTable();
 
         $p = new Person();
-        $p->drop();
+        $p->drop()->yesImSure();
         $p->createTable();
     }
     /**
@@ -143,7 +143,7 @@ class CollectionTest extends TestBase
     public function shouldGetValuesFromExternalTablesWhenUsingModel(){
         // given
         $city = new City();
-        $city->drop();
+        $city->drop()->yesImSure();
         $city->createTable();
         $city->deleteTableData();
 

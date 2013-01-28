@@ -19,18 +19,18 @@ class MysqlTests extends TestBase
 
 
         $city = new City();
-        $city->drop();
+        $city->drop()->yesImSure();
         $city->createTable();
 
         $phone = new Phone();
         if(!$phone->exists())$phone->createTable();
 
         $car = new Car();
-        $car->drop();
+        $car->drop()->yesImSure();
         $car->createTable();
 
         $pr = new CarProperty();
-        $pr->drop();
+        $pr->drop()->yesImSure();
         $pr->createTable();
     }
 
