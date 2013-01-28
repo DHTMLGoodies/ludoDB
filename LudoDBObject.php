@@ -133,7 +133,7 @@ abstract class LudoDBObject
 
     public function getKey(){
         if($this->getId()){
-            return get_class($this)."_".$this->getId();
+            return get_class($this)."_".implode("_", $this->constructorValues);
         }
         return null;
     }

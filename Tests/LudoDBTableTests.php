@@ -15,7 +15,7 @@ class LudoDBModelTests extends TestBase
         parent::setUp();
 
         $city = new City();
-        $city->drop();
+        $city->drop()->yesImSure();
         $city->createTable();
 
         $phone = new Phone();
@@ -108,7 +108,7 @@ class LudoDBModelTests extends TestBase
     public function shouldBeAbleToDropTable(){
         // given
         $tbl = new TestTable();
-        $tbl->drop();
+        $tbl->drop()->yesImSure();
 
         // then
         $this->assertFalse($tbl->exists());
@@ -137,7 +137,7 @@ class LudoDBModelTests extends TestBase
      */
     public function testShouldBeAbleToGetRecordById(){
         $car = new Car();
-        $car->drop();
+        $car->drop()->yesImSure();
         $car->createTable();
         // when
         $car = new Car(1);
@@ -233,7 +233,7 @@ class LudoDBModelTests extends TestBase
     public function shouldBeAbleToDefineDefaultData(){
         // given
         $car = new Car();
-        if($car->exists())$car->drop();
+        $car->drop()->yesImSure();
         $car->createTable();
 
         new Car();
@@ -355,6 +355,27 @@ class LudoDBModelTests extends TestBase
         // then
         $this->assertEquals('John', $person->getFirstname());
         $this->assertEquals('Wayne', $person->getLastname());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToDeleteRecord(){
+        // given
+        $p = new Person();
+        $p->setFirstname('John');
+        $p->commit();
+
+        // when
+        $p2 = new Person($p->getId());
+        $id = $p2->getId();
+        $p2->delete();
+
+
+        $p3 = new Person($p->getId());
+        // then
+        $this->assertEquals(null, $p2->getId());
+        $this->assertEquals(null, $p3->getId());
     }
 
 

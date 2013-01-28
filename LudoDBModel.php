@@ -242,6 +242,7 @@ abstract class LudoDBModel extends LudoDBObject
         return $this->db->tableExists($this->parser->getTableName());
     }
 
+    private $riskyQuery;
     /**
      * Drop database table
      * @method drop
@@ -249,13 +250,28 @@ abstract class LudoDBModel extends LudoDBObject
     public function drop()
     {
         if ($this->exists()) {
-            $this->db->query("drop table " . $this->parser->getTableName());
+            $this->riskyQuery = "drop table " . $this->parser->getTableName();
         }
+        return $this;
     }
 
     public function deleteTableData()
     {
-        $this->db->query("delete from " . $this->parser->getTableName());
+        $this->riskyQuery = "delete from " . $this->parser->getTableName();
+        return $this;
+    }
+
+    /**
+     * Execute risky query,
+     * @example
+     * $p = new Person();
+     * $p->drop()->yesImSure();
+     */
+    public function yesImSure(){
+        if(isset($this->riskyQuery)){
+            $this->db->query($this->riskyQuery);
+            $this->riskyQuery = null;
+        }
     }
 
     private function createIndexes()
@@ -426,5 +442,15 @@ abstract class LudoDBModel extends LudoDBObject
             }
         }
         return $valuesSet;
+    }
+
+    /**
+     * Delete record
+     */
+    public function delete(){
+        if(isset($this->constructorValues) && count($this->constructorValues)){
+            $this->db->query($this->sqlHandler()->getDeleteSQL());
+            $this->clearValues();
+        }
     }
 }

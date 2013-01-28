@@ -22,11 +22,11 @@ class TestBase extends PHPUnit_Framework_TestCase
         $tbl->createTable();
 
         $p = new Person();
-        $p->drop();
+        $p->drop()->yesImSure();
         $p->createTable();
 
         $p = new Phone();
-        $p->drop();
+        $p->drop()->yesImSure();
         $p->createTable();
     }
 
@@ -50,7 +50,7 @@ class TestBase extends PHPUnit_Framework_TestCase
     {
         $db = new LudoDB();
         $t = new TestTable();
-        $t->drop();
+        $t->drop()->yesImSure();
     }
 
     private function clearLog()
