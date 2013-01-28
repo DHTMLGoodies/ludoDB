@@ -112,7 +112,7 @@ class JSONTest extends TestBase
         $capitals->asJSON(); // Trigger caching
 
         // when
-        $capital = new Capital(1);
+        $capital = new Capital(8);
         $capital->setName('Stavanger');
         $capital->commit();
 
