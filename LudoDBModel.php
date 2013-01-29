@@ -273,7 +273,7 @@ abstract class LudoDBModel extends LudoDBObject
         if (isset($this->riskyQuery)) {
             $this->db->query($this->riskyQuery);
             if ($this->JSONCaching) {
-                $json = new LudoDBJSONCache();
+                $json = new LudoDBJSON();
                 $json->deleteTableData()->yesImSure();
             }
             $this->riskyQuery = null;

@@ -22,6 +22,10 @@ class Person extends LudoDBModel
 
     );
 
+    public function __construct($id){
+    	parent::__construct($id);
+    }
+
     public function setFirstname($value){
         $this->setValue('firstname', $value);
     }
@@ -94,6 +98,10 @@ PHP Class (Client.php)
 class Client extends LudoDBModel
 {
     protected $JSONConfig = true;
+
+    public function __construct($id){
+    	parent::__construct($id);
+    }
 
 }
 

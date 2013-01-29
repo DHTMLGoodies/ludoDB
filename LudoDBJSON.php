@@ -6,7 +6,7 @@
  * Time: 12:36
  * To change this template use File | Settings | File Templates.
  */
-class LudoDBJSONCache extends LudoDBModel
+class LudoDBJSON extends LudoDBModel
 {
     protected $JSONConfig = false;
     protected $config = array(
@@ -39,9 +39,11 @@ class LudoDBJSONCache extends LudoDBModel
         if(isset($model)){
             $key = $model->getJSONKey();
             parent::__construct($key);
-            $this->setClassName(get_class($model));
-            $this->setKey($key);
-            $this->JSON = $this->getValue('JSON_value');
+            if(isset($key)){
+                $this->setKey($key);
+                $this->setClassName(get_class($model));
+                $this->JSON = $this->getValue('JSON_value');
+            }
         }else{
             parent::__construct();
         }

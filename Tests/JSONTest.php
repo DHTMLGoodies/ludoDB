@@ -22,7 +22,7 @@ class JSONTest extends TestBase
         $section->drop()->yesImSure();
         $section->createTable();
 
-        $json = new LudoDBJSONCache();
+        $json = new LudoDBJSON();
         $json->drop()->yesImSure();
         $json->createTable();
 
@@ -84,7 +84,7 @@ class JSONTest extends TestBase
         $json = $capitals->asJSON();
 
         // when
-        $json = new LudoDBJSONCache($capitals);
+        $json = new LudoDBJSON($capitals);
 
         // then
         $this->assertTrue($json->hasValue());
@@ -117,7 +117,7 @@ class JSONTest extends TestBase
         $capital->commit();
 
         $capitals = new Capitals(5000,6000);
-        $json = new LudoDBJSONCache($capitals);
+        $json = new LudoDBJSON($capitals);
 
         $this->log($json->getJSON());
 
@@ -135,13 +135,13 @@ class JSONTest extends TestBase
         $capital->asJSON(); // Trigger JSON caching
         $this->assertEquals(1, $capital->getId());
         $this->assertEquals('Oslo', $capital->getName(), 'Initial test');
-        $json = new LudoDBJSONCache($capital);
+        $json = new LudoDBJSON($capital);
         $this->assertTrue($json->hasValue(), 'Initial test');
 
         // when
         $capital->delete();
         $capital = new Capital(1);
-        $json = new LudoDBJSONCache($capital);
+        $json = new LudoDBJSON($capital);
 
         // then
         $this->assertNull($capital->getId());
@@ -159,7 +159,7 @@ class JSONTest extends TestBase
         $capital->commit();
 
         // when
-        $json = new LudoDBJSONCache($capital);
+        $json = new LudoDBJSON($capital);
 
         // then
         $this->assertFalse($json->hasValue());
@@ -177,7 +177,7 @@ class JSONTest extends TestBase
 
         // when
         $capital->asJSON(); // Trigger JSON caching
-        $json = new LudoDBJSONCache($capital);
+        $json = new LudoDBJSON($capital);
         $jsonAsArray = JSON_decode($json->getJSON(), true);
 
         // then

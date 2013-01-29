@@ -129,7 +129,6 @@ abstract class LudoDBObject
 
     /**
      * @return string
-     * // TODO implement JSON caching here
      */
     public function asJSON()
     {
@@ -147,7 +146,7 @@ abstract class LudoDBObject
             );
         }
         $ret = json_encode($data);
-        if($this->JSONCaching){
+        if($this->JSONCaching && $this->getJSONKey()){
             $this->cache()->setJSON($ret)->commit();
         }
         return $ret;
@@ -155,24 +154,27 @@ abstract class LudoDBObject
 
     abstract public function getValues();
 
+    private $JSONKey = null;
     public function getJSONKey(){
-        if(isset($this->constructorValues) && count($this->constructorValues)){
-            return get_class($this)."_".implode("_", $this->constructorValues);
+        if(!isset($this->JSONKey)){
+            if(isset($this->constructorValues) && count($this->constructorValues)){
+                $this->JSONKey = get_class($this)."_".implode("_", $this->constructorValues);
+            }
         }
-        return null;
+        return $this->JSONKey;
     }
 
     private $jsonCacheInstance = null;
     protected function cache(){
         if(!isset($this->jsonCacheInstance)){
-            $this->jsonCacheInstance = new LudoDBJSONCache($this);
+            $this->jsonCacheInstance = new LudoDBJSON($this);
         }
         return $this->jsonCacheInstance;
     }
 
     protected function clearCache(){
         if($this->JSONCaching){
-            LudoDBJSONCache::clearCacheBy($this->getJSONKey());
+            LudoDBJSON::clearCacheBy($this->getJSONKey());
             $this->jsonCacheInstance = null;
         }
     }
