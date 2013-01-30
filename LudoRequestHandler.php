@@ -9,55 +9,125 @@
 class LudoRequestHandler
 {
     private $request;
-    public function __construct($request){
-        $this->request = $request;
-        $this->handle($this->request);
+    /**
+     * @var LudoDBObject
+     */
+    private $model;
+    private $action;
+    private $jsonCacheInstance;
+
+    public function __construct()
+    {
+
     }
 
-    private function handle($request){
-        $cl = $this->getClassForHandler($request);
-        if(isset($cl)){
-            $cl->setValues($request);
-            $cl->commit();
+    public function handle($request)
+    {
+        $this->request = $request;
+        $this->model = $this->getModel($request, $this->getArguments($request));
+        $this->action = $this->getAction($this->request);
+
+        switch ($this->action) {
+
+            case 'read':
+                return $this->toJSON($this->getValues());
+
         }
+        return "";
+    }
+
+    private function toJSON(array $data)
+    {
+        $ret = array(
+            'success' => true,
+            'message' => '',
+            'data' => $data
+        );
+        if (LudoDB::isLoggingEnabled()) {
+            $ret['log'] = array(
+                'time' => LudoDB::getElapsed(),
+                'queries' => LudoDB::getQueryCount()
+            );
+        }
+
+        return json_encode($ret);
+    }
+
+    private function getArguments(array $request)
+    {
+        return isset($request['data']) ? is_array($request['data']) ? $request['data'] : array($request['data']) : null;
     }
 
     /**
-     * @param $request
-     * @return LudoDBModel|LudoDBCollection|null
+     * @param array $request
+     * @param array $args
+     * @return null|object
+     * @throws Exception
      */
-    private function getClassForHandler($request){
+    private function getModel(array $request, $args = array())
+    {
         $className = $this->getClassName($request);
-        if(isset($className))return new $className;
+        if (isset($className)) {
+            try {
+                $cl = new ReflectionClass($className);
+                if (empty($args)) {
+                    return $cl->newInstance();
+                } else {
+                    return $cl->newInstanceArgs($args);
+                }
+            } catch (Exception $e) {
+                throw new Exception('Class not found');
+            }
+        }
         return null;
     }
 
-    protected function getCRUDAction(){
-        if(isset($this->request['read'])){
-            return 'R';
-        }
-        if(isset($this->request['create'])){
-            return 'C';
-        }
-        if(isset($this->request['create'])){
-            return 'U';
-        }
-        if(isset($this->request['create'])){
-            return 'D';
-        }
-        return null;
+    protected function getAction($request)
+    {
+        return isset($request['action']) ? strtolower($request['action']) : null;
     }
 
     /**
      * @param $request
      * @return string|null
      */
-    private function getClassName($request){
-        if(isset($request['model'])) return $request['model'];
+    private function getClassName($request)
+    {
+        if (isset($request['model'])) return $request['model'];
         return isset($request['form']) ? $request['form'] : null;
     }
 
-    public function __toString(){
-        return "";
+    public function getValues()
+    {
+        $data = null;
+        $caching = $this->model->JSONCacheEnabled();
+        if ($caching) {
+            if ($this->cache()->hasValue()) {
+                $data = $this->cache()->getCache();
+            }
+        }
+        if (!isset($data)) {
+            $data = $this->model->getValues();
+            if ($caching && $this->model->getJSONKey()) {
+                $this->cache()->setCache($data)->commit();
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * @return LudoDBCache
+     */
+    protected function cache()
+    {
+        if (!isset($this->jsonCacheInstance)) {
+            $this->jsonCacheInstance = new LudoDBCache($this->model);
+        }
+        return $this->jsonCacheInstance;
+    }
+
+    public function clearCacheObject()
+    {
+        $this->jsonCacheInstance = null;
     }
 }

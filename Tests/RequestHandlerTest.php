@@ -72,26 +72,38 @@ class RequestHandlerTest extends TestBase
     public function shouldFindCRUDMethod(){
 
         // given
+        $handler = new RequestHandlerMock();
+
+        // when
+        $crud = $handler->getAction($this->getRequest);
+
+        // then
+        $this->assertEquals('read', $crud);
+    }
+
+    public function shouldFindLudoDBObject(){
+        // given
         $handler = new RequestHandlerMock($this->getRequest);
 
         // when
-        $crud = $handler->getCRUDAction();
+        $model = $handler->model;
 
         // then
-        $this->assertEquals('R', $crud);
+        $this->assertTrue($model->instanceOf('Person'));
+
     }
 
     /**
      * @test
      */
-    public function shouldHandleSimplePosts()
+    public function shouldHandleSimpleGetRequets()
     {
         // given
         $request = $this->getRequest;
 
         // when
-        $returned = new RequestHandlerMock($request);
-        $asArray = json_decode($returned, true);
+        $returned = new RequestHandlerMock();
+        $asArray = json_decode($returned->handle($request), true);
 
         // then
         $this->assertEquals('Jane', $asArray['firstname']);

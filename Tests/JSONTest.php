@@ -81,7 +81,8 @@ class JSONTest extends TestBase
         $this->createCapitalCollection();
         $capitals = new Capitals(5000,6000);
         $this->assertEquals(4, count($capitals->getValues()));
-        $capitals->asJSON();
+        $this->triggerJSONFor('Capitals', array(5000,6000));
+        #$capitals->asJSON();
 
         // when
         $json = new LudoDBCache($capitals);
@@ -133,7 +134,8 @@ class JSONTest extends TestBase
     public function shouldDeleteJSONCacheWhenRecordIsDeleted(){
         // given
         $capital = new Capital(1);
-        $capital->asJSON(); // Trigger JSON caching
+        $this->triggerJSONFor('Capital', 1);
+
         $this->assertEquals(1, $capital->getId());
         $this->assertEquals('Oslo', $capital->getName(), 'Initial test');
         $json = new LudoDBCache($capital);
@@ -155,6 +157,7 @@ class JSONTest extends TestBase
     public function shouldDeleteCacheWhenRecordIsUpdated(){
         // given
         $capital = new Capital(2);
+        $this->triggerJSONFor('Capital', 2);
         $capital->asJSON(); // Trigger JSON caching
         $capital->setName('Stavanger');
         $capital->commit();
@@ -172,12 +175,12 @@ class JSONTest extends TestBase
     public function shouldGetNewCacheAfterRecordHasBeenUpdated(){
         // given
         $capital = new Capital(2);
-        $capital->asJSON(); // Trigger JSON caching
+        $this->triggerJSONFor('Capital', 2);
         $capital->setName('Stavanger');
         $capital->commit();
 
         // when
-        $capital->asJSON(); // Trigger JSON caching
+        $this->triggerJSONFor('Capital', 2);
         $json = new LudoDBCache($capital);
         $values = $json->getCache();
 
@@ -230,6 +233,17 @@ class JSONTest extends TestBase
             $city->setValues($c);
             $city->commit();
         }
+    }
+
+    private function triggerJSONFor($className, $arguments){
+        $request = new LudoRequestHandler();
+        $request->handle(
+            array(
+                'model' => $className,
+                'data' => $arguments,
+                'action' => 'read'
+            )
+        );
     }
 
 

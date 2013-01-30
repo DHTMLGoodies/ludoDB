@@ -135,7 +135,8 @@ abstract class LudoDBObject
      */
     public function asJSON()
     {
-        return $this->JSONHandler()->asJSON();
+        return json_encode($this->getValues());
+       # return json_encode($this->JSONHandler()->getValues());
     }
 
     public function JSONCacheEnabled(){
