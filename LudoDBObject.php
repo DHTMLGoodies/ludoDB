@@ -136,19 +136,10 @@ abstract class LudoDBObject
     public function asJSON()
     {
         return json_encode($this->getValues());
-       # return json_encode($this->JSONHandler()->getValues());
     }
 
     public function JSONCacheEnabled(){
         return $this->JSONCaching;
-    }
-
-    private $_jsonHandler;
-    private function JSONHandler(){
-        if(!isset($this->_jsonHandler)){
-            $this->_jsonHandler = new LudoJSONHandler($this);
-        }
-        return $this->_jsonHandler;
     }
 
     abstract public function getValues();
@@ -166,7 +157,6 @@ abstract class LudoDBObject
     protected function clearCache(){
         if($this->JSONCaching){
             LudoDBCache::clearCacheBy($this->getJSONKey());
-            $this->JSONHandler()->clearCacheObject();
         }
     }
 }

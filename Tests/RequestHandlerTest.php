@@ -81,22 +81,24 @@ class RequestHandlerTest extends TestBase
         $this->assertEquals('read', $crud);
     }
 
+    /**
+     * @test
+     */
     public function shouldFindLudoDBObject(){
         // given
-        $handler = new RequestHandlerMock($this->getRequest);
+        $handler = new RequestHandlerMock();
 
         // when
-        $model = $handler->model;
+        $model = $handler->getModel($this->getRequest);
 
         // then
-        $this->assertTrue($model->instanceOf('Person'));
-
+        $this->assertInstanceOf('Person', $model);
     }
 
     /**
      * @test
      */
-    public function shouldHandleSimpleGetRequets()
+    public function shouldHandleSimpleGetRequests()
     {
         // given
         $request = $this->getRequest;
@@ -106,6 +108,6 @@ class RequestHandlerTest extends TestBase
         $asArray = json_decode($returned->handle($request), true);
 
         // then
-        $this->assertEquals('Jane', $asArray['firstname']);
+        $this->assertEquals('Jane', $asArray['data']['firstname']);
     }
 }

@@ -28,7 +28,6 @@ class LudoRequestHandler
         $this->action = $this->getAction($this->request);
 
         switch ($this->action) {
-
             case 'read':
                 return $this->toJSON($this->getValues());
 
@@ -64,7 +63,7 @@ class LudoRequestHandler
      * @return null|object
      * @throws Exception
      */
-    private function getModel(array $request, $args = array())
+    protected function getModel(array $request, $args = array())
     {
         $className = $this->getClassName($request);
         if (isset($className)) {
@@ -76,17 +75,11 @@ class LudoRequestHandler
                     return $cl->newInstanceArgs($args);
                 }
             } catch (Exception $e) {
-                throw new Exception('Class not found');
+                throw new LudoDBClassNotFoundException('Class not found: ' . $className);
             }
         }
         return null;
     }
-
-    protected function getAction($request)
-    {
-        return isset($request['action']) ? strtolower($request['action']) : null;
-    }
-
     /**
      * @param $request
      * @return string|null
@@ -96,6 +89,13 @@ class LudoRequestHandler
         if (isset($request['model'])) return $request['model'];
         return isset($request['form']) ? $request['form'] : null;
     }
+
+    protected function getAction($request)
+    {
+        return isset($request['action']) ? strtolower($request['action']) : null;
+    }
+
+
 
     public function getValues()
     {

@@ -8,11 +8,9 @@
  */
 class RequestHandlerMock extends LudoRequestHandler
 {
-    public $model;
-    public function __call($name, $arguments){
-        if(method_exists($this, $name)){
-            $this->$name($arguments[0]);
-        }
+
+    public function getModel(array $request, $args = array()){
+        return parent::getModel($request, $args);
     }
 
     public function getAction($request){
