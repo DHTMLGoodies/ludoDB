@@ -24,7 +24,7 @@ class Capital extends LudoDBModel
     }
 
     public function clearCache(){
-        LudoDBJSON::clearCacheByClass('Capitals');
+        LudoDBCache::clearCacheByClass('Capitals');
         parent::clearCache();
     }
 }

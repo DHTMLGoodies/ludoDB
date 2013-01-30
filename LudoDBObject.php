@@ -27,6 +27,9 @@ abstract class LudoDBObject
     private $sql_handler;
     protected $config;
 
+    /**
+     * @var LudoDBCollectionConfigParser|LudoDBConfigParser
+     */
     protected $parser;
 
     public function __construct()
@@ -132,24 +135,19 @@ abstract class LudoDBObject
      */
     public function asJSON()
     {
-        if($this->JSONCaching){
-            $json = $this->cache();
-            if($json->hasValue()){
-                return $json->getJSON();
-            }
+        return $this->JSONHandler()->asJSON();
+    }
+
+    public function JSONCacheEnabled(){
+        return $this->JSONCaching;
+    }
+
+    private $_jsonHandler;
+    private function JSONHandler(){
+        if(!isset($this->_jsonHandler)){
+            $this->_jsonHandler = new LudoJSONHandler($this);
         }
-        $data = $this->getValues();
-        if (LudoDB::isLoggingEnabled()) {
-            $data['__log'] = array(
-                'time' => LudoDB::getElapsed(),
-                'queries' => LudoDB::getQueryCount()
-            );
-        }
-        $ret = json_encode($data);
-        if($this->JSONCaching && $this->getJSONKey()){
-            $this->cache()->setJSON($ret)->commit();
-        }
-        return $ret;
+        return $this->_jsonHandler;
     }
 
     abstract public function getValues();
@@ -164,18 +162,10 @@ abstract class LudoDBObject
         return $this->JSONKey;
     }
 
-    private $jsonCacheInstance = null;
-    protected function cache(){
-        if(!isset($this->jsonCacheInstance)){
-            $this->jsonCacheInstance = new LudoDBJSON($this);
-        }
-        return $this->jsonCacheInstance;
-    }
-
     protected function clearCache(){
         if($this->JSONCaching){
-            LudoDBJSON::clearCacheBy($this->getJSONKey());
-            $this->jsonCacheInstance = null;
+            LudoDBCache::clearCacheBy($this->getJSONKey());
+            $this->JSONHandler()->clearCacheObject();
         }
     }
 }

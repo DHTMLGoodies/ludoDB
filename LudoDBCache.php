@@ -1,23 +1,22 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * Caching of serialized LudoDBObjet->getValues()
  * User: Alf Magne
  * Date: 28.01.13
  * Time: 12:36
- * To change this template use File | Settings | File Templates.
  */
-class LudoDBJSON extends LudoDBModel
+class LudoDBCache extends LudoDBModel
 {
     protected $JSONConfig = false;
     protected $config = array(
-        'table' => 'JSON_cache',
-        'sql' => "select class_name, JSON_key, JSON_value from JSON_cache where JSON_key='?'",
+        'table' => 'ludo_db_cache',
+        'sql' => "select class_name, cache_key, cache_value from ludo_db_cache where cache_key='?'",
         'idField' => 'JSON_key',
         'columns' => array(
             'id' => array(
                 'db' => 'int auto_increment not null primary key'
             ),
-            'JSON_key' => array(
+            'cache_key' => array(
                 'db' => 'varchar(512) not null unique',
                 'access' => 'rw'
             ),
@@ -25,12 +24,12 @@ class LudoDBJSON extends LudoDBModel
                 'db' => 'varchar(512)',
                 'access' => 'rw'
             ),
-            'JSON_value' => array(
+            'cache_value' => array(
                 'db' => 'mediumtext',
                 'access' => 'rw'
             )
         ),
-        'indexes' => array('JSON_key','class_name')
+        'indexes' => array('cache_key','class_name')
     );
 
     private $JSON = null;
@@ -42,7 +41,7 @@ class LudoDBJSON extends LudoDBModel
             if(isset($key)){
                 $this->setKey($key);
                 $this->setClassName(get_class($model));
-                $this->JSON = $this->getValue('JSON_value');
+                $this->JSON = $this->getValue('cache_value');
             }
         }else{
             parent::__construct();
@@ -57,32 +56,28 @@ class LudoDBJSON extends LudoDBModel
         $this->setValue('class_name', $name);
     }
 
-    public function __toString(){
-        return $this->getJSON();
-    }
-
-    public function getJSON(){
-        $ret = $this->getValue('JSON_value');
-        return isset($ret) ? $ret : '';
+    public function getCache(){
+        $ret = $this->getValue('cache_value');
+        return isset($ret) && strlen($ret)> 0 ? unserialize($ret) : '';
     }
 
     public function setKey($key){
-        $this->setValue('JSON_key', $key);
+        $this->setValue('cache_key', $key);
         return $this;
     }
 
-    public function setJSON($json){
-        $this->setValue('JSON_value', $json);
+    public function setCache(array $json){
+        $this->setValue('cache_value', serialize($json));
         return $this;
     }
 
     public static function clearCacheBy($key){
         if(isset($key) && strlen($key)){
-            LudoDb::getInstance()->query("delete from JSON_cache where JSON_key='". $key."'");
+            LudoDb::getInstance()->query("delete from ludo_db_cache where cache_key='". $key."'");
         }
     }
 
     public static function clearCacheByClass($className){
-        LudoDb::getInstance()->query("delete from JSON_cache where class_name='". $className."'");
+        LudoDb::getInstance()->query("delete from ludo_db_cache where class_name='". $className."'");
     }
 }

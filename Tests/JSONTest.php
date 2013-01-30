@@ -22,7 +22,7 @@ class JSONTest extends TestBase
         $section->drop()->yesImSure();
         $section->createTable();
 
-        $json = new LudoDBJSON();
+        $json = new LudoDBCache();
         $json->drop()->yesImSure();
         $json->createTable();
 
@@ -40,7 +40,7 @@ class JSONTest extends TestBase
         $car = new Car(1);
 
         // when
-        $json = $car->getValues();
+        $json = json_decode($car->asJSON(), true);
 
         // then
         $this->assertEquals('1', $json['id']);
@@ -81,14 +81,15 @@ class JSONTest extends TestBase
         $this->createCapitalCollection();
         $capitals = new Capitals(5000,6000);
         $this->assertEquals(4, count($capitals->getValues()));
-        $json = $capitals->asJSON();
+        $capitals->asJSON();
 
         // when
-        $json = new LudoDBJSON($capitals);
+        $json = new LudoDBCache($capitals);
 
         // then
+        $val = $this->getDb()->getValue("select count(ID) from ludo_db_cache where class_name='Capitals'");
+        $this->assertEquals(1, $val);
         $this->assertTrue($json->hasValue());
-
     }
 
     /**
@@ -112,14 +113,14 @@ class JSONTest extends TestBase
         $capitals->asJSON(); // Trigger caching
 
         // when
-        $capital = new Capital(8);
+        $capital = new Capital(101);
         $capital->setName('Stavanger');
         $capital->commit();
 
         $capitals = new Capitals(5000,6000);
-        $json = new LudoDBJSON($capitals);
+        $json = new LudoDBCache($capitals);
 
-        $this->log($json->getJSON());
+        $this->log($json->getCache());
 
         // then
         $this->assertFalse($json->hasValue());
@@ -135,13 +136,13 @@ class JSONTest extends TestBase
         $capital->asJSON(); // Trigger JSON caching
         $this->assertEquals(1, $capital->getId());
         $this->assertEquals('Oslo', $capital->getName(), 'Initial test');
-        $json = new LudoDBJSON($capital);
+        $json = new LudoDBCache($capital);
         $this->assertTrue($json->hasValue(), 'Initial test');
 
         // when
         $capital->delete();
         $capital = new Capital(1);
-        $json = new LudoDBJSON($capital);
+        $json = new LudoDBCache($capital);
 
         // then
         $this->assertNull($capital->getId());
@@ -159,7 +160,7 @@ class JSONTest extends TestBase
         $capital->commit();
 
         // when
-        $json = new LudoDBJSON($capital);
+        $json = new LudoDBCache($capital);
 
         // then
         $this->assertFalse($json->hasValue());
@@ -177,24 +178,51 @@ class JSONTest extends TestBase
 
         // when
         $capital->asJSON(); // Trigger JSON caching
-        $json = new LudoDBJSON($capital);
-        $jsonAsArray = JSON_decode($json->getJSON(), true);
+        $json = new LudoDBCache($capital);
+        $values = $json->getCache();
 
         // then
-        $this->assertEquals('Stavanger', $jsonAsArray['name']);
+        $this->assertEquals('Stavanger', $values['name']);
+    }
 
+    /**
+     * @test
+     */
+    public function shouldDetermineWhenCachingIsEnabled(){
+        // given
+        $capital = new Capital();
+
+        // then
+        $this->assertTrue($capital->JSONCacheEnabled());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnCorrectJSONString(){
+        // given
+        $this->createCapitalCollection();
+        $capital = new Capital(100);
+
+        // when
+        $json = $capital->asJSON();
+        $decoded = json_decode($json, true);
+
+        // then
+        $this->assertEquals('4000', $decoded['zip']);
     }
 
     private function createCapitalCollection(){
-        $city = new Capital();
-        $city->deleteTableData()->yesImSure();
+        $c = new Capital();
+        $c->drop()->yesImSure();
+        $c->createTable();
         // given
         $cities = array(
-            array('zip' => 4000, 'name' => 'Stavanger'),
-            array('zip' => 5500, 'name' => 'Haugesund'),
-            array('zip' => 5501, 'name' => 'Haugesund'),
-            array('zip' => 5502, 'name' => 'Haugesund'),
-            array('zip' => 5503, 'name' => 'Haugesund'),
+            array('id' => 100, 'zip' => 4000, 'name' => 'Stavanger'),
+            array('id' => 101,'zip' => 5500, 'name' => 'Haugesund'),
+            array('id' => 102,'zip' => 5501, 'name' => 'Haugesund'),
+            array('id' => 103,'zip' => 5502, 'name' => 'Haugesund'),
+            array('id' => 104,'zip' => 5503, 'name' => 'Haugesund'),
         );
 
         foreach($cities as $c){

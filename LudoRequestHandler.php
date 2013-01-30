@@ -8,8 +8,10 @@
  */
 class LudoRequestHandler
 {
+    private $request;
     public function __construct($request){
-        $this->handle($request);
+        $this->request = $request;
+        $this->handle($this->request);
     }
 
     private function handle($request){
@@ -27,6 +29,22 @@ class LudoRequestHandler
     private function getClassForHandler($request){
         $className = $this->getClassName($request);
         if(isset($className))return new $className;
+        return null;
+    }
+
+    protected function getCRUDAction(){
+        if(isset($this->request['read'])){
+            return 'R';
+        }
+        if(isset($this->request['create'])){
+            return 'C';
+        }
+        if(isset($this->request['create'])){
+            return 'U';
+        }
+        if(isset($this->request['create'])){
+            return 'D';
+        }
         return null;
     }
 

@@ -30,6 +30,14 @@ class TestBase extends PHPUnit_Framework_TestCase
         $p->createTable();
     }
 
+    private $dbInstance;
+    protected function getDb(){
+        if(!isset($this->dbInstance)){
+            $this->dbInstance = new LudoDB();
+        }
+        return $this->dbInstance;
+    }
+
     private function connect()
     {
         LudoDB::setHost('localhost');

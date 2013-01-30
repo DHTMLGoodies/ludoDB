@@ -17,9 +17,9 @@
 		}
 	},
 	"data": [
-		{ "id": 1, "name": "Oslo" },
-		{ "id": 2, "name": "London" },
-		{ "id": 3, "name": "Madrid" },
+		{ "id": 1, "name": "Oslo", "zip": "0123" },
+		{ "id": 2, "name": "London", "zip": "012345" },
+		{ "id": 3, "name": "Madrid", "zip": "94321"},
 		{ "id": 4, "name": "Washington" }
 	]
 }

@@ -26,7 +26,6 @@ abstract class LudoDBModel extends LudoDBObject
             $this->populateWith($data);
             $this->setId($this->getValue($this->parser->getIdField()));
         }
-
     }
 
     private function autoPopulate()
@@ -82,7 +81,7 @@ abstract class LudoDBModel extends LudoDBObject
     }
 
     /**
-     * @param $column
+     * @param String $column
      * @return LudoDBCollection table
      */
     private function getExternalClassFor($column)
@@ -273,7 +272,8 @@ abstract class LudoDBModel extends LudoDBObject
         if (isset($this->riskyQuery)) {
             $this->db->query($this->riskyQuery);
             if ($this->JSONCaching) {
-                $json = new LudoDBJSON();
+                LudoDBCache::clearCacheByClass(get_class($this));
+                $json = new LudoDBCache();
                 $json->deleteTableData()->yesImSure();
             }
             $this->riskyQuery = null;
