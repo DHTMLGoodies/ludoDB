@@ -8,13 +8,18 @@
  */
 class LudoRequestHandler
 {
-    private $request;
+
     /**
      * @var LudoDBObject
      */
-    private $model;
-    private $action;
-    private $jsonCacheInstance;
+    protected $model;
+    protected $action;
+    protected $jsonCacheInstance;
+    protected $validActions = array('read', 'save', 'delete');
+
+    private $success = true;
+    private $message = "";
+    private $code = 200;
 
     public function __construct()
     {
@@ -23,24 +28,39 @@ class LudoRequestHandler
 
     public function handle($request)
     {
-        $this->request = $request;
-        $this->model = $this->getModel($request, $this->getArguments($request));
-        $this->action = $this->getAction($this->request);
+        $request = $this->getParsed($request);
+        try {
+            $this->model = $this->getModel($request, $this->getArguments($request));
+            $this->action = $this->getAction($request);
 
-        switch ($this->action) {
-            case 'read':
-                return $this->toJSON($this->getValues());
 
+            switch ($this->action) {
+                case 'read':
+                    return $this->toJSON($this->getValues());
+                case 'save':
+                    return $this->toJSON($this->model->save($request['data']));
+            }
+        } catch (Exception $e) {
+            $this->message = $e->getMessage();
+            $this->code = $e->getCode();
+            $this->success = false;
+            return $this->toJSON(array());
         }
         return "";
+    }
+
+    private function getParsed($request){
+        if (is_string($request)) $request = array('request' => $request);
+        return $request;
     }
 
     private function toJSON(array $data)
     {
         $ret = array(
-            'success' => true,
-            'message' => '',
-            'data' => $data
+            'success' => $this->success,
+            'message' => $this->message,
+            'code' => $this->code,
+            'response' => $data
         );
         if (LudoDB::isLoggingEnabled()) {
             $ret['log'] = array(
@@ -52,16 +72,23 @@ class LudoRequestHandler
         return json_encode($ret);
     }
 
-    private function getArguments(array $request)
+    protected function getArguments(array $request)
     {
-        return isset($request['data']) ? is_array($request['data']) ? $request['data'] : array($request['data']) : null;
+        $ret = array();
+        $tokens = explode("/", $request['request']);
+        for ($i = 1, $count = count($tokens); $i < $count; $i++) {
+            if ($i < $count - 1 || !in_array($tokens[$i], $this->validActions)) {
+                $ret[] = $tokens[$i];
+            }
+        }
+        return $ret;
     }
 
     /**
      * @param array $request
      * @param array $args
      * @return null|object
-     * @throws Exception
+     * @throws LudoDBClassNotFoundException
      */
     protected function getModel(array $request, $args = array())
     {
@@ -75,27 +102,28 @@ class LudoRequestHandler
                     return $cl->newInstanceArgs($args);
                 }
             } catch (Exception $e) {
-                throw new LudoDBClassNotFoundException('Class not found: ' . $className);
+                throw new LudoDBClassNotFoundException('Class not found: ' . $className, 400);
             }
         }
         return null;
     }
+
     /**
      * @param $request
      * @return string|null
      */
     private function getClassName($request)
     {
-        if (isset($request['model'])) return $request['model'];
-        return isset($request['form']) ? $request['form'] : null;
+        $tokens = explode("/", $request['request']);
+        return $tokens[0];
     }
 
     protected function getAction($request)
     {
-        return isset($request['action']) ? strtolower($request['action']) : null;
+        $tokens = explode("/", $request['request']);
+        $action = $tokens[count($tokens) - 1];
+        return in_array($action, $this->validActions) ? $action : 'read';
     }
-
-
 
     public function getValues()
     {

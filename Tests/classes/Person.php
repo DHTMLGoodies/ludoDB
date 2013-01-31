@@ -10,4 +10,16 @@ class Person extends LudoDBModel
     public function getPhone(){
         return $this->getValue('phone');
     }
+
+    public function setLastname($lastname){
+        $this->setValue('lastname', $lastname);
+    }
+
+    public function setZip($zip){
+        $this->setValue('zip', $zip);
+    }
+
+    public function getFirstname(){
+        return $this->getValue('firstname');
+    }
 }

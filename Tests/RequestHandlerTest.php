@@ -12,14 +12,12 @@ class RequestHandlerTest extends TestBase
 {
 
     private $getRequest = array(
-        'model' => 'Person',
-        'action' => 'read',
+        'request' => 'Person/1/read',
         'data' => array(1)
     );
 
     private $createRequest = array(
-        'model' => 'Person',
-        'action' => 'create',
+        'request' => 'Person/create',
         'data' => array(
             'firstname' => 'Alf Magne',
             'lastname' => 'Kalleland'
@@ -27,16 +25,14 @@ class RequestHandlerTest extends TestBase
     );
 
     private $updateRequest = array(
-        'model' => 'Person',
-        'update' => 2,
+        'request' => 'Person/2/save',
         'data' => array(
             'firstname' => 'Andrea'
         )
     );
 
     private $deleteRequest = array(
-        'model' => 'Person',
-        'delete'=> array(1)
+        'request' => 'Person/1/delete'
     );
 
     public function setUp()
@@ -45,7 +41,8 @@ class RequestHandlerTest extends TestBase
         $this->createPersons();
     }
 
-    private function createPersons(){
+    private function createPersons()
+    {
         $person = new Person();
         $person->drop()->yesImSure();
         $person->createTable();
@@ -69,10 +66,12 @@ class RequestHandlerTest extends TestBase
     /**
      * @test
      */
-    public function shouldFindCRUDMethod(){
+    public function shouldFindCRUDMethod()
+    {
 
         // given
         $handler = new RequestHandlerMock();
+
 
         // when
         $crud = $handler->getAction($this->getRequest);
@@ -84,7 +83,63 @@ class RequestHandlerTest extends TestBase
     /**
      * @test
      */
-    public function shouldFindLudoDBObject(){
+    public function shouldFindArguments()
+    {
+        // given
+        $handler = new RequestHandlerMock();
+
+        $request = array('request' => 'Person/1');
+
+        // when
+
+        $args = $handler->getArguments($request);
+
+        // then
+        $this->assertEquals(array(1), $args);
+
+        // given
+        $request = array('request' => 'Person/1/2');
+
+        // when
+
+        $args = $handler->getArguments($request);
+
+        // then
+        $this->assertEquals(array(1, 2), $args);
+
+        // given
+        $request = array('request' => 'Person/1/2/read');
+
+        // when
+        $args = $handler->getArguments($request);
+
+        // then
+        $this->assertEquals(array(1, 2), $args);
+
+        // given
+        $request = array('request' => 'Person/1/2/save');
+
+        // when
+        $args = $handler->getArguments($request);
+
+        // then
+        $this->assertEquals(array(1, 2), $args);
+
+        // given
+        $request = array('request' => 'Person/1/2/delete');
+
+        // when
+        $args = $handler->getArguments($request);
+
+        // then
+        $this->assertEquals(array(1, 2), $args);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldFindLudoDBObject()
+    {
         // given
         $handler = new RequestHandlerMock();
 
@@ -108,6 +163,29 @@ class RequestHandlerTest extends TestBase
         $asArray = json_decode($returned->handle($request), true);
 
         // then
-        $this->assertEquals('Jane', $asArray['data']['firstname']);
+        $this->assertEquals('Jane', $asArray['response']['firstname']);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldHandleUpdateRequests()
+    {
+        // given
+        $request = array(
+            'request' => 'Person/2/save',
+            'data' => array(
+                'firstname' => 'Andrea'
+            )
+        );
+        // when
+        $handler = new RequestHandlerMock();
+        $handler->handle($request);
+        $person = new Person(2);
+
+        // then
+        $this->assertEquals('Andrea', $person->getFirstname());
+
+
     }
 }

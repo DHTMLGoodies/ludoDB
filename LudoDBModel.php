@@ -450,6 +450,23 @@ abstract class LudoDBModel extends LudoDBObject
         return $valuesSet;
     }
 
+    public function save($data)
+    {
+        try {
+            $this->validate($data);
+            $this->setValues($data);
+            $this->commit();
+            return array($this->parser->getIdField() => $this->getId());
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
+    }
+
+    protected function validate($data)
+    {
+
+    }
+
     /**
      * Delete record
      */

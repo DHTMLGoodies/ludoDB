@@ -9,11 +9,18 @@
 class RequestHandlerMock extends LudoRequestHandler
 {
 
+    public $model;
+    public $action;
+
     public function getModel(array $request, $args = array()){
         return parent::getModel($request, $args);
     }
 
     public function getAction($request){
         return parent::getAction($request);
+    }
+
+    public function getArguments($request){
+        return parent::getArguments($request);
     }
 }
