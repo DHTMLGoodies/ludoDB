@@ -6,7 +6,7 @@
  * Time: 19:02
  * To change this template use File | Settings | File Templates.
  */
-class LudoDBPDO extends LudoDB
+class LudoDBPDO extends LudoDB implements LudoDBAdapter
 {
     private static $conn;
     
