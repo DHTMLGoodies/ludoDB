@@ -9,7 +9,7 @@
 class Capital extends LudoDBModel
 {
     protected $JSONConfig = true;
-    protected $JSONCaching = true;
+    protected $caching = true;
 
     public function __construct($id = null){
         parent::__construct($id);

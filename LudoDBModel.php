@@ -271,7 +271,7 @@ abstract class LudoDBModel extends LudoDBObject
     {
         if (isset($this->riskyQuery)) {
             $this->db->query($this->riskyQuery);
-            if ($this->JSONCaching) {
+            if ($this->caching) {
                 LudoDBCache::clearCacheByClass(get_class($this));
                 $json = new LudoDBCache();
                 $json->deleteTableData()->yesImSure();
@@ -450,21 +450,16 @@ abstract class LudoDBModel extends LudoDBObject
         return $valuesSet;
     }
 
+
     public function save($data)
     {
-        try {
-            $this->validate($data);
-            $this->setValues($data);
-            $this->commit();
-            return array($this->parser->getIdField() => $this->getId());
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage(), $e->getCode());
-        }
-    }
+        $idField = $this->parser->getIdField();
+        if (isset($data[$idField])) $this->setId($data[$idField]);
 
-    protected function validate($data)
-    {
+        $this->setValues($data);
+        $this->commit();
 
+        return array($idField => $this->getId());
     }
 
     /**
@@ -473,6 +468,7 @@ abstract class LudoDBModel extends LudoDBObject
     public function delete()
     {
         if (isset($this->constructorValues) && count($this->constructorValues)) {
+            $this->validate('delete');
             $this->db->query($this->sqlHandler()->getDeleteSQL());
             $this->clearCache();
             $this->clearValues();

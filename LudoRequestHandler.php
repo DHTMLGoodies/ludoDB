@@ -33,12 +33,15 @@ class LudoRequestHandler
             $this->model = $this->getModel($request, $this->getArguments($request));
             $this->action = $this->getAction($request);
 
+            $this->model->validate($this->action, $request['data']);
 
             switch ($this->action) {
                 case 'read':
                     return $this->toJSON($this->getValues());
                 case 'save':
                     return $this->toJSON($this->model->save($request['data']));
+                case 'delete':
+                    return $this->toJSON($this->model->delete($request['data']));
             }
         } catch (Exception $e) {
             $this->message = $e->getMessage();
@@ -51,6 +54,7 @@ class LudoRequestHandler
 
     private function getParsed($request){
         if (is_string($request)) $request = array('request' => $request);
+        if(!isset($request['data']))$request['data'] = array();
         return $request;
     }
 
@@ -128,7 +132,7 @@ class LudoRequestHandler
     public function getValues()
     {
         $data = null;
-        $caching = $this->model->JSONCacheEnabled();
+        $caching = $this->model->cacheEnabled();
         if ($caching) {
             if ($this->cache()->hasValue()) {
                 $data = $this->cache()->getCache();

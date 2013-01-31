@@ -22,7 +22,7 @@ abstract class LudoDBObject
      * True to enable JSON caching
      * @var bool
      */
-    protected $JSONCaching = false;
+    protected $caching = false;
 
     private $sql_handler;
     protected $config;
@@ -138,8 +138,8 @@ abstract class LudoDBObject
         return json_encode($this->getValues());
     }
 
-    public function JSONCacheEnabled(){
-        return $this->JSONCaching;
+    public function cacheEnabled(){
+        return $this->caching;
     }
 
     abstract public function getValues();
@@ -155,8 +155,18 @@ abstract class LudoDBObject
     }
 
     protected function clearCache(){
-        if($this->JSONCaching){
+        if($this->caching){
             LudoDBCache::clearCacheBy($this->getJSONKey());
         }
+    }
+
+    /**
+     * Validate requests. Throw exception on invalid requests.
+     * @param string $action
+     * @param array $data
+     */
+    public function validate($action = 'read', $data = array())
+    {
+
     }
 }

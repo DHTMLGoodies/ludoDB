@@ -196,7 +196,7 @@ class JSONTest extends TestBase
         $capital = new Capital();
 
         // then
-        $this->assertTrue($capital->JSONCacheEnabled());
+        $this->assertTrue($capital->cacheEnabled());
     }
 
     /**
@@ -235,13 +235,15 @@ class JSONTest extends TestBase
         }
     }
 
-    private function triggerJSONFor($className, $arguments){
+    private function triggerJSONFor($className, $arguments = array()){
         $request = new LudoRequestHandler();
+        $requestString = $className;
+        if(!is_array($arguments))$arguments = array($arguments);
+        if(!empty($arguments))$requestString.="/".implode("/", $arguments);
+        $requestString.="/read";
         $request->handle(
             array(
-                'model' => $className,
-                'data' => $arguments,
-                'action' => 'read'
+                'request' => $requestString
             )
         );
     }
