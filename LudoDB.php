@@ -8,44 +8,69 @@
 class LudoDB
 {
     private $debug = false;
-    private static $mysqli;
+    private static $_useMysqlI;
     private static $instance;
     private static $loggingEnabled = false;
     private static $startTime;
     private static $queryCounter = 0;
+    private static $connectionType = 'PDO'; // PDO|MySqlI
+
+    /**
+     * @var PDO
+     */
+    private static $PDO = null;
     /**
      * @var mysqli
      */
-    private static $conn;
+    private static $conn = null;
+    
 
-    public function __construct($useMysqlI = true)
+    public function __construct()
     {
-        if(self::$loggingEnabled){
+        if (self::$loggingEnabled) {
             self::$startTime = self::getTime();
         }
-        if (!isset(self::$mysqli)) {
-            if (!$useMysqlI) self::$mysqli = false;
-            else self::$mysqli = class_exists("mysqli");
-        }
-        if (!isset(self::$conn)) {
-            $this->connect();
-        }
+        $this->connect();
     }
 
-    public static function enableLogging(){
+    /**
+     * Set connection type,  PDO|MySqlI|MySql
+     * @param $type
+     */
+    public static function setConnectionType($type = 'PDO')
+    {
+        self::$connectionType = $type;
+        self::$PDO = null;
+        self::$conn = null;
+        self::getInstance()->connect();
+    }
+
+    public static function mySqlI(){
+        self::setConnectionType('MySqlI');
+    }
+
+    public static function hasPDO(){
+        return self::$connectionType === 'PDO';
+    }
+
+    public static function enableLogging()
+    {
         self::$loggingEnabled = true;
-        if(!isset(self::$startTime))self::$startTime = self::getTime();
+        if (!isset(self::$startTime)) self::$startTime = self::getTime();
     }
 
-    public static function isLoggingEnabled(){
+    public static function isLoggingEnabled()
+    {
         return self::$loggingEnabled;
     }
 
-    public  static function getElapsed(){
+    public static function getElapsed()
+    {
         return self::getTime() - self::$startTime;
     }
 
-    public static function getQueryCount(){
+    public static function getQueryCount()
+    {
         return self::$queryCounter;
     }
 
@@ -61,17 +86,6 @@ class LudoDB
             self::$instance = new LudoDB($useMysqlI);
         }
         return self::$instance;
-    }
-
-    public static function disableMySqli()
-    {
-        if (isset(self::$mysqli) && self::$mysqli) {
-            self::$mysqli = false;
-            if (isset(self::$conn)) {
-                self::$conn = null;
-                self::getInstance()->connect();
-            }
-        }
     }
 
     public static function setHost($host)
@@ -101,7 +115,9 @@ class LudoDB
         $pwd = LudoDBRegistry::get('DB_PWD');
         $db = LudoDBRegistry::get('DB_NAME');
 
-        if (self::$mysqli) {
+        if (self::$connectionType==='PDO') {
+            self::$PDO = new PDO("mysql:host=$host;dbname=$db", $user, $pwd);
+        } else if (self::$connectionType == 'MySqlI') {
             self::$conn = new mysqli($host, $user, $pwd, $db);
         } else {
             self::$conn = mysql_connect($host, $user, $pwd);
@@ -109,10 +125,14 @@ class LudoDB
         }
     }
 
-    public function escapeString($string){
-        if(is_string($string)){
+    public function escapeString($string)
+    {
+        if (self::$PDO) {
+            return $string;
+        }
+        if (is_string($string)) {
             $string = stripslashes($string);
-            if(self::$mysqli)return self::$conn->escape_string($string);
+            if (self::$_useMysqlI) return self::$conn->escape_string($string);
             return mysql_real_escape_string($string);
         }
         return $string;
@@ -120,20 +140,33 @@ class LudoDB
 
     /**
      * @param $sql
-     * @return bool|mysqli_result|resource
+     * @param array $params
+     * @return bool|mysqli_result|resource|PDOStatement
      * @throws Exception
      */
-    public function query($sql)
+    public function query($sql, $params = array())
     {
         if ($this->debug) $this->log($sql);
-        if(self::$loggingEnabled){
+        if (self::$loggingEnabled) {
             self::$queryCounter++;
         }
-        if (self::$mysqli) {
-            if($res = self::$conn->query($sql)){
+        if (self::$connectionType == 'PDO') {
+            if(!is_array($params))$params = array($params);
+            $stmt = self::$PDO->prepare($sql);
+            if(!$stmt->execute($params)){
+                throw new Exception("Invalid PDO query ". $sql . " (". implode(",", $params));
+            }
+            return $stmt;
+        }else{
+            if(!empty($params)){
+                $sql = LudoSQL::fromPrepared($sql, $params);
+            }
+        }
+        if (self::$connectionType == 'MySqlI') {
+            if ($res = self::$conn->query($sql)) {
                 return $res;
             }
-            throw new Exception("SQL ERROR: ". self::$conn->error."(".$sql.")");
+            throw new Exception("SQL ERROR: " . self::$conn->error . "(" . $sql . ")");
 
         }
         $res = mysql_query($sql) or die(mysql_error() . "\nSQL:" . $sql);
@@ -144,11 +177,14 @@ class LudoDB
      * @param $sql
      * @return array|null
      */
-    public function one($sql)
+    public function one($sql, $params = array())
     {
         if ($this->debug) $this->log($sql);
-        $res = $this->query($sql . " limit 1");
-        if (self::$mysqli) {
+        $res = $this->query($sql . " limit 1", $params);
+        if (self::$connectionType == 'PDO') {
+            $row = $res->fetch(PDO::FETCH_ASSOC);
+            return $row ? $row : null;
+        } else if (self::$connectionType == 'MySqlI') {
             if ($res && $row = $res->fetch_assoc()) {
                 return $row;
             }
@@ -157,7 +193,6 @@ class LudoDB
                 return $row;
             }
         }
-
         return null;
     }
 
@@ -165,13 +200,15 @@ class LudoDB
      * @param $sql
      * @return int
      */
-    public function countRows($sql)
+    public function countRows($sql, $params = array())
     {
-        if (self::$mysqli) {
-            $res = $this->query($sql);
+        $res = $this->query($sql, $params);
+        if (self::$PDO) {
+            return $res->rowCount();
+        } else if (self::$conn) {
             return ($res) ? $res->num_rows : 0;
         }
-        return mysql_num_rows($this->query($sql));
+        return mysql_num_rows($res);
     }
 
     /**
@@ -181,17 +218,21 @@ class LudoDB
      */
     public function getInsertId()
     {
-        if (self::$mysqli) return self::$conn->insert_id;
+        if (self::$PDO) return self::$PDO->lastInsertId();
+        if (self::$_useMysqlI) return self::$conn->insert_id;
         return mysql_insert_id();
     }
 
     /**
-     * @param mysqli_result|resource $result
+     * @param mysqli_result|resource|PDOStatement $result
      * @return array
      */
     public function nextRow($result)
     {
-        if (self::$mysqli) {
+        if(self::$PDO){
+            return $result->fetch(PDO::FETCH_ASSOC);
+        }
+        if (self::$_useMysqlI) {
             return $result->fetch_assoc();
         }
         return mysql_fetch_assoc($result);
@@ -201,10 +242,13 @@ class LudoDB
      * @param $sql
      * @return null|array
      */
-    public function getValue($sql)
+    public function getValue($sql, $params = array())
     {
-        $result = $this->query($sql . " limit 1");
-        if (self::$mysqli) {
+        $result = $this->query($sql . " limit 1", $params);
+        if(self::$PDO){
+            $row = $result->fetch(PDO::FETCH_NUM);
+        }
+        else if (self::$_useMysqlI) {
             $row = $result->fetch_row();
         } else {
             $row = mysql_fetch_row($result);
@@ -215,7 +259,7 @@ class LudoDB
 
     public function tableExists($tableName)
     {
-        return $this->countRows("show tables like '" . $tableName . "'") > 0;
+        return $this->countRows("show tables like ?", array($tableName)) > 0;
     }
 
     public function log($sql)

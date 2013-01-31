@@ -10,7 +10,7 @@ class LudoDBCache extends LudoDBModel
     protected $JSONConfig = false;
     protected $config = array(
         'table' => 'ludo_db_cache',
-        'sql' => "select class_name, cache_key, cache_value from ludo_db_cache where cache_key='?'",
+        'sql' => "select class_name, cache_key, cache_value from ludo_db_cache where cache_key=?",
         'idField' => 'JSON_key',
         'columns' => array(
             'id' => array(

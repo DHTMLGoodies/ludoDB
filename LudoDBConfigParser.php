@@ -95,7 +95,7 @@ class LudoDBConfigParser
         if ($this->obj->hasConfigInExternalFile()) {
             $config = $this->getConfigFromFile();
         }
-        if (isset($config['sql'])) {
+        if (isset($config['sql']) && !LudoDB::hasPDO()) {
             $config['sql'] = str_replace("?", "'%s'", $config['sql']);
             $config['sql'] = str_replace("''", "'", $config['sql']);
         }

@@ -21,7 +21,7 @@ abstract class LudoDBModel extends LudoDBObject
     {
         $this->populated = true;
         $this->constructorValues = $this->getValidConstructByValues($this->constructorValues);
-        $data = $this->db->one($this->sqlHandler()->getSql());
+        $data = $this->db->one($this->sqlHandler()->getSql(), $this->constructorValues);
         if (isset($data)) {
             $this->populateWith($data);
             $this->setId($this->getValue($this->parser->getIdField()));
@@ -49,13 +49,7 @@ abstract class LudoDBModel extends LudoDBObject
         return $value;
     }
 
-    private function getSQL()
-    {
-        $sql = new LudoSQL($this);
-        return $sql->getSql();
-    }
-
-    private function populateWith($data)
+    private function populateWith($data = array())
     {
         foreach ($data as $key => $value) {
             $this->data[$key] = $value;
@@ -182,7 +176,7 @@ abstract class LudoDBModel extends LudoDBObject
     {
         if ($this->isValid()) {
             $this->beforeInsert();
-            $this->db->query($this->sqlHandler()->getInsertSQL());
+            $this->db->query($this->sqlHandler()->getInsertSQL(), isset($this->updates) ? array_values($this->updates) : null);
             $this->setId($this->db->getInsertId());
         }
     }

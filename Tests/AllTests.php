@@ -20,7 +20,6 @@ class AllTests
         $suite->addTestSuite("ConfigParserTest");
         $suite->addTestSuite("ConfigParserTestJSON");
         $suite->addTestSuite("AccessorTest");
-        $suite->addTestSuite("MysqlTests");
         $suite->addTestSuite("ObjectCreatorTest");
         $suite->addTestSuite("ColumnAliasTest");
         $suite->addTestSuite("PerformanceTest");

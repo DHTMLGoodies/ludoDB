@@ -114,7 +114,7 @@ class SQLTest extends TestBase
 
         // when
         $sql = $this->getSqlObject($config, 1)->getSql();
-        $expected = "select Person.firstname,Person.lastname from Person where Person.id='1'";
+        $expected = "select Person.firstname,Person.lastname from Person where Person.id=?";
 
         // then
         $this->assertEquals($expected, $sql);
@@ -146,7 +146,7 @@ class SQLTest extends TestBase
 
         // when
         $sql = $this->getSqlObject($config, array(1,'Stavanger'))->getSql();
-        $expected = "select Person.firstname,Person.lastname,Person.zip,City.city from Person,City where Person.zip=City.zip and Person.id='1' and Person.city='Stavanger'";
+        $expected = "select Person.firstname,Person.lastname,Person.zip,City.city from Person,City where Person.zip=City.zip and Person.id=? and Person.city=?";
 
         // then
         $this->assertEquals($expected, $sql);
@@ -173,7 +173,7 @@ class SQLTest extends TestBase
 
         // when
         $sql = $this->getSqlObject($config, 1)->getSql();
-        $expected = "select Person.firstname,Person.lastname from Person where Person.id='1'";
+        $expected = "select Person.firstname,Person.lastname from Person where Person.id=?";
 
         // then
         $this->assertEquals($expected, $sql);
@@ -200,7 +200,7 @@ class SQLTest extends TestBase
 
         // when
         $sql = $this->getSqlObject($config, 1)->getSql();
-        $expected = "select Person.firstname,Person.lastname,Person.zip,City.city from Person,City where Person.zip=City.zip and Person.id='1'";
+        $expected = "select Person.firstname,Person.lastname,Person.zip,City.city from Person,City where Person.zip=City.zip and Person.id=?";
 
         // then
         $this->assertEquals($expected, $sql);
@@ -212,12 +212,12 @@ class SQLTest extends TestBase
     public function shouldBeAbleToHaveSQLDefinedInConfig(){
         // given
         $config = array(
-            'sql' => "select id,firstname,lastname from person where ID='?' and zip='?'"
+            'sql' => "select id,firstname,lastname from person where ID=? and zip=?"
         );
 
         // when
         $sql = $this->getSqlObject($config, array(1,4330))->getSql();
-        $expectedSql = "select id,firstname,lastname from person where ID='1' and zip='4330'";
+        $expectedSql = "select id,firstname,lastname from person where ID=? and zip=?";
         // then
         $this->assertEquals($expectedSql, $sql);
 

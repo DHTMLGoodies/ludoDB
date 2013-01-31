@@ -113,7 +113,6 @@ class CollectionTest extends TestBase
             'weight' => '1450kg',
             'hp' => '145'
         );
-
         // then
         $this->assertEquals($expected, $properties);
     }

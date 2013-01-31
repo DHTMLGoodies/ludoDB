@@ -59,7 +59,7 @@ class LudoDBIterator extends LudoDBObject implements Iterator
     }
 
     private function load(){
-        $this->dbResource = $this->db->query($this->sqlHandler()->getSql());
+        $this->dbResource = $this->db->query($this->sqlHandler()->getSql(), $this->constructorValues);
         $this->loaded = true;
         $this->next();
     }

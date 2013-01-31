@@ -1,4 +1,4 @@
 {
 	"model": "Capital",
-	"sql": "select * from capital where zip >= '?' and zip <= '?'"
+	"sql": "select * from capital where zip >= ? and zip <= ?"
 }

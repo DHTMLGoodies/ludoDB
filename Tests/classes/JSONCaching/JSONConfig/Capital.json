@@ -1,6 +1,6 @@
 {
 	"table": "Capital",
-	"sql": "select * from capital where ID='?'",
+	"sql": "select * from capital where ID=?",
 	"idField": "id",
 	"columns": {
 		"id": {

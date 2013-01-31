@@ -42,7 +42,6 @@ class LudoSQL
     private function getCompiledSql()
     {
         return "select " . $this->getColumns() . " from " . $this->getTables() . $this->getJoins() . $this->getOrderBy();
-
     }
 
     private function getColumns()
@@ -89,11 +88,11 @@ class LudoSQL
     {
         $ret = $this->configParser->getJoinsForSQL();
         $constructBy = $this->configParser->getConstructorParams();
+        $pdo = LudoDB::hasPDO();
         if (isset($constructBy)) {
             for ($i = 0, $count = count($this->constructorValues); $i < $count; $i++) {
-                $ret[] = $this->getTableAndColumn($constructBy[$i]) . "='" . $this->constructorValues[$i] . "'";
+                $ret[] = $this->getTableAndColumn($constructBy[$i]) . "=" . ($pdo ? "?" : "'" . $this->constructorValues[$i] . "'");
             }
-
         }
         if (count($ret)) {
             return " where " . implode(" and ", $ret);
@@ -148,14 +147,35 @@ class LudoSQL
 
     public function getInsertSQL()
     {
+
         $table = $this->configParser->getTableName();
         $data = $this->obj->getUncommitted();
+
+        if(LudoDB::hasPDO()){
+            return $this->getPDOInsert($data);
+        }
         if (!isset($data)) $data = array(
             $this->obj->configParser()->getIdField() => self::DELETED
         );
-
         $sql = "insert into " . $table . "(" . implode(",", array_keys($data)) . ")";
         $sql .= "values('" . implode("','", array_values($data)) . "')";
+        $sql = str_replace("'" . self::DELETED . "'", "null", $sql);
+
+        return $sql;
+    }
+
+    private function getPDOInsert($data){
+        $table = $this->configParser->getTableName();
+
+        if (!isset($data)) $data = array(
+            $this->obj->configParser()->getIdField() => null
+        );
+
+        $keys = array_keys($data);
+        $sql = "insert into " . $table . "(" . implode(",", $keys) . ")";
+
+        $values = implode(",", array_fill(0, count($keys), '?'));
+        $sql .= "values(" . $values . ")";
         $sql = str_replace("'" . self::DELETED . "'", "null", $sql);
 
         return $sql;
@@ -164,7 +184,6 @@ class LudoSQL
     public function getUpdateSql()
     {
         return "update " . $this->obj->configParser()->getTableName() . " set " . $this->getUpdatesForSql($this->obj->getUncommitted()) . " where " . $this->obj->configParser()->getIdField() . " = '" . $this->obj->getId() . "'";
-
     }
 
     private function getUpdatesForSql($updates)
@@ -174,5 +193,16 @@ class LudoSQL
             $ret[] = $key . "=" . ($value === self::DELETED ? 'NULL' : "'" . $value . "'");
         }
         return implode(",", $ret);
+    }
+
+    public static function fromPrepared($sql, $params = array()){
+        $sql = str_replace(",?", ",'%s'", $sql);
+        $db = LudoDB::getInstance();
+        for($i=0,$count = count($params);$i<$count;$i++){
+            $params[$i] = $db->escapeString($params[$i]);
+        }
+
+        $sql = vsprintf($sql, $params);
+        return $sql;
     }
 }
