@@ -147,7 +147,6 @@ class LudoSQL
 
     public function getInsertSQL()
     {
-
         $table = $this->configParser->getTableName();
         $data = $this->obj->getUncommitted();
 
@@ -196,12 +195,14 @@ class LudoSQL
     }
 
     public static function fromPrepared($sql, $params = array()){
-        $sql = str_replace(",?", ",'%s'", $sql);
+        if(!strstr($sql, "?"))return $sql;
+
+        $sql = str_replace("?", "'%s'", $sql);
+        $sql = str_replace("''%s''", "'%s'", $sql);
         $db = LudoDB::getInstance();
         for($i=0,$count = count($params);$i<$count;$i++){
             $params[$i] = $db->escapeString($params[$i]);
         }
-
         $sql = vsprintf($sql, $params);
         return $sql;
     }

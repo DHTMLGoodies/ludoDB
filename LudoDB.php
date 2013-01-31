@@ -203,9 +203,9 @@ class LudoDB
     public function countRows($sql, $params = array())
     {
         $res = $this->query($sql, $params);
-        if (self::$PDO) {
+        if(self::$connectionType == 'PDO'){
             return $res->rowCount();
-        } else if (self::$conn) {
+        } else if (self::$connectionType == 'MySqlI') {
             return ($res) ? $res->num_rows : 0;
         }
         return mysql_num_rows($res);
@@ -218,8 +218,8 @@ class LudoDB
      */
     public function getInsertId()
     {
-        if (self::$PDO) return self::$PDO->lastInsertId();
-        if (self::$_useMysqlI) return self::$conn->insert_id;
+        if(self::$connectionType == 'PDO') return self::$PDO->lastInsertId();
+        if (self::$connectionType == 'MySqlI') return self::$conn->insert_id;
         return mysql_insert_id();
     }
 
@@ -229,10 +229,10 @@ class LudoDB
      */
     public function nextRow($result)
     {
-        if(self::$PDO){
+        if(self::$connectionType == 'PDO'){
             return $result->fetch(PDO::FETCH_ASSOC);
         }
-        if (self::$_useMysqlI) {
+        if (self::$connectionType == 'MySqlI') {
             return $result->fetch_assoc();
         }
         return mysql_fetch_assoc($result);
@@ -245,10 +245,10 @@ class LudoDB
     public function getValue($sql, $params = array())
     {
         $result = $this->query($sql . " limit 1", $params);
-        if(self::$PDO){
+        if(self::$connectionType == 'PDO'){
             $row = $result->fetch(PDO::FETCH_NUM);
         }
-        else if (self::$_useMysqlI) {
+        else if (self::$connectionType == 'MySqlI') {
             $row = $result->fetch_row();
         } else {
             $row = mysql_fetch_row($result);
