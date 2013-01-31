@@ -7,12 +7,12 @@
  */
 class LudoDB
 {
-    private $debug = false;
-    private static $_useMysqlI;
-    private static $instance;
-    private static $loggingEnabled = false;
-    private static $startTime;
-    private static $queryCounter = 0;
+    protected $debug = false;
+    protected static $_useMysqlI;
+    protected static $instance;
+    protected static $loggingEnabled = false;
+    protected static $startTime;
+    protected static $queryCounter = 0;
     private static $connectionType = 'PDO'; // PDO|MySqlI
 
     /**
@@ -108,7 +108,7 @@ class LudoDB
         LudoDBRegistry::set('DB_NAME', $dbName);
     }
 
-    private function connect()
+    protected function connect()
     {
         $host = LudoDBRegistry::get('DB_HOST');
         $user = LudoDBRegistry::get('DB_USER');
