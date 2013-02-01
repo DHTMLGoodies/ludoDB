@@ -192,23 +192,38 @@ The LudoDBRequestHandler handles requests and passes them to the correct LudoDBM
 	$request = array(
 		'request' => 'Person/2/read'
 	);
-	// will give you the values for person where ID is set to 2
 	$handler = new LudoDBRequestHandler();
 	echo $handler->handle($request);
 
-For save, you may use
+Will give you the values for person where ID is set to 2. The handler will output response in JSON format:
+
+###Example: JSON response from LudoDBRequestHandler
+	{
+		"success": true,
+		"message": "",
+		"response": {
+			"firstname": "Anna",
+			"lastname": "Westwood"
+		}
+	}
+
+###Example: Save data, using request handler.
+
+For save, you can use code like this:
 
 	<?php
-	$request = array(
-		'request' => 'Person/1/save',
-		'data' => array(
-			'firstname' => 'Mike'
-		)
-	);
-	// will set firstname of person with ID 1 to Mike
-	$handler = new LudoDBRequestHandler();
-	echo $handler->handle($request);
+	/** Assuming that $_POST['request'] is
+		array(
+			'request' => 'Person/1/save',
+			'data' => array(
+				'firstname' => 'Mike'
+			)
+		);
 
+	$handler = new LudoDBRequestHandler();
+	echo $handler->handle($_POST['request']);
+	
+Which will set first name of person with ID 1 to Mike
 Support for handling requests using Apache mod_rewrite will be added soon. The "request" property in the example
 above will then no longer be needed. Instead, the request is specified in requested url. Examples:
 
