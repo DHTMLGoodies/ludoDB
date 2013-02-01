@@ -7,7 +7,32 @@ the LudoDBAdapter PHP interface.
 
 LudoDB will soon merge with LudoJS for easy, clean and fast development of rich web applications.
 
-###Example:
+To check out from command line (With Git installed on your computer):
+
+	git clone https://github.com/DHTMLGoodies/ludoDB.git
+
+###Setup database connection.
+The code to establish a connection to your database is:
+
+	<?php
+	LudoDB::setHost('<host>');
+	LudoDB::setUser('<user>');
+	LudoDB::setPassword('<password>');
+	LudoDB::setDb('<db name>');
+
+The default, and preferred database adapter is PDO. You can switch to MySqlI with this code:
+
+	<?php
+	LudoDB::setConnectionType('MYSQLI');
+
+LudoDB will establish a connection to your database when it needs to.
+
+##Examples:
+Here are some examples of use:
+
+###Example: Create database table
+
+###Example: Create model:
 
 	<?php
 
@@ -62,9 +87,13 @@ LudoDB will soon merge with LudoJS for easy, clean and fast development of rich 
 			}
 		}
 
-
 	?>
-###Usage:
+###Example: Create database table:
+	<?php
+	$person = new Person();
+	if(!$person->exists())$person->createTable();
+
+###Example: Use a model:
 
 	<?php
 	$person = new Person();
@@ -72,6 +101,7 @@ LudoDB will soon merge with LudoJS for easy, clean and fast development of rich 
 	$person->setLastname('Wayne');
 	$person->commit();
 	?>
+
 For creating a new Person record and save it to the database
 
 	<?php
@@ -87,6 +117,7 @@ Will output data for this record.
 	$person->setLastname('Johnson');
 	$person->commit();
 	?>
+
 Will update lastname in db for person with id=1
 
 	<?php
@@ -97,7 +128,7 @@ will output person data in JSON format.
 
 You can also configure the database in json files:
 
-###Example
+###Example: Creating a model using external JSON file:
 
 PHP Class (Client.php)
 
@@ -107,12 +138,12 @@ PHP Class (Client.php)
 		protected $JSONConfig = true;
 
 		public function __construct($id){
-		 parent::__construct($id);
+		 	parent::__construct($id);
 		}
 
 	}
 
-###JSON file(Client.json) located in sub folder JSONConfig:
+####JSON file(Client.json) located in sub folder JSONConfig:
 
 	{
 		"table":"Client",
@@ -154,9 +185,9 @@ PHP Class (Client.php)
 
 Which gives you automatic setters and getters for lastname, firstname, address and zip.
 
-##Request handlers
-LudoDB is intended for use with LudoJS Javascript framework. The LudoDBRequestHandler handles requests
-and passes them to the correct LudoDBModel. Example:
+###Example: LudoDB Request handler
+LudoDB is intended for use with LudoJS Javascript framework. It acts as a router or controller.
+The LudoDBRequestHandler handles requests and passes them to the correct LudoDBModel. Example:
 	<?php
 	$request = array(
 		'request' => 'Person/2/read'
@@ -178,3 +209,13 @@ For save, you may use
 	$handler = new LudoDBRequestHandler();
 	echo $handler->handle($request);
 
+Support for handling requests using Apache mod_rewrite will be added soon. The "request" property in the example
+above will then no longer be needed. Instead, the request is specified in requested url. Examples:
+
+	http://localhost/Person/1/read
+	http://localhost/Store/1/products
+
+The last example may return a list of all products in Store where ID is 1.
+
+##Status:
+LudoDB is still work in progress.
