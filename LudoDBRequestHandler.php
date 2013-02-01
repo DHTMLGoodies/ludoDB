@@ -103,13 +103,17 @@ class LudoDBRequestHandler
         if (isset($className)) {
             try {
                 $cl = new ReflectionClass($className);
+
+                if(!$cl->isSubclassOf('LudoDBObject')){
+                    throw new LudoDBClassNotFoundException('Invalid request for: ' . $className, 400);
+                }
                 if (empty($args)) {
                     return $cl->newInstance();
                 } else {
                     return $cl->newInstanceArgs($args);
                 }
             } catch (Exception $e) {
-                throw new LudoDBClassNotFoundException('Class not found: ' . $className, 400);
+                throw new LudoDBClassNotFoundException('Invalid request for: ' . $className, 400);
             }
         }
         return null;
