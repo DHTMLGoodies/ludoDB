@@ -8,7 +8,6 @@
 class LudoDB
 {
     protected $debug = false;
-    protected static $_useMysqlI;
     protected static $instance;
     protected static $loggingEnabled = false;
     protected static $startTime;
@@ -29,10 +28,10 @@ class LudoDB
      */
     public static function setConnectionType($type = 'PDO')
     {
-        self::$connectionType = $type;
-        self::$PDO = null;
         self::$conn = null;
-        self::getInstance()->connect();
+        self::$instance = null;
+        self::$connectionType = $type;
+        self::getInstance($type);
     }
 
     public static function mySqlI(){
@@ -70,10 +69,19 @@ class LudoDB
         return ((float)$usec + (float)$sec);
     }
 
-    public static function getInstance($useMysqlI = true)
+    public static function getInstance()
     {
         if (!isset(self::$instance)) {
-            self::$instance = new LudoDBPDO($useMysqlI);
+            switch(self::$connectionType){
+                case 'PDO':
+                    self::$instance = new LudoDBPDO();
+                    break;
+                case 'MYSQLI':
+                    self::$instance = new LudoDBMySqlI();
+                    break;
+                default:
+                    self::$instance = new LudoDBMySql();
+            }
             self::$instance->connect();
         }
         return self::$instance;
@@ -102,6 +110,10 @@ class LudoDB
     public function tableExists($tableName)
     {
         return $this->countRows("show tables like ?", array($tableName)) > 0;
+    }
+
+    public function countRows(){
+        return 0;
     }
 
     public function log($sql)

@@ -1,10 +1,9 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * LudoDB interfaces
  * User: Alf Magne
  * Date: 31.01.13
  * Time: 19:07
- * To change this template use File | Settings | File Templates.
  */
 interface LudoDBAdapter
 {

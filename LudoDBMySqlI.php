@@ -1,6 +1,7 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * MysqlI adapter. PDO is the preferred adapter and should be used
+ * when supported by the server.
  * User: Alf Magne
  * Date: 01.02.13
  * Time: 11:58
@@ -8,6 +9,10 @@
  */
 class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
 {
+    /**
+     * @var mysqli
+     */
+    protected static $conn;
 
     public function connect(){
         $host = LudoDBRegistry::get('DB_HOST');
@@ -20,7 +25,7 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
     /**
      * @param $sql
      * @param array $params
-     * @return bool|mysqli_result|resource|PDOStatement
+     * @return bool|mysqli_result
      * @throws Exception
      */
     public function query($sql, $params = array())

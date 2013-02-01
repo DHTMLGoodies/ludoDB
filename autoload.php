@@ -43,6 +43,7 @@ spl_autoload_register(
                 'ludorequesthandler' => '/LudoRequestHandler.php',
                 'ludosql' => '/LudoSQL.php',
                 'manager' => '/Tests/classes/Manager.php',
+                'mysqlitests' => '/Tests/MySqlITests.php',
                 'objectcreatortest' => '/Tests/ObjectCreatorTest.php',
                 'pdotests' => '/Tests/PDOTests.php',
                 'people' => '/Tests/classes/People.php',

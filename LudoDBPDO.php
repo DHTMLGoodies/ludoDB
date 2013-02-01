@@ -1,13 +1,16 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * PDO Mysql Adapter
  * User: Alf Magne
  * Date: 31.01.13
  * Time: 19:02
- * To change this template use File | Settings | File Templates.
  */
 class LudoDBPDO extends LudoDB implements LudoDBAdapter
 {
+    /**
+     * @var PDO
+     */
+    protected static $conn;
 
     public function connect()
     {
@@ -93,7 +96,6 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
     {
         $result = $this->query($sql . " limit 1", $params);
         $row = $result->fetch(PDO::FETCH_NUM);
-        if (isset($row)) return $row[0];
-        return null;
+        return (isset($row)) ? $row[0] : null;
     }
 }

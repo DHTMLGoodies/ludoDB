@@ -1,10 +1,10 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * PDO Mysql adapter. Should only be used when neither
+ * PDO or MySqlI is supported on the server.
  * User: Alf Magne
  * Date: 01.02.13
  * Time: 12:26
- * To change this template use File | Settings | File Templates.
  */
 class LudoDBMysql extends LudoDB implements LudoDBAdapter
 {

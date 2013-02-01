@@ -24,6 +24,8 @@ class AllTests
         $suite->addTestSuite("ColumnAliasTest");
         $suite->addTestSuite("PerformanceTest");
         $suite->addTestSuite("RequestHandlerTest");
+        $suite->addTestSuite("PDOTests");
+        $suite->addTestSuite("MySqlITests");
         return $suite;
     }
 }

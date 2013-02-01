@@ -8,7 +8,7 @@
  */
 require_once(__DIR__ . "/../autoload.php");
 
-class PDOTests extends TestBase
+class MySqlITests extends TestBase
 {
 
     private static $connectionSet = false;
@@ -19,7 +19,7 @@ class PDOTests extends TestBase
         parent::setUp();
 
         if(!self::$connectionSet){
-            LudoDb::setConnectionType('PDO');
+            LudoDb::setConnectionType('MYSQLI');
         }
     }
 
