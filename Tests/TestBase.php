@@ -33,7 +33,7 @@ class TestBase extends PHPUnit_Framework_TestCase
     private $dbInstance;
     protected function getDb(){
         if(!isset($this->dbInstance)){
-            $this->dbInstance = new LudoDB();
+            $this->dbInstance = LudoDB::getInstance();
         }
         return $this->dbInstance;
     }
@@ -50,13 +50,13 @@ class TestBase extends PHPUnit_Framework_TestCase
 
     protected function clearTable()
     {
-        $db = new LudoDB();
+        $db = LudoDB::getInstance();
         $db->query("delete from TestTable");
     }
 
     protected function dropTable()
     {
-        $db = new LudoDB();
+        $db = LudoDB::getInstance();
         $t = new TestTable();
         $t->drop()->yesImSure();
     }

@@ -238,7 +238,7 @@ class LudoDBModelTests extends TestBase
 
         new Car();
 
-        $db = new LudoDB();
+        $db = LudoDB::getInstance();
         $row = $db->one("select count(id) as num from car");
 
         // then
