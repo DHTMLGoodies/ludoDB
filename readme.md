@@ -1,7 +1,7 @@
 Framework for easy creation and manipulation of mySQL tables using PHP.
 
-Example:
---------
+###Example:
+
 	<?php
 
 		class Person extends LudoDBModel
@@ -57,7 +57,7 @@ Example:
 
 
 	?>
-Usage:
+###Usage:
 
 	<?php
 	$person = new Person();
@@ -82,15 +82,16 @@ Will output data for this record.
 	?>
 Will update lastname in db for person with id=1
 
-	<?php
-	echo $person;
-	?>
+><?php
+>//
+>echo $person;
+>?>
 
 will output person data in JSON format.
 
 You can also configure the database in json files:
 
-Example
+###Example
 
 PHP Class (Client.php)
 
@@ -105,7 +106,7 @@ PHP Class (Client.php)
 
 	}
 
-JSON file(Client.json) located in sub folder JSONConfig:
+###JSON file(Client.json) located in sub folder JSONConfig:
 
 	{
 		"table":"Client",
@@ -145,4 +146,4 @@ JSON file(Client.json) located in sub folder JSONConfig:
 		}
 	}
 
-Which gives you automatic setters and getters for lastname, firstname, address and zip
+Which gives you automatic setters and getters for lastname, firstname, address and zip.
