@@ -1,7 +1,7 @@
 Framework for easy creation and manipulation of mySQL tables using PHP.
 
 Example:
-
+--------
 	<?php
 
 		class Person extends LudoDBModel
