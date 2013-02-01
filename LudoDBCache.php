@@ -17,7 +17,7 @@ class LudoDBCache extends LudoDBModel
                 'db' => 'int auto_increment not null primary key'
             ),
             'cache_key' => array(
-                'db' => 'varchar(512) not null unique',
+                'db' => 'varchar(512)',
                 'access' => 'rw'
             ),
             'class_name' => array(
