@@ -23,7 +23,7 @@ class Person extends LudoDBModel
     );
 
     public function __construct($id){
-    	parent::__construct($id);
+     parent::__construct($id);
     }
 
     public function setFirstname($value){
@@ -100,7 +100,7 @@ class Client extends LudoDBModel
     protected $JSONConfig = true;
 
     public function __construct($id){
-    	parent::__construct($id);
+     parent::__construct($id);
     }
 
 }
@@ -146,4 +146,3 @@ JSON file(Client.json) located in sub folder JSONConfig:
 }
 
 Which gives you automatic setters and getters for lastname, firstname, address and zip
-

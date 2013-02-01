@@ -92,11 +92,7 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
 
     public function escapeString($string)
     {
-        if (is_string($string)) {
-            $string = stripslashes($string);
-            return self::$conn->escape_string($string);
-        }
-        return $string;
+        return is_string($string) ? self::$conn->escape_string(stripslashes($string)) : $string;
     }
 
 }
