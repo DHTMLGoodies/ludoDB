@@ -217,5 +217,3 @@ above will then no longer be needed. Instead, the request is specified in reques
 
 The last example may return a list of all products in Store where ID is 1.
 
-##Status:
-LudoDB is still work in progress.
