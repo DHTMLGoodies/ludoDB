@@ -15,9 +15,7 @@ class MySqlITests extends TestBase
 
     public function setUp()
     {
-
         parent::setUp();
-
         if(!self::$connectionSet){
             LudoDb::setConnectionType('MYSQLI');
         }

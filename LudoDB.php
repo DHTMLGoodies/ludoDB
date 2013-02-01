@@ -28,10 +28,12 @@ class LudoDB
      */
     public static function setConnectionType($type = 'PDO')
     {
-        self::$conn = null;
-        self::$instance = null;
-        self::$connectionType = $type;
-        self::getInstance($type);
+        if($type != self::$connectionType){
+            self::$conn = null;
+            self::$instance = null;
+            self::$connectionType = $type;
+            self::getInstance($type);
+        }
     }
 
     public static function mySqlI(){

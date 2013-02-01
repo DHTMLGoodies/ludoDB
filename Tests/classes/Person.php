@@ -22,4 +22,8 @@ class Person extends LudoDBModel
     public function getFirstname(){
         return $this->getValue('firstname');
     }
+
+    public function setAddress($address){
+        $this->setValue('address', $address);
+    }
 }
