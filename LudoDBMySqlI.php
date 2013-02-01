@@ -38,8 +38,10 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
         }
         throw new Exception("SQL ERROR: " . self::$conn->error . "(" . $sql . ")");
     }
+
     /**
      * @param $sql
+     * @param array $params
      * @return array|null
      */
     public function one($sql, $params = array())
@@ -51,8 +53,10 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
         }
         return null;
     }
+
     /**
      * @param $sql
+     * @param array $params
      * @return int
      */
     public function countRows($sql, $params = array())
@@ -81,7 +85,8 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
 
     /**
      * @param $sql
-     * @return null|array
+     * @param array $params
+     * @return null
      */
     public function getValue($sql, $params = array())
     {

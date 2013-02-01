@@ -1,10 +1,9 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * LudoDB PHPUnit base class for tests
  * User: borrow
  * Date: 19.12.12
  * Time: 15:37
- * To change this template use File | Settings | File Templates.
  */
 class TestBase extends PHPUnit_Framework_TestCase
 {

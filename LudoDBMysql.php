@@ -74,6 +74,7 @@ class LudoDBMysql extends LudoDB implements LudoDBAdapter
 
     /**
      * @param $sql
+     * @param array $params
      * @return null|array
      */
     public function getValue($sql, $params = array())

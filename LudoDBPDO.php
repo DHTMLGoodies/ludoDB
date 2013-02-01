@@ -48,6 +48,7 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
 
     /**
      * @param $sql
+     * @param array $params
      * @return array|null
      */
     public function one($sql, $params = array())
@@ -60,6 +61,7 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
 
     /**
      * @param $sql
+     * @param array $params
      * @return int
      */
     public function countRows($sql, $params = array())
@@ -89,6 +91,7 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
 
     /**
      * @param $sql
+     * @param array $params
      * @return null|array
      */
     public function getValue($sql, $params = array())

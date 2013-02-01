@@ -21,7 +21,7 @@ class LudoDBConfigParser
     }
 
     /**
-     * @param LudoDBObject $obj
+     * @param array $config
      */
     private function buildConfig($config)
     {
@@ -42,7 +42,6 @@ class LudoDBConfigParser
         } else {
             throw new Exception("Could not load config file $location");
         }
-        return null;
     }
 
     private function getPathToJSONConfig()
@@ -247,6 +246,9 @@ class LudoDBConfigParser
         return $ret;
     }
 
+    /**
+     * @return array
+     */
     public function getColumns()
     {
         return $this->getProperty('columns');

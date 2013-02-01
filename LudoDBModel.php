@@ -15,7 +15,7 @@ abstract class LudoDBModel extends LudoDBObject
     protected function populate()
     {
         $this->populated = true;
-        $this->constructorValues = $this->getValidConstructByValues($this->constructorValues);
+        $this->constructorValues = $this->getValidInputs($this->constructorValues);
         $data = $this->db->one($this->sqlHandler()->getSql(), $this->constructorValues);
         if (isset($data)) {
             $this->populateWith($data);
@@ -25,16 +25,16 @@ abstract class LudoDBModel extends LudoDBObject
 
 
 
-    private function getValidConstructByValues($params)
+    private function getValidInputs($params)
     {
         $paramNames = $this->parser->getConstructorParams();
         for ($i = 0, $count = count($params); $i < $count; $i++) {
-            $params[$i] = $this->getValidConstructByValue($paramNames[$i], $params[$i]);
+            $params[$i] = $this->getValidInput($paramNames[$i], $params[$i]);
         }
         return $params;
     }
 
-    protected function getValidConstructByValue($key, $value)
+    protected function getValidInput($key, $value)
     {
         return $value;
     }

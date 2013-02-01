@@ -73,11 +73,11 @@ class LudoDBCache extends LudoDBModel
 
     public static function clearCacheBy($key){
         if(isset($key) && strlen($key)){
-            LudoDb::getInstance()->query("delete from ludo_db_cache where cache_key='". $key."'");
+            LudoDb::getInstance()->query("delete from ludo_db_cache where cache_key=?", array($key));
         }
     }
 
     public static function clearCacheByClass($className){
-        LudoDb::getInstance()->query("delete from ludo_db_cache where class_name='". $className."'");
+        LudoDb::getInstance()->query("delete from ludo_db_cache where class_name=?", array($className));
     }
 }
