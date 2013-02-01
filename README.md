@@ -222,7 +222,7 @@ For save, you can use code like this:
 
 	$handler = new LudoDBRequestHandler();
 	echo $handler->handle($_POST['request']);
-	
+
 Which will set first name of person with ID 1 to Mike
 Support for handling requests using Apache mod_rewrite will be added soon. The "request" property in the example
 above will then no longer be needed. Instead, the request is specified in requested url. Examples:
