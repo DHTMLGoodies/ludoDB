@@ -1,4 +1,11 @@
-Framework for easy creation and manipulation of mySQL tables using PHP.
+##Overview
+LudoDB is a PHP Framework for easy creation and manipulation of mySQL tables using PHP. It supports both
+PDO and MysqlI. PDO with prepared queries is the default database adapter.
+
+Support for other databases can easily be implemented by creating a new database adapter which implements
+the LudoDBAdapter PHP interface.
+
+LudoDB will soon merge with LudoJS for easy, clean and fast development of rich web applications.
 
 ###Example:
 
@@ -82,10 +89,9 @@ Will output data for this record.
 	?>
 Will update lastname in db for person with id=1
 
-><?php
->//
->echo $person;
->?>
+	<?php
+	echo $person; // Call the __toString() method of Person
+	?>
 
 will output person data in JSON format.
 
@@ -147,3 +153,28 @@ PHP Class (Client.php)
 	}
 
 Which gives you automatic setters and getters for lastname, firstname, address and zip.
+
+##Request handlers
+LudoDB is intended for use with LudoJS Javascript framework. The LudoDBRequestHandler handles requests
+and passes them to the correct LudoDBModel. Example:
+	<?php
+	$request = array(
+		'request' => 'Person/2/read'
+	);
+	// will give you the values for person where ID is set to 2
+	$handler = new LudoDBRequestHandler();
+	echo $handler->handle($request);
+
+For save, you may use
+
+	<?php
+	$request = array(
+		'request' => 'Person/1/save',
+		'data' => array(
+			'firstname' => 'Mike'
+		)
+	);
+	// will set firstname of person with ID 1 to Mike
+	$handler = new LudoDBRequestHandler();
+	echo $handler->handle($request);
+
