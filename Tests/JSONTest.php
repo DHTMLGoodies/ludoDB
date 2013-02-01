@@ -236,7 +236,7 @@ class JSONTest extends TestBase
     }
 
     private function triggerJSONFor($className, $arguments = array()){
-        $request = new LudoRequestHandler();
+        $request = new LudoDBRequestHandler();
         $requestString = $className;
         if(!is_array($arguments))$arguments = array($arguments);
         if(!empty($arguments))$requestString.="/".implode("/", $arguments);

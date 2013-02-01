@@ -6,7 +6,7 @@
  * Time: 13:15
  * To change this template use File | Settings | File Templates.
  */
-class RequestHandlerMock extends LudoRequestHandler
+class RequestHandlerMock extends LudoDBRequestHandler
 {
 
     public $model;

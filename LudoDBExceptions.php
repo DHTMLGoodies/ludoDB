@@ -10,3 +10,8 @@ class LudoDBClassNotFoundException extends Exception
 {
 
 }
+
+
+class LudoDBObjectNotFoundException extends Exception{
+
+}

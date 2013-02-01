@@ -40,7 +40,7 @@ spl_autoload_register(
                 'ludodbobject' => '/LudoDBObject.php',
                 'ludodbpdo' => '/LudoDBPDO.php',
                 'ludodbregistry' => '/LudoDBRegistry.php',
-                'ludorequesthandler' => '/LudoRequestHandler.php',
+                'LudoDBRequestHandler' => '/LudoDBRequestHandler.php',
                 'ludosql' => '/LudoSQL.php',
                 'manager' => '/Tests/classes/Manager.php',
                 'mysqlitests' => '/Tests/MysqlITests.php',

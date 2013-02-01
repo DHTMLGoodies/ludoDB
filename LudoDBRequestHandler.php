@@ -6,7 +6,7 @@
  * Date: 13.01.13
  * Time: 16:24
  */
-class LudoRequestHandler
+class LudoDBRequestHandler
 {
 
     /**
@@ -37,6 +37,9 @@ class LudoRequestHandler
 
             switch ($this->action) {
                 case 'read':
+                    if(!$this->model->getId() && $this->model instanceof LudoDBModel){
+                        throw new Exception('Object not found', 404);
+                    }
                     return $this->toJSON($this->getValues());
                 case 'save':
                     return $this->toJSON($this->model->save($request['data']));
