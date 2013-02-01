@@ -8,7 +8,7 @@
 class LudoDB
 {
     protected $debug = false;
-    protected static $instance;
+    private static $instance;
     protected static $loggingEnabled = false;
     protected static $startTime;
     protected static $queryCounter = 0;
@@ -107,6 +107,22 @@ class LudoDB
     public static function setDb($dbName)
     {
         LudoDBRegistry::set('DB_NAME', $dbName);
+    }
+
+    protected static function getHost(){
+        return LudoDBRegistry::get('DB_HOST');
+    }
+
+    protected static function getUser(){
+        return LudoDBRegistry::get('DB_USER');
+    }
+
+    protected static function getPassword(){
+        return LudoDBRegistry::get('DB_PWD');
+    }
+
+    protected static function getDb(){
+        return LudoDBRegistry::get('DB_NAME');
     }
 
     public function tableExists($tableName)

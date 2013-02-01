@@ -12,11 +12,6 @@ abstract class LudoDBModel extends LudoDBObject
     private $commitDisabled;
     private $populated = false;
 
-    protected function onConstruct()
-    {
-
-    }
-
     protected function populate()
     {
         $this->populated = true;
@@ -28,12 +23,7 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
-    private function autoPopulate()
-    {
-        if (!$this->populated && isset($this->constructorValues)) {
-            $this->populate();
-        }
-    }
+
 
     private function getValidConstructByValues($params)
     {
@@ -66,6 +56,13 @@ abstract class LudoDBModel extends LudoDBObject
             return $this->updates[$column] == LudoSQL::DELETED ? null : $this->updates[$column];
         }
         return isset($this->data[$column]) ? $this->data[$column] : null;
+    }
+
+    private function autoPopulate()
+    {
+        if (!$this->populated && isset($this->constructorValues)) {
+            $this->populate();
+        }
     }
 
     private function getExternalValue($column)
@@ -181,6 +178,10 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
+    /**
+     * Method executed before record is updated
+     * @method beforeUpdate
+     */
     protected function beforeUpdate()
     {
     }
@@ -311,17 +312,27 @@ abstract class LudoDBModel extends LudoDBObject
         return new $className;
     }
 
-    public function getSomeValuesFiltered($keys)
+    /**
+     * Return key-pair values with null values removed.
+     * @param array $keys
+     * @return array
+     */
+    public function getSomeValuesFiltered(array $keys)
     {
         return $this->some($keys, true);
     }
 
-    public function getSomeValues($keys)
+    /**
+     * Return model values.
+     * @param array $keys
+     * @return array
+     */
+    public function getSomeValues(array $keys)
     {
         return $this->some($keys, false);
     }
 
-    private function some($keys, $filtered = false)
+    private function some(array $keys, $filtered = false)
     {
         $ret = array();
         foreach ($keys as $key) {

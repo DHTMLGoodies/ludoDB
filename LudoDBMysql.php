@@ -10,13 +10,8 @@ class LudoDBMysql extends LudoDB implements LudoDBAdapter
 {
     public function connect()
     {
-        $host = LudoDBRegistry::get('DB_HOST');
-        $user = LudoDBRegistry::get('DB_USER');
-        $pwd = LudoDBRegistry::get('DB_PWD');
-        $db = LudoDBRegistry::get('DB_NAME');
-
-        self::$conn = mysql_connect($host, $user, $pwd);
-        mysql_select_db($db, self::$conn);
+        self::$conn = mysql_connect(self::getHost(), self::getUser(), self::getPassword());
+        mysql_select_db(self::getDb(), self::$conn);
     }
 
     public function escapeString($string)

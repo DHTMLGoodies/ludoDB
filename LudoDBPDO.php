@@ -1,6 +1,6 @@
 <?php
 /**
- * PDO Mysql Adapter
+ * PDO Mysql Adapter. The default and preferred DB adapter to use.
  * User: Alf Magne
  * Date: 31.01.13
  * Time: 19:02
@@ -14,11 +14,10 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
 
     public function connect()
     {
-        $host = LudoDBRegistry::get('DB_HOST');
-        $user = LudoDBRegistry::get('DB_USER');
-        $pwd = LudoDBRegistry::get('DB_PWD');
-        $db = LudoDBRegistry::get('DB_NAME');
-
+        $host = self::getHost();
+        $user = self::getUser();
+        $pwd = self::getPassword();
+        $db = self::getDb();
         self::$conn = new PDO("mysql:host=$host;dbname=$db", $user, $pwd);
     }
 

@@ -34,7 +34,7 @@ spl_autoload_register(
                 'ludodbconfigparser' => '/LudoDBConfigParser.php',
                 'ludodbiterator' => '/LudoDBIterator.php',
                 'ludodbmodel' => '/LudoDBModel.php',
-                'ludodbmodeltests' => '/Tests/LudoDBTableTests.php',
+                'ludodbmodeltests' => '/Tests/LudoDBModelTests.php',
                 'ludodbmysql' => '/LudoDBMysql.php',
                 'ludodbmysqli' => '/LudoDBMySqlI.php',
                 'ludodbobject' => '/LudoDBObject.php',
