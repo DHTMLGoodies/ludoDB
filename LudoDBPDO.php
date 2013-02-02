@@ -14,13 +14,8 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
 
     public function connect()
     {
-        $host = self::getHost();
-        $user = self::getUser();
-        $pwd = self::getPassword();
-        $db = self::getDb();
         try{
-            self::$conn = new PDO("mysql:host=$host;dbname=$db", $user, $pwd);
-
+            self::$conn = new PDO("mysql:host=".self::getHost().";dbname=".self::getDb(), self::getUser(), self::getPassword());
         }catch(PDOException $e){
             throw new LudoDBConnectionException("Could not connect to database because ". $e->getMessage(), 400);
         }

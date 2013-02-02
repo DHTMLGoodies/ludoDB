@@ -13,6 +13,8 @@ abstract class LudoDBObject
     protected $db;
     protected $constructorValues;
     protected static $configParsers = array();
+
+    public static $validRequests = array('read', 'delete', 'save');
     /**
      * True when config is in JSONConfig/<class name>.json file
      * @var bool
@@ -170,11 +172,4 @@ abstract class LudoDBObject
 
     }
 
-    /**
-     * Return array of valid requests accepted by this object. Default is array('read', 'save', 'delete');
-     * @return array
-     */
-    public static function getValidRequests(){
-        return array('read','save','delete');
-    }
 }

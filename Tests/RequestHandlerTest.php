@@ -89,6 +89,7 @@ class RequestHandlerTest extends TestBase
         $handler = new RequestHandlerMock();
 
         $request = array('request' => 'Person/1');
+        $handler->handle($request);
 
         // when
 

@@ -17,6 +17,7 @@ class AllTests
         $suite->addTestSuite("CollectionTest");
         $suite->addTestSuite("SQLTest");
         $suite->addTestSuite("JSONTest");
+        $suite->addTestSuite("CacheTest");
         $suite->addTestSuite("ConfigParserTest");
         $suite->addTestSuite("ConfigParserTestJSON");
         $suite->addTestSuite("AccessorTest");

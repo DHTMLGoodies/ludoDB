@@ -39,7 +39,7 @@ class TestBase extends PHPUnit_Framework_TestCase
 
     private function connect()
     {
-        LudoDB::setHost('localhost');
+        LudoDB::setHost('127.0.0.1');
         LudoDB::setUser('root');
         LudoDB::setPassword('administrator');
         LudoDB::setDb('PHPUnit');

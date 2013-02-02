@@ -14,7 +14,7 @@ class LudoDBRequestHandler
      */
     protected $model;
     protected $action;
-    protected $jsonCacheInstance;
+    protected $cacheInstance;
     private $validRequests = array();
     private $success = true;
     private $message = "";
@@ -29,7 +29,9 @@ class LudoDBRequestHandler
     {
         $request = $this->getParsed($request);
         try {
-            $this->model = $this->getModel($request);
+            $this->validRequests = $this->getValidRequests($request);
+
+            $this->model = $this->getModel($request, $this->getArguments($request));
             $this->action = $this->getAction($request);
 
             $this->model->validate($this->action, $request['data']);
@@ -75,7 +77,6 @@ class LudoDBRequestHandler
                 'queries' => LudoDB::getQueryCount()
             );
         }
-
         return json_encode($ret);
     }
 
@@ -97,31 +98,29 @@ class LudoDBRequestHandler
      * @return null|object
      * @throws LudoDBClassNotFoundException
      */
-    protected function getModel(array $request)
+    protected function getModel(array $request, $args = array())
     {
         $className = $this->getClassName($request);
         if (isset($className)) {
-            $cl = $this->getLudoDBClass($className);
-            /**
-             * TODO try to refactor this
-             */
-            $this->validRequests = $className::getValidRequests();
-            $args = $this->getArguments($request);
+            $cl = $this->getReflectionClass($className);
             if (empty($args)) {
                 return $cl->newInstance();
             } else {
                 return $cl->newInstanceArgs($args);
             }
         }
-        throw new LudoDBClassNotFoundException('Invalid request for: ' . $className, 400);
+        throw new LudoDBClassNotFoundException('Invalid request for: ' . $request['request'], 400);
     }
 
-    /**
-     * @param $className
-     * @return ReflectionClass
-     * @throws LudoDBClassNotFoundException
-     */
-    private function getLudoDBClass($className){
+    private function getValidRequests(array $request){
+        $className = $this->getClassName($request);
+        if(isset($className)){
+            return $this->getReflectionClass($className)->getStaticPropertyValue("validRequests");
+        }
+        return array();
+    }
+
+    private function getReflectionClass($className){
         $cl = new ReflectionClass($className);
         if (!$cl->isSubclassOf('LudoDBObject')) {
             throw new LudoDBClassNotFoundException('Invalid request for: ' . $className, 400);
@@ -151,14 +150,14 @@ class LudoDBRequestHandler
         $data = null;
         $caching = $this->model->cacheEnabled();
         if ($caching) {
-            if ($this->cache()->hasValue()) {
-                $data = $this->cache()->getCache();
+            if ($this->ludoDBCache()->hasValue()) {
+                $data = $this->ludoDBCache()->getCache();
             }
         }
         if (!isset($data)) {
             $data = $this->model->getValues();
             if ($caching && $this->model->getJSONKey()) {
-                $this->cache()->setCache($data)->commit();
+                $this->ludoDBCache()->setCache($data)->commit();
             }
         }
         return $data;
@@ -167,16 +166,16 @@ class LudoDBRequestHandler
     /**
      * @return LudoDBCache
      */
-    protected function cache()
+    protected function ludoDBCache()
     {
-        if (!isset($this->jsonCacheInstance)) {
-            $this->jsonCacheInstance = new LudoDBCache($this->model);
+        if (!isset($this->cacheInstance)) {
+            $this->cacheInstance = new LudoDBCache($this->model);
         }
-        return $this->jsonCacheInstance;
+        return $this->cacheInstance;
     }
 
     public function clearCacheObject()
     {
-        $this->jsonCacheInstance = null;
+        $this->cacheInstance = null;
     }
 }
