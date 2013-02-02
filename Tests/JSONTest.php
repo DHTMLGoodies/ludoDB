@@ -82,7 +82,6 @@ class JSONTest extends TestBase
         $capitals = new Capitals(5000,6000);
         $this->assertEquals(4, count($capitals->getValues()));
         $this->triggerJSONFor('Capitals', array(5000,6000));
-        #$capitals->asJSON();
 
         // when
         $json = new LudoDBCache($capitals);
@@ -219,7 +218,6 @@ class JSONTest extends TestBase
         $c = new Capital();
         $c->drop()->yesImSure();
         $c->createTable();
-        // given
         $cities = array(
             array('id' => 100, 'zip' => 4000, 'name' => 'Stavanger'),
             array('id' => 101,'zip' => 5500, 'name' => 'Haugesund'),
@@ -247,6 +245,4 @@ class JSONTest extends TestBase
             )
         );
     }
-
-
 }

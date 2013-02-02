@@ -37,7 +37,7 @@ class LudoDBRequestHandler
 
             switch ($this->action) {
                 case 'read':
-                    if(!$this->model->getId() && $this->model instanceof LudoDBModel){
+                    if (!$this->model->getId() && $this->model instanceof LudoDBModel) {
                         throw new Exception('Object not found', 404);
                     }
                     return $this->toJSON($this->getValues());
@@ -55,9 +55,10 @@ class LudoDBRequestHandler
         return "";
     }
 
-    private function getParsed($request){
+    private function getParsed($request)
+    {
         if (is_string($request)) $request = array('request' => $request);
-        if(!isset($request['data']))$request['data'] = array();
+        if (!isset($request['data'])) $request['data'] = array();
         return $request;
     }
 
@@ -101,22 +102,17 @@ class LudoDBRequestHandler
     {
         $className = $this->getClassName($request);
         if (isset($className)) {
-            try {
-                $cl = new ReflectionClass($className);
-
-                if(!$cl->isSubclassOf('LudoDBObject')){
-                    throw new LudoDBClassNotFoundException('Invalid request for: ' . $className, 400);
-                }
-                if (empty($args)) {
-                    return $cl->newInstance();
-                } else {
-                    return $cl->newInstanceArgs($args);
-                }
-            } catch (Exception $e) {
+            $cl = new ReflectionClass($className);
+            if (!$cl->isSubclassOf('LudoDBObject')) {
                 throw new LudoDBClassNotFoundException('Invalid request for: ' . $className, 400);
             }
+            if (empty($args)) {
+                return $cl->newInstance();
+            } else {
+                return $cl->newInstanceArgs($args);
+            }
         }
-        return null;
+        throw new LudoDBClassNotFoundException('Invalid request for: ' . $className, 400);
     }
 
     /**
