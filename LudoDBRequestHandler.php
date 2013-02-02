@@ -15,8 +15,7 @@ class LudoDBRequestHandler
     protected $model;
     protected $action;
     protected $jsonCacheInstance;
-    protected $validActions = array('read', 'save', 'delete');
-
+    private $validRequests = array();
     private $success = true;
     private $message = "";
     private $code = 200;
@@ -30,7 +29,7 @@ class LudoDBRequestHandler
     {
         $request = $this->getParsed($request);
         try {
-            $this->model = $this->getModel($request, $this->getArguments($request));
+            $this->model = $this->getModel($request);
             $this->action = $this->getAction($request);
 
             $this->model->validate($this->action, $request['data']);
@@ -85,7 +84,7 @@ class LudoDBRequestHandler
         $ret = array();
         $tokens = explode("/", $request['request']);
         for ($i = 1, $count = count($tokens); $i < $count; $i++) {
-            if ($i < $count - 1 || !in_array($tokens[$i], $this->validActions)) {
+            if ($i < $count - 1 || !in_array($tokens[$i], $this->validRequests)) {
                 $ret[] = $tokens[$i];
             }
         }
@@ -98,14 +97,16 @@ class LudoDBRequestHandler
      * @return null|object
      * @throws LudoDBClassNotFoundException
      */
-    protected function getModel(array $request, $args = array())
+    protected function getModel(array $request)
     {
         $className = $this->getClassName($request);
         if (isset($className)) {
-            $cl = new ReflectionClass($className);
-            if (!$cl->isSubclassOf('LudoDBObject')) {
-                throw new LudoDBClassNotFoundException('Invalid request for: ' . $className, 400);
-            }
+            $cl = $this->getLudoDBClass($className);
+            /**
+             * TODO try to refactor this
+             */
+            $this->validRequests = $className::getValidRequests();
+            $args = $this->getArguments($request);
             if (empty($args)) {
                 return $cl->newInstance();
             } else {
@@ -116,20 +117,33 @@ class LudoDBRequestHandler
     }
 
     /**
+     * @param $className
+     * @return ReflectionClass
+     * @throws LudoDBClassNotFoundException
+     */
+    private function getLudoDBClass($className){
+        $cl = new ReflectionClass($className);
+        if (!$cl->isSubclassOf('LudoDBObject')) {
+            throw new LudoDBClassNotFoundException('Invalid request for: ' . $className, 400);
+        }
+        return $cl;
+    }
+
+    /**
      * @param $request
      * @return string|null
      */
     private function getClassName($request)
     {
         $tokens = explode("/", $request['request']);
-        return $tokens[0];
+        return class_exists($tokens[0]) ? $tokens[0] : null;
     }
 
     protected function getAction($request)
     {
         $tokens = explode("/", $request['request']);
         $action = $tokens[count($tokens) - 1];
-        return in_array($action, $this->validActions) ? $action : 'read';
+        return in_array($action, $this->validRequests) ? $action : 'read';
     }
 
     public function getValues()

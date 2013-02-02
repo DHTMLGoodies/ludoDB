@@ -11,11 +11,14 @@ class LudoDBClassNotFoundException extends Exception
 
 }
 
-
 class LudoDBObjectNotFoundException extends Exception{
 
 }
 
 class LudoDBConnectionException extends Exception{
+
+}
+
+class LudoDBUnauthorizedException extends Exception{
 
 }

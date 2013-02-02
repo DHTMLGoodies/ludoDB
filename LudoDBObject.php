@@ -169,4 +169,12 @@ abstract class LudoDBObject
     {
 
     }
+
+    /**
+     * Return array of valid requests accepted by this object. Default is array('read', 'save', 'delete');
+     * @return array
+     */
+    public static function getValidRequests(){
+        return array('read','save','delete');
+    }
 }
