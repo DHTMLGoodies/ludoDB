@@ -29,7 +29,7 @@ class LudoDBRequestHandler
     {
         $request = $this->getParsed($request);
         try {
-            $this->validRequests = $this->getValidRequests($request);
+            $this->validRequests = $this->getValidServices($request);
 
             $this->model = $this->getModel($request, $this->getArguments($request));
             $this->action = $this->getAction($request);
@@ -112,10 +112,10 @@ class LudoDBRequestHandler
         throw new LudoDBClassNotFoundException('Invalid request for: ' . $request['request'], 400);
     }
 
-    private function getValidRequests(array $request){
+    private function getValidServices(array $request){
         $className = $this->getClassName($request);
         if(isset($className)){
-            return $this->getReflectionClass($className)->getStaticPropertyValue("validRequests");
+            return $this->getReflectionClass($className)->getStaticPropertyValue("validServices");
         }
         return array();
     }
