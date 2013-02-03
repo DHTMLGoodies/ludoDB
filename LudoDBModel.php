@@ -458,6 +458,7 @@ abstract class LudoDBModel extends LudoDBObject
 
     public function save($data)
     {
+        if(empty($data))return array();
         $idField = $this->parser->getIdField();
         if (isset($data[$idField])) $this->setId($data[$idField]);
 
