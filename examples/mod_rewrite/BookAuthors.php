@@ -12,6 +12,7 @@ class BookAuthors extends LudoDBCollection
     );
 
     public function getValues(){
+        $values = parent::getValues();
         return implode(", ", $this->getColumnValues('name'));
     }
 }

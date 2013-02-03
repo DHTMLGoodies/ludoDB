@@ -64,16 +64,19 @@ class LudoDBIterator extends LudoDBObject implements Iterator
         $this->next();
     }
 
+    private $valueCache;
     /**
      * Return collection data
      * @method getValues
      * @return array
      */
     public function getValues(){
-        $ret = array();
-        foreach($this as $key=>$value){
-            $ret[$key] = $value;
+        if(!isset($this->valueCache)){
+            $this->valueCache = array();
+            foreach($this as $key=>$value){
+                $this->valueCache[$key] = $value;
+            }
         }
-        return $ret;
+        return $this->valueCache;
     }
 }

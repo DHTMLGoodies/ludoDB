@@ -60,6 +60,11 @@ abstract class LudoDBCollection extends LudoDBIterator
         return $ret;
     }
 
+    /**
+     * Return values of a column as array
+     * @param String $column
+     * @return array
+     */
     protected function getColumnValues($column){
         $values = parent::getValues();
         $ret = array();

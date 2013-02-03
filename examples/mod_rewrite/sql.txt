@@ -1,3 +1,0 @@
-show tables like ?
-select * from book where id = ?
-select * from book where id = ? limit 1
