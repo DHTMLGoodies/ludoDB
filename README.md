@@ -222,12 +222,53 @@ For save, you can use code like this:
 	$handler = new LudoDBRequestHandler();
 	echo $handler->handle($_POST['request']);
 
-Which will set first name of person with ID 1 to Mike
-Support for handling requests using Apache mod_rewrite will be added soon. The "request" property in the example
-above will then no longer be needed. Instead, the request is specified in requested url. Examples:
+Which will set first name of person with ID 1 to Mike.
+
+##Reques handler using Apache mod_rewrite
+
+The request handler can also be configured using Apache mod_rewrite. The request attribute in the example above is then no longer needed.
+instead, the request is defined in the url. Examples:
 
 	http://localhost/Person/1/read
 	http://localhost/Store/1/products
 
 The last example may return a list of all products in Store where ID is 1.
+
+Here's an example of a Router.php file for mod_rewrite requests.
+
+    <?php
+
+    require_once(__DIR__."/autoload.php");
+
+    LudoDB::setUser('myDbUser');
+    LudoDB::setPassword('myDbPassword');
+    LudoDB::setHost('localhost');
+    LudoDB::setDb('myDb');
+
+    LudoDB::enableLogging();
+
+    $request = $_GET['request'];
+
+    if(isset($_POST['request'])){
+        $request['data'] = $_POST['data'];
+    }
+
+    $handler = new LudoDBRequestHandler();
+    echo $handler->handle($request);
+
+For this to work, the mod_rewrite module must be enabled in httpd.conf. You will also need an .htaccess file in the
+same folder as router.php. Example:
+
+    RewriteEngine on
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([a-zA-Z0-9\/_]+)/?$ router.php?request=$1 [QSA]
+
+    RewriteCond %{THE_REQUEST} router\.php
+    RewriteRule ^router\.php - [F]
+
+Requests for
+    http://myServer/Game/1/read
+
+will then be passed to router.php with "/Game/1/read" as the $_GET['request'] param.
 
