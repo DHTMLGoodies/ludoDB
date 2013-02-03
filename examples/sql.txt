@@ -1,8 +1,0 @@
-show tables like ?
-show tables like ?
-show tables like ?
-create table book(id int auto_increment not null primary key,isbn varchar(32),writer varchar(512),title varchar(512))
-insert into book(id,isbn,title,writer)values(?,?,?,?)
-insert into book(id,isbn,title,writer)values(?,?,?,?)
-select * from book where id = ?
-select * from book where id = ? limit 1
