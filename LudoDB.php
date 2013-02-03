@@ -36,10 +36,6 @@ class LudoDB
         }
     }
 
-    public static function mySqlI(){
-        self::setConnectionType('MySqlI');
-    }
-
     public static function hasPDO(){
         return self::$connectionType === 'PDO';
     }
