@@ -121,7 +121,7 @@ class LudoDBRequestHandler
 
     private function getReflectionClass($className){
         $cl = new ReflectionClass($className);
-        if (!$cl->isSubclassOf('LudoDBModel') || !$cl->isAbstract()) {
+        if (!$cl->isSubclassOf('LudoDBModel') || $cl->isAbstract() || $cl->isInterface()) {
             throw new LudoDBClassNotFoundException('Invalid request for: ' . $className, 400);
         }
         return $cl;
