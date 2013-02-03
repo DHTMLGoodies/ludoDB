@@ -27,4 +27,8 @@ class Person extends LudoDBModel implements LudoDBService
     public function setAddress($address){
         $this->setValue('address', $address);
     }
+
+    public function areValidServiceArguments($service, $arguments){
+        return empty($arguments) || count($arguments) === 1 && is_numeric($arguments[0]) ? true: false;
+    }
 }

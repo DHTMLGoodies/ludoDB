@@ -16,8 +16,8 @@ class RequestHandlerMock extends LudoDBRequestHandler
         return parent::getModel($request, $args);
     }
 
-    public function getAction($request){
-        return parent::getAction($request);
+    public function getServiceName($request){
+        return parent::getServiceName($request);
     }
 
     public function getArguments($request){

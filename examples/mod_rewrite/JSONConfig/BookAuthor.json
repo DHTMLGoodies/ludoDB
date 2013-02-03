@@ -1,0 +1,57 @@
+{
+    "sql":"select * from book_author where id=?",
+    "table": "book_author",
+    "columns":{
+        "id":"int auto_increment not null primary key",
+        "author_id":{
+            "db":"int",
+            "access":"rw"
+        },
+        "book_id":{
+            "db":"int",
+            "access":"rw"
+        }
+    },
+    "data":[
+        {
+            "author_id":1,
+            "book_id":1
+        },
+        {
+            "author_id":2,
+            "book_id":1
+        },
+        {
+            "author_id":3,
+            "book_id":2
+        },
+        {
+            "author_id":4,
+            "book_id":2
+        },
+        {
+            "author_id":5,
+            "book_id":2
+        },
+        {
+            "author_id":6,
+            "book_id":2
+        },
+        {
+            "author_id":7,
+            "book_id":3
+        },
+        {
+            "author_id":8,
+            "book_id":3
+        },
+        {
+            "author_id":9,
+            "book_id":3
+        },
+        {
+            "author_id":10,
+            "book_id":3
+        }
+    ]
+}

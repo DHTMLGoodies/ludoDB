@@ -59,4 +59,15 @@ abstract class LudoDBCollection extends LudoDBIterator
         }
         return $ret;
     }
+
+    protected function getColumnValues($column){
+        $values = parent::getValues();
+        $ret = array();
+        foreach($values as $value){
+            if(isset($value[$column])){
+                $ret[] = $value[$column];
+            }
+        }
+        return $ret;
+    }
 }

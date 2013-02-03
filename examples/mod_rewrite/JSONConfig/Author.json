@@ -1,0 +1,23 @@
+{
+    "table": "Author",
+    "sql": "select * from author where id=?",
+    "columns": {
+        "id": "int auto_increment not null primary key",
+        "name": {
+            "db": "varchar(25)",
+            "access": "rw"
+        }
+    },
+    "data": [
+        { "id": "1", "name": "Thomas Powell"},
+        { "id": "2", "name": "Fritz Schneider"},
+        { "id": "3", "name": "Ed lecky-Thompson"},
+        { "id": "4", "name": "Heow Eide-Goodman"},
+        { "id": "5", "name": "Steven D. Nowicki"},
+        { "id": "6", "name": "Alec Cove"},
+        { "id": "7", "name": "Zigurd Mednieks"},
+        { "id": "8", "name": "Laird Dornin"},
+        { "id": "9", "name": "G. Blake Meike"},
+        { "id": "10", "name": "Masumi Nakamura"}
+    ]
+}

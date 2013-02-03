@@ -15,7 +15,12 @@ LudoDB::setDb('PHPUnit');
  * Auto create Book table if it doesn't exists. This is just for this demo/sample
  */
 $book = new Book();
+$book->drop()->yesImSure();
 if(!$book->exists())$book->createTable();
+$bookAuthor = new BookAuthor();
+if(!$bookAuthor->exists())$bookAuthor->createTable();
+$author = new Author();
+if(!$author->exists())$author->createTable();
 
 LudoDB::enableLogging();
 

@@ -74,7 +74,7 @@ class RequestHandlerTest extends TestBase
 
 
         // when
-        $crud = $handler->getAction($this->getRequest);
+        $crud = $handler->getServiceName($this->getRequest);
 
         // then
         $this->assertEquals('read', $crud);

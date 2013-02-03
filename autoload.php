@@ -8,7 +8,10 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'accessortest' => '/Tests/AccessorTest.php',
+                'author' => '/examples/mod_rewrite/Author.php',
                 'book' => '/examples/mod_rewrite/Book.php',
+                'bookauthor' => '/examples/mod_rewrite/BookAuthor.php',
+                'bookauthors' => '/examples/mod_rewrite/BookAuthors.php',
                 'brand' => '/Tests/classes/Brand.php',
                 'cachetest' => '/Tests/CacheTest.php',
                 'capital' => '/Tests/classes/JSONCaching/Capital.php',

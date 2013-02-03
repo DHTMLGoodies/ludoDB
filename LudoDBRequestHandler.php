@@ -12,13 +12,13 @@ class LudoDBRequestHandler
      * @var LudoDBObject
      */
     protected $model;
-    protected $action;
+    protected $serviceName;
     protected $cacheInstance;
     private $validServices = array();
     private $success = true;
     private $message = "";
     private $code = 200;
-
+    private $arguments;
     public function __construct()
     {
 
@@ -29,22 +29,27 @@ class LudoDBRequestHandler
         $request = $this->getParsed($request);
         try {
             $this->validServices = $this->getValidServices($request);
-            $this->model = $this->getModel($request, $this->getArguments($request));
-            $this->action = $this->getAction($request);
+            $this->arguments = $this->getArguments($request);
+            $this->model = $this->getModel($request, $this->arguments);
+            $this->serviceName = $this->getServiceName($request);
 
-            $this->model->validate($this->action, $request['data']);
+            $this->model->validate($this->serviceName, $request['data']);
 
-            if(!in_array($this->action, $this->validServices)){
-                throw new LudoDBException('Invalid service ' . $this->action, 400);
+            if(!in_array($this->serviceName, $this->validServices)){
+                throw new LudoDBException('Invalid service ' . $this->serviceName, 400);
             }
 
-            if($this->action === 'delete' || $this->action === 'read'){
+            if(!$this->model->areValidServiceArguments($this->serviceName, $this->arguments)){
+                throw new LudoDBException('Invalid arguments for ' . $this->serviceName. ", arguments: ". implode(",", $this->arguments), 400);
+            }
+
+            if($this->serviceName === 'delete' || $this->serviceName === 'read'){
                 if (!$this->model->getId() && $this->model instanceof LudoDBModel) {
                     throw new Exception('Object not found', 404);
                 }
             }
 
-            switch ($this->action) {
+            switch ($this->serviceName) {
                 case 'read':
                     return $this->toJSON($this->getValues());
                 case 'save':
@@ -52,8 +57,8 @@ class LudoDBRequestHandler
                 case 'delete':
                     return $this->toJSON($this->model->delete());
                 default:
-                    if(method_exists($this->model, $this->action)){
-                        return $this->toJSON($this->model->{$this->action}($request['data']));
+                    if(method_exists($this->model, $this->serviceName)){
+                        return $this->toJSON($this->model->{$this->serviceName}($request['data']));
                     }
             }
         } catch (Exception $e) {
@@ -151,11 +156,11 @@ class LudoDBRequestHandler
         return class_exists($tokens[0]) ? $tokens[0] : null;
     }
 
-    protected function getAction($request)
+    protected function getServiceName($request)
     {
         $tokens = explode("/", $request['request']);
-        $action = $tokens[count($tokens) - 1];
-        return in_array($action, $this->validServices) ? $action : 'read';
+        $serviceName = $tokens[count($tokens) - 1];
+        return in_array($serviceName, $this->validServices) ? $serviceName : 'read';
     }
 
     public function getValues()
