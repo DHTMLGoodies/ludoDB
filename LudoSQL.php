@@ -129,22 +129,6 @@ class LudoSQL
         return $sql;
     }
 
-    public function getDeleteSQL()
-    {
-        $sql = "delete from " . $this->configParser->getTableName() . " where ";
-        $where = array();
-        $configParams = $this->configParser->getConstructorParams();
-        for ($i = 0, $count = count($this->constructorValues); $i < $count; $i++) {
-            $val = $this->constructorValues[$i];
-            if (is_string($val)) {
-                $val = "'" . $val . "'";
-            }
-            $where[] = $configParams[$i] . "=" . $val;
-        }
-        $sql .= implode(" and ", $where);
-        return $sql;
-    }
-
     public function getInsertSQL()
     {
         $table = $this->configParser->getTableName();
