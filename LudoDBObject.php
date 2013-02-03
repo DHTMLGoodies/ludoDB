@@ -172,4 +172,8 @@ abstract class LudoDBObject
 
     }
 
+    public function read(){
+        return $this->getValues();
+    }
+
 }
