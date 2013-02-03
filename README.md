@@ -270,5 +270,6 @@ same folder as router.php. Example:
 Requests for
     http://myServer/Game/1/read
 
-will then be passed to router.php with "/Game/1/read" as the $_GET['request'] param.
+
+will then be redirected to router.php with "/Game/1/read" as the $_GET['request'] param.
 
