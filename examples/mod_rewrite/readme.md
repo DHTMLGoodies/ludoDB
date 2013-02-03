@@ -1,6 +1,8 @@
 #This is an example of LudoDBRequest handler using Apache mod_rewrite.
 This example only works when mod_rewrite is enabled on your Apache httpd server.
 
+Support for PDO MySql should also be enabled/installed.
+
 ##Configuration
 
 Open Router.php
