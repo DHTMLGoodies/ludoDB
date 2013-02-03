@@ -8,7 +8,6 @@
  */
 class LudoDBRequestHandler
 {
-
     /**
      * @var LudoDBObject
      */

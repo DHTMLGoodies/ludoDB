@@ -41,7 +41,7 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
         if(!is_array($params))$params = array($params);
         $stmt = self::$conn->prepare($sql);
         if(!$stmt->execute($params)){
-            throw new Exception("Invalid PDO query ". $sql . " (". implode(",", $params));
+            throw new Exception("Invalid PDO query ". $sql . " (". implode(",", $params).")");
         }
         return $stmt;
     }
