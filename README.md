@@ -206,6 +206,8 @@ Will give you the values for person where ID is set to 2. The handler will outpu
 		}
 	}
 
+* Classes available for the LudoDBRequestHandler needs to implement the LudoDBService interface.
+
 ###Example: Save data, using request handler.
 
 For save, you can use code like this:

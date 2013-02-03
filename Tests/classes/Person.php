@@ -1,5 +1,5 @@
 <?php
-class Person extends LudoDBModel
+class Person extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
     public static $validServices = array('save','delete','read');

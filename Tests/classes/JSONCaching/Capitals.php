@@ -6,7 +6,7 @@
  * Time: 15:16
  * To change this template use File | Settings | File Templates.
  */
-class Capitals extends LudoDBCollection
+class Capitals extends LudoDBCollection implements LudoDBService
 {
     protected $JSONConfig = true;
     protected $caching = true;

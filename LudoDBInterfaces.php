@@ -24,3 +24,11 @@ interface LudoDBAdapter
 
     public function escapeString($string);
 }
+
+/**
+ * Classes for request handlers has to implement the LudoDBService interface
+ */
+interface LudoDBService
+{
+
+}
