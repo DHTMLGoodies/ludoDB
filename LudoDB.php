@@ -7,7 +7,7 @@
  */
 class LudoDB
 {
-    protected $debug = true;
+    protected $debug = false;
     private static $instance;
     protected static $loggingEnabled = false;
     protected static $startTime;
