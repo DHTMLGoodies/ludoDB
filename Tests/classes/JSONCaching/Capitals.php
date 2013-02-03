@@ -10,6 +10,7 @@ class Capitals extends LudoDBCollection
 {
     protected $JSONConfig = true;
     protected $caching = true;
+    public static $validServices = array('read','delete','save');
 
     public function __construct($fromZip, $toZip){
         parent::__construct($fromZip, $toZip);

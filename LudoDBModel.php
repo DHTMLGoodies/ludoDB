@@ -431,11 +431,11 @@ abstract class LudoDBModel extends LudoDBObject
     /**
      * Populate an object dynamically, example
      * $pump = new WaterPump();
-     * $pump->where('category')->equals('10)->where('brand')->equals('Toshiba')->create();
+     * $pump->where('category')->equals('10)->where('brand')->equals('Toshiba')->instantiate();
      *
      * @return LudoDBModel
      */
-    public function create()
+    public function instantiate()
     {
         $this->parser->setConstructBy($this->whereEqualsArray['where']);
         $this->constructorValues = $this->whereEqualsArray['equals'];

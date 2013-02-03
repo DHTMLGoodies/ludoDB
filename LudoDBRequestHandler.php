@@ -14,7 +14,7 @@ class LudoDBRequestHandler
     protected $model;
     protected $action;
     protected $cacheInstance;
-    private $validRequests = array();
+    private $validServices = array();
     private $success = true;
     private $message = "";
     private $code = 200;
@@ -28,12 +28,15 @@ class LudoDBRequestHandler
     {
         $request = $this->getParsed($request);
         try {
-            $this->validRequests = $this->getValidServices($request);
-
+            $this->validServices = $this->getValidServices($request);
             $this->model = $this->getModel($request, $this->getArguments($request));
             $this->action = $this->getAction($request);
 
             $this->model->validate($this->action, $request['data']);
+
+            if(!in_array($this->action, $this->validServices)){
+                throw new LudoDBException('Invalid service ' . $this->action, 400);
+            }
 
             switch ($this->action) {
                 case 'read':
@@ -45,6 +48,10 @@ class LudoDBRequestHandler
                     return $this->toJSON($this->model->save($request['data']));
                 case 'delete':
                     return $this->toJSON($this->model->delete($request['data']));
+                default:
+                    if(method_exists($this->model, $this->action)){
+                        return $this->toJSON($this->model->{$this->action}($request['data']));
+                    }
             }
         } catch (Exception $e) {
             $this->message = $e->getMessage();
@@ -52,7 +59,7 @@ class LudoDBRequestHandler
             $this->success = false;
             return $this->toJSON(array());
         }
-        return "";
+        throw new LudoDBException("Invalid request ", 400);
     }
 
     private function getParsed($request)
@@ -84,7 +91,7 @@ class LudoDBRequestHandler
         $ret = array();
         $tokens = explode("/", $request['request']);
         for ($i = 1, $count = count($tokens); $i < $count; $i++) {
-            if ($i < $count - 1 || !in_array($tokens[$i], $this->validRequests)) {
+            if ($i < $count - 1 || !in_array($tokens[$i], $this->validServices)) {
                 $ret[] = $tokens[$i];
             }
         }
@@ -141,7 +148,7 @@ class LudoDBRequestHandler
     {
         $tokens = explode("/", $request['request']);
         $action = $tokens[count($tokens) - 1];
-        return in_array($action, $this->validRequests) ? $action : 'read';
+        return in_array($action, $this->validServices) ? $action : 'read';
     }
 
     public function getValues()

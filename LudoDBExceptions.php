@@ -22,3 +22,7 @@ class LudoDBConnectionException extends Exception{
 class LudoDBUnauthorizedException extends Exception{
 
 }
+
+class LudoDBException extends Exception{
+
+}

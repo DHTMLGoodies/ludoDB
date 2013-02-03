@@ -2,6 +2,7 @@
 class Person extends LudoDBModel
 {
     protected $JSONConfig = true;
+    public static $validServices = array('save','delete','read');
 
     public function setFirstname($firstname){
         $this->setValue('firstname', $firstname);

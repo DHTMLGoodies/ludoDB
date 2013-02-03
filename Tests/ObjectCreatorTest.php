@@ -59,7 +59,7 @@ class ObjectCreatorTest extends TestBase
     {
         // given
         $pump = new Brand();
-        $pump->where('category')->equals(4)->create();
+        $pump->where('category')->equals(4)->instantiate();
 
         // then
         $this->assertEquals(4, $pump->getCategory());
@@ -73,7 +73,7 @@ class ObjectCreatorTest extends TestBase
         $pump = new Brand();
 
         // when
-        $pump->where('category')->equals(11)->where('price')->equals(1300)->create();
+        $pump->where('category')->equals(11)->where('price')->equals(1300)->instantiate();
 
         // then
         $this->assertEquals(1300, $pump->getPrice());

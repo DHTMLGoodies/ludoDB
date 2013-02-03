@@ -14,7 +14,11 @@ abstract class LudoDBObject
     protected $constructorValues;
     protected static $configParsers = array();
 
-    public static $validServices = array('read', 'delete', 'save');
+    /**
+     * Valid public services offered by this class, example "read", "delete" and "save"
+     * @var array
+     */
+    public static $validServices = array();
     /**
      * True when config is in JSONConfig/<class name>.json file
      * @var bool
