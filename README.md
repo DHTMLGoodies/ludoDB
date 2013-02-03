@@ -30,8 +30,6 @@ LudoDB will establish a connection to your database when it needs to.
 ##Examples:
 Here are some examples of use:
 
-###Example: Create database table
-
 ###Example: Create model:
 
 	<?php
@@ -188,6 +186,7 @@ Which gives you automatic setters and getters for lastname, firstname, address a
 ###Example: LudoDB Request handler
 LudoDB is intended for use with LudoJS Javascript framework. It acts as a router or controller.
 The LudoDBRequestHandler handles requests and passes them to the correct LudoDBModel. Example:
+
 	<?php
 	$request = array(
 		'request' => 'Person/2/read'
