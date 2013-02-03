@@ -18,4 +18,4 @@ Open the url to the mod_rewrite folder in your browser and add "Book/2" to the u
 
     http://localhost/ludoDB/examples/mod_rewrite/Book/2
 
-
+* Tip! For a nice view in your browser(Firefox or Chrome), install a JSON view plugin/addon.
