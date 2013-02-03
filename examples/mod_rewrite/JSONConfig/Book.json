@@ -7,7 +7,7 @@
             "db": "varchar(32)",
             "access": "rw"
         },
-        "writer": {
+        "author": {
             "db": "varchar(512)",
             "access": "rw"
         },
@@ -21,13 +21,19 @@
             "id" : 1,
             "isbn": "9780072253573",
             "title": "JavaScript: The Complete Reference, 2nd edition",
-            "writer": "Thomas Powell, Fritz Schneider"
+            "author": "Thomas Powell, Fritz Schneider"
         },
         {
             "id" : 2,
             "isbn": "9780764572821",
             "title": "Professional PHP 5",
-            "writer": "Ed Lecky-Thompson, Heow Eide-Goodman, Steven D. Nowicki, Alec Cove"
+            "author": "Ed Lecky-Thompson, Heow Eide-Goodman, Steven D. Nowicki, Alec Cove"
+        },
+        {
+            "id" : 3,
+            "isbn": "9781449316648",
+            "title": "Programming Android: Java Programming for the New Generation of Mobile Devices",
+            "author": "Zigurd Mednieks, Laird Dornin, G. Blake Meike, Masumi Nakamura"
         }
     ]
 }

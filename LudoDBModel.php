@@ -473,9 +473,10 @@ abstract class LudoDBModel extends LudoDBObject
      */
     public function delete()
     {
-        if (isset($this->constructorValues) && count($this->constructorValues)) {
+        if ($this->getId()) {
             $this->validate('delete');
-            $this->db->query($this->sqlHandler()->getDeleteSQL());
+            $this->db->query("delete from ". $this->parser->getTableName(). " where ". $this->parser->getIdField()." = ?", $this->getId());
+            #$this->db->query($this->sqlHandler()->getDeleteSQL(), $this->constructorValues);
             $this->clearCache();
             $this->clearValues();
         }

@@ -38,16 +38,19 @@ class LudoDBRequestHandler
                 throw new LudoDBException('Invalid service ' . $this->action, 400);
             }
 
+            if($this->action === 'delete' || $this->action === 'read'){
+                if (!$this->model->getId() && $this->model instanceof LudoDBModel) {
+                    throw new Exception('Object not found', 404);
+                }
+            }
+
             switch ($this->action) {
                 case 'read':
-                    if (!$this->model->getId() && $this->model instanceof LudoDBModel) {
-                        throw new Exception('Object not found', 404);
-                    }
                     return $this->toJSON($this->getValues());
                 case 'save':
                     return $this->toJSON($this->model->save($request['data']));
                 case 'delete':
-                    return $this->toJSON($this->model->delete($request['data']));
+                    return $this->toJSON($this->model->delete());
                 default:
                     if(method_exists($this->model, $this->action)){
                         return $this->toJSON($this->model->{$this->action}($request['data']));
@@ -65,11 +68,15 @@ class LudoDBRequestHandler
     private function getParsed($request)
     {
         if (is_string($request)) $request = array('request' => $request);
+        $lastChar = substr($request['request'], strlen($request['request']) -1, 1);
+        if($lastChar === '/'){
+            $request['request'] = substr($request['request'], 0, strlen($request['request'])-1);
+        }
         if (!isset($request['data'])) $request['data'] = array();
         return $request;
     }
 
-    private function toJSON(array $data)
+    private function toJSON($data = array())
     {
         $ret = array(
             'success' => $this->success,

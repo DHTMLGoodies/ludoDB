@@ -17,8 +17,6 @@ LudoDB::setDb('PHPUnit');
 $book = new Book();
 if(!$book->exists())$book->createTable();
 
-
-
 LudoDB::enableLogging();
 
 $request = $_GET['request'];
