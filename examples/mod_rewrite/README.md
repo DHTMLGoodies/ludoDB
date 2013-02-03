@@ -1,5 +1,5 @@
 ###This is an example of LudoDBRequest handler using Apache mod_rewrite.
-The example will output book stored in a MySql database. The database tables in
+The example will output book data stored in a MySql database. The database tables in
 this example will be created automatically.
 
 To make this work, you will need to enable mod_rewrite on your Apache httpd server.
