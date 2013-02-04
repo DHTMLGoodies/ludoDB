@@ -8,8 +8,7 @@
 
 require_once(__DIR__ . "/../autoload.php");
 
-class SQLTest extends TestBase
-{
+class SQLTest extends TestBase{
 
     /**
      * @test
@@ -28,6 +27,29 @@ class SQLTest extends TestBase
         $sql = $this->getSqlObject($config)->getCreateTableSql();
         // then
         $this->assertEquals($expected, $sql);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetTableCreationSqlWithReferences(){
+        // given
+        $config = array(
+            'table' => 'Person',
+            'columns' => array(
+                'firstname' => array(
+                    'db' => 'varchar(32)',
+                    'references' => 'man(firstname) on delete cascade'
+                ),
+                'lastname' => 'varchar(32)'
+            )
+        );
+        // when
+        $expected ="create table Person(firstname varchar(32),FOREIGN KEY(firstname) REFERENCES man(firstname) on delete cascade,lastname varchar(32))";
+        $sql = $this->getSqlObject($config)->getCreateTableSql();
+        // then
+        $this->assertEquals($expected, $sql);
+
     }
 
     /**

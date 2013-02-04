@@ -122,6 +122,9 @@ class LudoSQL
                     $columns[] = $name . " " . $type;
                 } else {
                     $columns[] = $name . " " . $type['db'];
+                    if(isset($type['references'])){
+                        $columns[] = "FOREIGN KEY(". $name.") REFERENCES ". $type['references'];
+                    }
                 }
             }
         }
