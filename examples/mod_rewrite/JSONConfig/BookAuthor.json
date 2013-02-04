@@ -4,14 +4,15 @@
     "columns":{
         "id":"int auto_increment not null primary key",
         "author_id":{
-            "db":"int",
+            "db":"int, FOREIGN KEY (author_id) REFERENCES author(id) ON DELETE CASCADE",
             "access":"rw"
         },
         "book_id":{
-            "db":"int",
+            "db":"int, FOREIGN KEY (book_id) REFERENCES book(id) ON DELETE CASCADE",
             "access":"rw"
         }
     },
+    "indexes": ["book_id", "author_id"],
     "data":[
         {
             "author_id":1,
@@ -54,4 +55,5 @@
             "book_id":3
         }
     ]
+
 }

@@ -9,25 +9,38 @@ LudoDB::setPassword('administrator');
 LudoDB::setHost('127.0.0.1');
 LudoDB::setDb('PHPUnit');
 
-ini_set('display_errors','on');
+/*
+// Drop tables.
+$bookAuthor = new BookAuthor();
+$bookAuthor->drop()->yesImSure();
+$book = new Book();
+$book->drop()->yesImSure();
+$bookAuthor = new BookAuthor();
+$bookAuthor->drop()->yesImSure();
+*/
+
 /**
  * Auto create database tables. This is just for this demo/sample
  */
 $book = new Book();
 if(!$book->exists())$book->createTable();
-$bookAuthor = new BookAuthor();
-if(!$bookAuthor->exists())$bookAuthor->createTable();
+
 $author = new Author();
 if(!$author->exists())$author->createTable();
+
+$bookAuthor = new BookAuthor();
+if(!$bookAuthor->exists())$bookAuthor->createTable();
+
 
 LudoDB::enableLogging();
 
 $request = array(
-    'request' => $_GET['request']
+    'request' => $_GET['request'],
+    'data' => array()
 );
 
-if(isset($_POST)){
-    $request['data'] = $_POST;
+foreach($_POST as $key=>$value){
+    $request['data'][$key] = $value;
 }
 
 $handler = new LudoDBRequestHandler();
