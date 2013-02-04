@@ -103,6 +103,7 @@ Here are some examples of use:
 
 ###Example: Use a model:
 Create a new Person record and save it to the database:
+
 	<?php
 	$person = new Person();
 	$person->setFirstname('John');
@@ -111,6 +112,7 @@ Create a new Person record and save it to the database:
 	?>
 
 Output Person data:
+
 	<?php
 	echo $person->getId();
 	echo $person->getFirstname();
