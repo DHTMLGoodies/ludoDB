@@ -11,6 +11,9 @@ To check out from command line (With Git installed on your computer):
 
 	git clone https://github.com/DHTMLGoodies/ludoDB.git
 
+###License
+LudoDB is open source software according to the LGPL license.
+
 ###Setup database connection.
 The code to establish a connection to your database is:
 
