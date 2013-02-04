@@ -9,7 +9,14 @@ LudoDB will soon merge with LudoJS for easy, clean and fast development of rich 
 
 To check out from command line (With Git installed on your computer):
 
-	git clone https://github.com/DHTMLGoodies/ludoDB.git
+	git clone https://github.com/DHTMLGoodies/ludoDB.git ludoDB
+
+To try it out, open one of the url
+
+    http://<your server name>/ludoDB/examples/mod_rewrite/index.php
+
+This examples requires that the rewrite module(mod_rewrite) has been activated
+on your Apache web server.
 
 ###License
 LudoDB is open source software according to the LGPL license.
