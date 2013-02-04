@@ -8,4 +8,8 @@
 class Author extends LudoDBModel
 {
     protected $JSONConfig = true;
+
+    public function setName($name){
+        $this->setValue('name', $name);
+    }
 }
