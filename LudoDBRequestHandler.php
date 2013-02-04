@@ -49,6 +49,10 @@ class LudoDBRequestHandler
                 }
             }
 
+            if(!method_exists($this->model, $this->serviceName)){
+                throw new Exception("Service " . $this->serviceName . " not implemented", 400);
+            }
+
             switch ($this->serviceName) {
                 case 'read':
                     return $this->toJSON($this->getValues());

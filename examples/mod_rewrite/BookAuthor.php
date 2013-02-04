@@ -1,7 +1,7 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: xait0020
+ * Book-Author relationship table
+ * User: Alf Magne
  * Date: 03.02.13
  * Time: 16:26
  */
