@@ -102,7 +102,7 @@ Here are some examples of use:
 	if(!$person->exists())$person->createTable();
 
 ###Example: Use a model:
-
+Create a new Person record and save it to the database:
 	<?php
 	$person = new Person();
 	$person->setFirstname('John');
@@ -110,15 +110,14 @@ Here are some examples of use:
 	$person->commit();
 	?>
 
-For creating a new Person record and save it to the database
-
+Output Person data:
 	<?php
 	echo $person->getId();
 	echo $person->getFirstname();
 	echo $person->getLastname();
 	?>
 
-Will output data for this record.
+Update lastname of Person with id=1 to "Johnson":
 
 	<?php
 	$person = new Person(1);
@@ -126,15 +125,13 @@ Will output data for this record.
 	$person->commit();
 	?>
 
-Will update lastname in db for person with id=1
+Output all Person details as JSON:
 
 	<?php
 	echo $person; // Call the __toString() method of Person
 	?>
 
-will output person data in JSON format.
-
-You can also configure the database in json files:
+You can also configure data models using JSON:
 
 ###Example: Creating a model using external JSON file:
 
@@ -173,7 +170,8 @@ PHP Class (Client.php)
 			},
 			"zip":{
 				"db": "varchar(5)",
-				"access": "rw"
+				"access": "rw",
+				"references" : "city(zip) on delete cascade"
 			},
 			"phone":{
 				"class":"PhoneCollection"
