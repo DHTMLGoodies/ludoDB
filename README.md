@@ -161,8 +161,8 @@ class Client extends LudoDBModel
 ```JSON
 {
 	"table":"Client",
+	"sql":"select * from client where id=?",
 	"idField":"id",
-	"constructBy":"id",
 	"columns":{
 		"id":"int auto_increment not null primary key",
 		"firstname":{
