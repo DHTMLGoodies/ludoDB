@@ -207,14 +207,16 @@ The LudoDBRequestHandler handles requests and passes them to the correct LudoDBM
 Will give you the values for person where ID is set to 2. The handler will output response in JSON format:
 
 ###Example: JSON response from LudoDBRequestHandler
-	{
-		"success": true,
-		"message": "",
-		"response": {
-			"firstname": "Anna",
-			"lastname": "Westwood"
-		}
+```Javascript
+{
+	"success": true,
+	"message": "",
+	"response": {
+		"firstname": "Anna",
+		"lastname": "Westwood"
 	}
+}
+```
 
 * Classes available for the LudoDBRequestHandler needs to implement the LudoDBService interface.
 
@@ -222,17 +224,19 @@ Will give you the values for person where ID is set to 2. The handler will outpu
 
 For save, you can use code like this:
 
-	<?php
-	/** Assuming that $_POST['request'] is
-		array(
-			'request' => 'Person/1/save',
-			'data' => array(
-				'firstname' => 'Mike'
-			)
-		);
+```PHP
+<?php
+/** Assuming that $_POST['request'] is
+	array(
+		'request' => 'Person/1/save',
+		'data' => array(
+			'firstname' => 'Mike'
+		)
+	);
 
-	$handler = new LudoDBRequestHandler();
-	echo $handler->handle($_POST['request']);
+$handler = new LudoDBRequestHandler();
+echo $handler->handle($_POST['request']);
+```
 
 Which will set first name of person with ID 1 to Mike.
 
@@ -247,26 +251,27 @@ instead, the request is defined in the url. Examples:
 The last example may return a list of all products in Store where ID is 1.
 
 Here's an example of a Router.php file for mod_rewrite requests.
+```PHP
+<?php
 
-    <?php
+require_once(__DIR__."/autoload.php");
 
-    require_once(__DIR__."/autoload.php");
+LudoDB::setUser('myDbUser');
+LudoDB::setPassword('myDbPassword');
+LudoDB::setHost('localhost');
+LudoDB::setDb('myDb');
 
-    LudoDB::setUser('myDbUser');
-    LudoDB::setPassword('myDbPassword');
-    LudoDB::setHost('localhost');
-    LudoDB::setDb('myDb');
+LudoDB::enableLogging();
 
-    LudoDB::enableLogging();
+$request = $_GET['request'];
 
-    $request = $_GET['request'];
+if(isset($_POST['request'])){
+	$request['data'] = $_POST['data'];
+}
 
-    if(isset($_POST['request'])){
-        $request['data'] = $_POST['data'];
-    }
-
-    $handler = new LudoDBRequestHandler();
-    echo $handler->handle($request);
+$handler = new LudoDBRequestHandler();
+echo $handler->handle($request);
+```
 
 For this to work, the mod_rewrite module must be enabled in httpd.conf. You will also need an .htaccess file in the
 same folder as router.php. Example:
