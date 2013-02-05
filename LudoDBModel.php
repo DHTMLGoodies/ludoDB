@@ -97,7 +97,7 @@ abstract class LudoDBModel extends LudoDBObject
             $this->setExternalValue($column, $value);
         } else {
             $value = $this->db->escapeString($value);
-            if (!isset($value)) $value = LudoSQL::DELETED;
+            # if (!isset($value)) $value = LudoSQL::DELETED;
             if (!isset($this->updates)) $this->updates = array();
             $this->updates[$this->parser->getInternalColName($column)] = $value;
         }
@@ -135,6 +135,7 @@ abstract class LudoDBModel extends LudoDBObject
         } else {
             $this->insert();
         }
+
         if (isset($this->updates)) {
             foreach ($this->updates as $key => $value) {
                 $this->data[$key] = $value === LudoSQL::DELETED ? null : $value;
@@ -160,7 +161,7 @@ abstract class LudoDBModel extends LudoDBObject
         if ($this->isValid()) {
             $this->beforeUpdate();
             $this->clearCache();
-            $this->db->query($this->sqlHandler()->getUpdateSql());
+            $this->db->query($this->sqlHandler()->getUpdateSql(), isset($this->updates) ? array_values($this->updates) : null);
         }
     }
 
@@ -395,52 +396,6 @@ abstract class LudoDBModel extends LudoDBObject
             }
         }
         throw new Exception("Invalid method call " . $name);
-    }
-
-    private $whereEqualsArray = null;
-
-    public function where($column)
-    {
-        if ($this->parser->canBePopulatedBy($column)) {
-            $this->createWhereEqualsArray();
-            $this->whereEqualsArray['where'][] = $column;
-        }
-        return $this;
-    }
-
-    public function equals($value)
-    {
-        $this->createWhereEqualsArray();
-        $index = count($this->whereEqualsArray['equals']);
-        if (isset($this->whereEqualsArray['where'][$index])) {
-            $this->whereEqualsArray['equals'][] = $value;
-        }
-        return $this;
-    }
-
-    private function createWhereEqualsArray()
-    {
-        if (!isset($this->whereEqualsArray)) {
-            $this->whereEqualsArray = array(
-                'where' => array(),
-                'equals' => array()
-            );
-        }
-    }
-
-    /**
-     * Populate an object dynamically, example
-     * $pump = new WaterPump();
-     * $pump->where('category')->equals('10)->where('brand')->equals('Toshiba')->instantiate();
-     *
-     * @return LudoDBModel
-     */
-    public function instantiate()
-    {
-        $this->parser->setConstructBy($this->whereEqualsArray['where']);
-        $this->constructorValues = $this->whereEqualsArray['equals'];
-        $this->whereEqualsArray = null;
-        return $this;
     }
 
     public function setValues($data)

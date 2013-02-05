@@ -176,7 +176,7 @@ class LudoSQL
     {
         $ret = array();
         foreach ($updates as $key => $value) {
-            $ret[] = $key . "=" . ($value === self::DELETED ? 'NULL' : "'" . $value . "'");
+            $ret[] = $key . "=?"; // . ($value === self::DELETED ? 'NULL' : "'" . $value . "'");
         }
         return implode(",", $ret);
     }

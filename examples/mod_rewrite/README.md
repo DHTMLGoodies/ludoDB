@@ -11,11 +11,12 @@ Support for PDO MySql should also be enabled/installed.
 Open Router.php
 
 Change the DB config variables:
-
-    LudoDB::setUser('root');
-    LudoDB::setPassword('administrator');
-    LudoDB::setHost('127.0.0.1');
-    LudoDB::setDb('PHPUnit');
+```PHP
+LudoDB::setUser('root');
+LudoDB::setPassword('administrator');
+LudoDB::setHost('127.0.0.1');
+LudoDB::setDb('PHPUnit');
+```
 
 To configure connection to your MySql database.
 
