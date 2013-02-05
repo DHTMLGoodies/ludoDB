@@ -242,7 +242,7 @@ For save, you can use code like this:
 			'firstname' => 'Mike'
 		)
 	);
-
+*/
 $handler = new LudoDBRequestHandler();
 echo $handler->handle($_POST['request']);
 ```
