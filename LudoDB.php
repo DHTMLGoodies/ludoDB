@@ -131,6 +131,7 @@ class LudoDB
     }
 
     public function createDatabase($name){
+        $name = preg_replace("/[^0-9a-z_]/si", "", $name);
         self::getInstance()->query("create database ".$name);
     }
 
