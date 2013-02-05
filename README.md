@@ -303,3 +303,38 @@ http://myServer/Game/1/read
 
 will then be redirected to router.php with "/Game/1/read" as the $_GET['request'] param.
 
+###JSON config specification.
+This is a commented JSON showing the available options for a JSON config of a LudoDBModel
+or LudoDBCollection class:
+
+```JSON
+{
+    "table": "name of db table",
+    "sql": "sql for population, example: select * from game where id=?",
+    // Question mark is used as place holder. Argument(s) passed to constructor
+    will be inserted at the question mark(s)
+    "columns": {
+        "name of column": {
+            "db": "definition, example: int auto_increment not null primary key",
+            "access": "access to file, example: rw, w or rw",
+            "references": "constraints: example: database(id) on delete cascade"
+        },
+        "other_column": "simple definition, example: int",
+        "external column": {
+            "class": "Moves",
+            "fk": "property of this class used to instantiate Moves class, example: id"
+        }
+    },
+    "data": [
+        { "column name": "column value", "other column": "other column value"},
+        { "column name": "column value", "other column": "other column value"},
+        { "column name": "column value", "other column": "other column value"}
+    ],
+    // "data" can also be a string referring to the name of a JSON file, example:
+    "data": "game.data.json"
+    // This file has to be located inside the JSONConfig folder
+    "indexes": ["column to index", "column to index"]
+}
+```
+
+

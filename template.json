@@ -1,0 +1,22 @@
+{
+    "table": "name of db table",
+    "sql": "sql for population, example: select * from game where id=?",
+    "columns": {
+        "name of column": {
+            "db": "definition, example: int auto_increment not null primary key",
+            "access": "access to file, example: rw, w or rw",
+            "references": "constraints: example: database(id) on delete cascade"
+        },
+        "other_column": "simple definition, example: int",
+        "external column": {
+            "class": "Moves",
+            "fk": "property of this class used to instantiate Moves class, example: id"
+        }
+    },
+    "data": [
+        { "column name": "column value", "other column": "other column value"},
+        { "column name": "column value", "other column": "other column value"},
+        { "column name": "column value", "other column": "other column value"}
+    ],
+    "indexes": ["column to index", "column to index"]
+}

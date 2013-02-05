@@ -23,8 +23,6 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
-
-
     private function getValidInputs($params)
     {
         $paramNames = $this->parser->getConstructorParams();
@@ -429,7 +427,6 @@ abstract class LudoDBModel extends LudoDBObject
     public function delete()
     {
         if ($this->getId()) {
-            $this->validate('delete');
             $this->db->query("delete from ". $this->parser->getTableName(). " where ". $this->parser->getIdField()." = ?", $this->getId());
             $this->clearCache();
             $this->clearValues();

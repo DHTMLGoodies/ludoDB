@@ -250,6 +250,23 @@ class LudoDBModelTests extends TestBase
     /**
      * @test
      */
+    public function shouldBeAbleToInsertDefaultDataFromExternalFile(){
+        // given
+        $movie = new Movie();
+        $movie->drop()->yesImSure();
+        $movie->createTable();
+
+        // When
+        $m = new Movie(1);
+
+        // then
+        $this->assertEquals('Twelve angry men', $m->getTitle());
+
+    }
+
+    /**
+     * @test
+     */
     public function shouldBeAbleToDeleteColumnValue(){
         // given
         $person = new Person();

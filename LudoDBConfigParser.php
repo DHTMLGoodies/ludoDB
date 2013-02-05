@@ -63,6 +63,10 @@ class LudoDBConfigParser
         return $this->getFileLocation() . "/JSONConfig/" . get_class($this->obj) . ".json";
     }
 
+    private function getPathToJsonConfigDefaultData(){
+        return $this->getFileLocation() . "/JSONConfig/" . get_class($this->obj) . ".data.json";
+    }
+
     protected function getFileLocation()
     {
         $obj = new ReflectionClass($this->obj);
@@ -208,7 +212,17 @@ class LudoDBConfigParser
 
     public function getDefaultData()
     {
-        return $this->getProperty('data');
+        $ret = $this->getProperty('data');
+        if(is_string($ret)){
+            $file = $this->getPathToJsonConfigDefaultData();
+            if(file_exists($file)){
+                return json_decode(file_get_contents($file), true);
+            }else{
+                return null;
+            }
+        }else{
+            return $ret;
+        }
     }
 
     private function getJoins()
