@@ -24,16 +24,20 @@ LudoDB is open source software according to the LGPL license.
 ###Setup database connection.
 The code to establish a connection to your database is:
 
-	<?php
-	LudoDB::setHost('<host>');
-	LudoDB::setUser('<user>');
-	LudoDB::setPassword('<password>');
-	LudoDB::setDb('<db name>');
+```PHP
+<?php
+LudoDB::setHost('<host>');
+LudoDB::setUser('<user>');
+LudoDB::setPassword('<password>');
+LudoDB::setDb('<db name>');
+```
 
 The default, and preferred database adapter is PDO. You can switch to MySqlI with this code:
 
-	<?php
-	LudoDB::setConnectionType('MYSQLI');
+```PHP
+<?php
+LudoDB::setConnectionType('MYSQLI');
+```
 
 LudoDB will establish a connection to your database when it needs to.
 
@@ -41,168 +45,173 @@ LudoDB will establish a connection to your database when it needs to.
 Here are some examples of use:
 
 ###Example: Create model:
+```PHP
+<?php
 
-	<?php
+class Person extends LudoDBModel
+{
+	protected $idField = 'id';
+	protected $config = array(
+		'table' => 'Person',
+		'columns' => array(
+			'id' => 'int auto_increment not null primary key',
+			'firstname' => 'varchar(32)',
+			'lastname' => 'varchar(32)',
+			'address' => 'varchar(64)',
+			'zip' => 'varchar(5)'
+		),
+		'join' => array(
+			array('table' => 'city', 'pk' => 'zip', 'fk' => 'zip', 'columns' => array('city'))
+		)
 
-		class Person extends LudoDBModel
-		{
-			protected $idField = 'id';
-			protected $config = array(
-				'table' => 'Person',
-				'columns' => array(
-					'id' => 'int auto_increment not null primary key',
-					'firstname' => 'varchar(32)',
-					'lastname' => 'varchar(32)',
-					'address' => 'varchar(64)',
-					'zip' => 'varchar(5)'
-				),
-				'join' => array(
-					array('table' => 'city', 'pk' => 'zip', 'fk' => 'zip', 'columns' => array('city'))
-				)
+	);
 
-			);
+	public function __construct($id){
+	 parent::__construct($id);
+	}
 
-			public function __construct($id){
-			 parent::__construct($id);
-			}
+	public function setFirstname($value){
+		$this->setValue('firstname', $value);
+	}
 
-			public function setFirstname($value){
-				$this->setValue('firstname', $value);
-			}
+	public function setLastname($value){
+		$this->setvalue('lastname', $value);
+	}
 
-			public function setLastname($value){
-				$this->setvalue('lastname', $value);
-			}
+	public function setZip($value){
+		$this->setValue('zip', $value);
+	}
 
-			public function setZip($value){
-				$this->setValue('zip', $value);
-			}
+	public function getFirstname(){
+		return $this->getValue('firstname');
+	}
 
-			public function getFirstname(){
-				return $this->getValue('firstname');
-			}
+	public function getLastname(){
+		return $this->getValue('lastname');
+	}
 
-			public function getLastname(){
-				return $this->getValue('lastname');
-			}
+	public function getZip(){
+		return $this->getValue('zip');
+	}
 
-			public function getZip(){
-				return $this->getValue('zip');
-			}
+	public function getCity(){
+		return $this->getValue('city');
+	}
+}
 
-			public function getCity(){
-				return $this->getValue('city');
-			}
-		}
-
-	?>
+?>
+```
 ###Example: Create database table:
-	<?php
-	$person = new Person();
-	if(!$person->exists())$person->createTable();
-
+```PHP
+<?php
+$person = new Person();
+if(!$person->exists())$person->createTable();
+```
 ###Example: Use a model:
 Create a new Person record and save it to the database:
-
-	<?php
-	$person = new Person();
-	$person->setFirstname('John');
-	$person->setLastname('Wayne');
-	$person->commit();
-	?>
-
+```PHP
+<?php
+$person = new Person();
+$person->setFirstname('John');
+$person->setLastname('Wayne');
+$person->commit();
+?>
+```
 Output Person data:
-
-	<?php
-	echo $person->getId();
-	echo $person->getFirstname();
-	echo $person->getLastname();
-	?>
-
+```PHP
+<?php
+echo $person->getId();
+echo $person->getFirstname();
+echo $person->getLastname();
+?>
+```
 Update lastname of Person with id=1 to "Johnson":
-
-	<?php
-	$person = new Person(1);
-	$person->setLastname('Johnson');
-	$person->commit();
-	?>
-
+```PHP
+<?php
+$person = new Person(1);
+$person->setLastname('Johnson');
+$person->commit();
+?>
+```
 Output all Person details as JSON:
-
-	<?php
-	echo $person; // Call the __toString() method of Person
-	?>
+```PHP
+<?php
+echo $person; // Call the __toString() method of Person
+?>
+```
 
 You can also configure data models using JSON:
 
 ###Example: Creating a model using external JSON file:
 
 PHP Class (Client.php)
+```PHP
+<?php
+class Client extends LudoDBModel
+{
+	protected $JSONConfig = true;
 
-	<?php
-	class Client extends LudoDBModel
-	{
-		protected $JSONConfig = true;
-
-		public function __construct($id){
-		 	parent::__construct($id);
-		}
-
+	public function __construct($id){
+		parent::__construct($id);
 	}
 
+}
+```
 ####JSON file(Client.json) located in sub folder JSONConfig:
-
-	{
-		"table":"Client",
-		"idField":"id",
-		"constructBy":"id",
-		"columns":{
-			"id":"int auto_increment not null primary key",
-			"firstname":{
-				"db": "varchar(32)",
-				"access":"rw"
-			},
-			"lastname":{
-				"db": "varchar(32)",
-				"access": "rw"
-			},
-			"address":{
-				"db": "varchar(64)",
-				"access": "rw"
-			},
-			"zip":{
-				"db": "varchar(5)",
-				"access": "rw",
-				"references" : "city(zip) on delete cascade"
-			},
-			"phone":{
-				"class":"PhoneCollection"
-			},
-			"city":{
-				"class":"City",
-				"get":"getCity"
-			}
-
+```Javascript
+{
+	"table":"Client",
+	"idField":"id",
+	"constructBy":"id",
+	"columns":{
+		"id":"int auto_increment not null primary key",
+		"firstname":{
+			"db": "varchar(32)",
+			"access":"rw"
 		},
-		"classes":{
-			"city":{
-				"fk":"zip"
-			}
+		"lastname":{
+			"db": "varchar(32)",
+			"access": "rw"
+		},
+		"address":{
+			"db": "varchar(64)",
+			"access": "rw"
+		},
+		"zip":{
+			"db": "varchar(5)",
+			"access": "rw",
+			"references" : "city(zip) on delete cascade"
+		},
+		"phone":{
+			"class":"PhoneCollection"
+		},
+		"city":{
+			"class":"City",
+			"get":"getCity"
+		}
+
+	},
+	"classes":{
+		"city":{
+			"fk":"zip"
 		}
 	}
+}
+```
 
 Which gives you automatic setters and getters for lastname, firstname, address and zip.
 
 ###Example: LudoDB Request handler
 LudoDB is intended for use with LudoJS Javascript framework. It acts as a router or controller.
 The LudoDBRequestHandler handles requests and passes them to the correct LudoDBModel. Example:
-
-	<?php
-	$request = array(
-		'request' => 'Person/2/read'
-	);
-	$handler = new LudoDBRequestHandler();
-	echo $handler->handle($request);
+```PHP
+<?php
+$request = array(
+	'request' => 'Person/2/read'
+);
+$handler = new LudoDBRequestHandler();
+echo $handler->handle($request);
+```
 
 Will give you the values for person where ID is set to 2. The handler will output response in JSON format:
 
