@@ -174,16 +174,6 @@ abstract class LudoDBObject
         }
     }
 
-    /**
-     * Validate requests. Throw exception on invalid requests.
-     * @param string $action
-     * @param array $data
-     */
-    public function validate($action = 'read', $data = array())
-    {
-
-    }
-
     public function read()
     {
         return $this->getValues();

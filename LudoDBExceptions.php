@@ -6,23 +6,33 @@
  * Time: 17:17
  * To change this template use File | Settings | File Templates.
  */
-class LudoDBClassNotFoundException extends Exception
-{
-
-}
-
-class LudoDBObjectNotFoundException extends Exception{
-
-}
-
-class LudoDBConnectionException extends Exception{
-
-}
-
-class LudoDBUnauthorizedException extends Exception{
-
-}
 
 class LudoDBException extends Exception{
+    protected $code = 400;
+}
 
+class LudoDBClassNotFoundException extends LudoDBException
+{
+    protected $code = 404;
+}
+
+class LudoDBObjectNotFoundException extends LudoDBException{
+    protected $code = 404;
+}
+
+class LudoDBConnectionException extends LudoDBException{
+
+}
+
+class LudoDBUnauthorizedException extends LudoDBException{
+    protected $code = 401;
+}
+
+class LudoDBServiceNotImplementedException extends LudoDBException{
+    protected $code = 404;
+}
+
+
+class LudoDBInvalidServiceException extends Exception{
+    protected $code = 405;
 }
