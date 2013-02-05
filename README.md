@@ -307,8 +307,10 @@ will then be redirected to router.php with "/Game/1/read" as the $_GET['request'
 This is an overview of the most important PHP classes in ludoDB:
 
 * LudoDBObject: Abstract base class for LudoDBModel and LudoDBCollection
-* LudoDBModel: Representation of a database table, example: "Game"
-* LudoDBCollection: Collection of rows from database tables, example: "Moves"
+* LudoDBModel: Abstract class you extend to represent a database table, example: "Game"
+* LudoDBCollection: Abstract class used to present collection of data rows
+from the database, example: "Moves". ps! You can specify nested classes in
+your LudoDBModel config.
 * LudoDBRequestHandler: Class handling POST/GET requests and returning data
 in JSON format.
 
