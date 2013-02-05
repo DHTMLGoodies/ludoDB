@@ -338,7 +338,7 @@ and LudoDBCollection classes
 for the arguments passed to the constructor.
 * columns: Configuration of columns
 * "id": "int auto_increment not null primary key" is example of the most simple configuration. It's
-the same as writing "id": { "db": "int auto_increment not null primary key" }
+the same as writing ```"id": { "db": "int auto_increment not null primary key" }```
 * db : Column specification
 * access: "w" for write access, and "r" for read access. Is this column public or private.
 "w" makes the column writable via the save method. "r" makes the column readable from the
@@ -348,7 +348,7 @@ read the value of the column internally using setValue and getValue.
 example is a chess move where you have columns like "from" and "to", i.e. the name of
 squares on a chess board. "from" is not a good column name for a database, but a good
 public name. The config may the look like this:
-```JSON
+```
 "from_square":{
    "db": "varchar(2)",
    "alias": "from"
