@@ -249,7 +249,7 @@ echo $handler->handle($_POST['request']);
 
 Which will set first name of person with ID 1 to Mike.
 
-##Reques handler using Apache mod_rewrite
+##Request handler using Apache mod_rewrite
 
 The request handler can also be configured using Apache mod_rewrite. The request attribute in the example above is then no longer needed.
 instead, the request is defined in the url. Examples:
@@ -285,17 +285,21 @@ echo $handler->handle($request);
 For this to work, the mod_rewrite module must be enabled in httpd.conf. You will also need an .htaccess file in the
 same folder as router.php. Example:
 
-    RewriteEngine on
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^([a-zA-Z0-9\/_]+)/?$ router.php?request=$1 [QSA]
+```
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9\/_]+)/?$ router.php?request=$1 [QSA]
 
-    RewriteCond %{THE_REQUEST} router\.php
-    RewriteRule ^router\.php - [F]
+RewriteCond %{THE_REQUEST} router\.php
+RewriteRule ^router\.php - [F]
+```
 
 Requests for
-    http://myServer/Game/1/read
 
+```
+http://myServer/Game/1/read
+```
 
 will then be redirected to router.php with "/Game/1/read" as the $_GET['request'] param.
 
