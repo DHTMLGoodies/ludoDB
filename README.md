@@ -314,7 +314,7 @@ and LudoDBCollection classes
     "columns": {
         "id": "int auto_increment not null primary key",
         "database_id",{
-            "db": "int";
+            "db": "int",
             "access": "rw",
             "references": "database(id) on delete cascade"
         }
