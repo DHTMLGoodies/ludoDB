@@ -370,10 +370,13 @@ LudoDB looks for the file inside the JSONConfig sub folder.
 For LudoDBCollection, you also have a "model" property which is the name of a LudoDBModel
 class, example:
 
+For a LudoDBCollection class called "Moves":
 ```JSON
 {
     "sql": "select * from moves where game_id=?",
-    "model": "Moves"
+    "model": "Move"
 }
 
-
+When a "model" property is set, you will be able to get the correct alias names of columns
+defined in the "Move" class when calling the "read" or "getValues" methods. Example,
+you will get "from": "e4" instead of "from_square": "e4".
