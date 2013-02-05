@@ -128,7 +128,7 @@ Update lastname of Person with id=1 to "Johnson":
 	?>
 
 Output all Person details as JSON:
- 
+
 	<?php
 	echo $person; // Call the __toString() method of Person
 	?>
