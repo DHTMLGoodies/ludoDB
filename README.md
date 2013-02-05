@@ -303,6 +303,29 @@ http://myServer/Game/1/read
 
 will then be redirected to router.php with "/Game/1/read" as the $_GET['request'] param.
 
+###Classes
+This is an overview of the most important PHP classes in ludoDB:
+
+* LudoDBObject: Abstract base class for LudoDBModel and LudoDBCollection
+* LudoDBModel: Representation of a database table, example: "Game"
+* LudoDBCollection: Collection of rows from database tables, example: "Moves"
+* LudoDBRequestHandler: Class handling POST/GET requests and returning data
+in JSON format.
+
+###Public methods
+Here are some of the public methods for LudoDBModel and LudoDBCollection:
+
+* read - Return database values as array
+* save(array $data) - Saving new data to the database
+* delete - Delete record
+
+###Protected methods:
+Here are some of the protected methods which is good to know about:
+
+* setValue($column, $value) - Store internal value
+* getValue($column) - Return column value
+* commit() - Commit changes to the database
+
 ###JSON config specification.
 This is an example of the available properties for a JSON config file for LudoDBModel
 and LudoDBCollection classes
