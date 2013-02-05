@@ -304,37 +304,52 @@ http://myServer/Game/1/read
 will then be redirected to router.php with "/Game/1/read" as the $_GET['request'] param.
 
 ###JSON config specification.
-This is a commented JSON showing the available options for a JSON config of a LudoDBModel
-or LudoDBCollection class:
+This is an example of the available properties for a JSON config file for LudoDBModel
+and LudoDBCollection classes
 
 ```JSON
 {
-    "table": "name of db table",
-    "sql": "sql for population, example: select * from game where id=?",
-    // Question mark is used as place holder. Argument(s) passed to constructor
-    will be inserted at the question mark(s)
+    "table": "game",
+    "sql": "select * from game where id=?",
     "columns": {
-        "name of column": {
-            "db": "definition, example: int auto_increment not null primary key",
-            "access": "access to file, example: rw, w or rw",
-            "references": "constraints: example: database(id) on delete cascade"
-        },
-        "other_column": "simple definition, example: int",
-        "external column": {
+        "id": "int auto_increment not null primary key",
+        "database_id",{
+            "db": "int";
+            "access": "rw",
+            "references": "database(id) on delete cascade"
+        }
+        "Moves": {
             "class": "Moves",
-            "fk": "property of this class used to instantiate Moves class, example: id"
+            "fk": "id"
         }
     },
     "data": [
-        { "column name": "column value", "other column": "other column value"},
-        { "column name": "column value", "other column": "other column value"},
-        { "column name": "column value", "other column": "other column value"}
+        { "id": "1", "database_id": "1"},
+        { "id": "2", "database_id": "1"},
+        { "id": "3", "database_id": "1"}
     ],
-    // "data" can also be a string referring to the name of a JSON file, example:
-    "data": "game.data.json"
-    // This file has to be located inside the JSONConfig folder
-    "indexes": ["column to index", "column to index"]
+    "indexes": ["database_id"]
 }
 ```
 
+* table: Name of database table
+* sql: sql to execute when object is created. Question mark is used as a placeholder
+for the arguments passed to the constructor.
+* columns: Configuration of columns
+* "id": "int auto_increment not null primary key" is example of the most simple configuration. It's
+the same as writing "id": { "db": "int auto_increment not null primary key" }
+* db : Column specification
+* access: "w" for write access, and "r" for read access. Is this column public or private.
+"w" makes the column writable via the save method. "r" makes the column readable from the
+read and getValues() method. "rw" makes it both readable and writable. You can still modify and
+read the value of the column internally using setValue and getValue.
+* references: Specifies constraint, example: "references database(id) on delete cascade",
+* "class": Name of external/child LudoDBObject class.
+* "fk": Name of column to use when instantiating external class, example: "id". In the
+example above, the sql for "Moves" may be like this : "select * from moves where game_id=?"
+where "id" of this game will be inserted at the placeholder question mark.
+* data: Either an array of default data which are inserted when the table is created or
+a string specifying the path to a JSON file with the default data, example: game.data.json.
+LudoDB looks for the file inside the JSONConfig sub folder.
+* indexes: Array of indexed columns.
 
