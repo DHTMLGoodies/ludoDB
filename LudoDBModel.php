@@ -15,7 +15,7 @@ abstract class LudoDBModel extends LudoDBObject
     protected function populate()
     {
         $this->populated = true;
-        $this->arguments = $this->getValidInputs($this->arguments);
+        $this->arguments = $this->getValidArguments($this->arguments);
         $data = $this->db->one($this->sqlHandler()->getSql(), $this->arguments);
         if (isset($data)) {
             $this->populateWith($data);
@@ -23,16 +23,16 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
-    private function getValidInputs($params)
+    private function getValidArguments($params)
     {
         $paramNames = $this->parser->getConstructorParams();
         for ($i = 0, $count = count($params); $i < $count; $i++) {
-            $params[$i] = $this->getValidInput($paramNames[$i], $params[$i]);
+            $params[$i] = $this->getValidArgument($paramNames[$i], $params[$i]);
         }
         return $params;
     }
 
-    protected function getValidInput($key, $value)
+    protected function getValidArgument($key, $value)
     {
         return $value;
     }
