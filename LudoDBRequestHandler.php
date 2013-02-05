@@ -19,6 +19,7 @@ class LudoDBRequestHandler
     private $message = "";
     private $code = 200;
     private $arguments;
+
     public function __construct()
     {
 
@@ -35,21 +36,21 @@ class LudoDBRequestHandler
 
             $this->model->validate($this->serviceName, $request['data']);
 
-            if(!in_array($this->serviceName, $this->validServices)){
+            if (!in_array($this->serviceName, $this->validServices)) {
                 throw new LudoDBException('Invalid service ' . $this->serviceName, 400);
             }
 
-            if(!$this->model->areValidServiceArguments($this->serviceName, $this->arguments)){
-                throw new LudoDBException('Invalid arguments for ' . $this->serviceName. ", arguments: ". implode(",", $this->arguments), 400);
+            if (!$this->model->areValidServiceArguments($this->serviceName, $this->arguments)) {
+                throw new LudoDBException('Invalid arguments for ' . $this->serviceName . ", arguments: " . implode(",", $this->arguments), 400);
             }
 
-            if($this->serviceName === 'delete' || $this->serviceName === 'read'){
+            if ($this->serviceName === 'delete' || $this->serviceName === 'read') {
                 if (!$this->model->getId() && $this->model instanceof LudoDBModel) {
-                    throw new Exception('Object not found', 404);
+                    throw new LudoDBException('Object not found', 404);
                 }
             }
 
-            if(!method_exists($this->model, $this->serviceName)){
+            if (!method_exists($this->model, $this->serviceName)) {
                 throw new Exception("Service " . $this->serviceName . " not implemented", 400);
             }
 
@@ -61,7 +62,7 @@ class LudoDBRequestHandler
                 case 'delete':
                     return $this->toJSON($this->model->delete());
                 default:
-                    if(method_exists($this->model, $this->serviceName)){
+                    if (method_exists($this->model, $this->serviceName)) {
                         return $this->toJSON($this->model->{$this->serviceName}($request['data']));
                     }
             }
@@ -71,15 +72,15 @@ class LudoDBRequestHandler
             $this->success = false;
             return $this->toJSON(array());
         }
-        throw new LudoDBException("Invalid request ", 400);
+        throw new LudoDBException("Invalid request for " . $this->serviceName, 400);
     }
 
     private function getParsed($request)
     {
         if (is_string($request)) $request = array('request' => $request);
-        $lastChar = substr($request['request'], strlen($request['request']) -1, 1);
-        if($lastChar === '/'){
-            $request['request'] = substr($request['request'], 0, strlen($request['request'])-1);
+        $lastChar = substr($request['request'], strlen($request['request']) - 1, 1);
+        if ($lastChar === '/') {
+            $request['request'] = substr($request['request'], 0, strlen($request['request']) - 1);
         }
         if (!isset($request['data'])) $request['data'] = array();
         return $request;
@@ -134,15 +135,18 @@ class LudoDBRequestHandler
         throw new LudoDBClassNotFoundException('Invalid request for: ' . $request['request'], 400);
     }
 
-    private function getValidServices(array $request){
+    private function getValidServices(array $request)
+    {
         $className = $this->getClassName($request);
-        if(isset($className)){
-            return $this->getReflectionClass($className)->getStaticPropertyValue("validServices");
+        if (isset($className)) {
+            $servicesMethod = $this->getReflectionClass($className)->getMethod('getValidServices');
+            return isset($servicesMethod) ? $servicesMethod->invoke(null) : array();
         }
         return array();
     }
 
-    private function getReflectionClass($className){
+    private function getReflectionClass($className)
+    {
         $cl = new ReflectionClass($className);
         if (!$cl->implementsInterface('LudoDBService')) {
             throw new LudoDBClassNotFoundException('Invalid request for: ' . $className, 400);

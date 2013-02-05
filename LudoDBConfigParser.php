@@ -33,6 +33,20 @@ class LudoDBConfigParser
         $this->mapColumnAliases();
     }
 
+    private static $extensionClasses = array();
+    /**
+     * @return LudoDBObject
+     */
+    private function getExtends()
+    {
+        $className = $this->getProperty('extends');
+        if (!isset($className)) return null;
+        if (!isset(self::$extensionClasses[$className])) {
+            self::$extensionClasses[$className] = new $className;
+        }
+        return self::$extensionClasses[$className];
+    }
+
     private function getConfigFromFile()
     {
         $location = $this->getPathToJSONConfig();
@@ -368,20 +382,7 @@ class LudoDBConfigParser
         return $this->columnAccessCache[$key];
     }
 
-    private static $extensionClasses = array();
 
-    /**
-     * @return LudoDBObject
-     */
-    private function getExtends()
-    {
-        $className = $this->getProperty('extends');
-        if (!isset($className)) return null;
-        if (!isset(self::$extensionClasses[$className])) {
-            self::$extensionClasses[$className] = new $className;
-        }
-        return self::$extensionClasses[$className];
-    }
 
     public function canBePopulatedBy($column)
     {

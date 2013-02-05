@@ -11,12 +11,12 @@ abstract class LudoDBCollection extends LudoDBIterator
      * Lookup value to use when instantiating collection. This value
      * is used in join with config['constructBy']
      */
-    protected $constructorValues;
+    protected $arguments;
 
     public function deleteRecords(){
-        if(isset($this->constructorValues)){
+        if(isset($this->arguments)){
             $constructBy = $this->parser->getConstructorParams();
-            $this->db->query("delete from ". $this->parser->getTableName()." where ". $constructBy[0]."=?", array($this->constructorValues[0]));
+            $this->db->query("delete from ". $this->parser->getTableName()." where ". $constructBy[0]."=?", array($this->arguments[0]));
             $this->clearCache();
         }
     }
@@ -54,8 +54,8 @@ abstract class LudoDBCollection extends LudoDBIterator
 
     public function getJSONKey(){
         $ret = get_class($this);
-        if(isset($this->constructorValues) && count($this->constructorValues)){
-            $ret.="_". implode("_", $this->constructorValues);
+        if(isset($this->arguments) && count($this->arguments)){
+            $ret.="_". implode("_", $this->arguments);
         }
         return $ret;
     }

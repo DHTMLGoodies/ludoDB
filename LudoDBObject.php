@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * Base class for LudoDB models and collections.
  * User: Alf Magne Kalleland
  * Date: 20.12.12
  * Time: 14:31
@@ -11,14 +11,18 @@ abstract class LudoDBObject
      * @var LudoDB
      */
     protected $db;
-    protected $constructorValues;
+    protected $arguments;
     protected static $configParsers = array();
 
     /**
      * Valid public services offered by this class, example "read", "delete" and "save"
-     * @var array
+     * @return array
      */
-    public static $validServices = array();
+    public static function getValidServices()
+    {
+        return array();
+    }
+
     /**
      * True when config is in JSONConfig/<class name>.json file
      * @var bool
@@ -42,7 +46,7 @@ abstract class LudoDBObject
     {
         $this->db = LudoDb::getInstance();
         if (func_num_args() > 0) {
-            $this->constructorValues = $this->getValidConstructorValues(func_get_args());
+            $this->arguments = $this->getValidArguments(func_get_args());
         }
         $this->parser = $this->configParser();
         $this->onConstruct();
@@ -57,7 +61,7 @@ abstract class LudoDBObject
     }
 
 
-    protected function getValidConstructorValues($values)
+    protected function getValidArguments($values)
     {
         foreach ($values as &$value) {
             $value = $this->db->escapeString($value);
@@ -78,7 +82,7 @@ abstract class LudoDBObject
 
     public function getConstructorValues()
     {
-        return $this->constructorValues;
+        return $this->arguments;
     }
 
     public function commit()
@@ -144,24 +148,28 @@ abstract class LudoDBObject
         return json_encode($this->getValues());
     }
 
-    public function cacheEnabled(){
+    public function cacheEnabled()
+    {
         return $this->caching;
     }
 
     abstract public function getValues();
 
     private $JSONKey = null;
-    public function getJSONKey(){
-        if(!isset($this->JSONKey)){
-            if(isset($this->constructorValues) && count($this->constructorValues)){
-                $this->JSONKey = get_class($this)."_".implode("_", $this->constructorValues);
+
+    public function getJSONKey()
+    {
+        if (!isset($this->JSONKey)) {
+            if (isset($this->arguments) && count($this->arguments)) {
+                $this->JSONKey = get_class($this) . "_" . implode("_", $this->arguments);
             }
         }
         return $this->JSONKey;
     }
 
-    protected function clearCache(){
-        if($this->caching){
+    protected function clearCache()
+    {
+        if ($this->caching) {
             LudoDBCache::clearCacheBy($this->getJSONKey());
         }
     }
@@ -176,7 +184,8 @@ abstract class LudoDBObject
 
     }
 
-    public function read(){
+    public function read()
+    {
         return $this->getValues();
     }
 

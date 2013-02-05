@@ -15,8 +15,8 @@ abstract class LudoDBModel extends LudoDBObject
     protected function populate()
     {
         $this->populated = true;
-        $this->constructorValues = $this->getValidInputs($this->constructorValues);
-        $data = $this->db->one($this->sqlHandler()->getSql(), $this->constructorValues);
+        $this->arguments = $this->getValidInputs($this->arguments);
+        $data = $this->db->one($this->sqlHandler()->getSql(), $this->arguments);
         if (isset($data)) {
             $this->populateWith($data);
             $this->setId($this->getValue($this->parser->getIdField()));
@@ -60,7 +60,7 @@ abstract class LudoDBModel extends LudoDBObject
 
     private function autoPopulate()
     {
-        if (!$this->populated && isset($this->constructorValues)) {
+        if (!$this->populated && isset($this->arguments)) {
             $this->populate();
         }
     }

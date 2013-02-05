@@ -10,7 +10,6 @@ class Capitals extends LudoDBCollection implements LudoDBService
 {
     protected $JSONConfig = true;
     protected $caching = true;
-    public static $validServices = array('read','delete','save');
 
     public function __construct($fromZip, $toZip){
         parent::__construct($fromZip, $toZip);
@@ -18,5 +17,9 @@ class Capitals extends LudoDBCollection implements LudoDBService
 
     public function areValidServiceArguments($service, $arguments){
         return count($arguments) === 2 && is_numeric($arguments[0]) && is_numeric($arguments[1]);
+    }
+
+    public static function getValidServices(){
+        return array('read','delete','save');
     }
 }

@@ -7,7 +7,7 @@
 class LudoSQL
 {
     private $config;
-    private $constructorValues;
+    private $arguments;
     private $obj;
     const DELETED = '__DELETED__';
 
@@ -21,19 +21,19 @@ class LudoSQL
         $this->obj = $obj;
         $this->configParser = $obj->configParser();
         $this->config = $obj->configParser()->getConfig();
-        $this->constructorValues = $obj->getConstructorValues();
+        $this->arguments = $obj->getConstructorValues();
         $this->validate();
     }
 
     private function validate()
     {
-        if (isset($this->constructorValues) && !is_array($this->constructorValues)) $this->constructorValues = array($this->constructorValues);
+        if (isset($this->arguments) && !is_array($this->arguments)) $this->arguments = array($this->arguments);
     }
 
     public function getSql()
     {
         if (isset($this->config['sql'])) {
-            return vsprintf($this->config['sql'], $this->constructorValues);
+            return vsprintf($this->config['sql'], $this->arguments);
         } else {
             return $this->getCompiledSql();
         }
@@ -90,8 +90,8 @@ class LudoSQL
         $constructBy = $this->configParser->getConstructorParams();
         $pdo = LudoDB::hasPDO();
         if (isset($constructBy)) {
-            for ($i = 0, $count = count($this->constructorValues); $i < $count; $i++) {
-                $ret[] = $this->getTableAndColumn($constructBy[$i]) . "=" . ($pdo ? "?" : "'" . $this->constructorValues[$i] . "'");
+            for ($i = 0, $count = count($this->arguments); $i < $count; $i++) {
+                $ret[] = $this->getTableAndColumn($constructBy[$i]) . "=" . ($pdo ? "?" : "'" . $this->arguments[$i] . "'");
             }
         }
         if (count($ret)) {

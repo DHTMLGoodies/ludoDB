@@ -10,10 +10,13 @@ class Capital extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
     protected $caching = true;
-    public static $validServices = array('read','delete','save');
 
     public function __construct($id = null){
         parent::__construct($id);
+    }
+
+    public static function getValidServices(){
+        return array('read','delete','save');
     }
 
     public function setName($name){

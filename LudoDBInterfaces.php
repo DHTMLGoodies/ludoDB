@@ -27,6 +27,11 @@ interface LudoDBAdapter
 
 /**
  * Classes for request handlers has to implement the LudoDBService interface
+ *
+ * The class also needs to implement a static function called getValidServices
+ * which returns an array of valid services, example array('read','save','delete');
+ * Methods with these names also has to be implemented. "read", "save" and "delete"
+ * are already implemented for LudoDBModel.
  */
 interface LudoDBService
 {
@@ -37,4 +42,5 @@ interface LudoDBService
      * @return mixed
      */
     public function areValidServiceArguments($service, $arguments);
+
 }
