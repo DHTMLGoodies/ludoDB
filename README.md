@@ -376,6 +376,7 @@ For a LudoDBCollection class called "Moves":
     "sql": "select * from moves where game_id=?",
     "model": "Move"
 }
+```
 
 When a "model" property is set, you will be able to get the correct alias names of columns
 defined in the "Move" class when calling the "read" or "getValues" methods. Example,
