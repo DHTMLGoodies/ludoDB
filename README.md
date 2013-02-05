@@ -313,7 +313,7 @@ and LudoDBCollection classes
     "sql": "select * from game where id=?",
     "columns": {
         "id": "int auto_increment not null primary key",
-        "database_id",{
+        "database_id" :{
             "db": "int",
             "access": "rw",
             "references": "database(id) on delete cascade"
