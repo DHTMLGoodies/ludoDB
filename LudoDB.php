@@ -130,10 +130,14 @@ class LudoDB
         return 0;
     }
 
-    public function log($sql)
+    public function log($sql, $arguments = array())
     {
         $fh = fopen("sql.txt", "a+");
-        fwrite($fh, $sql . "\n");
+        $logText = $sql;
+        if(!empty($arguments)){
+            $logText.= ", arguments: (". implode(",", $arguments). ")";
+        }
+        fwrite($fh, $logText . "\n");
         fclose($fh);
     }
 }
