@@ -316,7 +316,8 @@ and LudoDBCollection classes
         "database_id" :{
             "db": "int",
             "access": "rw",
-            "references": "database(id) on delete cascade"
+            "references": "database(id) on delete cascade",
+            "alias": "database"
         }
         "Moves": {
             "class": "Moves",
@@ -343,6 +344,19 @@ the same as writing "id": { "db": "int auto_increment not null primary key" }
 "w" makes the column writable via the save method. "r" makes the column readable from the
 read and getValues() method. "rw" makes it both readable and writable. You can still modify and
 read the value of the column internally using setValue and getValue.
+* alias: Public name of column if different than the name of the column in the database. One
+example is a chess move where you have columns like "from" and "to", i.e. the name of
+squares on a chess board. "from" is not a good column name for a database, but a good
+public name. The config may the look like this:
+```JSON
+"from_square":{
+   "db": "varchar(2)",
+   "alias": "from"
+}
+```
+The read method will then return "from" as column name instead of "from_square". The save
+method will support both "from" and "to_square" and do the mapping when saving the column
+value to the database.
 * references: Specifies constraint, example: "references database(id) on delete cascade",
 * "class": Name of external/child LudoDBObject class.
 * "fk": Name of column to use when instantiating external class, example: "id". In the
@@ -352,4 +366,14 @@ where "id" of this game will be inserted at the placeholder question mark.
 a string specifying the path to a JSON file with the default data, example: game.data.json.
 LudoDB looks for the file inside the JSONConfig sub folder.
 * indexes: Array of indexed columns.
+
+For LudoDBCollection, you also have a "model" property which is the name of a LudoDBModel
+class, example:
+
+```JSON
+{
+    "sql": "select * from moves where game_id=?",
+    "model": "Moves"
+}
+
 
