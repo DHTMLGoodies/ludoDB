@@ -158,7 +158,7 @@ class Client extends LudoDBModel
 }
 ```
 ####JSON file(Client.json) located in sub folder JSONConfig:
-```Javascript
+```JSON
 {
 	"table":"Client",
 	"idField":"id",
