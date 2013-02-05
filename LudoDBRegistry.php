@@ -9,18 +9,21 @@ class LudoDBRegistry
 {
     private static $storage = array();
 
-    public static function set($key, $value){
+    public static function set($key, $value)
+    {
         self::$storage[$key] = $value;
     }
 
-    public static function get($key){
-        if(self::isValid($key)){
+    public static function get($key)
+    {
+        if (self::isValid($key)) {
             return self::$storage[$key];
         }
         return null;
     }
 
-    public static function isValid($key){
+    public static function isValid($key)
+    {
         return isset(self::$storage[$key]);
     }
 }

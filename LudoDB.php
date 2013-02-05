@@ -130,6 +130,10 @@ class LudoDB
         return 0;
     }
 
+    public function createDatabase($name){
+        self::getInstance()->query("create database ".$name);
+    }
+
     public function log($sql, $arguments = array())
     {
         $fh = fopen("sql.txt", "a+");
