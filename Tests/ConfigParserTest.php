@@ -234,8 +234,24 @@ class ConfigParserTest extends TestBase
         $this->assertTrue(isset($columns['address']));
         $this->assertEquals('varchar(10)', $columns['zip']);
         $this->assertEquals("Manager", $manager->configParser()->getTableName());
-
     }
 
+    /**
+     * @test
+     */
+    public function shouldGetReferencesToOtherTables(){
+        // given
+        $obj = new AChild();
 
+        // when
+        $references = $obj->configParser()->getTableReferences();
+
+        // then
+        $this->assertEquals(2, count($references));
+        $this->assertEquals("a_parent", $references[0]['table']);
+        $this->assertEquals("a_city", $references[1]['table']);
+
+        $this->assertEquals("id", $references[0]['column']);
+        $this->assertEquals("zip", $references[1]['column']);
+    }
 }

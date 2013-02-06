@@ -16,17 +16,10 @@ class TestBase extends PHPUnit_Framework_TestCase
         date_default_timezone_set('Europe/Berlin');
         $this->clearLog();
         if (!$this->connected) $this->connect();
-        $this->dropTable();
-        $tbl = new TestTable();
-        $tbl->createTable();
 
-        $p = new Person();
-        $p->drop()->yesImSure();
-        $p->createTable();
+        $util = new LudoDBUtility();
+        $util->dropAndCreate(array('TestTable','Person','Phone','City'));
 
-        $p = new Phone();
-        $p->drop()->yesImSure();
-        $p->createTable();
     }
 
     private $dbInstance;
@@ -51,13 +44,6 @@ class TestBase extends PHPUnit_Framework_TestCase
     {
         $db = LudoDB::getInstance();
         $db->query("delete from TestTable");
-    }
-
-    protected function dropTable()
-    {
-        $db = LudoDB::getInstance();
-        $t = new TestTable();
-        $t->drop()->yesImSure();
     }
 
     private function clearLog()

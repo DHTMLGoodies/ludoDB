@@ -1,0 +1,15 @@
+{
+	"table": "a_child",
+	"sql": "select * from a_child where id=?",
+	"columns": {
+		"id": "int auto_increment not null primary key",
+		"parent": {
+			"db": "int",
+			"references": "a_parent(id) on delete cascade"
+		},
+		"zip": {
+			"db": "varchar(25)",
+			"references": "a_city(zip) on delete cascade"
+		}
+	}
+}

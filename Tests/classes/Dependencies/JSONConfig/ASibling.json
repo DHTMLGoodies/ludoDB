@@ -1,0 +1,11 @@
+{
+	"table": "a_sibling",
+	"sql": "select * from a_sibling where id=?",
+	"columns": {
+		"id": "int auto_increment not null primary key",
+		"parent": {
+			"db": "int",
+			"references": "a_parent(id) on delete cascade"
+		}
+	}
+}

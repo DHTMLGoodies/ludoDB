@@ -11,13 +11,6 @@ class LudoDBModelTests extends TestBase
 {
     public function setUp(){
         parent::setUp();
-
-        $city = new City();
-        $city->drop()->yesImSure();
-        $city->createTable();
-
-        $phone = new Phone();
-        if(!$phone->exists())$phone->createTable();
     }
 
     /**
@@ -53,24 +46,15 @@ class LudoDBModelTests extends TestBase
         $this->assertEquals(array('firstname' => 'Alf Magne'), $table->getUncommitted());
     }
 
-    /**
-     * @test
-     */
-    /**
-     * @test
-     */
-    public function shouldBeAbleToCreateTable(){
-        $this->dropTable();
-        $table = new TestTable();
-        $table->createTable();
-    }
-
-    /**
+     /**
      * @test
      */
     public function shouldBeAbleToCheckTableExistence(){
-        $this->dropTable();
+        // given
         $table = new TestTable();
+        // when
+        $this->getDb()->query("drop table TestTable");
+        // then
         $this->assertFalse($table->exists());
     }
 
@@ -78,9 +62,14 @@ class LudoDBModelTests extends TestBase
      * @test
      */
     public function shouldReturnTrueIfTableExists(){
-        $this->dropTable();
+        // given
         $table = new TestTable();
+
+        // when
+        $this->getDb()->query("drop table TestTable");
         $table->createTable();
+
+        // then
         $this->assertTrue($table->exists());
     }
 

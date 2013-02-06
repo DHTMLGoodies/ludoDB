@@ -1,5 +1,4 @@
 {
-	"extends": "Client",
 	"table": "Manager",
 	"columns": {
 		"salary":{

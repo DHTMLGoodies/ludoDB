@@ -140,6 +140,7 @@ class LudoDB
         $fh = fopen("sql.txt", "a+");
         $logText = $sql;
         if(!empty($arguments)){
+            if(!is_array($arguments))$arguments = array($arguments);
             $logText.= ", arguments: (". implode(",", $arguments). ")";
         }
         fwrite($fh, $logText . "\n");

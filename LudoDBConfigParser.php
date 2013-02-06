@@ -40,7 +40,13 @@ class LudoDBConfigParser
     private function getExtends()
     {
         $className = $this->getProperty('extends');
-        if (!isset($className)) return null;
+        if (!isset($className)){
+            $parent = get_parent_class($this->obj);
+            if($parent !== 'LudoDBModel' && $parent!='LudoDBCollection'){
+                $className = $parent;
+            }
+        }
+        if(!isset($className))return null;
         if (!isset(self::$extensionClasses[$className])) {
             self::$extensionClasses[$className] = new $className;
         }
@@ -406,5 +412,27 @@ class LudoDBConfigParser
             return true;
         }
         return is_array($col) && isset($col['canConstructBy']) ? $col['canConstructBy'] : false;
+    }
+
+    /**
+     * Returns references to other tables as array,
+     * example array(
+     *  array('table' => 'city', 'column' => 'zip'),
+     *  array('table' => 'country', 'column' => 'id')
+     * )
+     * @return array
+     */
+    public function getTableReferences(){
+        $ret = array();
+        $cols = $this->getColumns();
+        foreach($cols as $col){
+            if(is_array($col) && isset($col['references'])){
+                $ret[] = array(
+                    'table' => preg_replace("/^([^\(]+?)\(.*$/", "$1", $col['references']),
+                    'column' => preg_replace("/^[^\(]+?\(([^\)]+)\).*$/", "$1", $col['references'])
+                );
+            }
+        }
+        return $ret;
     }
 }

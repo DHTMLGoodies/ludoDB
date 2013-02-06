@@ -6,7 +6,7 @@
  * Time: 16:42
  * To change this template use File | Settings | File Templates.
  */
-class Manager extends LudoDBModel
+class Manager extends Client
 {
     protected $JSONConfig = true;
 }
