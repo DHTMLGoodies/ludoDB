@@ -27,6 +27,7 @@ class AllTests
         $suite->addTestSuite("RequestHandlerTest");
         $suite->addTestSuite("PDOTests");
         $suite->addTestSuite("MySqlITests");
+        $suite->addTestSuite("LudoDBUtilityTest");
         return $suite;
     }
 }

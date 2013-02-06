@@ -18,7 +18,8 @@ class TestBase extends PHPUnit_Framework_TestCase
         if (!$this->connected) $this->connect();
 
         $util = new LudoDBUtility();
-        $util->dropAndCreate(array('TestTable','Person','Phone','City'));
+        $tables = array('TestTable','Person','Phone','City');
+        $util->dropAndCreate($tables);
 
     }
 

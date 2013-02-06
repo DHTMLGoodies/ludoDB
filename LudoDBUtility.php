@@ -79,14 +79,12 @@ class LudoDBUtility
                             $index = array_search($reference, $tableNames);
                             $indexThis = array_search($tableName, $tableNames);
                             if ($index !== FALSE && $indexThis !== FALSE && $index > $indexThis) {
-                                array_splice(&$tableNames, $index+1, 0, array($tableName));
-                                array_splice(&$ret, $index+1, 0, array($className));
+                                array_splice($tableNames, $index+1, 0, array($tableName));
+                                array_splice($ret, $index+1, 0, array($className));
 
-                                array_splice(&$tableNames, $indexThis, 1);
-                                array_splice(&$ret, $indexThis, 1);
-
+                                array_splice($tableNames, $indexThis, 1);
+                                array_splice($ret, $indexThis, 1);
                                 $itemFound = true;
-
                             }
                         }
                     }

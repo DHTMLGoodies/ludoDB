@@ -16,13 +16,6 @@ class LudoDBModelTests extends TestBase
     /**
      * @test
      */
-    public function shouldBeAbleToRunTests(){
-        $this->assertEquals(1,1);
-    }
-
-    /**
-     * @test
-     */
     public function shouldCaptureQueryValues(){
         // when
         $city = new City(1);
