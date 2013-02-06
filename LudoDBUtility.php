@@ -149,4 +149,8 @@ class LudoDBUtility
         }
         return $this->instances[$name];
     }
+    // TODO implement
+    public function validateConfigsOf(array $classNames){
+
+    }
 }
