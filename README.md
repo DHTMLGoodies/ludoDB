@@ -343,6 +343,10 @@ and LudoDBCollection classes
             "access": "rw",
             "references": "database(id) on delete cascade",
             "alias": "database"
+        },
+        "creator": {
+            "db": "varchar(128)",
+            "default": "NA"
         }
         "Moves": {
             "class": "Moves",
@@ -383,6 +387,7 @@ The read method will then return "from" as column name instead of "from_square".
 method will support both "from" and "to_square" and do the mapping when saving the column
 value to the database.
 * references: Specifies constraint, example: "references database(id) on delete cascade",
+* default: The default property specifies the default value for this column in the database.
 * "class": Name of external/child LudoDBObject class.
 * "fk": Name of column to use when instantiating external class, example: "id". In the
 example above, the sql for "Moves" may be like this : "select * from moves where game_id=?"

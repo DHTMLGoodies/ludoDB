@@ -254,4 +254,15 @@ class ConfigParserTest extends TestBase
         $this->assertEquals("id", $references[0]['column']);
         $this->assertEquals("zip", $references[1]['column']);
     }
+
+    /**
+     * @test
+     */
+    public function shouldFindDefaultValues(){
+        // given
+        $p = new Person();
+
+        // then
+        $this->assertEquals('female', $p->configParser()->getDefaultValue('sex'));
+    }
 }

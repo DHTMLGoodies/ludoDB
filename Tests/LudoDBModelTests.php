@@ -375,6 +375,19 @@ class LudoDBModelTests extends TestBase
         $this->assertEquals(null, $p3->getId());
     }
 
+    /**
+     * @test
+     */
+    public function shouldReturnDefaultValueWhenSetInConfig(){
+        // given
+        $person = new Person();
+
+        // when
+        $sex = $person->getSex();
+
+        // then
+        $this->assertEquals('female', $sex);
+    }
 
     private function getExistingRecord(){
         $this->clearTable();

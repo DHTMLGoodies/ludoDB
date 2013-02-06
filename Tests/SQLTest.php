@@ -32,6 +32,29 @@ class SQLTest extends TestBase{
     /**
      * @test
      */
+    public function shouldGetCreateSqlIncludingDefaultValues(){
+        // given
+        $config = array(
+            'table' => 'Person',
+            'columns' => array(
+                'firstname' => 'varchar(32)',
+                'lastname' => array(
+                    'db' => 'varchar(32)',
+                    'default' => 'Doe'
+                )
+            )
+        );
+        // when
+        $expected ="create table Person(firstname varchar(32),lastname varchar(32) default ?)";
+        $sql = $this->getSqlObject($config)->getCreateTableSql();
+        // then
+        $this->assertEquals($expected, $sql);
+
+    }
+
+    /**
+     * @test
+     */
     public function shouldGetTableCreationSqlWithReferences(){
         // given
         $config = array(

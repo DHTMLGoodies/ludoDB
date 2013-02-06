@@ -33,6 +33,11 @@
             "class": "City",
             "get": "getCity",
             "access": "r"
+        },
+        "sex": {
+            "db" : "varchar(10)",
+            "default": "female",
+            "access": "rw"
         }
     },
     "classes": {

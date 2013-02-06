@@ -53,7 +53,7 @@ abstract class LudoDBModel extends LudoDBObject
         if (isset($this->updates) && isset($this->updates[$column])) {
             return $this->updates[$column] == LudoSQL::DELETED ? null : $this->updates[$column];
         }
-        return isset($this->data[$column]) ? $this->data[$column] : null;
+        return isset($this->data[$column]) ? $this->data[$column] : $this->parser->getDefaultValue($column);
     }
 
     private function autoPopulate()
@@ -221,7 +221,7 @@ abstract class LudoDBModel extends LudoDBObject
      */
     public function createTable()
     {
-        $this->db->query($this->sqlHandler()->getCreateTableSql());
+        $this->db->query($this->sqlHandler()->getCreateTableSql(), $this->parser->getDefaultValues());
         $this->createIndexes();
         $this->insertDefaultData();
     }

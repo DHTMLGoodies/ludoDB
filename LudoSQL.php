@@ -121,10 +121,16 @@ class LudoSQL
                 if (is_string($type)) {
                     $columns[] = $name . " " . $type;
                 } else {
-                    $columns[] = $name . " " . $type['db'];
+                    $col = $name. " ". $type['db'];
+                    if(isset($type['default'])){
+                        $col.= " default ?";
+                    }
+                    $columns[] = $col;
+
                     if(isset($type['references'])){
                         $columns[] = "FOREIGN KEY(". $name.") REFERENCES ". $type['references'];
                     }
+
                 }
             }
         }

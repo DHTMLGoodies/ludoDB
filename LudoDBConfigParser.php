@@ -435,4 +435,19 @@ class LudoDBConfigParser
         }
         return $ret;
     }
+
+    public function getDefaultValue($column){
+        return $this->getColumnProperty($column,'default');
+    }
+
+    public function getDefaultValues(){
+        $ret = array();
+        $cols = $this->getColumns();
+        foreach($cols as $col){
+            if(is_array($col) && isset($col['db']) && isset($col['default'])){
+                $ret[] = $col['default'];
+            }
+        }
+        return count($ret) ? $ret : null;
+    }
 }
