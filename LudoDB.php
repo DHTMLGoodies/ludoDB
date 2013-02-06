@@ -142,6 +142,8 @@ class LudoDB
         if(!empty($arguments)){
             if(!is_array($arguments))$arguments = array($arguments);
             $logText.= ", arguments: (". implode(",", $arguments). ")";
+        }else{
+            $logText.= " no arguments";
         }
         fwrite($fh, $logText . "\n");
         fclose($fh);
