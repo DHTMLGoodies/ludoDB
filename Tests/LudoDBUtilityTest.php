@@ -52,4 +52,20 @@ class LudoDBUtilityTest extends TestBase
         $this->assertEquals(5, count($ludoDBTables));
         $this->assertEquals($expected, $ludoDBTables);
     }
+
+    /**
+     * @test
+     */
+    public function shouldExcludeDuplicates(){
+        // given
+        $classes = array('AChild','ASibling','LudoDBModel','GrandParent','AParent','NoLudoDBClass','ACity','AChild');
+        $util = new LudoDBUtilityMock();
+        // when
+        $ludoDBTables = $util->getClassesRearranged($classes);
+        $expected = array('ACity','GrandParent','AParent','ASibling','AChild');
+
+        // then
+        $this->assertEquals(5, count($ludoDBTables));
+        $this->assertEquals($expected, $ludoDBTables);
+    }
 }

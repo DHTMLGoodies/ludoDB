@@ -1,6 +1,6 @@
 <?php
 /**
- *
+ * Class used during Development/Debugging.
  * User: Alf Magne
  * Date: 06.02.13
  * Time: 08:57
@@ -8,11 +8,23 @@
 class LudoDBUtility
 {
 
+    /**
+     * Drop and create database tables for the given class names
+     * $classNames is an array of LudoDBModel sub classes.
+     * This method is useful during development since it will check
+     * table references(defined in config) and drop and create the tables
+     * in the right order
+     * @param array $classNames
+     */
     public function dropAndCreate(array $classNames){
         $this->dropDatabaseTables($classNames);
         $this->createDatabaseTables($classNames);
     }
 
+    /**
+     * Drop the database tables of the given classes.
+     * @param array $classNames
+     */
     public function dropDatabaseTables(array $classNames){
         $classes = array_reverse($this->getClassesRearranged($classNames));
         foreach($classes as $class){
@@ -47,6 +59,8 @@ class LudoDBUtility
     protected function getClassesRearranged(array $classNames)
     {
         $classes = $this->getLudoDBModelTables($classNames);
+        $classes = $this->withDuplicatesRemoved($classes);
+
         $ret = $classes;
         $tableNames = $this->getTableNames($classes);
         $itemFound = true;
@@ -80,6 +94,25 @@ class LudoDBUtility
             }
         }
 
+        return $ret;
+    }
+
+    /**
+     * Remove duplicate class names, i.e. classes using the same database table.
+     * @param $classNames
+     * @return array
+     */
+    private function withDuplicatesRemoved(array $classNames){
+        $tables = array();
+        $ret = array();
+        foreach($classNames as $className){
+            $instance = $this->getClassInstance($className);
+            $tableName = $instance->configParser()->getTableName();
+            if(!in_array($tableName, $tables)){
+                $ret[] = $className;
+                $tables[] = $tableName;
+            }
+        }
         return $ret;
     }
 

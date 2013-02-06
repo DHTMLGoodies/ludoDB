@@ -8,4 +8,8 @@
 class Movie extends LudoDBModel
 {
     protected $JSONConfig = true;
+
+    public function getTitle(){
+        return $this->getValue('title');
+    }
 }

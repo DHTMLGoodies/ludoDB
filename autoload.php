@@ -10,6 +10,7 @@ spl_autoload_register(
                 'accessortest' => '/Tests/AccessorTest.php',
                 'achild' => '/Tests/classes/Dependencies/AChild.php',
                 'acity' => '/Tests/classes/Dependencies/ACity.php',
+                'anotherchild' => '/Tests/classes/Dependencies/AnotherChild.php',
                 'aparent' => '/Tests/classes/Dependencies/AParent.php',
                 'asibling' => '/Tests/classes/Dependencies/ASibling.php',
                 'author' => '/examples/mod_rewrite/Author.php',

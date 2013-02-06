@@ -53,6 +53,10 @@ class TestBase extends PHPUnit_Framework_TestCase
             $fh = fopen("test-log.txt", "w");
             fwrite($fh, "\n");
             fclose($fh);
+
+            $fh = fopen("sql.txt", "w");
+            fwrite($fh, "\n");
+            fclose($fh);
         }
     }
 

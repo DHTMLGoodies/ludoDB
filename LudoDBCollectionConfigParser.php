@@ -27,9 +27,8 @@ class LudoDBCollectionConfigParser extends LudoDBConfigParser
     public function getModel()
     {
         if (isset($this->config['model'])) {
-            if (!isset($this->model)) {
-                $this->model = $this->getModelInstance();
-            }
+            // TODO singleton.
+            $this->model = $this->getModelInstance();
             $this->model->clearValues();
             return $this->model;
         }
@@ -41,7 +40,6 @@ class LudoDBCollectionConfigParser extends LudoDBConfigParser
      */
     private function getModelInstance()
     {
-        $modelName = $this->config['model'];
-        return new $modelName;
+        return new $this->config['model'];
     }
 }

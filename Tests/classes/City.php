@@ -5,7 +5,7 @@ class City extends LudoDBModel
     protected $config = array(
         'sql' => 'select * from city where zip = ?',
         'idField' => 'zip',
-        'table' => 'City',
+        'table' => 'city',
         'columns' => array(
             'zip' => array(
                 'db' => 'varchar(32) primary key',

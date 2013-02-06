@@ -18,10 +18,6 @@ class CollectionTest extends TestBase
         $pr = new CarProperty();
         $pr->drop()->yesImSure();
         $pr->createTable();
-
-        $p = new Person();
-        $p->drop()->yesImSure();
-        $p->createTable();
     }
     /**
      * @test
@@ -142,13 +138,14 @@ class CollectionTest extends TestBase
     public function shouldGetValuesFromExternalTablesWhenUsingModel(){
         // given
         $city = new City();
-        $city->drop()->yesImSure();
-        $city->createTable();
         $city->deleteTableData();
+        $person = new Person();
+        $person->deleteTableData();
 
         $city->setZip(4330);
         $city->setCity('Aalgaard');
         $city->commit();
+        $this->assertEquals(1, $this->getDb()->countRows("select zip from city where zip=?", array(4330)));
 
         $this->createPersons();
 
@@ -156,9 +153,13 @@ class CollectionTest extends TestBase
         $people = new People(4330);
         $values = $people->getValues();
         $first = $values[0];
+        $this->log($values);
         $this->log($first);
 
         // then
+
+        $this->assertEquals('John', $first['firstname']);
+        $this->assertEquals('4330', $first['zip']);
         $this->assertEquals('Aalgaard', $first['city']);
     }
 
