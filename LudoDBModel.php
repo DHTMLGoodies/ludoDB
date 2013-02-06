@@ -356,7 +356,9 @@ abstract class LudoDBModel extends LudoDBObject
         $ret = array();
         foreach ($columns as $column => $def) {
             $colName = $this->parser->getPublicColumnName($column);
-            $ret[$colName] = $this->getValue($column);
+            if($this->parser->canReadFrom($colName)){
+                $ret[$colName] = $this->getValue($column);
+            }
         }
         return array_merge($ret, $this->getJoinColumns());
     }

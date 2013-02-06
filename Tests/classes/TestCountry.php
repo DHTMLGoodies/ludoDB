@@ -1,9 +1,9 @@
 <?php
 
-class Country extends LudoDBModel{
+class TestCountry extends LudoDBModel{
     protected $config = array(
         'idField' => 'id',
-        'table' => 'Country',
+        'table' => 'TestCountry',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'name' => 'varchar(64)'

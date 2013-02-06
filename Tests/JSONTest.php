@@ -47,8 +47,6 @@ class JSONTest extends TestBase
         $this->assertEquals('Opel', $json['brand']);
     }
 
-
-
     /**
      * @test
      */
