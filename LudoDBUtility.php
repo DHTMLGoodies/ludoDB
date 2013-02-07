@@ -153,4 +153,8 @@ class LudoDBUtility
     public function validateConfigsOf(array $classNames){
 
     }
+    // TODO implement
+    public function getAllAvailableServices(){
+
+    }
 }
