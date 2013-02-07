@@ -288,7 +288,7 @@ abstract class LudoDBModel extends LudoDBObject
         return 'IND_' . md5($this->parser->getTableName() . $field);
     }
 
-    private function insertDefaultData()
+    protected function insertDefaultData()
     {
         $data = $this->parser->getDefaultData();
         if (!isset($data)) return;
@@ -337,7 +337,10 @@ abstract class LudoDBModel extends LudoDBObject
         foreach ($keys as $key) {
             $col = $this->parser->getPublicColumnName($key);
             $val = $this->getValue($key);
-            if (!$filtered || isset($val)) $ret[$col] = $val;
+            if ($this->parser->canReadFrom($col)) {
+                if (!$filtered || isset($val)) $ret[$col] = $val;
+            }
+
         }
         return $ret;
     }
@@ -356,7 +359,7 @@ abstract class LudoDBModel extends LudoDBObject
         $ret = array();
         foreach ($columns as $column => $def) {
             $colName = $this->parser->getPublicColumnName($column);
-            if($this->parser->canReadFrom($colName)){
+            if ($this->parser->canReadFrom($colName)) {
                 $ret[$colName] = $this->getValue($column);
             }
         }
@@ -413,7 +416,7 @@ abstract class LudoDBModel extends LudoDBObject
 
     public function save($data)
     {
-        if(empty($data))return array();
+        if (empty($data)) return array();
         $idField = $this->parser->getIdField();
         if (isset($data[$idField])) $this->setId($data[$idField]);
 
@@ -429,7 +432,7 @@ abstract class LudoDBModel extends LudoDBObject
     public function delete()
     {
         if ($this->getId()) {
-            $this->db->query("delete from ". $this->parser->getTableName(). " where ". $this->parser->getIdField()." = ?", $this->getId());
+            $this->db->query("delete from " . $this->parser->getTableName() . " where " . $this->parser->getIdField() . " = ?", $this->getId());
             $this->clearCache();
             $this->clearValues();
         }
