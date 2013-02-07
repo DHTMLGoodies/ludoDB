@@ -11,7 +11,7 @@ class LudoDB
     protected static $loggingEnabled = false;
     protected static $startTime;
     protected static $queryCounter = 0;
-    private static $connectionType = 'PDO'; // PDO|MySqlI
+    private static $connectionType = 'PDO'; // PDO|MYSQLI
     protected static $conn;
 
     public function __construct()

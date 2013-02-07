@@ -37,7 +37,7 @@ class LudoDBRequestHandler
                 throw new LudoDBException('Invalid service ' . $this->serviceName);
             }
 
-            if (!$this->model->areValidServiceArguments($this->serviceName, $this->arguments)) {
+            if (!$this->model->validateService($this->serviceName, $this->arguments)) {
                 throw new LudoDBException('Invalid arguments for ' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 

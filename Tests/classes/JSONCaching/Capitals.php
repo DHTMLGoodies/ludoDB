@@ -15,7 +15,7 @@ class Capitals extends LudoDBCollection implements LudoDBService
         parent::__construct($fromZip, $toZip);
     }
 
-    public function areValidServiceArguments($service, $arguments){
+    public function validateService($service, $arguments){
         return count($arguments) === 2 && is_numeric($arguments[0]) && is_numeric($arguments[1]);
     }
 

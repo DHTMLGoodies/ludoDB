@@ -9,7 +9,7 @@ class Book extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true; // Config on JSONConfig/Book.json
 
-    public function areValidServiceArguments($service, $arguments){
+    public function validateService($service, $arguments){
         switch($service){
             case 'delete':
                 return count($arguments) === 1 && is_numeric($arguments[0]);

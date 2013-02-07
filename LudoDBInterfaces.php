@@ -39,8 +39,8 @@ interface LudoDBService
      * Returns true is passed arguments are acceptable for given service
      * @param String $service
      * @param Array $arguments
-     * @return mixed
+     * @return bool
      */
-    public function areValidServiceArguments($service, $arguments);
+    public function validateService($service, $arguments);
 
 }
