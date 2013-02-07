@@ -4,7 +4,7 @@
  * Date: 22.12.12
 
  */
-class LudoSQL
+class LudoDBSql
 {
     private $config;
     private $arguments;

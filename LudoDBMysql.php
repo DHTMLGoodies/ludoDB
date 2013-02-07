@@ -32,7 +32,7 @@ class LudoDBMysql extends LudoDB implements LudoDBAdapter
                 self::$queryCounter++;
             }
             if(!empty($params)){
-                $sql = LudoSQL::fromPrepared($sql, $params);
+                $sql = LudoDBSql::fromPrepared($sql, $params);
             }
             $res = mysql_query($sql) or die(mysql_error() . "\nSQL:" . $sql);
             return $res;

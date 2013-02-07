@@ -276,7 +276,7 @@ class SQLTest extends TestBase{
         $obj->setConfig($config);
         $obj->setConstructorValues($constructBy);
 
-        return new LudoSQL($obj);
+        return new LudoDBSql($obj);
 
     }
 

@@ -55,7 +55,7 @@ abstract class LudoDBObject
     protected function sqlHandler()
     {
         if (!isset($this->sql_handler)) {
-            $this->sql_handler = new LudoSQL($this);
+            $this->sql_handler = new LudoDBSql($this);
         }
         return $this->sql_handler;
     }

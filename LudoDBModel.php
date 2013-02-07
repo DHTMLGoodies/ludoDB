@@ -51,7 +51,7 @@ abstract class LudoDBModel extends LudoDBObject
             return $this->getExternalValue($column);
         }
         if (isset($this->updates) && isset($this->updates[$column])) {
-            return $this->updates[$column] == LudoSQL::DELETED ? null : $this->updates[$column];
+            return $this->updates[$column] == LudoDBSql::DELETED ? null : $this->updates[$column];
         }
         return isset($this->data[$column]) ? $this->data[$column] : $this->parser->getDefaultValue($column);
     }
@@ -95,7 +95,7 @@ abstract class LudoDBModel extends LudoDBObject
             $this->setExternalValue($column, $value);
         } else {
             $value = $this->db->escapeString($value);
-            # if (!isset($value)) $value = LudoSQL::DELETED;
+            # if (!isset($value)) $value = LudoDBSql::DELETED;
             if (!isset($this->updates)) $this->updates = array();
             $this->updates[$this->parser->getInternalColName($column)] = $value;
         }
@@ -136,7 +136,7 @@ abstract class LudoDBModel extends LudoDBObject
 
         if (isset($this->updates)) {
             foreach ($this->updates as $key => $value) {
-                $this->data[$key] = $value === LudoSQL::DELETED ? null : $value;
+                $this->data[$key] = $value === LudoDBSql::DELETED ? null : $value;
             }
         }
         foreach ($this->externalClasses as $class) {
