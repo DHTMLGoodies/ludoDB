@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by JetBrains PhpStorm.
- * User: xait0020
+ * User: Alf Magne Kalleland
  * Date: 03.02.13
 
  */
