@@ -4,7 +4,7 @@
  * by Views and pass them to the correct LudoDBObjects.
  * User: Alf Magne Kalleland
  * Date: 13.01.13
- * Time: 16:24
+
  */
 class LudoDBRequestHandler
 {

@@ -3,7 +3,7 @@
  * LudoDB PHPUnit base class for tests
  * User: borrow
  * Date: 19.12.12
- * Time: 15:37
+
  */
 class TestBase extends PHPUnit_Framework_TestCase
 {

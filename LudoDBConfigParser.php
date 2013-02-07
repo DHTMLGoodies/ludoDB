@@ -1,10 +1,8 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ *  parser for LudoDBObject
  * User: Alf Magne
  * Date: 10.01.13
- * Time: 11:46
- * To change this template use File | Settings | File Templates.
  */
 class LudoDBConfigParser
 {

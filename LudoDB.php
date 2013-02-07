@@ -1,9 +1,8 @@
 <?php
 /**
- * MySql DB layer
+ * Base class for LudoDB adapters
  * User: Alf Magne Kalleland
  * Date: 03.11.12
- * Time: 01:37
  */
 class LudoDB
 {

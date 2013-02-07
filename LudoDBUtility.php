@@ -3,7 +3,7 @@
  * Class used during Development/Debugging.
  * User: Alf Magne
  * Date: 06.02.13
- * Time: 08:57
+
  */
 class LudoDBUtility
 {

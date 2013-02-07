@@ -1,9 +1,8 @@
 <?php
 /**
- * Caching of serialized LudoDBObjet->getValues()
+ * Caching of serialized LudoDBObjects
  * User: Alf Magne
  * Date: 28.01.13
- * Time: 12:36
  */
 class LudoDBCache extends LudoDBModel
 {

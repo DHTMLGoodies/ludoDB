@@ -2,7 +2,7 @@
 /**
  * User: Alf Magne Kalleland
  * Date: 22.12.12
- * Time: 00:19
+
  */
 class LudoSQL
 {

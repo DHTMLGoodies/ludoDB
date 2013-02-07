@@ -4,8 +4,8 @@
  * when supported by the server.
  * User: Alf Magne
  * Date: 01.02.13
- * Time: 11:58
- * To change this template use File | Settings | File Templates.
+
+
  */
 class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
 {

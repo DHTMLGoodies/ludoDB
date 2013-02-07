@@ -3,7 +3,7 @@
  * PHPUnit tests ludoDB
  * User: Alf Magne Kalleland
  * Date: 04.11.12
- * Time: 02:15
+
  */
 require_once(__DIR__ . "/../autoload.php");
 

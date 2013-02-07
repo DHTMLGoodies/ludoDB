@@ -3,8 +3,8 @@
  * Created by JetBrains PhpStorm.
  * User: Alf Magne
  * Date: 10.01.13
- * Time: 15:52
- * To change this template use File | Settings | File Templates.
+
+
  */
 require_once(__DIR__ . "/../autoload.php");
 

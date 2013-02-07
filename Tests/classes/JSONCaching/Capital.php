@@ -3,8 +3,8 @@
  * Created by JetBrains PhpStorm.
  * User: Alf Magne
  * Date: 28.01.13
- * Time: 15:55
- * To change this template use File | Settings | File Templates.
+
+
  */
 class Capital extends LudoDBModel implements LudoDBService
 {

@@ -3,7 +3,7 @@
  * PDO Mysql Adapter. The default and preferred DB adapter to use.
  * User: Alf Magne
  * Date: 31.01.13
- * Time: 19:02
+
  */
 class LudoDBPDO extends LudoDB implements LudoDBAdapter
 {
@@ -53,7 +53,6 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
      */
     public function one($sql, $params = array())
     {
-        if ($this->debug) $this->log($sql);
         $res = $this->query($sql . " limit 1", $params);
         $row = $res->fetch(PDO::FETCH_ASSOC);
         return $row ? $row : null;

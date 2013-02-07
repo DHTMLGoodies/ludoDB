@@ -3,8 +3,8 @@
  * Mock class where private methods are public
  * User: Alf Magne
  * Date: 30.01.13
- * Time: 13:15
- * To change this template use File | Settings | File Templates.
+
+
  */
 class RequestHandlerMock extends LudoDBRequestHandler
 {

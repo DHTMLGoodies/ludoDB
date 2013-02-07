@@ -3,7 +3,7 @@
  * Base class for LudoDB models and collections.
  * User: Alf Magne Kalleland
  * Date: 20.12.12
- * Time: 14:31
+
  */
 abstract class LudoDBObject
 {

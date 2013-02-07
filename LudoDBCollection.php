@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * LudoDB collection class
  * User: Alf Magne Kalleland
  * Date: 19.12.12
- * Time: 21:31
+
  */
 abstract class LudoDBCollection extends LudoDBIterator
 {

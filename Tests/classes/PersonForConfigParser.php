@@ -3,8 +3,8 @@
  * Created by JetBrains PhpStorm.
  * User: Alf Magne
  * Date: 10.01.13
- * Time: 12:15
- * To change this template use File | Settings | File Templates.
+
+
  */
 class PersonForConfigParser extends LudoDBModel
 {

@@ -4,7 +4,7 @@
  * PDO or MySqlI is supported on the server.
  * User: Alf Magne
  * Date: 01.02.13
- * Time: 12:26
+
  */
 class LudoDBMysql extends LudoDB implements LudoDBAdapter
 {

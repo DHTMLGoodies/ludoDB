@@ -3,7 +3,7 @@
  * Simple model for a book.
  * User: xAlf Magne Kalleland
  * Date: 03.02.13
- * Time: 13:23
+
  */
 class Book extends LudoDBModel implements LudoDBService
 {

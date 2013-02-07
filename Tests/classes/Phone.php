@@ -3,7 +3,7 @@
  * Created by JetBrains PhpStorm.
  * User: Alf Magne Kalleland
  * Date: 20.12.12
- * Time: 13:48
+
  */
 class Phone extends LudoDBModel
 {

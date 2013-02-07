@@ -3,8 +3,8 @@
  * Created by JetBrains PhpStorm.
  * User: borrow
  * Date: 04.11.12
- * Time: 03:31
- * To change this template use File | Settings | File Templates.
+
+
  */
 class TestTable extends LudoDBModel
 {

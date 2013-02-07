@@ -3,7 +3,7 @@
  * Class for storage of values
  * User: Alf Magne
  * Date: 11.01.13
- * Time: 12:20
+
  */
 class LudoDBRegistry
 {

@@ -3,7 +3,7 @@
  * Book-Author relationship table
  * User: Alf Magne
  * Date: 03.02.13
- * Time: 16:26
+
  */
 class BookAuthor extends LudoDBModel
 {

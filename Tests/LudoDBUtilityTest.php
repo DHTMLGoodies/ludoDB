@@ -16,7 +16,7 @@ class LudoDBUtilityMock extends LudoDBUtility{
  *
  * User: Alf Magne
  * Date: 06.02.13
- * Time: 08:58
+
  */
 class LudoDBUtilityTest extends TestBase
 {
