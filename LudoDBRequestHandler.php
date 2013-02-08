@@ -89,7 +89,7 @@ class LudoDBRequestHandler
             'success' => $this->success,
             'message' => $this->message,
             'code' => $this->code,
-            'response' => $data
+            'data' => $data
         );
         if (LudoDB::isLoggingEnabled()) {
             $ret['log'] = array(
@@ -102,6 +102,9 @@ class LudoDBRequestHandler
 
     protected function getArguments(array $request)
     {
+        if(isset($request['arguments'])){
+            return is_array($request['arguments']) ? $request['arguments'] : array($request['arguments']);
+        }
         $ret = array();
         $tokens = explode("/", $request['request']);
         for ($i = 1, $count = count($tokens); $i < $count; $i++) {
