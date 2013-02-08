@@ -5,7 +5,7 @@
  * Date: 08.02.13
  * Time: 22:00
  */
-class LudoDBTreeCollection extends LudoDBCollection
+abstract class LudoDBTreeCollection extends LudoDBCollection
 {
     private $rows;
     public function getValues(){
