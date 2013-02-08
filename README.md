@@ -332,8 +332,9 @@ Here are some of the protected methods which is good to know about:
 * commit() - Commit changes to the database
 
 ###JSON config specification.
-This is an example of the available properties for a JSON config file for LudoDBModel
-and LudoDBCollection classes
+
+####LudoDBModel config
+This is an example of JSON config for a LudoDBModel class called "Game":
 
 ```JSON
 {
@@ -402,20 +403,38 @@ LudoDB looks for the file inside the JSONConfig sub folder.
 
 
 ###LudoDBCollection
-LudoDBCollection also have a "model" config property which is the name of a LudoDBModel
-class. This attribute is optional.
+The config for LudoDBCollection is much simpler. You have three available properties, __sql__, __model__
+and __groupBy__
 
-Example: Class called "Moves":
+Example: Class called "City":
 ```JSON
 {
-    "sql": "select * from moves where game_id=?",
-    "model": "Move"
+    "sql": "select city.id,city.name,state.state from city,state where city.state_id = state.id and state.country=?",
+    "model": "City",
+    "groupBy": "state"
 }
 ```
 
-When a "model" property is set, you will be able to get the correct alias names of columns
-defined in the "Move" class when calling the "read" or "getValues" methods. Example,
-you will get __"from": "e4"__ instead of __"from_square": "e4"__.
+* __model__: Name of a LudoDBModel class representing each row in the collection.
+When a model property is set, LudoDBCollection will read values from the LudoDBModel
+for each returned row. This will make you able to hide read-only rows and return alias keys names
+for rows.
+* __groupBy__: Name of column in the result set. groupBy will returned rows grouped by given column.
+
+Example:
+``JSON
+{
+    "Texas":[
+        { "id" : 1, "name": "Houston" },
+        { "id" : 2, "name": "Austin" }
+    ],
+    "California":[
+        {  "id": 3, "name": "San Fransisco" },
+        {  "id": 4, "name": "California" }
+    }
+}
+
+```
 
 ###LudoDBTreeCollection
 The LudoDBTreeCollection class is used to present rows from __one__ table in

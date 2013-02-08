@@ -18,6 +18,10 @@ class City extends LudoDBModel
             'countryId' => array(
                 'db' => 'int',
                 'access' => 'rw'
+            ),
+            "state" => array(
+                "db" => "varchar(32)",
+                "access" => "rw"
             )
         ),
         'indexes' => array('countryId')
