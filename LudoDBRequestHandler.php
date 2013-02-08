@@ -89,7 +89,7 @@ class LudoDBRequestHandler
             'success' => $this->success,
             'message' => $this->message,
             'code' => $this->code,
-            'data' => $data
+            'response' => $data
         );
         if (LudoDB::isLoggingEnabled()) {
             $ret['log'] = array(
