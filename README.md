@@ -433,7 +433,7 @@ Example:
     "California":[
         {  "id": 3, "name": "San Fransisco" },
         {  "id": 4, "name": "California" }
-    }
+    ]
 }
 
 ```
