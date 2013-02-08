@@ -13,7 +13,7 @@ class LudoDBTreeCollectionTest extends TestBase
     /**
      * @test
      */
-    public function shouldBeAbleToGetChildren(){
+    public function shouldBeAbleToGetTopNodes(){
         // given
         $node = new TestNodes();
 
@@ -23,5 +23,49 @@ class LudoDBTreeCollectionTest extends TestBase
         // then
         $this->assertEquals(2,count($values));
 
+    }
+    /**
+     * @test
+     */
+    public function shouldBeAbleToGetChildNodes(){
+        // given
+        $node = new TestNodes();
+
+        // when
+        $values = $node->getValues();
+
+        $children = $values[0]["children"];
+
+        // then
+        $this->assertEquals(3,count($children));
+
+    }
+    /**
+     * @test
+     */
+    public function shouldBeAbleToGetGrandChildren(){
+        // given
+        $node = new TestNodes();
+
+        // when
+        $values = $node->getValues();
+
+        $children = $values[0]["children"][0]['children'];
+
+        // then
+        $this->assertEquals(2,count($children));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetParserKeys(){
+        // given
+        $node = new TestNodes();
+
+        // when
+        $this->assertEquals('parent', $node->configParser()->getFK());
+        $this->assertEquals('id', $node->configParser()->getPK());
+        $this->assertEquals('children', $node->configParser()->getChildKey());
     }
 }
