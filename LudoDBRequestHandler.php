@@ -18,6 +18,7 @@ class LudoDBRequestHandler
     private $message = "";
     private $code = 200;
     private $arguments;
+    private $responseKey = "response";
 
     public function __construct()
     {
@@ -72,6 +73,10 @@ class LudoDBRequestHandler
         throw new LudoDBInvalidServiceException("Invalid service " . $this->serviceName);
     }
 
+    public function setResponseKey($key){
+        $this->responseKey = $key;
+    }
+
     private function getParsed($request)
     {
         if (is_string($request)) $request = array('request' => $request);
@@ -89,7 +94,7 @@ class LudoDBRequestHandler
             'success' => $this->success,
             'message' => $this->message,
             'code' => $this->code,
-            'response' => $data
+            $this->responseKey  => $data
         );
         if (LudoDB::isLoggingEnabled()) {
             $ret['log'] = array(
