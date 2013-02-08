@@ -73,6 +73,10 @@ class LudoDBRequestHandler
         throw new LudoDBInvalidServiceException("Invalid service " . $this->serviceName);
     }
 
+    public function setResponseKey($key){
+        $this->responseKey = $key;
+    }
+
     private function getParsed($request)
     {
         if (is_string($request)) $request = array('request' => $request);
@@ -84,17 +88,13 @@ class LudoDBRequestHandler
         return $request;
     }
 
-    public function setResponseKey($key){
-        $this->responseKey = $key;
-    }
-
     private function toJSON($data = array())
     {
         $ret = array(
             'success' => $this->success,
             'message' => $this->message,
             'code' => $this->code,
-            $this->responseKey => $data
+            $this->responseKey  => $data
         );
         if (LudoDB::isLoggingEnabled()) {
             $ret['log'] = array(
