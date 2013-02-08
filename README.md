@@ -423,7 +423,7 @@ for rows.
 
 Example:
 
-``JSON
+```JSON
 {
     "Texas":[
         { "id" : 1, "name": "Houston" },
