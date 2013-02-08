@@ -18,6 +18,7 @@ class LudoDBRequestHandler
     private $message = "";
     private $code = 200;
     private $arguments;
+    private $responseKey = 'response';
 
     public function __construct()
     {
@@ -83,13 +84,17 @@ class LudoDBRequestHandler
         return $request;
     }
 
+    public function setResponseKey($key){
+        $this->responseKey = $key;
+    }
+
     private function toJSON($data = array())
     {
         $ret = array(
             'success' => $this->success,
             'message' => $this->message,
             'code' => $this->code,
-            'response' => $data
+            $this->responseKey => $data
         );
         if (LudoDB::isLoggingEnabled()) {
             $ret['log'] = array(
