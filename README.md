@@ -306,14 +306,14 @@ will then be redirected to router.php with "/Game/1/read" as the $_GET['request'
 ###Classes
 This is an overview of the most important PHP classes in ludoDB:
 
-* *LudoDBObject*: Abstract base class for LudoDBModel and LudoDBCollection
-* *LudoDBModel*: Abstract class you extend to represent a database table, example: "Game"
-* *LudoDBCollection*: Abstract class used to present collection of data rows
+* __LudoDBObject__: Abstract base class for LudoDBModel and LudoDBCollection
+* __LudoDBModel__: Abstract class you extend to represent a database table, example: "Game"
+* __LudoDBCollection__: Abstract class used to present collection of data rows
 from the database, example: "Moves". ps! You can specify nested classes in
 your LudoDBModel config.
-* *LudoDBTreeCollection*: Abstract class used to present collection of data in
+* __LudoDBTreeCollection__: Abstract class used to present collection of data in
 tree format.
-* *LudoDBRequestHandler*: Class handling POST/GET requests and returning data
+* __LudoDBRequestHandler__: Class handling POST/GET requests and returning data
 in JSON format.
 
 
@@ -365,18 +365,18 @@ and LudoDBCollection classes
 }
 ```
 
-* table: Name of database table
-* sql: sql to execute when object is created. Question mark is used as a placeholder
+* __table__ Name of database table
+* __sql__ sql to execute when object is created. Question mark is used as a placeholder
 for the arguments passed to the constructor.
-* columns: Configuration of columns
+* __columns__ Configuration of columns
 * "id": "int auto_increment not null primary key" is example of the most simple configuration. It's
 the same as writing ```"id": { "db": "int auto_increment not null primary key" }```
 * db : Column specification
-* access: "w" for write access, and "r" for read access. Is this column public or private.
+* __access__ "w" for write access, and "r" for read access. Is this column public or private.
 "w" makes the column writable via the save method. "r" makes the column readable from the
 read and getValues() method. "rw" makes it both readable and writable. You can still modify and
 read the value of the column internally using setValue and getValue.
-* alias: Public name of column if different than the name of the column in the database. One
+* __alias__ Public name of column if different than the name of the column in the database. One
 example is a chess move where you have columns like "from" and "to", i.e. the name of
 squares on a chess board. "from" is not a good column name for a database, but a good
 public name. The config may the look like this:
@@ -389,16 +389,16 @@ public name. The config may the look like this:
 The read method will then return "from" as column name instead of "from_square". The save
 method will support both "from" and "to_square" and do the mapping when saving the column
 value to the database.
-* references: Specifies constraint, example: "references database(id) on delete cascade",
-* default: The default property specifies the default value for this column in the database.
+* __references__ Specifies constraint, example: "references database(id) on delete cascade",
+* __default__ The default property specifies the default value for this column in the database.
 * "class": Name of external/child LudoDBObject class.
 * "fk": Name of column to use when instantiating external class, example: "id". In the
 example above, the sql for "Moves" may be like this : "select * from moves where game_id=?"
 where "id" of this game will be inserted at the placeholder question mark.
-* data: Either an array of default data which are inserted when the table is created or
+* __data__ Either an array of default data which are inserted when the table is created or
 a string specifying the path to a JSON file with the default data, example: game.data.json.
 LudoDB looks for the file inside the JSONConfig sub folder.
-* indexes: Array of indexed columns.
+* __indexes__ Array of indexed columns.
 
 For LudoDBCollection, you also have a "model" property which is the name of a LudoDBModel
 class, example:
