@@ -369,9 +369,9 @@ and LudoDBCollection classes
 * __sql__ sql to execute when object is created. Question mark is used as a placeholder
 for the arguments passed to the constructor.
 * __columns__ Configuration of columns
-* "id": "int auto_increment not null primary key" is example of the most simple configuration. It's
+* __id__ "int auto_increment not null primary key" is example of the most simple configuration. It's
 the same as writing ```"id": { "db": "int auto_increment not null primary key" }```
-* db : Column specification
+* __db__ : Column specification
 * __access__ "w" for write access, and "r" for read access. Is this column public or private.
 "w" makes the column writable via the save method. "r" makes the column readable from the
 read and getValues() method. "rw" makes it both readable and writable. You can still modify and
@@ -391,8 +391,8 @@ method will support both "from" and "to_square" and do the mapping when saving t
 value to the database.
 * __references__ Specifies constraint, example: "references database(id) on delete cascade",
 * __default__ The default property specifies the default value for this column in the database.
-* "class": Name of external/child LudoDBObject class.
-* "fk": Name of column to use when instantiating external class, example: "id". In the
+* __class__ Name of external/child LudoDBObject class.
+* __fk__ Name of column to use when instantiating external class, example: "id". In the
 example above, the sql for "Moves" may be like this : "select * from moves where game_id=?"
 where "id" of this game will be inserted at the placeholder question mark.
 * __data__ Either an array of default data which are inserted when the table is created or
@@ -414,3 +414,94 @@ For a LudoDBCollection class called "Moves":
 When a "model" property is set, you will be able to get the correct alias names of columns
 defined in the "Move" class when calling the "read" or "getValues" methods. Example,
 you will get "from": "e4" instead of "from_square": "e4".
+
+###LudoDBTreeCollection
+The LudoDBTreeCollection class is used to present rows from __one__ table in
+tree format. It extends the LudoDBCollection class.
+
+In the config of the class, you'll need to  specify three properties:
+
+* __fk__: name of __foreign key__ column, i.e. column refering to parent key
+* __pk__: name of the __primary key__, the column used to identify parents.
+* __childKey__: Children will be placed inside an array with this key.
+
+Example
+
+```JSON
+{
+    "sql" : "select * from node order by parent,id",
+    "fk": "parent",
+    "pk": "id",
+    "childKey": "children"
+}
+```
+
+A LudoDBTreeCollection class like this may return these values:
+
+```JSON
+[
+    {
+        "id":"1",
+        "title":"Node 1",
+        "parent":null,
+        "children":[
+            {
+                "id":"3",
+                "title":"Node 1.1",
+                "parent":"1",
+                "children":[
+                    {
+                        "id":"6",
+                        "title":"Node 1.1.1",
+                        "parent":"3"
+                    },
+                    {
+                        "id":"7",
+                        "title":"Node 1.1.2",
+                        "parent":"3"
+                    }
+                ]
+            },
+            {
+                "id":"4",
+                "title":"Node 1.2",
+                "parent":"1"
+            },
+            {
+                "id":"5",
+                "title":"Node 1.3",
+                "parent":"1",
+                "children":[
+                    {
+                        "id":"8",
+                        "title":"Node 1.1.2.1",
+                        "parent":"5"
+                    },
+                    {
+                        "id":"9",
+                        "title":"Node 1.1.2.2",
+                        "parent":"5"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"2",
+        "title":"Node 2",
+        "parent":null,
+        "children":[
+            {
+                "id":"13",
+                "title":"Node 2.1",
+                "parent":"2"
+            },
+            {
+                "id":"14",
+                "title":"Node 2.2",
+                "parent":"2"
+            }
+        ]
+    }
+]
+```

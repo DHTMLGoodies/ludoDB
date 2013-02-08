@@ -41,7 +41,7 @@ class LudoDBConfigParser
         $className = $this->getProperty('extends');
         if (!isset($className)) {
             $parent = get_parent_class($this->obj);
-            if ($parent !== 'LudoDBModel' && $parent != 'LudoDBCollection') {
+            if ($parent !== 'LudoDBModel' && $parent != 'LudoDBCollection' && $parent != 'LudoDBTreeCollection') {
                 $className = $parent;
             }
         }
