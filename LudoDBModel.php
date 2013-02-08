@@ -47,6 +47,9 @@ abstract class LudoDBModel extends LudoDBObject
     protected function getValue($column)
     {
         $this->autoPopulate();
+        if($this->parser->isStaticColumn($column)){
+            return $this->parser->getStaticValue($column);
+        }
         if ($this->parser->isExternalColumn($column)) {
             return $this->getExternalValue($column);
         }

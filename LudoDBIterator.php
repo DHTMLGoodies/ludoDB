@@ -72,9 +72,19 @@ class LudoDBIterator extends LudoDBObject implements Iterator
      */
     public function getValues(){
         if(!isset($this->valueCache)){
+            $groupBy = $this->parser->getGroupBy();
             $this->valueCache = array();
+            $staticValues = $this->parser->getStaticValues();
             foreach($this as $key=>$value){
-                $this->valueCache[$key] = $value;
+                if(is_array($value)) $value = array_merge($value, $staticValues);
+                if(isset($groupBy) && isset($value[$groupBy])){
+                    if(!isset($this->valueCache[$groupBy])){
+                        $this->valueCache[$groupBy] = array();
+                    }
+                    $this->valueCache[$groupBy] = $value;
+                }else{
+                    $this->valueCache[$key] = $value;
+                }
             }
         }
         return $this->valueCache;

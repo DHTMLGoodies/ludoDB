@@ -56,7 +56,9 @@ spl_autoload_register(
                 'ludodbrequesthandler' => '/LudoDBRequestHandler.php',
                 'ludodbservice' => '/LudoDBInterfaces.php',
                 'ludodbservicenotimplementedexception' => '/LudoDBExceptions.php',
-                'ludodbsql' => '/LudoDBSql.php',
+                'ludodbsql' => '/LudoDBSQL.php',
+                'ludodbtreecollection' => '/LudoDBTreeCollection.php',
+                'ludodbtreecollectiontest' => '/Tests/LudoDBTreeCollectionTest.php',
                 'ludodbunauthorizedexception' => '/LudoDBExceptions.php',
                 'ludodbutility' => '/LudoDBUtility.php',
                 'ludodbutilitymock' => '/Tests/LudoDBUtilityTest.php',
@@ -80,6 +82,8 @@ spl_autoload_register(
                 'testbase' => '/Tests/TestBase.php',
                 'testcountry' => '/Tests/classes/TestCountry.php',
                 'testgame' => '/Tests/classes/TestGame.php',
+                'testnode' => '/Tests/classes/TestNode.php',
+                'testnodes' => '/Tests/classes/TestNodes.php',
                 'testtable' => '/Tests/classes/TestTable.php',
                 'testtimer' => '/Tests/classes/TestTimer.php'
             );

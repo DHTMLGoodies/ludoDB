@@ -28,19 +28,35 @@ abstract class LudoDBCollection extends LudoDBIterator
     public function getValues(){
         $model = $this->parser->getModel();
         if(isset($model)){
-            $model->disableCommit();
-            $ret = array();
-            foreach($this as $value){
-                if(!isset($columns))$columns = array_keys($value);
-                $model->clearValues();
-                $model->setValues($value);
-                $ret[] = $this->getValuesFromModel($model, $columns);
-            }
-            $model->enableCommit();
-            return $ret;
+            return $this->getValuesUsingModel($model);
         }else{
             return parent::getValues();
         }
+    }
+
+    private function getValuesUsingModel(LudoDBModel $model){
+        $model->disableCommit();
+        $ret = array();
+        $key = $this->parser->getGroupBy();
+        $staticValues = $model->parser->getStaticValues();
+
+        foreach($this as $value){
+            if(!isset($columns))$columns = array_keys($value);
+            $model->clearValues();
+            $model->setValues($value);
+            $modelValues = $this->getValuesFromModel($model, $columns);
+            $modelValues = array_merge($modelValues, $staticValues);
+            if(isset($key) && isset($modelValues[$key])){
+                if(!isset($ret[$modelValues[$key]])){
+                    $ret[$modelValues[$key]] = array();
+                }
+                $ret[$modelValues[$key]][] = $modelValues;
+            }else{
+                $ret[] = $modelValues;
+            }
+        }
+        $model->enableCommit();
+        return $ret;
     }
 
     /**

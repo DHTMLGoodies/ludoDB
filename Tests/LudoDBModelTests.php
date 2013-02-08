@@ -389,6 +389,21 @@ class LudoDBModelTests extends TestBase
         $this->assertEquals('female', $sex);
     }
 
+    /**
+     * @test
+     */
+    public function shouldBeAbleToDefineStaticColumnsWithDefaultValues(){
+        // given
+        $person = new Person();
+
+        // when
+        $type = $person->getType();
+
+        // then
+        $this->assertEquals('person', $type);
+
+    }
+
     private function getExistingRecord(){
         $this->clearTable();
         $table = new TestTable();

@@ -40,6 +40,9 @@
             "access": "rw"
         }
     },
+    "static": {
+        "type": "person"
+    },
     "classes": {
         "city": {
             "fk": "zip"

@@ -32,19 +32,20 @@ class LudoDBConfigParser
     }
 
     private static $extensionClasses = array();
+
     /**
      * @return LudoDBObject
      */
     private function getExtends()
     {
         $className = $this->getProperty('extends');
-        if (!isset($className)){
+        if (!isset($className)) {
             $parent = get_parent_class($this->obj);
-            if($parent !== 'LudoDBModel' && $parent!='LudoDBCollection'){
+            if ($parent !== 'LudoDBModel' && $parent != 'LudoDBCollection') {
                 $className = $parent;
             }
         }
-        if(!isset($className))return null;
+        if (!isset($className)) return null;
         if (!isset(self::$extensionClasses[$className])) {
             self::$extensionClasses[$className] = new $className;
         }
@@ -67,7 +68,8 @@ class LudoDBConfigParser
         return $this->getFileLocation() . "/JSONConfig/" . get_class($this->obj) . ".json";
     }
 
-    public function getPathToJsonConfigDefaultData(){
+    public function getPathToJsonConfigDefaultData()
+    {
         return $this->getFileLocation() . "/JSONConfig/" . get_class($this->obj) . ".data.json";
     }
 
@@ -125,6 +127,9 @@ class LudoDBConfigParser
         }
         if (isset($config['constructBy']) && !is_array($config['constructBy'])) {
             $config['constructBy'] = array($config['constructBy']);
+        }
+        if (!isset($config['static'])) {
+            $config['static'] = array();
         }
         return $config;
     }
@@ -217,14 +222,14 @@ class LudoDBConfigParser
     public function getDefaultData()
     {
         $ret = $this->getProperty('data');
-        if(is_string($ret)){
+        if (is_string($ret)) {
             $file = $this->getPathToJsonConfigDefaultData();
-            if(file_exists($file)){
+            if (file_exists($file)) {
                 return json_decode(file_get_contents($file), true);
-            }else{
+            } else {
                 return null;
             }
-        }else{
+        } else {
             return $ret;
         }
     }
@@ -326,7 +331,7 @@ class LudoDBConfigParser
         return $ret;
     }
 
-    private function getProperty($key)
+    protected function getProperty($key)
     {
         return isset($this->config[$key]) ? $this->config[$key] : null;
     }
@@ -389,18 +394,33 @@ class LudoDBConfigParser
             if ($name === $this->getIdField()) {
                 $this->columnAccessCache[$key] = true;
             } else {
-                $column = $this->getColumn($name);
-                if (isset($column) && isset($column['access'])) {
-                    $this->columnAccessCache[$key] = strstr($column['access'], $access) ? true : false;
+                if ($this->isStaticColumn($name)) {
+                    $this->columnAccessCache[$key] = $access === 'r';
                 } else {
-                    $this->columnAccessCache[$key] = false;
+                    $column = $this->getColumn($name);
+                    if (isset($column) && isset($column['access'])) {
+                        $this->columnAccessCache[$key] = strstr($column['access'], $access) ? true : false;
+                    } else {
+                        $this->columnAccessCache[$key] = false;
+                    }
                 }
             }
         }
         return $this->columnAccessCache[$key];
     }
 
+    public function isStaticColumn($column)
+    {
+        return isset($this->config['static'][$column]);
+    }
 
+    public function getStaticValue($column){
+        return $this->config['static'][$column];
+    }
+
+    public function getStaticValues(){
+        return $this->config['static'];
+    }
 
     public function canBePopulatedBy($column)
     {
@@ -420,11 +440,12 @@ class LudoDBConfigParser
      * )
      * @return array
      */
-    public function getTableReferences(){
+    public function getTableReferences()
+    {
         $ret = array();
         $cols = $this->getColumns();
-        foreach($cols as $col){
-            if(is_array($col) && isset($col['references'])){
+        foreach ($cols as $col) {
+            if (is_array($col) && isset($col['references'])) {
                 $ret[] = array(
                     'table' => preg_replace("/^([^\(]+?)\(.*$/", "$1", $col['references']),
                     'column' => preg_replace("/^[^\(]+?\(([^\)]+)\).*$/", "$1", $col['references'])
@@ -434,15 +455,17 @@ class LudoDBConfigParser
         return $ret;
     }
 
-    public function getDefaultValue($column){
-        return $this->getColumnProperty($column,'default');
+    public function getDefaultValue($column)
+    {
+        return $this->getColumnProperty($column, 'default');
     }
 
-    public function getDefaultValues(){
+    public function getDefaultValues()
+    {
         $ret = array();
         $cols = $this->getColumns();
-        foreach($cols as $col){
-            if(is_array($col) && isset($col['db']) && isset($col['default'])){
+        foreach ($cols as $col) {
+            if (is_array($col) && isset($col['db']) && isset($col['default'])) {
                 $ret[] = $col['default'];
             }
         }

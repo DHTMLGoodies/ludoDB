@@ -40,4 +40,19 @@ class LudoDBCollectionConfigParser extends LudoDBConfigParser
     {
         return new $this->config['model'];
     }
+
+    public function getGroupBy(){
+        return $this->getProperty('groupBy');
+    }
+
+    public function getPK(){
+        return $this->getProperty('pk');
+    }
+
+    public function getFK(){
+        return $this->getProperty('fk');
+    }
+    public function getChildKey(){
+        return $this->getProperty('childKey');
+    }
 }
