@@ -10,8 +10,12 @@ class TestNodes extends LudoDBTreeCollection implements LudoDBService
     protected $config = array(
         "sql" => "select * from test_node order by parent,id",
         "childKey" => "children",
+        "model" => "TestNode",
         "fk" => "parent",
-        "pk" => "id"
+        "pk" => "id",
+        "static" => array(
+            "type" => "node"
+        )
     );
 
     public function validateService($service, $arguments){

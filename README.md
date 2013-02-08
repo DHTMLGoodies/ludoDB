@@ -362,22 +362,25 @@ This is an example of JSON config for a LudoDBModel class called "Game":
         { "id": "2", "database_id": "1"},
         { "id": "3", "database_id": "1"}
     ],
+    "static": {
+        "type": "database"
+    }
     "indexes": ["database_id"]
 }
 ```
 
-* __table__ Name of database table
-* __sql__ sql to execute when object is created. Question mark is used as a placeholder
+* __table__: Name of database table
+* __sql__: sql to execute when object is created. Question mark is used as a placeholder
 for the arguments passed to the constructor.
-* __columns__ Configuration of columns
-* __id__ "int auto_increment not null primary key" is example of the most simple configuration. It's
+* __columns__: Configuration of columns
+* __id__: "int auto_increment not null primary key" is example of the most simple configuration. It's
 the same as writing ```"id": { "db": "int auto_increment not null primary key" }```
-* __db__ : Column specification
-* __access__ "w" for write access, and "r" for read access. Is this column public or private.
+* __db__: : Column specification
+* __access__: "w" for write access, and "r" for read access. Is this column public or private.
 "w" makes the column writable via the save method. "r" makes the column readable from the
 read and getValues() method. "rw" makes it both readable and writable. You can still modify and
 read the value of the column internally using setValue and getValue.
-* __alias__ Public name of column if different than the name of the column in the database. One
+* __alias__: Public name of column if different than the name of the column in the database. One
 example is a chess move where you have columns like "from" and "to", i.e. the name of
 squares on a chess board. "from" is not a good column name for a database, but a good
 public name. The config may the look like this:
@@ -390,16 +393,19 @@ public name. The config may the look like this:
 The read method will then return "from" as column name instead of "from_square". The save
 method will support both "from" and "to_square" and do the mapping when saving the column
 value to the database.
-* __references__ Specifies constraint, example: "references database(id) on delete cascade",
-* __default__ The default property specifies the default value for this column in the database.
-* __class__ Name of external/child LudoDBObject class.
-* __fk__ Name of column to use when instantiating external class, example: "id". In the
+* __references__: Specifies constraint, example: "references database(id) on delete cascade",
+* __default__: The default property specifies the default value for this column in the database.
+* __class__: Name of external/child LudoDBObject class.
+* __fk__: Name of column to use when instantiating external class, example: "id". In the
 example above, the sql for "Moves" may be like this : "select * from moves where game_id=?"
 where "id" of this game will be inserted at the placeholder question mark.
-* __data__ Either an array of default data which are inserted when the table is created or
+* __static__: Optional array of additional static properties not stored in the database,
+example: { "type": "country" }. This is useful in tree collection where you might want
+to distinguish between different type of rows, example "city" and "country".
+* __data__: Either an array of default data which are inserted when the table is created or
 a string specifying the path to a JSON file with the default data, example: game.data.json.
 LudoDB looks for the file inside the JSONConfig sub folder.
-* __indexes__ Array of indexed columns.
+* __indexes__: Array of indexed columns.
 
 
 ###LudoDBCollection

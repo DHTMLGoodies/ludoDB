@@ -18,6 +18,7 @@ class TestNode extends LudoDBModel
             ),
             "parent" => array(
                 "db" => "int",
+                "access" => "rw",
                 "references" => "test_node(id)"
             )
         ),
