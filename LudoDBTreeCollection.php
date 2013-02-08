@@ -24,11 +24,12 @@ abstract class LudoDBTreeCollection extends LudoDBCollection
                 if(!isset($parent[$childKey])){
                     $parent[$childKey] = array();
                 }
+
                 $parent[$childKey][] = &$row;
             }else{
                 $ret[] = &$row;
             }
-
+            unset($row[$fk]);
             $this->rows[] = &$row;
         }
         return $ret;
