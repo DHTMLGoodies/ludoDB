@@ -422,6 +422,7 @@ for rows.
 * __groupBy__: Name of column in the result set. groupBy will returned rows grouped by given column.
 
 Example:
+
 ``JSON
 {
     "Texas":[
