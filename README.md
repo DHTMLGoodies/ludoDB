@@ -407,6 +407,7 @@ The config for LudoDBCollection is much simpler. You have three available proper
 and __groupBy__
 
 Example: Class called "City":
+
 ```JSON
 {
     "sql": "select city.id,city.name,state.state from city,state where city.state_id = state.id and state.country=?",
