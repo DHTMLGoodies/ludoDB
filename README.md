@@ -400,10 +400,12 @@ a string specifying the path to a JSON file with the default data, example: game
 LudoDB looks for the file inside the JSONConfig sub folder.
 * __indexes__ Array of indexed columns.
 
-For LudoDBCollection, you also have a "model" property which is the name of a LudoDBModel
-class, example:
 
-For a LudoDBCollection class called "Moves":
+###LudoDBCollection
+LudoDBCollection also have a "model" config property which is the name of a LudoDBModel
+class. This attribute is optional.
+
+Example: Class called "Moves":
 ```JSON
 {
     "sql": "select * from moves where game_id=?",
@@ -413,7 +415,7 @@ For a LudoDBCollection class called "Moves":
 
 When a "model" property is set, you will be able to get the correct alias names of columns
 defined in the "Move" class when calling the "read" or "getValues" methods. Example,
-you will get "from": "e4" instead of "from_square": "e4".
+you will get __"from": "e4"__ instead of __"from_square": "e4"__.
 
 ###LudoDBTreeCollection
 The LudoDBTreeCollection class is used to present rows from __one__ table in
