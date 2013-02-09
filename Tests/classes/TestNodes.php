@@ -7,7 +7,6 @@
  */
 class TestNodes extends LudoDBTreeCollection implements LudoDBService
 {
-    protected $caching = true;
     protected $config = array(
         "sql" => "select * from test_node order by parent,id",
         "childKey" => "children",
@@ -25,5 +24,9 @@ class TestNodes extends LudoDBTreeCollection implements LudoDBService
 
     public static function getValidServices(){
         return array('read');
+    }
+
+    public function cachingEnabled(){
+        return true;
     }
 }
