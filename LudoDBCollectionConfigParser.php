@@ -59,4 +59,9 @@ class LudoDBCollectionConfigParser extends LudoDBConfigParser
     public function getMerged(){
         return $this->getProperty('merge');
     }
+
+    public function shouldHideForeignKeys(){
+        $val = $this->getProperty('hideForeignKeys');
+        return isset($val) && $val;
+    }
 }

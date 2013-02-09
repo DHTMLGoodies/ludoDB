@@ -36,3 +36,7 @@ class LudoDBServiceNotImplementedException extends LudoDBException{
 class LudoDBInvalidServiceException extends Exception{
     protected $code = 405;
 }
+
+class LudoDBInvalidConfigException extends LudoDBException{
+
+}

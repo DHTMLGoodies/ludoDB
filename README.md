@@ -457,6 +457,7 @@ In the config of the class, you'll need to  specify three properties:
 * __pk__: name of the __primary key__, the column used to identify parents.
 * __childKey__: Children will be placed inside an array with this key.
 * __merge__: Array of other LudoDBCollection objects to merge into the tree.
+* __hideForeignKeys__: true to hide foreign keys in merged collections.
 
 Example:
 
@@ -490,6 +491,7 @@ __JSONConfig/Nodes.json__
     "fk": "parent",
     "pk": "id",
     "childKey": "children",
+    "hideForeignKeys" : true,
     "merge" : [
         {
             "class" : "LeafNode",

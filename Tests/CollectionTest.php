@@ -163,6 +163,32 @@ class CollectionTest extends TestBase
         $this->assertEquals('Aalgaard', $first['city']);
     }
 
+    /**
+     * @test
+     */
+    public function shouldBeAbleToMerge(){
+        // given
+        $car = new Car();
+        $car->deleteTableData()->yesImSure();
+        $car->setBrand("Volkswagen");
+        $car->setModel("Polo 1.6 TDI");
+        $car->commit();
+        $this->addCarProperty($car->getId(), "Hk", "75");
+        $this->addCarProperty($car->getId(), "Mileage", "42000");
+        $this->addCarProperty($car->getId(), "Year", "2010");
+
+        $cars = new CarsWithProperties();
+
+        // when
+        $values = $cars->getValues();
+        $firstCar = $values[0];
+
+        // then
+        $this->assertNotNull($firstCar['properties']);
+
+
+    }
+
     private function createPersons(){
         $persons =  array(
             array('firstname' => 'John', 'lastname' => 'Johnson', 'zip' => '4330','nick' => 'Mr J'),

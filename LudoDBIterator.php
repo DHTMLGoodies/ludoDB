@@ -12,6 +12,7 @@ class LudoDBIterator extends LudoDBObject implements Iterator
     private $isValid;
     private $position;
     protected $currentRow;
+    private $rows;
 
     function rewind() {
         if ($this->dbResource) {
@@ -72,6 +73,7 @@ class LudoDBIterator extends LudoDBObject implements Iterator
      */
     public function getValues(){
         if(!isset($this->valueCache)){
+            $this->clearStoredRows();
             $groupBy = $this->parser->getGroupBy();
             $this->valueCache = array();
             $staticValues = $this->parser->getStaticValues();
@@ -79,14 +81,42 @@ class LudoDBIterator extends LudoDBObject implements Iterator
                 if(is_array($value)) $value = array_merge($value, $staticValues);
                 if(isset($groupBy) && isset($value[$groupBy])){
                     if(!isset($this->valueCache[$groupBy])){
-                        $this->valueCache[$groupBy] = array();
-                    }
+                        $this->valueCache[$groupBy] = array();                    }
                     $this->valueCache[$groupBy] = $value;
+                    $this->storeRow($this->valueCache[$groupBy]);
                 }else{
                     $this->valueCache[$key] = $value;
+                    $this->storeRow($this->valueCache[$key]);
                 }
             }
         }
         return $this->valueCache;
+    }
+
+    protected function storeRow(&$row){
+        $this->rows[] = &$row;
+    }
+
+    protected function getRowsAssoc($key){
+        $rows = $this->getRows();
+        $ret = array();
+        foreach($rows as & $row){
+            if(isset($row[$key])){
+                $ret[$row[$key]] = & $row;
+            }
+        }
+        return $ret;
+    }
+
+    /**
+     * Returns reference to all tree nodes as numeric array
+     * @return Array
+     */
+    public function getRows(){
+        return $this->rows;
+    }
+
+    protected function clearStoredRows(){
+        $this->rows = array();
     }
 }
