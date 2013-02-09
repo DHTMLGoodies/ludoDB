@@ -207,15 +207,18 @@ abstract class LudoDBModel extends LudoDBObject
 
     protected function setId($id)
     {
-        $this->id = $id;
-        $this->data[$this->parser->getIdField()] = $id;
-        $this->externalClasses = array();
+        $field = $this->parser->getIdField();
+        if(!isset($this->data[$field])){
+            $this->data[$field] = $id;
+            $this->externalClasses = array();
+        }
     }
 
     public function getId()
     {
         $this->autoPopulate();
-        return $this->id;
+        $field = $this->parser->getIdField();
+        return isset($this->data[$field]) ? $this->data[$field] : null;
     }
 
     /**
@@ -354,7 +357,6 @@ abstract class LudoDBModel extends LudoDBObject
 
     public function clearValues()
     {
-        $this->id = null;
         $this->data = array();
         $this->updates = null;
     }
@@ -393,7 +395,7 @@ abstract class LudoDBModel extends LudoDBObject
 
     public function __call($name, $arguments)
     {
-        if (substr($name, 0, 3) === 'set') {
+        if (substr($name, 0, 3) === 'set' && $name !== "setId") {
             $col = $this->parser->getColumnByMethod($name);
             if (isset($col) && $this->parser->canWriteTo($col)) {
                 return $this->setValue($col, $arguments[0]);

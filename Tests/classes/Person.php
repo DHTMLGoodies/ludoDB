@@ -24,6 +24,22 @@ class Person extends LudoDBModel implements LudoDBService
         $this->setValue('zip', $zip);
     }
 
+    public function getZip(){
+        return $this->getValue('zip');
+    }
+
+    public function getCity(){
+        return $this->getValue('city');
+    }
+
+    public function getLastname(){
+        return $this->getValue('lastname');
+    }
+
+    public function getType(){
+        return $this->getValue('type');
+    }
+
     public function getFirstname(){
         return $this->getValue('firstname');
     }

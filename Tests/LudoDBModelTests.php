@@ -404,6 +404,7 @@ class LudoDBModelTests extends TestBase
 
     }
 
+
     private function getExistingRecord(){
         $this->clearTable();
         $table = new TestTable();
