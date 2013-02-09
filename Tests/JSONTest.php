@@ -93,12 +93,12 @@ class JSONTest extends TestBase
     /**
      * @test
      */
-    public function shouldReturnProperJSONKey(){
+    public function shouldReturnPropercacheKey(){
         // given
         $capital = new Capital(1);
 
         // then
-        $this->assertEquals('Capital_1', $capital->getJSONKey());
+        $this->assertEquals('Capital_1', $capital->getCacheKey());
     }
     /**
      * @test

@@ -155,22 +155,22 @@ abstract class LudoDBObject
 
     abstract public function getValues();
 
-    private $JSONKey = null;
+    private $cacheKey = null;
 
-    public function getJSONKey()
+    public function getCacheKey()
     {
-        if (!isset($this->JSONKey)) {
+        if (!isset($this->cacheKey)) {
             if (isset($this->arguments) && count($this->arguments)) {
-                $this->JSONKey = get_class($this) . "_" . implode("_", $this->arguments);
+                $this->cacheKey = get_class($this) . "_" . implode("_", $this->arguments);
             }
         }
-        return $this->JSONKey;
+        return $this->cacheKey;
     }
 
     protected function clearCache()
     {
         if ($this->caching) {
-            LudoDBCache::clearCacheBy($this->getJSONKey());
+            LudoDBCache::clearBy($this->getCacheKey());
         }
     }
 

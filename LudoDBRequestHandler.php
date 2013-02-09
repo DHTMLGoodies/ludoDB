@@ -187,7 +187,7 @@ class LudoDBRequestHandler
         }
         if (!isset($data)) {
             $data = $this->model->read();
-            if ($caching && $this->model->getJSONKey()) {
+            if ($caching && $this->model->getCacheKey()) {
                 $this->ludoDBCache()->setCache($data)->commit();
             }
         }

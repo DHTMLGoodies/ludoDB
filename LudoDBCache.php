@@ -35,7 +35,7 @@ class LudoDBCache extends LudoDBModel
 
     public function __construct(LudoDBObject $model = null){
         if(isset($model)){
-            $key = $model->getJSONKey();
+            $key = $model->getCacheKey();
             parent::__construct($key);
             if(isset($key)){
                 $this->setKey($key);
@@ -70,13 +70,13 @@ class LudoDBCache extends LudoDBModel
         return $this;
     }
 
-    public static function clearCacheBy($key){
+    public static function clearBy($key){
         if(isset($key) && strlen($key)){
             LudoDb::getInstance()->query("delete from ludo_db_cache where cache_key=?", array($key));
         }
     }
 
-    public static function clearCacheByClass($className){
+    public static function clearByClass($className){
         LudoDb::getInstance()->query("delete from ludo_db_cache where class_name=?", array($className));
     }
 }

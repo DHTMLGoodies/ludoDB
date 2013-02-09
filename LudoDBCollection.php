@@ -16,8 +16,10 @@ abstract class LudoDBCollection extends LudoDBIterator
     public function deleteRecords(){
         if(isset($this->arguments)){
             $constructBy = $this->parser->getConstructorParams();
-            $this->db->query("delete from ". $this->parser->getTableName()." where ". $constructBy[0]."=?", array($this->arguments[0]));
-            $this->clearCache();
+            if(isset($constructBy[0])){
+                $this->db->query("delete from ". $this->parser->getTableName()." where ". $constructBy[0]."=?", array($this->arguments[0]));
+                $this->clearCache();
+            }
         }
     }
 
@@ -68,7 +70,7 @@ abstract class LudoDBCollection extends LudoDBIterator
         return $model->getSomeValues($columns);
     }
 
-    public function getJSONKey(){
+    public function getCacheKey(){
         $ret = get_class($this);
         if(isset($this->arguments) && count($this->arguments)){
             $ret.="_". implode("_", $this->arguments);

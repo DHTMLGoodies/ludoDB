@@ -1,6 +1,8 @@
 ##Overview
-LudoDB is a PHP Framework for easy creation and manipulation of mySQL tables using PHP. It supports both
-PDO and MysqlI. PDO with prepared queries is the default database adapter.
+LudoDB is a PHP Database framework especially designed for Web applications using JSON for communication
+between server and client. It makes development of MySql tables easy using JSON config files.
+
+LudoDB supports both PDO and MysqlI. PDO with prepared queries is the default database adapter.
 
 Support for other databases can easily be implemented by creating a new database adapter which implements
 the LudoDBAdapter PHP interface.
@@ -67,7 +69,7 @@ class Person extends LudoDBModel
 	);
 
 	public function __construct($id){
-	 parent::__construct($id);
+	    parent::__construct($id);
 	}
 
 	public function setFirstname($value){
@@ -101,6 +103,7 @@ class Person extends LudoDBModel
 
 ?>
 ```
+
 ###Example: Create database table:
 ```PHP
 <?php

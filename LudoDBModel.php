@@ -258,6 +258,10 @@ abstract class LudoDBModel extends LudoDBObject
         return $this;
     }
 
+    protected function beforeDelete(){
+
+    }
+
     /**
      * Execute risky query,
      * @example
@@ -269,7 +273,7 @@ abstract class LudoDBModel extends LudoDBObject
         if (isset($this->riskyQuery)) {
             $this->db->query($this->riskyQuery);
             if ($this->caching) {
-                LudoDBCache::clearCacheByClass(get_class($this));
+                LudoDBCache::clearByClass(get_class($this));
                 $json = new LudoDBCache();
                 $json->deleteTableData()->yesImSure();
             }
