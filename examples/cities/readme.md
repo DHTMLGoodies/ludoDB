@@ -164,7 +164,45 @@ $handler = new LudoDBRequestHandler();
 echo $handler->handle("DemoCountries/read");
 ```
 
-It's also possible to output data without using the LudoDBRequestHandler:
+When using  LudoDBRequest handler, we'll have to implement the LudoDBService interface. It contains
+three methods:
+
+* __getValidServices__: Static method returning array of available services, example: array('read');
+* __validateService__: Method returning true if passed service and arguments ar valid.
+* __cacheEnabled__: Returns true when the Request Handler is allowed to look into LudoDBCache for
+values. This is very useful if you have collections with lot's of expensive database queries.
+
+This is the DemoCountries class:
+```PHP
+class DemoCountries extends LudoDBCollection implements LudoDBService
+{
+    protected $config = array(
+        "sql" => "select * from demo_country order by name",
+        "childKey" => "states/counties",
+        "merge" => array(
+            array(
+                "class" => "DemoStates",
+                "fk" => "country",
+                "pk" => "id"
+            )
+        )
+    );
+
+    public static function getValidServices(){
+        return array("read");
+    }
+
+    public function validateService($service, $arguments){
+        return count($arguments) === 0;
+    }
+
+    public function cacheEnabled(){
+        return false;
+    }
+}
+```
+
+It's also possible to output data without using a LudoDBRequestHandler:
 
 ```PHP
 $countries = new DemoCountries();
