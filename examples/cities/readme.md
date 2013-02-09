@@ -19,6 +19,92 @@ URL:
 http://<path to your local server>/path/to/ludoDB/examples/cities/index.php
 ```
 
+This should give you this countent:
+
+```JSON
+{"success":true, "message":"", "code":200, "response":[
+    {
+        "id":"1",
+        "name":"Norway",
+        "states\/counties":[
+            {
+                "id":"2",
+                "name":"Hordaland",
+                "country":"1",
+                "cities":[
+                    {
+                        "id":"4",
+                        "name":"Bergen"
+                    }
+                ]
+            },
+            {
+                "id":"1",
+                "name":"Rogaland",
+                "country":"1",
+                "cities":[
+                    {
+                        "id":"3",
+                        "name":"Haugesund"
+                    },
+                    {
+                        "id":"2",
+                        "name":"Sandnes"
+                    },
+                    {
+                        "id":"1",
+                        "name":"Stavanger"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"2",
+        "name":"United States",
+        "states\/counties":[
+            {
+                "id":"4",
+                "name":"California",
+                "country":"2",
+                "cities":[
+                    {
+                        "id":"8",
+                        "name":"Los Angeles"
+                    },
+                    {
+                        "id":"9",
+                        "name":"San Diego"
+                    },
+                    {
+                        "id":"7",
+                        "name":"San Fransisco"
+                    }
+                ]
+            },
+            {
+                "id":"3",
+                "name":"Texas",
+                "country":"2",
+                "cities":[
+                    {
+                        "id":"6",
+                        "name":"Austin"
+                    },
+                    {
+                        "id":"5",
+                        "name":"Houston"
+                    }
+                ]
+            }
+        ]
+    }
+], "log":{
+    "time":0.02137303352356,
+    "queries":3
+}}
+```
+
 ##Classes for the demo
 This demo contains 3 LudoDBModel classes and 3 LudoDBCollection classes.
 
