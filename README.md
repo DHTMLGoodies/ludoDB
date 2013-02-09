@@ -541,7 +541,8 @@ __PHP Class LeafNodes returning a list of LeafNode rows:__
 class LeafNodes extends LudoDBCollection
 {
     protected $config = array(
-        "sql" => "select * from leaf_node order by id"
+        "sql" => "select * from leaf_node order by id",
+        "model" => "LeafNode"
     );
 }
 ```
