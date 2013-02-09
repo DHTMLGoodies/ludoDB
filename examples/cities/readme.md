@@ -26,7 +26,7 @@ This should give you this countent:
     {
         "id":"1",
         "name":"Norway",
-        "states\/counties":[
+        "states/counties":[
             {
                 "id":"2",
                 "name":"Hordaland",
@@ -62,7 +62,7 @@ This should give you this countent:
     {
         "id":"2",
         "name":"United States",
-        "states\/counties":[
+        "states/counties":[
             {
                 "id":"4",
                 "name":"California",
