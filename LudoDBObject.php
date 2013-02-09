@@ -28,11 +28,6 @@ abstract class LudoDBObject
      * @var bool
      */
     protected $JSONConfig = false;
-    /**
-     * True to enable JSON caching
-     * @var bool
-     */
-    protected $caching = false;
 
     private $sql_handler;
     protected $config;
@@ -150,7 +145,7 @@ abstract class LudoDBObject
 
     public function cacheEnabled()
     {
-        return $this->caching;
+        return false;
     }
 
     abstract public function getValues();
@@ -169,7 +164,7 @@ abstract class LudoDBObject
 
     protected function clearCache()
     {
-        if ($this->caching) {
+        if ($this->cacheEnabled()) {
             LudoDBCache::clearBy($this->getCacheKey());
         }
     }

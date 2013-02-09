@@ -9,7 +9,6 @@
 class Capital extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
-    protected $caching = true;
 
     public function __construct($id = null){
         parent::__construct($id);
@@ -34,5 +33,9 @@ class Capital extends LudoDBModel implements LudoDBService
 
     public function validateService($service, $arguments){
         return empty($arguments) || count($arguments) === 1 && is_numeric($arguments[0]) ? true: false;
+    }
+
+    public function cacheEnabled(){
+        return true;
     }
 }
