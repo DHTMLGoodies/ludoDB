@@ -532,7 +532,7 @@ class LeafNode extends LudoDBModel
         )
     );
 }
-```PHP
+```
 
 __PHP Class LeafNodes returning a list of LeafNode rows:__
 
