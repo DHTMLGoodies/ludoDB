@@ -43,6 +43,16 @@ interface LudoDBService
      */
     public function validateService($service, $arguments);
 
+    /**
+     * Return true to enable caching in LudoDBRequest handler.
+     * When true a serialized version of LudoDBModel::read will
+     * be stored in a caching table. When caching is enabled,
+     * you should also implement clearCache() to clear cache in
+     * case Data has been changed.
+     * @return boolean
+     */
+    public function cacheEnabled();
+
 
 
 }

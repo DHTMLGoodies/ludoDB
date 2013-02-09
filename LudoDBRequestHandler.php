@@ -5,6 +5,7 @@
  * User: Alf Magne Kalleland
  * Date: 13.01.13
  */
+
 class LudoDBRequestHandler
 {
     /**
@@ -43,7 +44,7 @@ class LudoDBRequestHandler
             }
 
             if ($this->serviceName === 'delete' || $this->serviceName === 'read') {
-                if (!$this->model->getId() && $this->model instanceof LudoDBModel) {
+                if ($this->model instanceof LudoDBModel && !$this->model->getId()) {
                     throw new LudoDBException('Object not found');
                 }
             }
