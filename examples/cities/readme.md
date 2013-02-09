@@ -164,7 +164,7 @@ $handler = new LudoDBRequestHandler();
 echo $handler->handle("DemoCountries/read");
 ```
 
-When using  LudoDBRequest handler, we'll have to implement the LudoDBService interface. It contains
+When using  LudoDBRequest handler, we'll have to implement the __LudoDBService__ interface. It contains
 three methods:
 
 * __getValidServices__: Static method returning array of available services, example: array('read');
