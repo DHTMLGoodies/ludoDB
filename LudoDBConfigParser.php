@@ -90,12 +90,6 @@ class LudoDBConfigParser
         }
     }
 
-    public function setConstructBy($params)
-    {
-        if (!is_array($params)) $params = array($params);
-        $this->customConstructorParams = $params;
-    }
-
     private function getMergedConfigs($config1, $config2)
     {
         if (!is_array($config1) or !is_array($config2)) {
