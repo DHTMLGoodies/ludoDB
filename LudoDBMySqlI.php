@@ -14,11 +14,14 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
      */
     protected static $conn;
 
-    public function connect(){
-        try{
-            self::$conn = new mysqli(self::getHost(), self::getUser(), self::getPassword(), self::getDb());
-        }catch(Exception $e){
-             throw new LudoDBConnectionException("Could not connect to database because ". $e->getMessage(),400);
+    public function connect()
+    {
+
+        ob_start();
+        self::$conn = new mysqli(self::getHost(), self::getUser(), self::getPassword(), self::getDb());
+        ob_end_clean();
+        if (self::$conn->connect_errno) {
+            throw new LudoDBConnectionException("Could not connect to database because: " . self::$conn->connect_error, 400);
         }
     }
 
@@ -34,7 +37,7 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
         if (self::$loggingEnabled) {
             self::$queryCounter++;
         }
-        if(!empty($params)){
+        if (!empty($params)) {
             $sql = LudoDBSql::fromPrepared($sql, $params);
         }
         if ($res = self::$conn->query($sql)) {
@@ -78,6 +81,7 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
     {
         return self::$conn->insert_id;
     }
+
     /**
      * @param mysqli_result|resource|PDOStatement $result
      * @return array

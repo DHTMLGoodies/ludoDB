@@ -116,7 +116,7 @@ class LudoDB
         return LudoDBRegistry::get('DB_PWD');
     }
 
-    protected static function getDb(){
+    public static function getDb(){
         return LudoDBRegistry::get('DB_NAME');
     }
 
@@ -129,10 +129,21 @@ class LudoDB
         return 0;
     }
 
-    public function createDatabase($name){
+    public static function createDatabase($name){
         $name = preg_replace("/[^0-9a-z_]/si", "", $name);
-        self::getInstance()->query("create database ".$name);
+        self::getInstance()->query("create database if not exists ".$name);
     }
+
+    public function useDatabase($name){
+        if($this->databaseExists($name)){
+            self::getInstance()->query("use ". $name);
+        }
+    }
+
+    public function databaseExists($name){
+        return $this->countRows("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = ?", array($name)) > 0;
+    }
+
 
     public function log($sql, $arguments = array())
     {

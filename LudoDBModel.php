@@ -98,7 +98,6 @@ abstract class LudoDBModel extends LudoDBObject
             $this->setExternalValue($column, $value);
         } else {
             $value = $this->db->escapeString($value);
-            # if (!isset($value)) $value = LudoDBSql::DELETED;
             if (!isset($this->updates)) $this->updates = array();
             $this->updates[$this->parser->getInternalColName($column)] = $value;
         }

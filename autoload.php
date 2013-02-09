@@ -36,6 +36,7 @@ spl_autoload_register(
                 'jsontest' => '/Tests/JSONTest.php',
                 'ludodb' => '/LudoDB.php',
                 'ludodbadapter' => '/LudoDBInterfaces.php',
+                'ludodbadaptertest' => '/Tests/LudoDBAdapterTest.php',
                 'ludodbcache' => '/LudoDBCache.php',
                 'ludodbclassnotfoundexception' => '/LudoDBExceptions.php',
                 'ludodbcollection' => '/LudoDBCollection.php',
