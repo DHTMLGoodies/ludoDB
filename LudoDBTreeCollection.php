@@ -8,6 +8,7 @@
 abstract class LudoDBTreeCollection extends LudoDBCollection
 {
     private $rows;
+
     public function getValues(){
         $rows = parent::getValues();
         $rowReferences = array();
@@ -30,6 +31,53 @@ abstract class LudoDBTreeCollection extends LudoDBCollection
             }
             unset($row[$fk]);
             $this->rows[] = &$row;
+        }
+        $this->mergeInOthers();
+        return $ret;
+    }
+
+    private function mergeInOthers(){
+        $merged = $this->parser->getMerged();
+        if(isset($merged)){
+            $childKey = $this->parser->getChildKey();
+            foreach($merged as $merge){
+                
+                if(isset($merge['fk'])){
+                    $fk = $merge['fk'];
+                    $rows = $this->getRowsAssoc($merge['pk']);
+
+                    $mergeObj = $this->getMergeCollection($merge['class']);
+                    $values = $mergeObj->getValues();
+                    foreach($values as & $row){
+                        $fkValue = $row[$fk];
+
+                        if(!isset($rows[$fkValue][$childKey])){
+                            $rows[$fkValue][$childKey] = array();
+                        }
+                        $rows[$fkValue][$childKey][] = & $row;
+
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @param $className
+     * @return LudoDBCollection
+     */
+    private function getMergeCollection($className){
+        $r = new ReflectionClass($className);
+        return $r->newInstance();
+    }
+
+    private function getRowsAssoc($key){
+        $rows = $this->getRows();
+        $ret = array();
+        foreach($rows as & $row){
+            if(isset($row[$key])){
+                $ret[$row[$key]] = & $row;
+            }
         }
         return $ret;
     }

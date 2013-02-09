@@ -21,7 +21,7 @@ class LudoDBTreeCollectionTest extends TestBase
         $values = $node->getValues();
 
         // then
-        $this->assertEquals(2,count($values));
+        $this->assertEquals(3,count($values));
 
     }
     /**
@@ -53,7 +53,7 @@ class LudoDBTreeCollectionTest extends TestBase
         $children = $values[0]["children"][0]['children'];
 
         // then
-        $this->assertEquals(2,count($children));
+        $this->assertEquals(4,count($children));
     }
 
     /**
@@ -67,5 +67,22 @@ class LudoDBTreeCollectionTest extends TestBase
         $this->assertEquals('parent', $node->configParser()->getFK());
         $this->assertEquals('id', $node->configParser()->getPK());
         $this->assertEquals('children', $node->configParser()->getChildKey());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToMergeInCollections(){
+        // given
+        $nodes = new TestNodesWithLeafs();
+
+        // when
+        $values = $nodes->getValues();
+        $rootNode = $values[2];
+
+        // then
+        $this->assertEquals(1, count($nodes->configParser()->getMerged()));
+        $this->assertEquals(3, count($rootNode['children']));
+
     }
 }

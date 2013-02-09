@@ -38,7 +38,7 @@ class LudoDBCollectionConfigParser extends LudoDBConfigParser
      */
     private function getModelInstance()
     {
-        return new $this->config['model'];
+        return class_exists($this->config['model']) ? new $this->config['model'] : null;
     }
 
     public function getGroupBy(){
@@ -54,5 +54,9 @@ class LudoDBCollectionConfigParser extends LudoDBConfigParser
     }
     public function getChildKey(){
         return $this->getProperty('childKey');
+    }
+
+    public function getMerged(){
+        return $this->getProperty('merge');
     }
 }

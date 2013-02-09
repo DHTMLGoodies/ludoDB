@@ -34,6 +34,8 @@ spl_autoload_register(
                 'forsqltest' => '/Tests/classes/ForSQLTest.php',
                 'grandparent' => '/Tests/classes/Dependencies/GrandParent.php',
                 'jsontest' => '/Tests/JSONTest.php',
+                'leafnode' => '/Tests/classes/LeafNode.php',
+                'leafnodes' => '/Tests/classes/LeafNodes.php',
                 'ludodb' => '/LudoDB.php',
                 'ludodbadapter' => '/LudoDBInterfaces.php',
                 'ludodbadaptertest' => '/Tests/LudoDBAdapterTest.php',
@@ -85,6 +87,7 @@ spl_autoload_register(
                 'testgame' => '/Tests/classes/TestGame.php',
                 'testnode' => '/Tests/classes/TestNode.php',
                 'testnodes' => '/Tests/classes/TestNodes.php',
+                'testnodeswithleafs' => '/Tests/classes/TestNodesWithLeafs.php',
                 'testtable' => '/Tests/classes/TestTable.php',
                 'testtimer' => '/Tests/classes/TestTimer.php'
             );

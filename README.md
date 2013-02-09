@@ -456,53 +456,138 @@ In the config of the class, you'll need to  specify three properties:
 * __fk__: name of __foreign key__ column, i.e. column refering to parent key
 * __pk__: name of the __primary key__, the column used to identify parents.
 * __childKey__: Children will be placed inside an array with this key.
+* __merge__: Array of other LudoDBCollection objects to merge into the tree.
 
-Example
+Example:
+
+__PHP Class Nodes__
+
+```PHP
+class Nodes extends LudoDBTreeCollection implements LudoDBService
+{
+    protected $JSONConfig = true;
+
+    public function validateService($service, $arguments){
+        return count($arguments) === 0;
+    }
+
+    public static function getValidServices(){
+        return array('read');
+    }
+
+    public function cacheEnabled(){
+        return false;
+    }
+}
+
+```
+
+__JSONConfig/Nodes.json__
 
 ```JSON
 {
     "sql" : "select * from node order by parent,id",
     "fk": "parent",
     "pk": "id",
-    "childKey": "children"
+    "childKey": "children",
+    "merge" : [
+        {
+            "class" : "LeafNode",
+            "fk" : "parent_node_id",
+            "pk" : "id"
+        }
+
+    ]
 }
 ```
 
-A LudoDBTreeCollection class like this may return these values:
+__PHP Class LeafNode__
+
+```PHP
+<?php
+/**
+ * Comment pending.
+ * User: Alf Magne Kalleland
+ * Date: 09.02.13
+ * Time: 14:15
+ */
+class LeafNode extends LudoDBModel
+{
+    protected $config = array(
+        "table" => "leaf_node",
+        "columns" => array(
+            "id" => "int auto_increment not null primary key",
+            "name" => array(
+                "db" => "varchar(32)",
+                "access" => "rw"
+            ),
+            "parent_node_id" => array(
+                "db" => "int",
+                "access" => "rw",
+                "references" => "test_node(id) on delete cascade"
+            )
+        ),
+        "static" => array(
+            "type" => "leaf"
+        )
+    );
+}
+```PHP
+
+__PHP Class LeafNodes returning a list of LeafNode rows:__
+
+```PHP
+<?php
+class LeafNodes extends LudoDBCollection
+{
+    protected $config = array(
+        "sql" => "select * from leaf_node order by id"
+    );
+}
+```
+
+The following code:
+
+```PHP
+<?php
+$obj = new Nodes();
+echo $obj;
+```
+
+Will return something like:
 
 ```JSON
 [
     {
         "id":"1",
         "title":"Node 1",
-        "parent":null,
         "children":[
             {
                 "id":"3",
                 "title":"Node 1.1",
-                "parent":"1",
                 "children":[
                     {
                         "id":"6",
-                        "title":"Node 1.1.1",
-                        "parent":"3"
+                        "title":"Node 1.1.1"
                     },
                     {
                         "id":"7",
-                        "title":"Node 1.1.2",
-                        "parent":"3"
+                        "title":"Node 1.1.2"
+                    },
+                    {
+                        "id":"100",
+                        "title": "Leaf node",
+                        "type":"Leaf"
                     }
                 ]
             },
             {
                 "id":"4",
-                "title":"Node 1.2",
-                "parent":"1"
+                "title":"Node 1.2"
             },
             {
                 "id":"5",
                 "title":"Node 1.3",
-                "parent":"1",
                 "children":[
                     {
                         "id":"8",
