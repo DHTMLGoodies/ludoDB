@@ -116,16 +116,17 @@ abstract class LudoDBCollection extends LudoDBIterator
     protected function mergeInOthers()
     {
         $collectionsToMerge = $this->parser->getMerged();
+
         if (isset($collectionsToMerge)) {
             $childKey = $this->parser->getChildKey();
             $hideForeignKey = $this->parser->shouldHideForeignKeys();
             foreach ($collectionsToMerge as $collection) {
-
                 if (isset($collection['fk'])) {
                     $fk = $collection['fk'];
                     $rows = $this->getRowsAssoc($collection['pk']);
                     $collectionObj = $this->getCollectionInstance($collection['class']);
                     $values = $collectionObj->getValues();
+
                     foreach ($values as & $row) {
                         if (isset($row[$fk])) {
                             $fkValue = $row[$fk];

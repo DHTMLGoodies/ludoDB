@@ -34,7 +34,7 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
      */
     public function query($sql, $params = array())
     {
-        if ($this->debug) $this->log($sql, $params);
+        if (self::$logSQLs) $this->log($sql, $params);
         if (self::$loggingEnabled) {
             self::$queryCounter++;
         }

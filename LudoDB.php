@@ -6,7 +6,7 @@
  */
 class LudoDB
 {
-    protected $debug = false;
+    protected static $logSQLs = false;
     private static $instance;
     protected static $loggingEnabled = false;
     protected static $startTime;
@@ -21,6 +21,7 @@ class LudoDB
         }
     }
 
+
     /**
      * Set connection type,  PDO|MySqlI|MySql
      * @param $type
@@ -33,6 +34,10 @@ class LudoDB
             self::$connectionType = $type;
             self::getInstance($type);
         }
+    }
+
+    public static function enableSqlLogging(){
+        self::$logSQLs = true;
     }
 
     public static function hasPDO(){

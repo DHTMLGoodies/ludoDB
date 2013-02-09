@@ -27,7 +27,7 @@ class LudoDBMysql extends LudoDB implements LudoDBAdapter
          */
         public function query($sql, $params = array())
         {
-            if ($this->debug) $this->log($sql);
+            if (self::$logSQLs) $this->log($sql);
             if (self::$loggingEnabled) {
                 self::$queryCounter++;
             }
@@ -40,7 +40,7 @@ class LudoDBMysql extends LudoDB implements LudoDBAdapter
 
     public function one($sql, $params = array())
     {
-        if ($this->debug) $this->log($sql);
+        if (self::$logSQLs) $this->log($sql);
         $res = $this->query($sql . " limit 1", $params);
         if ($row = mysql_fetch_assoc($res)) {
             return $row;
