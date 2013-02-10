@@ -1,7 +1,7 @@
 <?php
 /**
  * Request handler class for Front End Controller. This class will handle requests sent
- * by Views and pass them to the correct LudoDBObjects.
+ * by Views and pass them to the correct LudoDBObject's.
  * User: Alf Magne Kalleland
  * Date: 13.01.13
  */
