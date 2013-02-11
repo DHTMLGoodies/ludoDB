@@ -204,9 +204,12 @@ class Client extends LudoDBModel
 
 Which gives you automatic setters and getters for lastname, firstname, address and zip.
 
-###Example: LudoDB Request handler
-LudoDB is intended for use with LudoJS Javascript framework. It acts as a router or controller.
-The LudoDBRequestHandler handles requests and passes them to the correct LudoDBModel. Example:
+###Example: LudoDBRequestHandler
+A LudoDBRequestHandler is used to handle requests from a web page and pass them to the correct
+LudoDBService(interface). You typically created an instance of this class in a PHP controller, i.e.
+the connection point between the GUI of your web application and the server framework.
+
+Example:
 ```PHP
 <?php
 $request = array(
@@ -216,7 +219,18 @@ $handler = new LudoDBRequestHandler();
 echo $handler->handle($request);
 ```
 
-Will give you the values for person where ID is set to 2. The handler will output response in JSON format:
+Will show you the values for person where ID is set to 2. The __request__ attribute contains tokens separated
+by a slash. The first token("Person") is the name of a resource/Class. The last token is the name of a service method
+implemented by the Resource class. The arguments in between, here "2" are arguments sent to the the
+constructor when an instance of the resource is created. For a request like above, the following will
+be done internally:
+
+```PHP
+$person = new Person(2);
+return $person->read();
+```
+
+The handler will output response in JSON format:
 
 ###Example: JSON response from LudoDBRequestHandler
 ```Javascript
