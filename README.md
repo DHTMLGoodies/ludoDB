@@ -222,7 +222,9 @@ echo $handler->handle($request);
 Will show you the values for person where ID is set to 2. The __request__ attribute contains tokens separated
 by a slash. The first token("Person") is the name of a resource/Class. The last token("read") is the name of a service method
 implemented by the Resource class. The arguments in between, here "2" are arguments sent to the the
-constructor when an instance of the resource is created. For a request like above, the following will
+constructor when an instance of the resource is created.
+
+For a request like above, the following will
 be done internally:
 
 ```PHP
@@ -265,6 +267,8 @@ echo $handler->handle($_POST['request']);
 ```
 
 Which will set first name of person with ID 1 to Mike.
+
+* __"data"__ contains values sent to the service method "save".
 
 ##Request handler using Apache mod_rewrite
 
