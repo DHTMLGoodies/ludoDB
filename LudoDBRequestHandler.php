@@ -55,7 +55,7 @@ class LudoDBRequestHandler
 
             switch ($this->serviceName) {
                 case 'read':
-                    return $this->toJSON($this->getValues());
+                    return $this->toJSON($this->read($request['data']));
                 case 'save':
                     return $this->toJSON($this->model->save($request['data']));
                 case 'delete':
@@ -177,8 +177,9 @@ class LudoDBRequestHandler
         return in_array($serviceName, $this->validServices) ? $serviceName : 'read';
     }
 
-    public function getValues()
+    private function read($requestData = array())
     {
+        if(empty($requestData))$requestData = null;
         $data = null;
         $caching = $this->model->cacheEnabled();
         if ($caching) {
@@ -187,7 +188,7 @@ class LudoDBRequestHandler
             }
         }
         if (!isset($data)) {
-            $data = $this->model->read();
+            $data = $this->model->read($requestData);
             if ($caching && $this->model->getCacheKey()) {
                 $this->ludoDBCache()->setCache($data)->commit();
             }

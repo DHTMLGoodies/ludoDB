@@ -187,7 +187,4 @@ class RequestHandlerTest extends TestBase
         // then
         $this->assertEquals('Andrea', $person->getFirstname());
     }
-
-
-
 }
