@@ -22,7 +22,7 @@ class TestNodes extends LudoDBTreeCollection implements LudoDBService
         return count($arguments) === 0;
     }
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('read');
     }
 

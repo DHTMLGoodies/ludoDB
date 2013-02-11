@@ -18,7 +18,7 @@ abstract class LudoDBObject
      * Valid public services offered by this class, example "read", "delete" and "save"
      * @return array
      */
-    public static function getValidServices()
+    public function getValidServices()
     {
         return array();
     }

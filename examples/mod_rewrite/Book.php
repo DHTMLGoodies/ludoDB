@@ -17,7 +17,7 @@ class Book extends LudoDBModel implements LudoDBService
                 return count($arguments) === 0 || is_numeric($arguments[0]) && count($arguments) === 1;
         }
     }
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('read','save','delete');
     }
 

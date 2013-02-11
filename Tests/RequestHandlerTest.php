@@ -88,7 +88,7 @@ class RequestHandlerTest extends TestBase
         // given
         $handler = new RequestHandlerMock();
 
-        $request = array('request' => 'Person/1');
+        $request = array('request' => 'Person/1/read');
         $handler->handle($request);
 
         // when
@@ -99,7 +99,7 @@ class RequestHandlerTest extends TestBase
         $this->assertEquals(array(1), $args);
 
         // given
-        $request = array('request' => 'Person/1/2');
+        $request = array('request' => 'Person/1/2/read');
 
         // when
 

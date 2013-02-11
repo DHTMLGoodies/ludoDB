@@ -30,9 +30,10 @@ class LudoDBRequestHandler
     {
         $request = $this->getParsed($request);
         try {
-            $this->validServices = $this->getValidServices($request);
+
             $this->arguments = $this->getArguments($request);
             $this->model = $this->getModel($request, $this->arguments);
+            $this->validServices = $this->getValidServices($request);
             $this->serviceName = $this->getServiceName($request);
 
             if (!in_array($this->serviceName, $this->validServices)) {
@@ -40,7 +41,7 @@ class LudoDBRequestHandler
             }
 
             if (!$this->model->validateService($this->serviceName, $this->arguments)) {
-                throw new LudoDBException('Invalid arguments for resource:' . $this->getClassName($request).', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
+                throw new LudoDBException('Invalid arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 
             if ($this->serviceName === 'delete' || $this->serviceName === 'read') {
@@ -79,7 +80,8 @@ class LudoDBRequestHandler
      * @param String $key
      * @default "response"
      */
-    public function setResponseKey($key){
+    public function setResponseKey($key)
+    {
         $this->responseKey = $key;
     }
 
@@ -101,7 +103,7 @@ class LudoDBRequestHandler
             'success' => $this->success,
             'message' => $this->message,
             'code' => $this->code,
-            $this->responseKey  => $data
+            $this->responseKey => $data
         );
         if (LudoDB::isLoggingEnabled()) {
             $ret['log'] = array(
@@ -114,15 +116,14 @@ class LudoDBRequestHandler
 
     protected function getArguments(array $request)
     {
-        if(isset($request['arguments'])){
+        if (isset($request['arguments'])) {
             return is_array($request['arguments']) ? $request['arguments'] : array($request['arguments']);
         }
         $ret = array();
         $tokens = explode("/", $request['request']);
-        for ($i = 1, $count = count($tokens); $i < $count; $i++) {
-            if ($i < $count - 1 || !in_array($tokens[$i], $this->validServices)) {
-                $ret[] = $tokens[$i];
-            }
+        for ($i = 1, $count = count($tokens); $i < $count - 1; $i++) {
+            $ret[] = $tokens[$i];
+
         }
         return $ret;
     }
@@ -152,7 +153,7 @@ class LudoDBRequestHandler
         $className = $this->getClassName($request);
         if (isset($className)) {
             $servicesMethod = $this->getReflectionClass($className)->getMethod('getValidServices');
-            return isset($servicesMethod) ? $servicesMethod->invoke(null) : array();
+            return isset($servicesMethod) ? $servicesMethod->invoke($this->model) : array();
         }
         return array();
     }
@@ -185,7 +186,7 @@ class LudoDBRequestHandler
 
     private function read($requestData = array())
     {
-        if(empty($requestData))$requestData = null;
+        if (empty($requestData)) $requestData = null;
         $data = null;
         $caching = $this->model->cacheEnabled();
         if ($caching) {

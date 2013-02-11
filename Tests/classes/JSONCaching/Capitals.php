@@ -18,7 +18,7 @@ class Capitals extends LudoDBCollection implements LudoDBService
         return count($arguments) === 2 && is_numeric($arguments[0]) && is_numeric($arguments[1]);
     }
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('read','delete','save');
     }
 

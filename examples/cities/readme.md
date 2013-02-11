@@ -188,7 +188,7 @@ class DemoCountries extends LudoDBCollection implements LudoDBService
         )
     );
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array("read");
     }
 

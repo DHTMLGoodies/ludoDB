@@ -53,6 +53,8 @@ interface LudoDBService
      */
     public function cacheEnabled();
 
+    public function getValidServices();
+
 
 
 }

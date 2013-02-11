@@ -14,7 +14,7 @@ class Capital extends LudoDBModel implements LudoDBService
         parent::__construct($id);
     }
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('read','delete','save');
     }
 

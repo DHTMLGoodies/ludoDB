@@ -4,7 +4,7 @@ class Person extends LudoDBModel implements LudoDBService
     protected $JSONConfig = true;
     public static $validServices = array('save','delete','read');
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('save','delete','read');
     }
 
