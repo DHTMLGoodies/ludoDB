@@ -295,7 +295,7 @@ LudoDB::enableLogging();
 
 $request = $_GET['request'];
 
-if(isset($_POST['request'])){
+if(isset($_POST['data'])){
 	$request['data'] = $_POST['data'];
 }
 
