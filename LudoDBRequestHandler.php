@@ -9,7 +9,7 @@
 class LudoDBRequestHandler
 {
     /**
-     * @var LudoDBObject
+     * @var LudoDBObject|LudoDBService
      */
     protected $model;
     protected $serviceName;
@@ -74,6 +74,11 @@ class LudoDBRequestHandler
         throw new LudoDBInvalidServiceException("Invalid service " . $this->serviceName);
     }
 
+    /**
+     * Set new response key. Response from the service will be in an array of this key.
+     * @param String $key
+     * @default "response"
+     */
     public function setResponseKey($key){
         $this->responseKey = $key;
     }
