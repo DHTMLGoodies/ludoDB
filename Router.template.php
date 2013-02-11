@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Template for a router, i.e. entry point for all requests sent by Ajax
+ * from GUI.
+ */
 require_once(__DIR__."/autoload.php");
 
 date_default_timezone_set("Europe/Berlin");
