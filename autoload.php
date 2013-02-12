@@ -15,6 +15,7 @@ spl_autoload_register(
                 'aparent' => '/Tests/classes/Dependencies/AParent.php',
                 'asibling' => '/Tests/classes/Dependencies/ASibling.php',
                 'author' => '/examples/mod_rewrite/Author.php',
+                'availableservicestest' => '/Tests/AvailableServicesTest.php',
                 'book' => '/examples/mod_rewrite/Book.php',
                 'bookauthor' => '/examples/mod_rewrite/BookAuthor.php',
                 'bookauthors' => '/examples/mod_rewrite/BookAuthors.php',

@@ -2,7 +2,6 @@
 class Person extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
-    public static $validServices = array('save','delete','read');
 
     public function getValidServices(){
         return array('save','delete','read');
@@ -48,8 +47,12 @@ class Person extends LudoDBModel implements LudoDBService
         $this->setValue('address', $address);
     }
 
-    public function validateService($service, $arguments){
+    public function validateArguments($service, $arguments){
         return empty($arguments) || count($arguments) === 1 && is_numeric($arguments[0]) ? true: false;
+    }
+
+    public function validateServiceData($service, $data){
+        return true;
     }
 
     public function getSex(){

@@ -163,4 +163,29 @@ class LudoDB
         fwrite($fh, $logText . "\n");
         fclose($fh);
     }
+
+    private static $registeredServices = array();
+
+    /**
+     * Register service resource. If you need access to all available services, you can call
+     * LudoDB::getAllServices(). Argument is name of a LudoDBService class.
+     * @param String $resource
+     */
+    public static function registerService($resource){
+        if(class_exists($resource)){
+            $r = new ReflectionClass($resource);
+            if($r->implementsInterface("LudoDBService")){
+                self::$registeredServices[$resource] = $r->getMethod("getValidServices")->invoke(new $resource);
+            }
+        }
+    }
+
+    /**
+     * Return array of all registered service resources with service names.
+     * @return array
+     */
+    public static function getAllServices(){
+        ksort(self::$registeredServices);
+        return self::$registeredServices;
+    }
 }

@@ -486,8 +486,13 @@ class Nodes extends LudoDBTreeCollection implements LudoDBService
 {
     protected $JSONConfig = true;
 
-    public function validateService($service, $arguments){
+    // Validate arguments sent to constructor
+    public function validateArguments($service, $arguments){
         return count($arguments) === 0;
+    }
+    // Validate data sent to service method
+    public function validateServiceData($service, $arguments){
+        return true;
     }
 
     public function getValidServices(){

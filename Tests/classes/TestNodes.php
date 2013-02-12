@@ -18,8 +18,12 @@ class TestNodes extends LudoDBTreeCollection implements LudoDBService
         )
     );
 
-    public function validateService($service, $arguments){
+    public function validateArguments($service, $arguments){
         return count($arguments) === 0;
+    }
+
+    public function validateServiceData($service, $data){
+        return true;
     }
 
     public function getValidServices(){

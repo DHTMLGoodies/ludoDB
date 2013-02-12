@@ -40,8 +40,12 @@ class LudoDBRequestHandler
                 throw new LudoDBException('Invalid service ' . $this->serviceName . ', resource: ' . $this->getClassName($request));
             }
 
-            if (!$this->model->validateService($this->serviceName, $this->arguments)) {
-                throw new LudoDBException('Invalid arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
+            if (!$this->model->validateArguments($this->serviceName, $this->arguments)) {
+                throw new LudoDBException('Invalid constructor arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
+            }
+
+            if (!$this->model->validateServiceData($this->serviceName, $this->arguments)) {
+                throw new LudoDBException('Invalid service arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 
             if ($this->serviceName === 'delete' || $this->serviceName === 'read') {

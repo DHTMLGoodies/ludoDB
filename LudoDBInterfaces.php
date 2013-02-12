@@ -36,12 +36,14 @@ interface LudoDBAdapter
 interface LudoDBService
 {
     /**
-     * Returns true is passed arguments are acceptable for given service
+     * Returns true is passed arguments are acceptable for the constructor.
      * @param String $service
      * @param Array $arguments
      * @return bool
      */
-    public function validateService($service, $arguments);
+    public function validateArguments($service, $arguments);
+
+    public function validateServiceData($service, $arguments);
 
     /**
      * Return true to enable caching in LudoDBRequest handler.

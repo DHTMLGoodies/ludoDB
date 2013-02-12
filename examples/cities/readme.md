@@ -168,7 +168,8 @@ When using  LudoDBRequest handler, we'll have to implement the __LudoDBService__
 three methods:
 
 * __getValidServices__: Static method returning array of available services, example: array('read');
-* __validateService__: Method returning true if passed service and arguments ar valid.
+* __validateArguments__: Method returning true if passed service and constructor arguments are valid.
+* __validateServiceData__: Method returning true if passed data are valid date for the service.
 * __cacheEnabled__: Returns true when the Request Handler is allowed to look into LudoDBCache for
 values. This is very useful if you have collections with lot's of expensive database queries.
 
@@ -192,8 +193,12 @@ class DemoCountries extends LudoDBCollection implements LudoDBService
         return array("read");
     }
 
-    public function validateService($service, $arguments){
+    public function validateArguments($service, $arguments){
         return count($arguments) === 0;
+    }
+
+    public function validateServiceData($service, $data){
+        return true;
     }
 
     public function cacheEnabled(){

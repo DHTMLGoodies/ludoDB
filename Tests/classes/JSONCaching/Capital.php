@@ -31,8 +31,12 @@ class Capital extends LudoDBModel implements LudoDBService
         parent::clearCache();
     }
 
-    public function validateService($service, $arguments){
+    public function validateArguments($service, $arguments){
         return empty($arguments) || count($arguments) === 1 && is_numeric($arguments[0]) ? true: false;
+    }
+
+    public function validateServiceData($service, $data){
+        return true;
     }
 
     public function cacheEnabled(){

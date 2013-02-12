@@ -3,7 +3,7 @@
 require_once(__DIR__."/../autoload.php");
 error_reporting(E_ALL);
 ini_set('display_errors','on');
-class AllTests
+class LudoDBAllTests
 {
     public static function main()
     {
@@ -30,6 +30,7 @@ class AllTests
         $suite->addTestSuite("LudoDBUtilityTest");
         $suite->addTestSuite("LudoDBTreeCollectionTest");
         $suite->addTestSuite("LudoDBAdapterTest");
+        $suite->addTestSuite("AvailableServicesTest");
         return $suite;
     }
 }
