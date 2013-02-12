@@ -37,7 +37,7 @@ class LudoDBRequestHandler
             $this->serviceName = $this->getServiceName($request);
 
             if (!in_array($this->serviceName, $this->validServices)) {
-                throw new LudoDBException('Invalid service ' . $this->serviceName);
+                throw new LudoDBException('Invalid service ' . $this->serviceName . ', resource: ' . $this->getClassName($request));
             }
 
             if (!$this->model->validateService($this->serviceName, $this->arguments)) {
