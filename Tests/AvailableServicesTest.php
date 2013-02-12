@@ -14,14 +14,13 @@ class AvailableServicesTest extends TestBase
      */
     public function shouldBeAbleToRegisterService(){
         // given
-        LudoDB::registerService('Person');
+        LudoDBServiceRegistry::register('Person');
 
         // when
-        $services = LudoDB::getAllServices();
+        $services = LudoDBServiceRegistry::getAll();
 
         // then
         $this->assertNotNull($services['Person']);
         $this->assertEquals(array('save','delete','read'), $services['Person']);
     }
-
 }

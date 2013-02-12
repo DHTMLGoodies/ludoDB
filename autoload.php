@@ -69,6 +69,7 @@ spl_autoload_register(
                 'ludodbrequesthandler' => '/LudoDBRequestHandler.php',
                 'ludodbservice' => '/LudoDBInterfaces.php',
                 'ludodbservicenotimplementedexception' => '/LudoDBExceptions.php',
+                'ludodbserviceregistry' => '/LudoDBServiceRegistry.php',
                 'ludodbsql' => '/LudoDBSQL.php',
                 'ludodbtreecollection' => '/LudoDBTreeCollection.php',
                 'ludodbtreecollectiontest' => '/Tests/LudoDBTreeCollectionTest.php',
