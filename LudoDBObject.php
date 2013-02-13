@@ -41,7 +41,6 @@ abstract class LudoDBObject
     {
         $this->db = LudoDb::getInstance();
         if (func_num_args() > 0) {
-            $args = func_get_args();
             $this->arguments = $this->escapeArguments(func_get_args());
         }
         $this->parser = $this->configParser();
@@ -55,7 +54,6 @@ abstract class LudoDBObject
         }
         return $this->sql_handler;
     }
-
 
     protected function escapeArguments($values)
     {

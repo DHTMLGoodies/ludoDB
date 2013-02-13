@@ -44,7 +44,7 @@ class LudoDBRequestHandler
                 throw new LudoDBException('Invalid constructor arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 
-            if (!$this->model->validateServiceData($this->serviceName, $this->arguments)) {
+            if (!$this->model->validateServiceData($this->serviceName, $request['data'])) {
                 throw new LudoDBException('Invalid service arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 
@@ -184,8 +184,7 @@ class LudoDBRequestHandler
     protected function getServiceName($request)
     {
         $tokens = explode("/", $request['request']);
-        $serviceName = $tokens[count($tokens) - 1];
-        return in_array($serviceName, $this->validServices) ? $serviceName : 'read';
+        return $tokens[count($tokens) - 1];
     }
 
     private function read($requestData = array())
