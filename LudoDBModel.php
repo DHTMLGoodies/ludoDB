@@ -4,10 +4,8 @@
  */
 abstract class LudoDBModel extends LudoDBObject
 {
-
-    private $id;
-    private $data = array();
-    private $updates;
+    protected $data = array();
+    protected $updates;
     private $externalClasses = array();
     private $commitDisabled;
     private $populated = false;
@@ -61,7 +59,7 @@ abstract class LudoDBModel extends LudoDBObject
 
     private function autoPopulate()
     {
-        if (!$this->populated && isset($this->arguments)) {
+        if (!$this->populated && !empty($this->arguments)) {
             $this->populate();
         }
     }

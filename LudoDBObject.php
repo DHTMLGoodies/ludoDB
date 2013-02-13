@@ -41,6 +41,7 @@ abstract class LudoDBObject
     {
         $this->db = LudoDb::getInstance();
         if (func_num_args() > 0) {
+            $args = func_get_args();
             $this->arguments = $this->escapeArguments(func_get_args());
         }
         $this->parser = $this->configParser();
@@ -58,10 +59,11 @@ abstract class LudoDBObject
 
     protected function escapeArguments($values)
     {
-        foreach ($values as &$value) {
-            $value = $this->db->escapeString($value);
+        $ret = array();
+        foreach ($values as $value) {
+            if(isset($value))$ret[] = $this->db->escapeString($value);
         }
-        return $values;
+        return $ret;
     }
 
     protected function onConstruct()
