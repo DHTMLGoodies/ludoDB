@@ -24,6 +24,10 @@ class LudoDBConnectionException extends LudoDBException{
 
 }
 
+class LudoDBInvalidArgumentsException extends LudoDBException{
+
+}
+
 class LudoDBUnauthorizedException extends LudoDBException{
     protected $code = 401;
 }
