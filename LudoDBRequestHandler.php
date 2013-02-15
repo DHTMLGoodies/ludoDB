@@ -86,12 +86,8 @@ class LudoDBRequestHandler
     private function getParsed($request)
     {
         if (is_string($request)) $request = array('request' => $request);
-        $lastChar = substr($request['request'], strlen($request['request']) - 1, 1);
-        if ($lastChar === '/') {
-            $request['request'] = substr($request['request'], 0, strlen($request['request']) - 1);
-        }
+        $request['request'] = stripslashes(rtrim($request['request'], '/'));
         if (!isset($request['data'])) $request['data'] = array();
-        $request['request'] = stripslashes($request['request']);
         return $request;
     }
 
