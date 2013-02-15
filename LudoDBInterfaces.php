@@ -55,8 +55,17 @@ interface LudoDBService
      */
     public function cacheEnabledFor($service);
 
+    /**
+     * Return array with names of valid services
+     * @return array
+     */
     public function getValidServices();
 
+    /**
+     * Return on success message for given service
+     * @param String $service
+     * @return String
+     */
     public function getOnSuccessMessageFor($service);
 
 
