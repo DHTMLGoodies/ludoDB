@@ -15,11 +15,16 @@ class LudoDBServiceRegistry
      * LudoDBServiceRegistry::getAll(). Argument is name of a LudoDBService class.
      * @param String $resource
      */
-    public static function register($resource){
-        if(class_exists($resource)){
+    public static function register($resource)
+    {
+        if (class_exists($resource)) {
             $r = new ReflectionClass($resource);
-            if($r->implementsInterface("LudoDBService")){
-                self::$registeredServices[$resource] = $r->getMethod("getValidServices")->invoke(new $resource);
+            if ($r->implementsInterface("LudoDBService")) {
+                try {
+                    self::$registeredServices[$resource] = $r->getMethod("getValidServices")->invoke(new $resource);
+                } catch (Exception $e) {
+                    self::$registeredServices[$resource] = array('NA');
+                }
             }
         }
     }
@@ -28,7 +33,8 @@ class LudoDBServiceRegistry
      * Return array of all registered service resources with service names.
      * @return array
      */
-    public static function getAll(){
+    public static function getAll()
+    {
         ksort(self::$registeredServices);
         return self::$registeredServices;
     }
