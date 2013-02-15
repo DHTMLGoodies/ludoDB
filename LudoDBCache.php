@@ -35,12 +35,12 @@ class LudoDBCache extends LudoDBModel
 
     public function __construct(LudoDBService $resource = null, array $arguments = null){
         if(isset($resource)){
-            $cl = get_class($resource);
-            $cacheKey = $this->getCacheKey($resource, $arguments);
+            $resourceName = get_class($resource);
+            $cacheKey = $this->getCacheKey($resourceName, $arguments);
             parent::__construct($cacheKey);
             if(isset($cacheKey)){
                 $this->setKey($cacheKey);
-                $this->setClassName($cl);
+                $this->setClassName($resourceName);
                 $this->JSON = $this->getValue('cache_value');
             }
         }else{
@@ -48,8 +48,8 @@ class LudoDBCache extends LudoDBModel
         }
     }
 
-    private function getCacheKey($resource, $arguments){
-        return implode("_", array_merge(array($resource), $arguments));
+    private function getCacheKey($resourceName, $arguments){
+        return implode("_", array_merge(array($resourceName), $arguments));
     }
 
     public function hasValue(){

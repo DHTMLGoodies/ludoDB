@@ -500,7 +500,7 @@ class Nodes extends LudoDBTreeCollection implements LudoDBService
     }
 
     public function cacheEnabledFor($service){
-        return false;
+        return $service === "read;
     }
 }
 
