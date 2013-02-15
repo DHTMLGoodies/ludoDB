@@ -162,4 +162,22 @@ abstract class LudoDBObject
         return $this->getValues();
     }
 
+    /**
+     * @param array $columnsEqual
+     * Returns true if database table has rows where one of the given columns has one of the
+     * given values,
+     * @example
+            if($this->hasRowWith(array("email" => "name@dhtmlgoodies.com"));
+     */
+    public function hasRowWith(array $columnsEqual){
+        $sql= "select * from ". $this->parser->getTableName()." where ";
+        $sql.= implode("=? or ", array_keys($columnsEqual));
+        $sql.= "=?";
+        $row = $this->db->one($sql, array_values($columnsEqual));
+        if(isset($row)){
+            return true;
+        }
+        return false;
+    }
+
 }
