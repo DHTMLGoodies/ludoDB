@@ -55,6 +55,15 @@ class Person extends LudoDBModel implements LudoDBService
         return true;
     }
 
+    public function getOnSuccessMessageFor($service){
+        switch($service){
+            case "read":
+                return "Succesfully read";
+            default:
+                return "D";
+        }
+    }
+
     public function getSex(){
         return $this->getValue('sex');
     }

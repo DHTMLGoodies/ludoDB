@@ -42,7 +42,7 @@ class CacheTest extends TestBase
         $this->log($json->getCache());
 
         // then
-        $this->assertFalse($json->hasValue());
+        $this->assertFalse($json->hasData());
     }
 
 
@@ -57,7 +57,7 @@ class CacheTest extends TestBase
         $this->assertEquals(1, $capital->getId());
         $this->assertEquals('Oslo', $capital->getName(), 'Initial test');
         $json = new LudoDBCache($capital, array(1));
-        $this->assertTrue($json->hasValue(), 'Initial test');
+        $this->assertTrue($json->hasData(), 'Initial test');
 
         // when
         $capital->delete();
@@ -66,7 +66,7 @@ class CacheTest extends TestBase
 
         // then
         $this->assertNull($capital->getId());
-        $this->assertFalse($json->hasValue());
+        $this->assertFalse($json->hasData());
     }
 
     /**
@@ -84,7 +84,7 @@ class CacheTest extends TestBase
         $json = new LudoDBCache($capital, array(2));
 
         // then
-        $this->assertFalse($json->hasValue());
+        $this->assertFalse($json->hasData());
     }
 
     /**

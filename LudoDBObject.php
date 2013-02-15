@@ -23,6 +23,10 @@ abstract class LudoDBObject
         return array();
     }
 
+    public function getOnSuccessMessageFor($service){
+        return "";
+    }
+
     /**
      * True when config is in JSONConfig/<class name>.json file
      * @var bool

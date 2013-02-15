@@ -87,7 +87,7 @@ class JSONTest extends TestBase
         // then
         $val = $this->getDb()->getValue("select count(ID) from ludo_db_cache where class_name='Capitals'");
         $this->assertEquals(1, $val);
-        $this->assertTrue($cache->hasValue());
+        $this->assertTrue($cache->hasData());
     }
 
     /**

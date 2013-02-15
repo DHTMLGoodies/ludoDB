@@ -37,20 +37,20 @@ class LudoDBRequestHandler
             $this->serviceName = $this->getServiceName($request);
 
             if (!in_array($this->serviceName, $this->validServices)) {
-                throw new LudoDBException('Invalid service ' . $this->serviceName . ', resource: ' . $this->getClassName($request));
+                throw new LudoDBInvalidServiceException('Invalid service ' . $this->serviceName . ', resource: ' . $this->getClassName($request));
             }
 
             if (!$this->resource->validateArguments($this->serviceName, $this->arguments)) {
-                throw new LudoDBException('Invalid constructor arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
+                throw new LudoDBInvalidArgumentsException('Invalid constructor arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 
             if (!$this->resource->validateServiceData($this->serviceName, $request['data'])) {
-                throw new LudoDBException('Invalid service arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
+                throw new LudoDBInvalidArgumentsException('Invalid service arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 
             if ($this->serviceName === 'delete' || $this->serviceName === 'read') {
                 if ($this->resource instanceof LudoDBModel && !$this->resource->getId()) {
-                    throw new LudoDBException('Object not found');
+                    throw new LudoDBObjectNotFoundException('Object not found');
                 }
             }
 
@@ -58,25 +58,19 @@ class LudoDBRequestHandler
                 throw new LudoDBServiceNotImplementedException("Service " . $this->serviceName . " not implemented");
             }
 
-            switch ($this->serviceName) {
-                case 'read':
-                    return $this->toJSON($this->read($request['data']));
-                case 'save':
-                    return $this->toJSON($this->resource->save($request['data']));
-                case 'delete':
-                    return $this->toJSON($this->resource->delete());
-                default:
-                    if (method_exists($this->resource, $this->serviceName)) {
-                        return $this->toJSON($this->resource->{$this->serviceName}($request['data']));
-                    }
+            if($this->resource->cacheEnabledFor($this->serviceName)){
+                return $this->toJSON($this->getCached($request['data']));
+            }else{
+                return $this->toJSON($this->resource->{$this->serviceName}($request['data']));
             }
+
+
         } catch (Exception $e) {
             $this->message = $e->getMessage();
             $this->code = $e->getCode();
             $this->success = false;
             return $this->toJSON(array());
         }
-        throw new LudoDBInvalidServiceException("Invalid service " . $this->serviceName);
     }
 
     /**
@@ -103,6 +97,9 @@ class LudoDBRequestHandler
 
     private function toJSON($data = array())
     {
+        if($this->success){
+            $this->message = $this->resource->getOnSuccessMessageFor($this->serviceName);
+        }
         $ret = array(
             'success' => $this->success,
             'message' => $this->message,
@@ -188,22 +185,18 @@ class LudoDBRequestHandler
         return $tokens[count($tokens) - 1];
     }
 
-    private function read($requestData = array())
+    private function getCached($requestData = array())
     {
         if (empty($requestData)) $requestData = null;
         $data = null;
-        $caching = $this->resource->cacheEnabledFor($this->serviceName);
-        if ($caching) {
-            if ($this->ludoDBCache()->hasValue()) {
-                $data = $this->ludoDBCache()->getCache();
-            }
+        if ($this->ludoDBCache()->hasData()) {
+            $data = $this->ludoDBCache()->getCache();
         }
 
         if (!isset($data)) {
-            $data = $this->resource->read($requestData);
+            $data = $this->resource->{$this->serviceName}($requestData);
             $this->ludoDBCache()->setCache($data)->commit();
         }
-
         return $data;
     }
 

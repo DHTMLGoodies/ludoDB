@@ -52,7 +52,7 @@ class LudoDBCache extends LudoDBModel
         return implode("_", array_merge(array($resourceName), $arguments));
     }
 
-    public function hasValue(){
+    public function hasData(){
         return isset($this->JSON) && strlen($this->JSON)>0;
     }
 

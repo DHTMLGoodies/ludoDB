@@ -57,6 +57,8 @@ interface LudoDBService
 
     public function getValidServices();
 
+    public function getOnSuccessMessageFor($service);
+
 
 
 }

@@ -145,7 +145,7 @@ class RequestHandlerTest extends TestBase
         $handler = new RequestHandlerMock();
 
         // when
-        $model = $handler->getModel($this->getRequest);
+        $model = $handler->getResource($this->getRequest);
 
         // then
         $this->assertInstanceOf('Person', $model);
@@ -186,5 +186,23 @@ class RequestHandlerTest extends TestBase
 
         // then
         $this->assertEquals('Andrea', $person->getFirstname());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToSpecifyOnSuccessMessages(){
+        // given
+        $request = array(
+            "request" => "Person/1/read"
+        );
+
+        // when
+        $handler = new RequestHandlerMock();
+        $data = json_decode($handler->handle($request), true);
+
+        // then
+        $this->assertEquals("Succesfully read", $data['message']);
+
     }
 }
