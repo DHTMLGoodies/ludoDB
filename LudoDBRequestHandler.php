@@ -11,7 +11,7 @@ class LudoDBRequestHandler
     /**
      * @var LudoDBObject|LudoDBService
      */
-    protected $model;
+    protected $resource;
     protected $serviceName;
     protected $cacheInstance;
     private $validServices = array();
@@ -32,7 +32,7 @@ class LudoDBRequestHandler
         try {
 
             $this->arguments = $this->getArguments($request);
-            $this->model = $this->getModel($request, $this->arguments);
+            $this->resource = $this->getResource($request, $this->arguments);
             $this->validServices = $this->getValidServices($request);
             $this->serviceName = $this->getServiceName($request);
 
@@ -40,21 +40,21 @@ class LudoDBRequestHandler
                 throw new LudoDBException('Invalid service ' . $this->serviceName . ', resource: ' . $this->getClassName($request));
             }
 
-            if (!$this->model->validateArguments($this->serviceName, $this->arguments)) {
+            if (!$this->resource->validateArguments($this->serviceName, $this->arguments)) {
                 throw new LudoDBException('Invalid constructor arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 
-            if (!$this->model->validateServiceData($this->serviceName, $request['data'])) {
+            if (!$this->resource->validateServiceData($this->serviceName, $request['data'])) {
                 throw new LudoDBException('Invalid service arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 
             if ($this->serviceName === 'delete' || $this->serviceName === 'read') {
-                if ($this->model instanceof LudoDBModel && !$this->model->getId()) {
+                if ($this->resource instanceof LudoDBModel && !$this->resource->getId()) {
                     throw new LudoDBException('Object not found');
                 }
             }
 
-            if (!method_exists($this->model, $this->serviceName)) {
+            if (!method_exists($this->resource, $this->serviceName)) {
                 throw new LudoDBServiceNotImplementedException("Service " . $this->serviceName . " not implemented");
             }
 
@@ -62,12 +62,12 @@ class LudoDBRequestHandler
                 case 'read':
                     return $this->toJSON($this->read($request['data']));
                 case 'save':
-                    return $this->toJSON($this->model->save($request['data']));
+                    return $this->toJSON($this->resource->save($request['data']));
                 case 'delete':
-                    return $this->toJSON($this->model->delete());
+                    return $this->toJSON($this->resource->delete());
                 default:
-                    if (method_exists($this->model, $this->serviceName)) {
-                        return $this->toJSON($this->model->{$this->serviceName}($request['data']));
+                    if (method_exists($this->resource, $this->serviceName)) {
+                        return $this->toJSON($this->resource->{$this->serviceName}($request['data']));
                     }
             }
         } catch (Exception $e) {
@@ -107,6 +107,7 @@ class LudoDBRequestHandler
             'success' => $this->success,
             'message' => $this->message,
             'code' => $this->code,
+            'resource' => get_class($this->resource),
             $this->responseKey => $data
         );
         if (LudoDB::isLoggingEnabled()) {
@@ -138,7 +139,7 @@ class LudoDBRequestHandler
      * @return null|object
      * @throws LudoDBClassNotFoundException
      */
-    protected function getModel(array $request, $args = array())
+    protected function getResource(array $request, $args = array())
     {
         $className = $this->getClassName($request);
         if (isset($className)) {
@@ -157,7 +158,7 @@ class LudoDBRequestHandler
         $className = $this->getClassName($request);
         if (isset($className)) {
             $servicesMethod = $this->getReflectionClass($className)->getMethod('getValidServices');
-            return isset($servicesMethod) ? $servicesMethod->invoke($this->model) : array();
+            return isset($servicesMethod) ? $servicesMethod->invoke($this->resource) : array();
         }
         return array();
     }
@@ -191,7 +192,7 @@ class LudoDBRequestHandler
     {
         if (empty($requestData)) $requestData = null;
         $data = null;
-        $caching = $this->model->cacheEnabledFor($this->serviceName);
+        $caching = $this->resource->cacheEnabledFor($this->serviceName);
         if ($caching) {
             if ($this->ludoDBCache()->hasValue()) {
                 $data = $this->ludoDBCache()->getCache();
@@ -199,7 +200,7 @@ class LudoDBRequestHandler
         }
 
         if (!isset($data)) {
-            $data = $this->model->read($requestData);
+            $data = $this->resource->read($requestData);
             $this->ludoDBCache()->setCache($data)->commit();
         }
 
@@ -212,7 +213,7 @@ class LudoDBRequestHandler
     protected function ludoDBCache()
     {
         if (!isset($this->cacheInstance)) {
-            $this->cacheInstance = new LudoDBCache($this->model, $this->arguments);
+            $this->cacheInstance = new LudoDBCache($this->resource, $this->arguments);
         }
         return $this->cacheInstance;
     }
