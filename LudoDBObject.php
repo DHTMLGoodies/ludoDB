@@ -143,7 +143,7 @@ abstract class LudoDBObject
         return json_encode($this->getValues());
     }
 
-    public function cacheEnabled()
+    public function cacheEnabledFor($service)
     {
         return false;
     }
@@ -152,7 +152,7 @@ abstract class LudoDBObject
 
     protected function clearCache()
     {
-        if ($this->cacheEnabled()) {
+        if ($this->cacheEnabledFor("read") && !empty($this->arguments)) {
             LudoDBCache::clearBy(get_class($this) . "_" . implode("_", $this->arguments));
         }
     }

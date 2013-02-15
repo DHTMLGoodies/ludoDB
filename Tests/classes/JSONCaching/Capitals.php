@@ -26,7 +26,7 @@ class Capitals extends LudoDBCollection implements LudoDBService
         return array('read','delete','save');
     }
 
-    public function cacheEnabled(){
-        return true;
+    public function cacheEnabledFor($service){
+        return $service === "read";
     }
 }

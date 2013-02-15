@@ -114,7 +114,7 @@ class CacheTest extends TestBase
         $capital = new Capital();
 
         // then
-        $this->assertTrue($capital->cacheEnabled());
+        $this->assertTrue($capital->cacheEnabledFor("read"));
     }
 
     /**

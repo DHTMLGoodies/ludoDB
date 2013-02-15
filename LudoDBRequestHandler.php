@@ -191,7 +191,7 @@ class LudoDBRequestHandler
     {
         if (empty($requestData)) $requestData = null;
         $data = null;
-        $caching = $this->model->cacheEnabled();
+        $caching = $this->model->cacheEnabledFor($this->serviceName);
         if ($caching) {
             if ($this->ludoDBCache()->hasValue()) {
                 $data = $this->ludoDBCache()->getCache();

@@ -39,7 +39,7 @@ class Capital extends LudoDBModel implements LudoDBService
         return true;
     }
 
-    public function cacheEnabled(){
+    public function cacheEnabledFor($service){
         return true;
     }
 }

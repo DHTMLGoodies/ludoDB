@@ -499,7 +499,7 @@ class Nodes extends LudoDBTreeCollection implements LudoDBService
         return array('read');
     }
 
-    public function cacheEnabled(){
+    public function cacheEnabledFor($service){
         return false;
     }
 }
