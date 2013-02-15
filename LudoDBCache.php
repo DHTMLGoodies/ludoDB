@@ -33,18 +33,23 @@ class LudoDBCache extends LudoDBModel
 
     private $JSON = null;
 
-    public function __construct(LudoDBObject $model = null){
-        if(isset($model)){
-            $key = $model->getCacheKey();
-            parent::__construct($key);
-            if(isset($key)){
-                $this->setKey($key);
-                $this->setClassName(get_class($model));
+    public function __construct(LudoDBService $resource = null, array $arguments = null){
+        if(isset($resource)){
+            $cl = get_class($resource);
+            $cacheKey = $this->getCacheKey($resource, $arguments);
+            parent::__construct($cacheKey);
+            if(isset($cacheKey)){
+                $this->setKey($cacheKey);
+                $this->setClassName($cl);
                 $this->JSON = $this->getValue('cache_value');
             }
         }else{
             parent::__construct();
         }
+    }
+
+    private function getCacheKey($resource, $arguments){
+        return implode("_", array_merge(array($resource), $arguments));
     }
 
     public function hasValue(){

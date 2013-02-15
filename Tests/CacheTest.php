@@ -37,7 +37,7 @@ class CacheTest extends TestBase
         $capital->commit();
 
         $capitals = new Capitals(5000,6000);
-        $json = new LudoDBCache($capitals);
+        $json = new LudoDBCache($capitals, array(5000,6000));
 
         $this->log($json->getCache());
 
@@ -56,13 +56,13 @@ class CacheTest extends TestBase
 
         $this->assertEquals(1, $capital->getId());
         $this->assertEquals('Oslo', $capital->getName(), 'Initial test');
-        $json = new LudoDBCache($capital);
+        $json = new LudoDBCache($capital, array(1));
         $this->assertTrue($json->hasValue(), 'Initial test');
 
         // when
         $capital->delete();
         $capital = new Capital(1);
-        $json = new LudoDBCache($capital);
+        $json = new LudoDBCache($capital, array(1));
 
         // then
         $this->assertNull($capital->getId());
@@ -81,7 +81,7 @@ class CacheTest extends TestBase
         $capital->commit();
 
         // when
-        $json = new LudoDBCache($capital);
+        $json = new LudoDBCache($capital, array(2));
 
         // then
         $this->assertFalse($json->hasValue());
@@ -99,7 +99,7 @@ class CacheTest extends TestBase
 
         // when
         $this->triggerJSONFor('Capital', 2);
-        $json = new LudoDBCache($capital);
+        $json = new LudoDBCache($capital, array(2));
         $values = $json->getCache();
 
         // then

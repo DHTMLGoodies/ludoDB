@@ -150,22 +150,10 @@ abstract class LudoDBObject
 
     abstract public function getValues();
 
-    private $cacheKey = null;
-
-    public function getCacheKey()
-    {
-        if (!isset($this->cacheKey)) {
-            if (isset($this->arguments) && count($this->arguments)) {
-                $this->cacheKey = get_class($this) . "_" . implode("_", $this->arguments);
-            }
-        }
-        return $this->cacheKey;
-    }
-
     protected function clearCache()
     {
         if ($this->cacheEnabled()) {
-            LudoDBCache::clearBy($this->getCacheKey());
+            LudoDBCache::clearBy(get_class($this) . "_" . implode("_", $this->arguments));
         }
     }
 

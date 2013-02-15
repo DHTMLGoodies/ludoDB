@@ -197,12 +197,12 @@ class LudoDBRequestHandler
                 $data = $this->ludoDBCache()->getCache();
             }
         }
+
         if (!isset($data)) {
             $data = $this->model->read($requestData);
-            if ($caching && $this->model->getCacheKey()) {
-                $this->ludoDBCache()->setCache($data)->commit();
-            }
+            $this->ludoDBCache()->setCache($data)->commit();
         }
+
         return $data;
     }
 
@@ -212,7 +212,7 @@ class LudoDBRequestHandler
     protected function ludoDBCache()
     {
         if (!isset($this->cacheInstance)) {
-            $this->cacheInstance = new LudoDBCache($this->model);
+            $this->cacheInstance = new LudoDBCache($this->model, $this->arguments);
         }
         return $this->cacheInstance;
     }

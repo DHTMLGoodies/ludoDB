@@ -82,24 +82,14 @@ class JSONTest extends TestBase
         $this->triggerJSONFor('Capitals', array(5000,6000));
 
         // when
-        $json = new LudoDBCache($capitals);
+        $cache = new LudoDBCache($capitals, array(5000,6000));
 
         // then
         $val = $this->getDb()->getValue("select count(ID) from ludo_db_cache where class_name='Capitals'");
         $this->assertEquals(1, $val);
-        $this->assertTrue($json->hasValue());
+        $this->assertTrue($cache->hasValue());
     }
 
-    /**
-     * @test
-     */
-    public function shouldReturnPropercacheKey(){
-        // given
-        $capital = new Capital(1);
-
-        // then
-        $this->assertEquals('Capital_1', $capital->getCacheKey());
-    }
     /**
      * @test
      */
@@ -152,7 +142,7 @@ class JSONTest extends TestBase
         if(!is_array($arguments))$arguments = array($arguments);
         if(!empty($arguments))$requestString.="/".implode("/", $arguments);
         $requestString.="/read";
-        echo $requestString."\n";
+
         $request->handle(
             array(
                 'request' => $requestString
