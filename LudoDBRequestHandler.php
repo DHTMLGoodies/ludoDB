@@ -117,12 +117,9 @@ class LudoDBRequestHandler
         if (isset($request['arguments'])) {
             return is_array($request['arguments']) ? $request['arguments'] : array($request['arguments']);
         }
-        $ret = array();
-        $tokens = explode("/", $request['request']);
-        for ($i = 1, $count = count($tokens); $i < $count - 1; $i++) {
-            $ret[] = $tokens[$i];
-
-        }
+        $ret = explode("/", $request['request']);
+        array_shift($ret);
+        array_pop($ret);
         return $ret;
     }
 
@@ -160,7 +157,7 @@ class LudoDBRequestHandler
     {
         $cl = new ReflectionClass($className);
         if (!$cl->implementsInterface('LudoDBService')) {
-            throw new LudoDBClassNotFoundException('Invalid request for: ' . $className);
+            throw new LudoDBClassNotFoundException($className . " is not an instance of LudoDBService");
         }
         return $cl;
     }
@@ -177,19 +174,15 @@ class LudoDBRequestHandler
 
     protected function getServiceName($request)
     {
-        $tokens = explode("/", $request['request']);
-        return $tokens[count($tokens) - 1];
+        return array_pop(explode("/", $request['request']));
     }
 
     private function getCached($requestData = array())
     {
         if (empty($requestData)) $requestData = null;
-        $data = null;
         if ($this->ludoDBCache()->hasData()) {
             $data = $this->ludoDBCache()->getCache();
-        }
-
-        if (!isset($data)) {
+        }else {
             $data = $this->resource->{$this->serviceName}($requestData);
             $this->ludoDBCache()->setCache($data)->commit();
         }
