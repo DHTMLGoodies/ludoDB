@@ -16,7 +16,7 @@ class LudoDB
 
     public function __construct()
     {
-        if (self::$loggingEnabled) {
+        if (self::$loggingEnabled && !isset(self::$startTime)) {
             self::$startTime = self::getTime();
         }
     }
