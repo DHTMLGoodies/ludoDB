@@ -164,5 +164,13 @@ class LudoDB
         fclose($fh);
     }
 
+    public function hasConnection(){
+        try{
+            self::getInstance()->connect();
+            return true;
+        }catch(LudoDBConnectionException $e){
+            return false;
+        }
+    }
 
 }
