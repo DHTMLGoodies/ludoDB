@@ -13,7 +13,7 @@ To check out from command line (With Git installed on your computer):
 
 	git clone https://github.com/DHTMLGoodies/ludoDB.git ludoDB
 
-To try it out, open one of the url
+To try it out, open the url
 
     http://<your server name>/ludoDB/examples/mod_rewrite/index.php
 
