@@ -10,7 +10,11 @@ class LudoDBMysql extends LudoDB implements LudoDBAdapter
 {
     public function connect()
     {
+        ob_start();
         self::$conn = mysql_connect(self::getHost(), self::getUser(), self::getPassword());
+        if(!self::$conn){
+            throw new LudoDBConnectionException("Could not connect to database because: " . mysql_error(), 400);
+        }
         mysql_select_db(self::getDb(), self::$conn);
     }
 
