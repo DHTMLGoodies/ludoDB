@@ -336,6 +336,10 @@ your LudoDBModel config.
 tree format.
 * __LudoDBRequestHandler__: Class handling POST/GET requests and returning data
 in JSON format.
+* __LudoDBService__:Interface for classes/resources available for the LudoDBRequestHandler.
+* __LudoDBProfiler__: LudoDBService class implementing XHPROF profiling. During development, you
+can use this class to profile your PHP code. Example: profile the request Person/1/read, you can
+call this service: ```http://hostname/LudoDBProfiler/Person/1/read/profile```.
 
 
 ###Public methods

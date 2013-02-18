@@ -41,7 +41,8 @@ class LudoDBProfiling implements LudoDBService
         }
 
         $request = implode("/", $this->arguments);
-        $this->start(preg_replace("/[^0-9a-z]/si", "", $request));
+        $name = preg_replace("/[^0-9a-z]/si", "", $request);
+        $this->start($name);
 
         $handler = new LudoDBRequestHandler();
         $result = json_decode($handler->handle(array(
