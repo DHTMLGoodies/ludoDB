@@ -23,6 +23,23 @@ on your Apache web server.
 ###License
 LudoDB is open source software according to the LGPL license.
 
+###Classes
+This is an overview of the most important PHP classes in ludoDB:
+
+* __LudoDBObject__: Abstract base class for LudoDBModel and LudoDBCollection
+* __LudoDBModel__: Abstract class you extend to represent a database table, example: "Person"
+* __LudoDBCollection__: Abstract class used to present collection of data rows
+from the database, example: "People". ps! You can specify nested classes in
+your LudoDBModel config.
+* __LudoDBTreeCollection__: Abstract class used to present collection of data in
+tree format.
+* __LudoDBRequestHandler__: Class handling POST/GET requests and returning data
+in JSON format.
+* __LudoDBService__:Interface for classes/resources available for the LudoDBRequestHandler.
+* __LudoDBProfiler__: LudoDBService class implementing XHPROF profiling. During development, you
+can use this class to profile your PHP code. Example: profile the request Person/1/read, you can
+call this service: ```http://hostname/LudoDBProfiler/Person/1/read/profile```.
+
 ###Setup database connection.
 The code to establish a connection to your database is:
 
@@ -323,24 +340,6 @@ http://myServer/Game/1/read
 ```
 
 will then be redirected to router.php with "/Game/1/read" as the $_GET['request'] param.
-
-###Classes
-This is an overview of the most important PHP classes in ludoDB:
-
-* __LudoDBObject__: Abstract base class for LudoDBModel and LudoDBCollection
-* __LudoDBModel__: Abstract class you extend to represent a database table, example: "Game"
-* __LudoDBCollection__: Abstract class used to present collection of data rows
-from the database, example: "Moves". ps! You can specify nested classes in
-your LudoDBModel config.
-* __LudoDBTreeCollection__: Abstract class used to present collection of data in
-tree format.
-* __LudoDBRequestHandler__: Class handling POST/GET requests and returning data
-in JSON format.
-* __LudoDBService__:Interface for classes/resources available for the LudoDBRequestHandler.
-* __LudoDBProfiler__: LudoDBService class implementing XHPROF profiling. During development, you
-can use this class to profile your PHP code. Example: profile the request Person/1/read, you can
-call this service: ```http://hostname/LudoDBProfiler/Person/1/read/profile```.
-
 
 ###Public methods
 Here are some of the public methods for LudoDBModel and LudoDBCollection:
