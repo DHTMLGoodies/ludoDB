@@ -35,6 +35,11 @@ class LudoDBProfiling implements LudoDBService
 
     public function profile($data = array())
     {
+        $inDevelop = LudoDBRegistry::get('DEVELOP_MODE');
+        if(!isset($inDevelop) || !$inDevelop){
+            throw new LudoDBException("Profiling can only executed in develop mode. Use LudoDBRegistry::set('DEVELOP_MODE', true) to activate develop mode");
+        }
+
         $request = implode("/", $this->arguments);
         $this->start(preg_replace("/[^0-9a-z]/si", "", $request));
 
