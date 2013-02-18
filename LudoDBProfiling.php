@@ -35,17 +35,26 @@ class LudoDBProfiling implements LudoDBService
 
     public function profile($data = array())
     {
-
         $request = implode("/", $this->arguments);
         $this->start(preg_replace("/[^0-9a-z]/si", "", $request));
 
         $handler = new LudoDBRequestHandler();
-        $handler->handle(array(
+        $result = json_decode($handler->handle(array(
             'request' => $request,
             'data' => $data
-        ));
+        )), true);
 
-        return $this->end();
+        if(!$result['success']){
+            throw new LudoDBException($result['message']);
+        }
+
+        $url = $this->end();
+
+        return array(
+            "result" => $url,
+            "request" => $request,
+            "data" => $data
+        );
     }
 
     public function validateServiceData($service, $data)
