@@ -37,7 +37,7 @@ class TestNodesWithLeafs extends LudoDBTreeCollection implements LudoDBService
         return array('read');
     }
 
-    public function cacheEnabledFor($service){
+    public function shouldCache($service){
         return $service === "read";
     }
 }

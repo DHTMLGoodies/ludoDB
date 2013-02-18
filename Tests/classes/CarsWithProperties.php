@@ -21,7 +21,7 @@ class CarsWithProperties extends LudoDBCollection implements LudoDBService
         )
     );
 
-    public function cacheEnabledFor($service){
+    public function shouldCache($service){
         return false;
     }
     public function validateArguments($service, $arguments){

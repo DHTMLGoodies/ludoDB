@@ -98,7 +98,7 @@ class JSONTest extends TestBase
         $capital = new Capital();
 
         // then
-        $this->assertTrue($capital->cacheEnabledFor("read"));
+        $this->assertTrue($capital->shouldCache("read"));
     }
 
     /**

@@ -58,7 +58,7 @@ class LudoDBRequestHandler
                 throw new LudoDBServiceNotImplementedException("Service " . $this->serviceName . " not implemented");
             }
 
-            if($this->resource->cacheEnabledFor($this->serviceName)){
+            if($this->resource->shouldCache($this->serviceName)){
                 return $this->toJSON($this->getCached($request['data']));
             }else{
                 return $this->toJSON($this->resource->{$this->serviceName}($request['data']));

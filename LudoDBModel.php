@@ -272,7 +272,7 @@ abstract class LudoDBModel extends LudoDBObject
     {
         if (isset($this->riskyQuery)) {
             $this->db->query($this->riskyQuery);
-            if ($this->cacheEnabledFor("read")) {
+            if ($this->shouldCache("read")) {
                 LudoDBCache::clearByClass(get_class($this));
                 $json = new LudoDBCache();
                 $json->deleteTableData()->yesImSure();

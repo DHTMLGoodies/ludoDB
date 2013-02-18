@@ -53,7 +53,7 @@ interface LudoDBService
      * case Data has been changed.
      * @return boolean
      */
-    public function cacheEnabledFor($service);
+    public function shouldCache($service);
 
     /**
      * Return array with names of valid services
