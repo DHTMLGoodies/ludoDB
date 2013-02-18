@@ -73,16 +73,6 @@ class LudoDBRequestHandler
         }
     }
 
-    /**
-     * Set new response key. Response from the service will be in an array of this key.
-     * @param String $key
-     * @default "response"
-     */
-    public function setResponseKey($key)
-    {
-        $this->responseKey = $key;
-    }
-
     private function getParsed($request)
     {
         if (is_string($request)) $request = array('request' => $request);
