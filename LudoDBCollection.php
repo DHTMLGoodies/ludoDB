@@ -124,6 +124,7 @@ abstract class LudoDBCollection extends LudoDBIterator
                 if (isset($collection['fk'])) {
                     $fk = $collection['fk'];
                     if(!isset($childKey) && isset($collection['childKey']))$childKey = $collection['childKey'];
+                    if(!isset($hideForeignKey) && isset($collection['hideForeignKey']))$childKey = $collection['hideForeignKey'];
                     $rows = $this->getRowsAssoc($collection['pk']);
                     $collectionObj = $this->getCollectionInstance($collection['class']);
                     $values = $collectionObj->getValues();
