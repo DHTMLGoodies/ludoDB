@@ -43,7 +43,7 @@ interface LudoDBService
      */
     public function validateArguments($service, $arguments);
 
-    public function validateServiceData($service, $arguments);
+    public function validateServiceData($service, $data);
 
     /**
      * Return true to enable caching in LudoDBRequest handler for the read service.

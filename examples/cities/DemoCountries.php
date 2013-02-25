@@ -14,6 +14,7 @@ class DemoCountries extends LudoDBCollection implements LudoDBService
         "merge" => array(
             array(
                 "class" => "DemoStates",
+                "hideForeignKeys" => true,
                 "fk" => "country",
                 "pk" => "id"
             )
@@ -29,10 +30,14 @@ class DemoCountries extends LudoDBCollection implements LudoDBService
     }
 
     public function validateServiceData($service, $data){
-        return true;
+        return empty($data);
     }
 
     public function cacheEnabledFor($service){
-        return false;
+        return true;
+    }
+
+    public function getOnSuccessMessageFor($service){
+        return "";
     }
 }

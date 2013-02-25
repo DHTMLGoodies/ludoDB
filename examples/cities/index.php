@@ -7,7 +7,7 @@
  * Time: 16:34
  */
 
-require_once(__DIR__ . "/../../autoload.php");
+require_once(__DIR__ . "/autoload.php");
 
 ini_set('display_errors', 'on');
 date_default_timezone_set("Europe/Berlin");
@@ -18,10 +18,10 @@ LudoDB::setPassword("administrator");
 LudoDB::setHost("127.0.0.1");
 
 $c = new DemoCountry();
-#if (!$c->exists()) {
+if (!$c->exists()) {
     $util = new LudoDBUtility();
     $util->dropAndCreate(array("DemoState", "DemoCity", "DemoCountry"));
-#}
+}
 
 
 LudoDB::enableLogging(); // get number of queries and server time in response
