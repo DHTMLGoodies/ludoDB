@@ -20,6 +20,7 @@ class DemoCountry extends LudoDBModel
         "data" => array(
             array("name" => "Norway"),
             array("name" => "United States"),
+            array("name" => "Germany"),
         )
     );
 }

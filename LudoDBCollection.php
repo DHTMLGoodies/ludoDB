@@ -123,6 +123,7 @@ abstract class LudoDBCollection extends LudoDBIterator
             foreach ($collectionsToMerge as $collection) {
                 if (isset($collection['fk'])) {
                     $fk = $collection['fk'];
+                    if(!isset($childKey) && isset($collection['childKey']))$childKey = $collection['childKey'];
                     $rows = $this->getRowsAssoc($collection['pk']);
                     $collectionObj = $this->getCollectionInstance($collection['class']);
                     $values = $collectionObj->getValues();

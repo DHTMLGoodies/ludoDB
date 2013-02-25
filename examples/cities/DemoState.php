@@ -27,6 +27,7 @@ class DemoState extends LudoDBModel
             array("name" => "Hordaland", "country" => 1),
             array("name" => "Texas", "country" => 2),
             array("name" => "California", "country" => 2),
+            array("name" => "Bavaria", "country" => 3),
         ),
         "indexes" => array("country")
 

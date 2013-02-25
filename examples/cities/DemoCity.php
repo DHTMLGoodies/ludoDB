@@ -32,6 +32,7 @@ class DemoCity extends LudoDBModel
             array("name" => "San Fransisco", "state"=> 4),
             array("name" => "Los Angeles", "state"=> 4),
             array("name" => "San Diego", "state"=> 4),
+            array("name" => "Munich", "state"=> 5),
         ),
         "indexes" => array("state")
 
