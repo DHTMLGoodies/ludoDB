@@ -18,7 +18,7 @@ LudoDB::setPassword("administrator");
 LudoDB::setHost("127.0.0.1");
 
 $c = new DemoCountry();
-if ($c->exists()) {
+if (!$c->exists()) {
     $util = new LudoDBUtility();
     $util->dropAndCreate(array("DemoState", "DemoCity", "DemoCountry"));
 }
