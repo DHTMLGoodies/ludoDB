@@ -22,6 +22,9 @@ class DemoState extends LudoDBModel
                 "access" => "rw"
             )
         ),
+        "static" => array(
+            "type" => "state"
+        ),
         "data" => array(
             array("name" => "Rogaland", "country" => 1),
             array("name" => "Hordaland", "country" => 1),

@@ -17,6 +17,9 @@ class DemoCountry extends LudoDBModel
                 "access" => "rw"
             )
         ),
+        "static"=>array(
+            "type" => "country"
+        ),
         "data" => array(
             array("name" => "Norway"),
             array("name" => "United States"),

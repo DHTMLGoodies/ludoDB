@@ -9,7 +9,7 @@ class DemoCountries extends LudoDBCollection implements LudoDBService
 {
     protected $config = array(
         "sql" => "select * from demo_country order by name",
-        "childKey" => "states/counties",
+        "childKey" => "children",
         "model" => "DemoCountry",
         "merge" => array(
             array(

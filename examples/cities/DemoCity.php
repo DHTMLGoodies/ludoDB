@@ -22,6 +22,9 @@ class DemoCity extends LudoDBModel
                 "access" => "rw"
             )
         ),
+        "static" => array(
+            "type" => "city"
+        ),
         "data" => array(
             array("name" => "Stavanger", "state"=> 1),
             array("name" => "Sandnes", "state"=> 1),
