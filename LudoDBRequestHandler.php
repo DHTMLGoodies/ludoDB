@@ -77,7 +77,7 @@ class LudoDBRequestHandler
     {
         if (is_string($request)) $request = array('request' => $request);
         $request['request'] = stripslashes(rtrim($request['request'], '/'));
-        if (!isset($request['data'])) $request['data'] = array();
+        if (!isset($request['data'])) $request['data'] = null;
         return $request;
     }
 

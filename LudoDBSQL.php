@@ -121,14 +121,14 @@ class LudoDBSql
                 if (is_string($type)) {
                     $columns[] = $name . " " . $type;
                 } else {
-                    $col = $name. " ". $type['db'];
-                    if(isset($type['default'])){
-                        $col.= " default ?";
+                    $col = $name . " " . $type['db'];
+                    if (isset($type['default'])) {
+                        $col .= " default ?";
                     }
                     $columns[] = $col;
 
-                    if(isset($type['references'])){
-                        $columns[] = "FOREIGN KEY(". $name.") REFERENCES ". $type['references'];
+                    if (isset($type['references'])) {
+                        $columns[] = "FOREIGN KEY(" . $name . ") REFERENCES " . $type['references'];
                     }
 
                 }
@@ -143,7 +143,7 @@ class LudoDBSql
         $table = $this->configParser->getTableName();
         $data = $this->obj->getUncommitted();
 
-        if(LudoDB::hasPDO()){
+        if (LudoDB::hasPDO()) {
             return $this->getPDOInsert($data);
         }
         if (!isset($data)) $data = array(
@@ -156,7 +156,8 @@ class LudoDBSql
         return $sql;
     }
 
-    private function getPDOInsert($data){
+    private function getPDOInsert($data)
+    {
         $table = $this->configParser->getTableName();
 
         if (!isset($data)) $data = array(
@@ -181,19 +182,22 @@ class LudoDBSql
     private function getUpdatesForSql($updates)
     {
         $ret = array();
-        foreach ($updates as $key => $value) {
-            $ret[] = $key . "=?"; // . ($value === self::DELETED ? 'NULL' : "'" . $value . "'");
+        if (is_array($updates)) {
+            foreach ($updates as $key => $value) {
+                $ret[] = $key . "=?";
+            }
         }
         return implode(",", $ret);
     }
 
-    public static function fromPrepared($sql, $params = array()){
-        if(!strstr($sql, "?"))return $sql;
+    public static function fromPrepared($sql, $params = array())
+    {
+        if (!strstr($sql, "?")) return $sql;
 
         $sql = str_replace("?", "'%s'", $sql);
         $sql = str_replace("''%s''", "'%s'", $sql);
         $db = LudoDB::getInstance();
-        for($i=0,$count = count($params);$i<$count;$i++){
+        for ($i = 0, $count = count($params); $i < $count; $i++) {
             $params[$i] = $db->escapeString($params[$i]);
         }
         $sql = vsprintf($sql, $params);
