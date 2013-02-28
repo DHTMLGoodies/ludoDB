@@ -38,7 +38,10 @@ class LudoDBCollectionConfigParser extends LudoDBConfigParser
      */
     private function getModelInstance()
     {
-        return class_exists($this->config['model']) ? new $this->config['model'] : null;
+        if(!class_exists($this->config['model'])){
+            throw new LudoDBException("Class ". $this->config['model']. " does not exists");
+        }
+        return new $this->config['model'];
     }
 
     public function getGroupBy(){
