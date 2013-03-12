@@ -1,5 +1,5 @@
 ##Overview
-LudoDB is a PHP Database framework especially designed for Web applications using JSON for communication
+LudoDB is a PHP Database and Web Service framework especially designed for Web applications using JSON for communication
 between server and client. It makes development of MySql tables easy using JSON config files.
 
 LudoDB supports both PDO and MysqlI. PDO with prepared queries is the default database adapter.
