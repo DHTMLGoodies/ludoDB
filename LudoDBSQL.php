@@ -9,6 +9,7 @@ class LudoDBSql
     private $config;
     private $arguments;
     private $obj;
+    private $limit = "";
     const DELETED = '__DELETED__';
 
     /**
@@ -33,10 +34,18 @@ class LudoDBSql
     public function getSql()
     {
         if (isset($this->config['sql'])) {
-            return vsprintf($this->config['sql'], $this->arguments);
+            return vsprintf($this->config['sql'], $this->arguments).$this->limit;
         } else {
-            return $this->getCompiledSql();
+            return $this->getCompiledSql().$this->limit;
         }
+    }
+
+    public function setLimit($start, $count = null){
+        $this->limit = " limit $start" . (isset($count) ? ", ". $count : "");
+    }
+
+    public function clearLimit(){
+        $this->limit = "";
     }
 
     private function getCompiledSql()

@@ -29,8 +29,19 @@ abstract class LudoDBCollection extends LudoDBIterator
         return new LudoDBCollectionConfigParser($this, $this->config);
     }
 
-    public function getValues()
+    /**
+     * Return collection values. Use $start and $count to specify a limit query.
+     * @param null $start
+     * @param null $count
+     * @return array
+     */
+    public function getValues($start = null, $count = null)
     {
+        if(isset($start)){
+            $this->sqlHandler()->setLimit($start, $count);
+        }else{
+            $this->sqlHandler()->clearLimit();
+        }
         $model = $this->parser->getModel();
         if (isset($model)) {
             $ret = $this->getValuesUsingModel($model);
