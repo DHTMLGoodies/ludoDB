@@ -4,9 +4,9 @@
 </head>
 <body>
     <h2>Example 1: get request:</h2>
-    <p>Click here to show data for <a href="Book/2">Book/2</a></p>
+    <p>Click here to show data for <a href="Book/2/read">Book/2</a></p>
     <h2>Example 2: delete request:</h2>
-    <p>Click here to delete <a href="Book/2">Book/2/delete</a></p>
+    <p>Click here to delete <a href="Book/2/delete">Book/2/delete</a></p>
     <h2>Example 3: save request:</h2>
     <form action="./Book/save" method="post">
         <table>
@@ -28,6 +28,6 @@
         </table>
     </form>
     <p>After save, open Book/&lt;id&gt; where id is the id you'll see in the JSON response,
-    example:  <a href="Book/4">Book/4</p>
+    example:  <a href="Book/4/read">Book/4</p>
 </body>
 </html>
