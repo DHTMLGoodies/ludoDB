@@ -3,7 +3,8 @@
  * Class used during Development/Debugging.
  * User: Alf Magne
  * Date: 06.02.13
-
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBUtility
 {

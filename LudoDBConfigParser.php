@@ -3,6 +3,8 @@
  *  parser for LudoDBObject
  * User: Alf Magne
  * Date: 10.01.13
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBConfigParser
 {

@@ -4,6 +4,8 @@
  * by Views and pass them to the correct LudoDBObject's.
  * User: Alf Magne Kalleland
  * Date: 13.01.13
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 
 class LudoDBRequestHandler

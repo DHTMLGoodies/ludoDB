@@ -3,6 +3,8 @@
  * Created by JetBrains PhpStorm.
  * User: Alf Magne
  * Date: 14.01.13
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBCollectionConfigParser extends LudoDBConfigParser
 {

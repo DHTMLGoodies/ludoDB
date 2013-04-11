@@ -10,6 +10,8 @@
  * User: Alf Magne Kalleland
  * Date: 18.02.13
  * Time: 20:48
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBProfiling implements LudoDBService
 {

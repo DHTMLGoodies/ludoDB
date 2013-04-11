@@ -3,7 +3,8 @@
  * LudoDB interfaces
  * User: Alf Magne
  * Date: 31.01.13
-
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 interface LudoDBAdapter
 {
@@ -32,6 +33,8 @@ interface LudoDBAdapter
  * which returns an array of valid services, example array('read','save','delete');
  * Methods with these names also has to be implemented. "read", "save" and "delete"
  * are already implemented for LudoDBModel.
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 interface LudoDBService
 {

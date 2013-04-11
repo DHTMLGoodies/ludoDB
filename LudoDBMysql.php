@@ -1,10 +1,11 @@
 <?php
 /**
- * PDO Mysql adapter. Should only be used when neither
+ * Mysql adapter. Should only be used when neither
  * PDO or MySqlI is supported on the server.
  * User: Alf Magne
  * Date: 01.02.13
-
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBMysql extends LudoDB implements LudoDBAdapter
 {

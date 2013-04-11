@@ -1,6 +1,8 @@
 <?php
 /**
  * Representation of a ludoDB table
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 abstract class LudoDBModel extends LudoDBObject
 {

@@ -4,8 +4,8 @@
  * when supported by the server.
  * User: Alf Magne
  * Date: 01.02.13
-
-
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
 {

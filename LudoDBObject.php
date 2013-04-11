@@ -3,7 +3,8 @@
  * Base class for LudoDB models and collections.
  * User: Alf Magne Kalleland
  * Date: 20.12.12
-
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 abstract class LudoDBObject
 {

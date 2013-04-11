@@ -3,7 +3,8 @@
  * Created by JetBrains PhpStorm.
  * User: Alf Magne Kalleland
  * Date: 21.12.12
-
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBIterator extends LudoDBObject implements Iterator
 {

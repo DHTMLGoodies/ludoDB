@@ -5,6 +5,8 @@
  * User: Alf Magne Kalleland
  * Date: 12.02.13
  * Time: 23:14
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBServiceRegistry
 {

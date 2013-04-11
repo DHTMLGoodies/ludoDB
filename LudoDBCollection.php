@@ -3,7 +3,8 @@
  * LudoDB collection class
  * User: Alf Magne Kalleland
  * Date: 19.12.12
-
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 abstract class LudoDBCollection extends LudoDBIterator
 {

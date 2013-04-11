@@ -3,6 +3,8 @@
  * Base class for LudoDB adapters
  * User: Alf Magne Kalleland
  * Date: 03.11.12
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDB
 {
@@ -36,6 +38,9 @@ class LudoDB
         }
     }
 
+    /**
+     * Logs all sql queries to sql.txt
+     */
     public static function enableSqlLogging(){
         self::$logSQLs = true;
     }

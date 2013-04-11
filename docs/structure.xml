@@ -1,0 +1,3713 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="2.0.0a12" title="">
+  <file path="LudoDB.php" hash="47d7dc02d777bf83a83c3483bcf4af66" package="Default">
+    <class final="false" abstract="false" namespace="global" line="9" package="LudoDB">
+      <extends/>
+      <name>LudoDB</name>
+      <full_name>\LudoDB</full_name>
+      <docblock line="2">
+        <description>Base class for LudoDB adapters
+User: Alf Magne Kalleland
+Date: 03.11.12</description>
+        <long-description/>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="true" visibility="protected" line="11" namespace="global" package="Default">
+        <name>$logSQLs</name>
+        <default>false</default>
+      </property>
+      <property final="false" static="true" visibility="private" line="12" namespace="global" package="Default">
+        <name>$instance</name>
+        <default/>
+      </property>
+      <property final="false" static="true" visibility="protected" line="13" namespace="global" package="Default">
+        <name>$loggingEnabled</name>
+        <default>false</default>
+      </property>
+      <property final="false" static="true" visibility="protected" line="14" namespace="global" package="Default">
+        <name>$startTime</name>
+        <default/>
+      </property>
+      <property final="false" static="true" visibility="protected" line="15" namespace="global" package="Default">
+        <name>$queryCounter</name>
+        <default>0</default>
+      </property>
+      <property final="false" static="true" visibility="private" line="16" namespace="global" package="Default">
+        <name>$connectionType</name>
+        <default>'PDO'</default>
+      </property>
+      <property final="false" static="true" visibility="protected" line="17" namespace="global" package="Default">
+        <name>$conn</name>
+        <default/>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="19" package="LudoDB">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="31" package="LudoDB">
+        <name>setConnectionType</name>
+        <full_name>setConnectionType</full_name>
+        <docblock line="27">
+          <description>Set connection type,  PDO|MySqlI|MySql</description>
+          <long-description/>
+          <tag line="27" name="param" description="" type="\" variable="$type"/>
+        </docblock>
+        <argument line="31">
+          <name>$type</name>
+          <default>'PDO'</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="44" package="LudoDB">
+        <name>enableSqlLogging</name>
+        <full_name>enableSqlLogging</full_name>
+        <docblock line="41">
+          <description>Logs all sql queries to sql.txt</description>
+          <long-description/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="48" package="LudoDB">
+        <name>hasPDO</name>
+        <full_name>hasPDO</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="52" package="LudoDB">
+        <name>enableLogging</name>
+        <full_name>enableLogging</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="58" package="LudoDB">
+        <name>isLoggingEnabled</name>
+        <full_name>isLoggingEnabled</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="63" package="LudoDB">
+        <name>getElapsed</name>
+        <full_name>getElapsed</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="68" package="LudoDB">
+        <name>getQueryCount</name>
+        <full_name>getQueryCount</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="private" namespace="global" line="73" package="LudoDB">
+        <name>getTime</name>
+        <full_name>getTime</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="79" package="LudoDB">
+        <name>getInstance</name>
+        <full_name>getInstance</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="97" package="LudoDB">
+        <name>setHost</name>
+        <full_name>setHost</full_name>
+        <argument line="97">
+          <name>$host</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="102" package="LudoDB">
+        <name>setUser</name>
+        <full_name>setUser</full_name>
+        <argument line="102">
+          <name>$user</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="107" package="LudoDB">
+        <name>setPassword</name>
+        <full_name>setPassword</full_name>
+        <argument line="107">
+          <name>$pwd</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="112" package="LudoDB">
+        <name>setDb</name>
+        <full_name>setDb</full_name>
+        <argument line="112">
+          <name>$dbName</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="protected" namespace="global" line="117" package="LudoDB">
+        <name>getHost</name>
+        <full_name>getHost</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="protected" namespace="global" line="121" package="LudoDB">
+        <name>getUser</name>
+        <full_name>getUser</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="protected" namespace="global" line="125" package="LudoDB">
+        <name>getPassword</name>
+        <full_name>getPassword</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="129" package="LudoDB">
+        <name>getDb</name>
+        <full_name>getDb</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="133" package="LudoDB">
+        <name>tableExists</name>
+        <full_name>tableExists</full_name>
+        <argument line="133">
+          <name>$tableName</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="138" package="LudoDB">
+        <name>countRows</name>
+        <full_name>countRows</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="142" package="LudoDB">
+        <name>createDatabase</name>
+        <full_name>createDatabase</full_name>
+        <argument line="142">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="147" package="LudoDB">
+        <name>useDatabase</name>
+        <full_name>useDatabase</full_name>
+        <argument line="147">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="153" package="LudoDB">
+        <name>databaseExists</name>
+        <full_name>databaseExists</full_name>
+        <argument line="153">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="158" package="LudoDB">
+        <name>log</name>
+        <full_name>log</full_name>
+        <argument line="158">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="158">
+          <name>$arguments</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="172" package="LudoDB">
+        <name>hasConnection</name>
+        <full_name>hasConnection</full_name>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDB.php</error>
+      <error line="11" code="50018">No DocBlock was found for property $logSQLs</error>
+      <error line="12" code="50018">No DocBlock was found for property $instance</error>
+      <error line="13" code="50018">No DocBlock was found for property $loggingEnabled</error>
+      <error line="14" code="50018">No DocBlock was found for property $startTime</error>
+      <error line="15" code="50018">No DocBlock was found for property $queryCounter</error>
+      <error line="16" code="50018">No DocBlock was found for property $connectionType</error>
+      <error line="17" code="50018">No DocBlock was found for property $conn</error>
+      <error line="19" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="48" code="50010">No DocBlock was found for method hasPDO()</error>
+      <error line="52" code="50010">No DocBlock was found for method enableLogging()</error>
+      <error line="58" code="50010">No DocBlock was found for method isLoggingEnabled()</error>
+      <error line="63" code="50010">No DocBlock was found for method getElapsed()</error>
+      <error line="68" code="50010">No DocBlock was found for method getQueryCount()</error>
+      <error line="73" code="50010">No DocBlock was found for method getTime()</error>
+      <error line="79" code="50010">No DocBlock was found for method getInstance()</error>
+      <error line="97" code="50010">No DocBlock was found for method setHost()</error>
+      <error line="102" code="50010">No DocBlock was found for method setUser()</error>
+      <error line="107" code="50010">No DocBlock was found for method setPassword()</error>
+      <error line="112" code="50010">No DocBlock was found for method setDb()</error>
+      <error line="117" code="50010">No DocBlock was found for method getHost()</error>
+      <error line="121" code="50010">No DocBlock was found for method getUser()</error>
+      <error line="125" code="50010">No DocBlock was found for method getPassword()</error>
+      <error line="129" code="50010">No DocBlock was found for method getDb()</error>
+      <error line="133" code="50010">No DocBlock was found for method tableExists()</error>
+      <error line="138" code="50010">No DocBlock was found for method countRows()</error>
+      <error line="142" code="50010">No DocBlock was found for method createDatabase()</error>
+      <error line="147" code="50010">No DocBlock was found for method useDatabase()</error>
+      <error line="153" code="50010">No DocBlock was found for method databaseExists()</error>
+      <error line="158" code="50010">No DocBlock was found for method log()</error>
+      <error line="172" code="50010">No DocBlock was found for method hasConnection()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBCache.php" hash="b5ee68af5152fcef34f86cfe387667de" package="Default">
+    <class final="false" abstract="false" namespace="global" line="9" package="LudoDB">
+      <extends>\LudoDBModel</extends>
+      <name>LudoDBCache</name>
+      <full_name>\LudoDBCache</full_name>
+      <docblock line="2">
+        <description>Caching of serialized LudoDBObjects
+User: Alf Magne
+Date: 28.01.13</description>
+        <long-description/>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="11" namespace="global" package="Default">
+        <name>$JSONConfig</name>
+        <default>false</default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="12" namespace="global" package="Default">
+        <name>$config</name>
+        <default>array('table' =&gt; 'ludo_db_cache', 'sql' =&gt; "select class_name, cache_key, cache_value from ludo_db_cache where cache_key=?", 'idField' =&gt; 'JSON_key', 'columns' =&gt; array('id' =&gt; array('db' =&gt; 'int auto_increment not null primary key'), 'cache_key' =&gt; array('db' =&gt; 'varchar(512)', 'access' =&gt; 'rw'), 'class_name' =&gt; array('db' =&gt; 'varchar(512)', 'access' =&gt; 'rw'), 'cache_value' =&gt; array('db' =&gt; 'mediumtext', 'access' =&gt; 'rw')), 'indexes' =&gt; array('cache_key', 'class_name'))</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="36" namespace="global" package="Default">
+        <name>$JSON</name>
+        <default>null</default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="38" package="LudoDB">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <argument line="38">
+          <name>$resource</name>
+          <default>null</default>
+          <type>\LudoDBService</type>
+        </argument>
+        <argument line="38">
+          <name>$arguments</name>
+          <default>null</default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="53" package="LudoDB">
+        <name>getCacheKey</name>
+        <full_name>getCacheKey</full_name>
+        <argument line="53">
+          <name>$resourceName</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="53">
+          <name>$arguments</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="57" package="LudoDB">
+        <name>hasData</name>
+        <full_name>hasData</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="61" package="LudoDB">
+        <name>setClassName</name>
+        <full_name>setClassName</full_name>
+        <argument line="61">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="65" package="LudoDB">
+        <name>getCache</name>
+        <full_name>getCache</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="70" package="LudoDB">
+        <name>setKey</name>
+        <full_name>setKey</full_name>
+        <argument line="70">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="75" package="LudoDB">
+        <name>setCache</name>
+        <full_name>setCache</full_name>
+        <argument line="75">
+          <name>$json</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="80" package="LudoDB">
+        <name>clearBy</name>
+        <full_name>clearBy</full_name>
+        <argument line="80">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="86" package="LudoDB">
+        <name>clearByClass</name>
+        <full_name>clearByClass</full_name>
+        <argument line="86">
+          <name>$className</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBCache.php</error>
+      <error line="11" code="50018">No DocBlock was found for property $JSONConfig</error>
+      <error line="12" code="50018">No DocBlock was found for property $config</error>
+      <error line="36" code="50018">No DocBlock was found for property $JSON</error>
+      <error line="38" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="53" code="50010">No DocBlock was found for method getCacheKey()</error>
+      <error line="57" code="50010">No DocBlock was found for method hasData()</error>
+      <error line="61" code="50010">No DocBlock was found for method setClassName()</error>
+      <error line="65" code="50010">No DocBlock was found for method getCache()</error>
+      <error line="70" code="50010">No DocBlock was found for method setKey()</error>
+      <error line="75" code="50010">No DocBlock was found for method setCache()</error>
+      <error line="80" code="50010">No DocBlock was found for method clearBy()</error>
+      <error line="86" code="50010">No DocBlock was found for method clearByClass()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBCollection.php" hash="e2e86969ff72206ca0ca4f61d3bfa82f" package="Default">
+    <class final="false" abstract="true" namespace="global" line="9" package="LudoDB">
+      <extends>\LudoDBIterator</extends>
+      <name>LudoDBCollection</name>
+      <full_name>\LudoDBCollection</full_name>
+      <docblock line="2">
+        <description>LudoDB collection class
+User: Alf Magne Kalleland
+Date: 19.12.12</description>
+        <long-description/>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="15" namespace="global" package="Default">
+        <name>$arguments</name>
+        <default/>
+        <docblock line="11">
+          <description>Lookup value to use when instantiating collection.</description>
+          <long-description>&lt;p&gt;This value
+is used in join with config['constructBy']&lt;/p&gt;</long-description>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="17" package="LudoDB">
+        <name>deleteRecords</name>
+        <full_name>deleteRecords</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="28" package="LudoDB">
+        <name>getConfigParserInstance</name>
+        <full_name>getConfigParserInstance</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="39" package="LudoDB">
+        <name>getValues</name>
+        <full_name>getValues</full_name>
+        <docblock line="33">
+          <description>Return collection values.</description>
+          <long-description>&lt;p&gt;Use $start and $count to specify a limit query.&lt;/p&gt;</long-description>
+          <tag line="33" name="param" description="" type="null" variable="$start">
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="33" name="param" description="" type="null" variable="$count">
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="33" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="39">
+          <name>$start</name>
+          <default>null</default>
+          <type/>
+        </argument>
+        <argument line="39">
+          <name>$count</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="56" package="LudoDB">
+        <name>getValuesUsingModel</name>
+        <full_name>getValuesUsingModel</full_name>
+        <argument line="56">
+          <name>$model</name>
+          <default/>
+          <type>\LudoDBModel</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="97" package="LudoDB">
+        <name>getValuesFromModel</name>
+        <full_name>getValuesFromModel</full_name>
+        <docblock line="92">
+          <description/>
+          <long-description/>
+          <tag line="92" name="param" description="" type="\LudoDBModel" variable="$model">
+            <type by_reference="false">\LudoDBModel</type>
+          </tag>
+          <tag line="92" name="param" description="" type="array" variable="$columns">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="92" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="97">
+          <name>$model</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="97">
+          <name>$columns</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="102" package="LudoDB">
+        <name>getCacheKey</name>
+        <full_name>getCacheKey</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="116" package="LudoDB">
+        <name>getColumnValues</name>
+        <full_name>getColumnValues</full_name>
+        <docblock line="111">
+          <description>Return values of a column as array</description>
+          <long-description/>
+          <tag line="111" name="param" description="" type="String" variable="$column">
+            <type by_reference="false">String</type>
+          </tag>
+          <tag line="111" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="116">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="128" package="LudoDB">
+        <name>mergeInOthers</name>
+        <full_name>mergeInOthers</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="163" package="LudoDB">
+        <name>getCollectionInstance</name>
+        <full_name>getCollectionInstance</full_name>
+        <docblock line="159">
+          <description/>
+          <long-description/>
+          <tag line="159" name="param" description="" type="\" variable="$className"/>
+          <tag line="159" name="return" description="" type="\LudoDBCollection">
+            <type by_reference="false">\LudoDBCollection</type>
+          </tag>
+        </docblock>
+        <argument line="163">
+          <name>$className</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBCollection.php</error>
+      <error line="17" code="50010">No DocBlock was found for method deleteRecords()</error>
+      <error line="28" code="50010">No DocBlock was found for method getConfigParserInstance()</error>
+      <error line="56" code="50010">No DocBlock was found for method getValuesUsingModel()</error>
+      <error line="92" code="50012">No short description for method getValuesFromModel()</error>
+      <error line="102" code="50010">No DocBlock was found for method getCacheKey()</error>
+      <error line="128" code="50010">No DocBlock was found for method mergeInOthers()</error>
+      <error line="159" code="50012">No short description for method getCollectionInstance()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBCollectionConfigParser.php" hash="3f3944d1a409c81cdb451aa7237d5fa8" package="Default">
+    <class final="false" abstract="false" namespace="global" line="9" package="LudoDB">
+      <extends>\LudoDBConfigParser</extends>
+      <name>LudoDBCollectionConfigParser</name>
+      <full_name>\LudoDBCollectionConfigParser</full_name>
+      <docblock line="2">
+        <description>Created by JetBrains PhpStorm.</description>
+        <long-description>&lt;p&gt;User: Alf Magne
+Date: 14.01.13&lt;/p&gt;</long-description>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="11" namespace="global" package="Default">
+        <name>$model</name>
+        <default>null</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="12" namespace="global" package="Default">
+        <name>$tableName</name>
+        <default/>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="14" package="LudoDB">
+        <name>getTableName</name>
+        <full_name>getTableName</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="27" package="LudoDB">
+        <name>getModel</name>
+        <full_name>getModel</full_name>
+        <docblock line="24">
+          <description/>
+          <long-description/>
+          <tag line="24" name="return" description="" type="\LudoDBModel|null">
+            <type by_reference="false">\LudoDBModel</type>
+            <type by_reference="false">null</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="41" package="LudoDB">
+        <name>getModelInstance</name>
+        <full_name>getModelInstance</full_name>
+        <docblock line="38">
+          <description/>
+          <long-description/>
+          <tag line="38" name="return" description="" type="\LudoDBModel">
+            <type by_reference="false">\LudoDBModel</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="49" package="LudoDB">
+        <name>getGroupBy</name>
+        <full_name>getGroupBy</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="53" package="LudoDB">
+        <name>getPK</name>
+        <full_name>getPK</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="57" package="LudoDB">
+        <name>getFK</name>
+        <full_name>getFK</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="60" package="LudoDB">
+        <name>getChildKey</name>
+        <full_name>getChildKey</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="64" package="LudoDB">
+        <name>getMerged</name>
+        <full_name>getMerged</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="68" package="LudoDB">
+        <name>shouldHideForeignKeys</name>
+        <full_name>shouldHideForeignKeys</full_name>
+      </method>
+    </class>
+    <markers>
+      <todo line="30">singleton.</todo>
+    </markers>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBCollectionConfigParser.php</error>
+      <error line="11" code="50018">No DocBlock was found for property $model</error>
+      <error line="12" code="50018">No DocBlock was found for property $tableName</error>
+      <error line="14" code="50010">No DocBlock was found for method getTableName()</error>
+      <error line="24" code="50012">No short description for method getModel()</error>
+      <error line="38" code="50012">No short description for method getModelInstance()</error>
+      <error line="49" code="50010">No DocBlock was found for method getGroupBy()</error>
+      <error line="53" code="50010">No DocBlock was found for method getPK()</error>
+      <error line="57" code="50010">No DocBlock was found for method getFK()</error>
+      <error line="60" code="50010">No DocBlock was found for method getChildKey()</error>
+      <error line="64" code="50010">No DocBlock was found for method getMerged()</error>
+      <error line="68" code="50010">No DocBlock was found for method shouldHideForeignKeys()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBConfigParser.php" hash="9760b3b457dba5a0dcbc15dd61f7b4c0" package="Default">
+    <class final="false" abstract="false" namespace="global" line="9" package="LudoDB">
+      <extends/>
+      <name>LudoDBConfigParser</name>
+      <full_name>\LudoDBConfigParser</full_name>
+      <docblock line="2">
+        <description>parser for LudoDBObject
+User: Alf Magne
+Date: 10.01.13</description>
+        <long-description/>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="11" namespace="global" package="Default">
+        <name>$config</name>
+        <default/>
+      </property>
+      <property final="false" static="true" visibility="private" line="12" namespace="global" package="Default">
+        <name>$columnMappingCache</name>
+        <default>array()</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="13" namespace="global" package="Default">
+        <name>$customConstructorParams</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="14" namespace="global" package="Default">
+        <name>$aliasMapping</name>
+        <default>array()</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="15" namespace="global" package="Default">
+        <name>$obj</name>
+        <default/>
+      </property>
+      <property final="false" static="true" visibility="private" line="36" namespace="global" package="Default">
+        <name>$extensionClasses</name>
+        <default>array()</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="167" namespace="global" package="Default">
+        <name>$externalCache</name>
+        <default>array()</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="238" namespace="global" package="Default">
+        <name>$myColumns</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="384" namespace="global" package="Default">
+        <name>$columnAccessCache</name>
+        <default>array()</default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="17" package="LudoDB">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <argument line="17">
+          <name>$obj</name>
+          <default/>
+          <type>\LudoDBObject</type>
+        </argument>
+        <argument line="17">
+          <name>$config</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="26" package="LudoDB">
+        <name>buildConfig</name>
+        <full_name>buildConfig</full_name>
+        <docblock line="23">
+          <description/>
+          <long-description/>
+          <tag line="23" name="param" description="" type="array" variable="$config">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="26">
+          <name>$config</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="41" package="LudoDB">
+        <name>getExtends</name>
+        <full_name>getExtends</full_name>
+        <docblock line="38">
+          <description/>
+          <long-description/>
+          <tag line="38" name="return" description="" type="\LudoDBObject">
+            <type by_reference="false">\LudoDBObject</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="57" package="LudoDB">
+        <name>getConfigFromFile</name>
+        <full_name>getConfigFromFile</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="68" package="LudoDB">
+        <name>getPathToJSONConfig</name>
+        <full_name>getPathToJSONConfig</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="73" package="LudoDB">
+        <name>getPathToJsonConfigDefaultData</name>
+        <full_name>getPathToJsonConfigDefaultData</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="78" package="LudoDB">
+        <name>getFileLocation</name>
+        <full_name>getFileLocation</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="84" package="LudoDB">
+        <name>mapColumnAliases</name>
+        <full_name>mapColumnAliases</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="95" package="LudoDB">
+        <name>getMergedConfigs</name>
+        <full_name>getMergedConfigs</full_name>
+        <argument line="95">
+          <name>$config1</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="95">
+          <name>$config2</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="106" package="LudoDB">
+        <name>getConfig</name>
+        <full_name>getConfig</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="112" package="LudoDB">
+        <name>getValidConfig</name>
+        <full_name>getValidConfig</full_name>
+        <argument line="112">
+          <name>$config</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="133" package="LudoDB">
+        <name>getTableName</name>
+        <full_name>getTableName</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="138" package="LudoDB">
+        <name>getConstructorParams</name>
+        <full_name>getConstructorParams</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="144" package="LudoDB">
+        <name>externalClassNameFor</name>
+        <full_name>externalClassNameFor</full_name>
+        <argument line="144">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="149" package="LudoDB">
+        <name>getColumnProperty</name>
+        <full_name>getColumnProperty</full_name>
+        <argument line="149">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="149">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="158" package="LudoDB">
+        <name>getExternalClassProperty</name>
+        <full_name>getExternalClassProperty</full_name>
+        <argument line="158">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="158">
+          <name>$property</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="169" package="LudoDB">
+        <name>isExternalColumn</name>
+        <full_name>isExternalColumn</full_name>
+        <argument line="169">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="179" package="LudoDB">
+        <name>getIdField</name>
+        <full_name>getIdField</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="184" package="LudoDB">
+        <name>isIdAutoIncremented</name>
+        <full_name>isIdAutoIncremented</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="189" package="LudoDB">
+        <name>getDbDefinition</name>
+        <full_name>getDbDefinition</full_name>
+        <argument line="189">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="195" package="LudoDB">
+        <name>getSetMethod</name>
+        <full_name>getSetMethod</full_name>
+        <argument line="195">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="200" package="LudoDB">
+        <name>getGetMethod</name>
+        <full_name>getGetMethod</full_name>
+        <argument line="200">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="207" package="LudoDB">
+        <name>foreignKeyFor</name>
+        <full_name>foreignKeyFor</full_name>
+        <argument line="207">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="213" package="LudoDB">
+        <name>getIndexes</name>
+        <full_name>getIndexes</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="218" package="LudoDB">
+        <name>getDefaultData</name>
+        <full_name>getDefaultData</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="233" package="LudoDB">
+        <name>getJoins</name>
+        <full_name>getJoins</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="240" package="LudoDB">
+        <name>getMyColumnsForSQL</name>
+        <full_name>getMyColumnsForSQL</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="256" package="LudoDB">
+        <name>getJoinsForSQL</name>
+        <full_name>getJoinsForSQL</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="268" package="LudoDB">
+        <name>getColumnsFromJoins</name>
+        <full_name>getColumnsFromJoins</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="285" package="LudoDB">
+        <name>getColumns</name>
+        <full_name>getColumns</full_name>
+        <docblock line="282">
+          <description/>
+          <long-description/>
+          <tag line="282" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="290" package="LudoDB">
+        <name>getPublicColumnName</name>
+        <full_name>getPublicColumnName</full_name>
+        <argument line="290">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="296" package="LudoDB">
+        <name>getColumn</name>
+        <full_name>getColumn</full_name>
+        <argument line="296">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="302" package="LudoDB">
+        <name>getInternalColName</name>
+        <full_name>getInternalColName</full_name>
+        <argument line="302">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="307" package="LudoDB">
+        <name>getOrderBy</name>
+        <full_name>getOrderBy</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="312" package="LudoDB">
+        <name>hasColumns</name>
+        <full_name>hasColumns</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="318" package="LudoDB">
+        <name>getTableNamesFromJoins</name>
+        <full_name>getTableNamesFromJoins</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="330" package="LudoDB">
+        <name>getProperty</name>
+        <full_name>getProperty</full_name>
+        <argument line="330">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="335" package="LudoDB">
+        <name>hasColumn</name>
+        <full_name>hasColumn</full_name>
+        <argument line="335">
+          <name>$columnName</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="340" package="LudoDB">
+        <name>getColumnByMethod</name>
+        <full_name>getColumnByMethod</full_name>
+        <argument line="340">
+          <name>$methodName</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="355" package="LudoDB">
+        <name>saveInMappingCache</name>
+        <full_name>saveInMappingCache</full_name>
+        <argument line="355">
+          <name>$methodName</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="355">
+          <name>$col</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="365" package="LudoDB">
+        <name>getFromMappingCache</name>
+        <full_name>getFromMappingCache</full_name>
+        <argument line="365">
+          <name>$methodName</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="374" package="LudoDB">
+        <name>canWriteTo</name>
+        <full_name>canWriteTo</full_name>
+        <argument line="374">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="379" package="LudoDB">
+        <name>canReadFrom</name>
+        <full_name>canReadFrom</full_name>
+        <argument line="379">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="386" package="LudoDB">
+        <name>hasColumnAccess</name>
+        <full_name>hasColumnAccess</full_name>
+        <argument line="386">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="386">
+          <name>$access</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="408" package="LudoDB">
+        <name>isStaticColumn</name>
+        <full_name>isStaticColumn</full_name>
+        <argument line="408">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="413" package="LudoDB">
+        <name>getStaticValue</name>
+        <full_name>getStaticValue</full_name>
+        <argument line="413">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="417" package="LudoDB">
+        <name>getStaticValues</name>
+        <full_name>getStaticValues</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="421" package="LudoDB">
+        <name>canBePopulatedBy</name>
+        <full_name>canBePopulatedBy</full_name>
+        <argument line="421">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="439" package="LudoDB">
+        <name>getTableReferences</name>
+        <full_name>getTableReferences</full_name>
+        <docblock line="431">
+          <description>Returns references to other tables as array,
+example array(
+ array('table' =&gt; 'city', 'column' =&gt; 'zip'),
+ array('table' =&gt; 'country', 'column' =&gt; 'id')
+)</description>
+          <long-description/>
+          <tag line="431" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="454" package="LudoDB">
+        <name>getDefaultValue</name>
+        <full_name>getDefaultValue</full_name>
+        <argument line="454">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="459" package="LudoDB">
+        <name>getDefaultValues</name>
+        <full_name>getDefaultValues</full_name>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBConfigParser.php</error>
+      <error line="11" code="50018">No DocBlock was found for property $config</error>
+      <error line="12" code="50018">No DocBlock was found for property $columnMappingCache</error>
+      <error line="13" code="50018">No DocBlock was found for property $customConstructorParams</error>
+      <error line="14" code="50018">No DocBlock was found for property $aliasMapping</error>
+      <error line="15" code="50018">No DocBlock was found for property $obj</error>
+      <error line="36" code="50018">No DocBlock was found for property $extensionClasses</error>
+      <error line="167" code="50018">No DocBlock was found for property $externalCache</error>
+      <error line="238" code="50018">No DocBlock was found for property $myColumns</error>
+      <error line="384" code="50018">No DocBlock was found for property $columnAccessCache</error>
+      <error line="17" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="23" code="50012">No short description for method buildConfig()</error>
+      <error line="38" code="50012">No short description for method getExtends()</error>
+      <error line="57" code="50010">No DocBlock was found for method getConfigFromFile()</error>
+      <error line="68" code="50010">No DocBlock was found for method getPathToJSONConfig()</error>
+      <error line="73" code="50010">No DocBlock was found for method getPathToJsonConfigDefaultData()</error>
+      <error line="78" code="50010">No DocBlock was found for method getFileLocation()</error>
+      <error line="84" code="50010">No DocBlock was found for method mapColumnAliases()</error>
+      <error line="95" code="50010">No DocBlock was found for method getMergedConfigs()</error>
+      <error line="106" code="50010">No DocBlock was found for method getConfig()</error>
+      <error line="112" code="50010">No DocBlock was found for method getValidConfig()</error>
+      <error line="133" code="50010">No DocBlock was found for method getTableName()</error>
+      <error line="138" code="50010">No DocBlock was found for method getConstructorParams()</error>
+      <error line="144" code="50010">No DocBlock was found for method externalClassNameFor()</error>
+      <error line="149" code="50010">No DocBlock was found for method getColumnProperty()</error>
+      <error line="158" code="50010">No DocBlock was found for method getExternalClassProperty()</error>
+      <error line="169" code="50010">No DocBlock was found for method isExternalColumn()</error>
+      <error line="179" code="50010">No DocBlock was found for method getIdField()</error>
+      <error line="184" code="50010">No DocBlock was found for method isIdAutoIncremented()</error>
+      <error line="189" code="50010">No DocBlock was found for method getDbDefinition()</error>
+      <error line="195" code="50010">No DocBlock was found for method getSetMethod()</error>
+      <error line="200" code="50010">No DocBlock was found for method getGetMethod()</error>
+      <error line="207" code="50010">No DocBlock was found for method foreignKeyFor()</error>
+      <error line="213" code="50010">No DocBlock was found for method getIndexes()</error>
+      <error line="218" code="50010">No DocBlock was found for method getDefaultData()</error>
+      <error line="233" code="50010">No DocBlock was found for method getJoins()</error>
+      <error line="240" code="50010">No DocBlock was found for method getMyColumnsForSQL()</error>
+      <error line="256" code="50010">No DocBlock was found for method getJoinsForSQL()</error>
+      <error line="268" code="50010">No DocBlock was found for method getColumnsFromJoins()</error>
+      <error line="282" code="50012">No short description for method getColumns()</error>
+      <error line="290" code="50010">No DocBlock was found for method getPublicColumnName()</error>
+      <error line="296" code="50010">No DocBlock was found for method getColumn()</error>
+      <error line="302" code="50010">No DocBlock was found for method getInternalColName()</error>
+      <error line="307" code="50010">No DocBlock was found for method getOrderBy()</error>
+      <error line="312" code="50010">No DocBlock was found for method hasColumns()</error>
+      <error line="318" code="50010">No DocBlock was found for method getTableNamesFromJoins()</error>
+      <error line="330" code="50010">No DocBlock was found for method getProperty()</error>
+      <error line="335" code="50010">No DocBlock was found for method hasColumn()</error>
+      <error line="340" code="50010">No DocBlock was found for method getColumnByMethod()</error>
+      <error line="355" code="50010">No DocBlock was found for method saveInMappingCache()</error>
+      <error line="365" code="50010">No DocBlock was found for method getFromMappingCache()</error>
+      <error line="374" code="50010">No DocBlock was found for method canWriteTo()</error>
+      <error line="379" code="50010">No DocBlock was found for method canReadFrom()</error>
+      <error line="386" code="50010">No DocBlock was found for method hasColumnAccess()</error>
+      <error line="408" code="50010">No DocBlock was found for method isStaticColumn()</error>
+      <error line="413" code="50010">No DocBlock was found for method getStaticValue()</error>
+      <error line="417" code="50010">No DocBlock was found for method getStaticValues()</error>
+      <error line="421" code="50010">No DocBlock was found for method canBePopulatedBy()</error>
+      <error line="454" code="50010">No DocBlock was found for method getDefaultValue()</error>
+      <error line="459" code="50010">No DocBlock was found for method getDefaultValues()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBExceptions.php" hash="c6f614d98efffb907e7bea475a716e23" package="Default">
+    <class final="false" abstract="false" namespace="global" line="10" package="LudoDB">
+      <extends>\Exception</extends>
+      <name>LudoDBException</name>
+      <full_name>\LudoDBException</full_name>
+      <docblock line="2">
+        <description>Created by JetBrains PhpStorm.</description>
+        <long-description>&lt;p&gt;User: Alf Magne
+Date: 30.01.13&lt;/p&gt;</long-description>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="11" namespace="global" package="Default">
+        <name>$code</name>
+        <default>400</default>
+      </property>
+    </class>
+    <class final="false" abstract="false" namespace="global" line="20" package="LudoDB">
+      <extends>\LudoDBException</extends>
+      <name>LudoDBClassNotFoundException</name>
+      <full_name>\LudoDBClassNotFoundException</full_name>
+      <docblock line="14">
+        <description>Class not found exception.</description>
+        <long-description>&lt;p&gt;Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
+        <tag line="14" name="package" description="LudoDB"/>
+        <tag line="14" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="22" namespace="global" package="Default">
+        <name>$code</name>
+        <default>404</default>
+      </property>
+    </class>
+    <class final="false" abstract="false" namespace="global" line="31" package="LudoDB">
+      <extends>\LudoDBException</extends>
+      <name>LudoDBObjectNotFoundException</name>
+      <full_name>\LudoDBObjectNotFoundException</full_name>
+      <docblock line="25">
+        <description>Object not found exception.</description>
+        <long-description>&lt;p&gt;Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
+        <tag line="25" name="package" description="LudoDB"/>
+        <tag line="25" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="32" namespace="global" package="Default">
+        <name>$code</name>
+        <default>404</default>
+      </property>
+    </class>
+    <class final="false" abstract="false" namespace="global" line="41" package="LudoDB">
+      <extends>\LudoDBException</extends>
+      <name>LudoDBConnectionException</name>
+      <full_name>\LudoDBConnectionException</full_name>
+      <docblock line="35">
+        <description>DB Connection error exception.</description>
+        <long-description>&lt;p&gt;Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
+        <tag line="35" name="package" description="LudoDB"/>
+        <tag line="35" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+    </class>
+    <class final="false" abstract="false" namespace="global" line="51" package="LudoDB">
+      <extends>\LudoDBException</extends>
+      <name>LudoDBInvalidArgumentsException</name>
+      <full_name>\LudoDBInvalidArgumentsException</full_name>
+      <docblock line="45">
+        <description>Invalid constructor arguments exception.</description>
+        <long-description>&lt;p&gt;Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
+        <tag line="45" name="package" description="LudoDB"/>
+        <tag line="45" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+    </class>
+    <class final="false" abstract="false" namespace="global" line="60" package="LudoDB">
+      <extends>\LudoDBException</extends>
+      <name>LudoDBUnauthorizedException</name>
+      <full_name>\LudoDBUnauthorizedException</full_name>
+      <docblock line="54">
+        <description>Unauthorized exception
+Thrown by LudoDBRequestHandler</description>
+        <long-description></long-description>
+        <tag line="54" name="package" description="LudoDB"/>
+        <tag line="54" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="61" namespace="global" package="Default">
+        <name>$code</name>
+        <default>401</default>
+      </property>
+    </class>
+    <class final="false" abstract="false" namespace="global" line="71" package="LudoDB">
+      <extends>\LudoDBException</extends>
+      <name>LudoDBServiceNotImplementedException</name>
+      <full_name>\LudoDBServiceNotImplementedException</full_name>
+      <docblock line="64">
+        <description>Service not implemented exception.</description>
+        <long-description>&lt;p&gt;Executed when a service is returned from getValidServices, but
+the service method is not implemented.
+Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
+        <tag line="64" name="package" description="LudoDB"/>
+        <tag line="64" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="72" namespace="global" package="Default">
+        <name>$code</name>
+        <default>404</default>
+      </property>
+    </class>
+    <class final="false" abstract="false" namespace="global" line="82" package="LudoDB">
+      <extends>\Exception</extends>
+      <name>LudoDBInvalidServiceException</name>
+      <full_name>\LudoDBInvalidServiceException</full_name>
+      <docblock line="76">
+        <description>Invalid service exception.</description>
+        <long-description>&lt;p&gt;Executed on call for service name not returned by getValidServices.
+Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
+        <tag line="76" name="package" description="LudoDB"/>
+        <tag line="76" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="83" namespace="global" package="Default">
+        <name>$code</name>
+        <default>405</default>
+      </property>
+    </class>
+    <class final="false" abstract="false" namespace="global" line="86" package="Default">
+      <extends>\LudoDBException</extends>
+      <name>LudoDBInvalidConfigException</name>
+      <full_name>\LudoDBInvalidConfigException</full_name>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBExceptions.php</error>
+      <error line="11" code="50018">No DocBlock was found for property $code</error>
+      <error line="22" code="50018">No DocBlock was found for property $code</error>
+      <error line="32" code="50018">No DocBlock was found for property $code</error>
+      <error line="61" code="50018">No DocBlock was found for property $code</error>
+      <error line="72" code="50018">No DocBlock was found for property $code</error>
+      <error line="83" code="50018">No DocBlock was found for property $code</error>
+      <error line="86" code="50000">No DocBlock was found for \LudoDBInvalidConfigException</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBInterfaces.php" hash="1e140bf9d55c8fc8522928bae6ce250d" package="Default">
+    <interface namespace="global" line="9" package="LudoDB">
+      <name>LudoDBAdapter</name>
+      <full_name>\LudoDBAdapter</full_name>
+      <docblock line="2">
+        <description>LudoDB interfaces
+User: Alf Magne
+Date: 31.01.13</description>
+        <long-description/>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="12" package="LudoDB">
+        <name>connect</name>
+        <full_name>connect</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="14" package="LudoDB">
+        <name>query</name>
+        <full_name>query</full_name>
+        <argument line="14">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="14">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="16" package="LudoDB">
+        <name>one</name>
+        <full_name>one</full_name>
+        <argument line="16">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="16">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="18" package="LudoDB">
+        <name>countRows</name>
+        <full_name>countRows</full_name>
+        <argument line="18">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="18">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="20" package="LudoDB">
+        <name>getInsertId</name>
+        <full_name>getInsertId</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="22" package="LudoDB">
+        <name>nextRow</name>
+        <full_name>nextRow</full_name>
+        <argument line="22">
+          <name>$result</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="24" package="LudoDB">
+        <name>getValue</name>
+        <full_name>getValue</full_name>
+        <argument line="24">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="24">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="26" package="LudoDB">
+        <name>escapeString</name>
+        <full_name>escapeString</full_name>
+        <argument line="26">
+          <name>$string</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </interface>
+    <interface namespace="global" line="39" package="LudoDB">
+      <name>LudoDBService</name>
+      <full_name>\LudoDBService</full_name>
+      <docblock line="29">
+        <description>Classes for request handlers has to implement the LudoDBService interface</description>
+        <long-description>&lt;p&gt;The class also needs to implement a static function called getValidServices
+which returns an array of valid services, example array('read','save','delete');
+Methods with these names also has to be implemented. "read", "save" and "delete"
+are already implemented for LudoDBModel.&lt;/p&gt;</long-description>
+        <tag line="29" name="package" description="LudoDB"/>
+        <tag line="29" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="47" package="LudoDB">
+        <name>validateArguments</name>
+        <full_name>validateArguments</full_name>
+        <docblock line="41">
+          <description>Returns true is passed arguments are acceptable for the constructor.</description>
+          <long-description/>
+          <tag line="41" name="param" description="" type="String" variable="$service">
+            <type by_reference="false">String</type>
+          </tag>
+          <tag line="41" name="param" description="" type="Array" variable="$arguments">
+            <type by_reference="false">Array</type>
+          </tag>
+          <tag line="41" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="47">
+          <name>$service</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="47">
+          <name>$arguments</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="49" package="LudoDB">
+        <name>validateServiceData</name>
+        <full_name>validateServiceData</full_name>
+        <argument line="49">
+          <name>$service</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="49">
+          <name>$data</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="59" package="LudoDB">
+        <name>shouldCache</name>
+        <full_name>shouldCache</full_name>
+        <docblock line="51">
+          <description>Return true to enable caching in LudoDBRequest handler for the read service.</description>
+          <long-description>&lt;p&gt;When true a serialized version of LudoDBModel::read will
+be stored in a caching table. When caching is enabled,
+you should also implement clearCache() to clear cache in
+case Data has been changed.&lt;/p&gt;</long-description>
+          <tag line="51" name="return" description="" type="boolean">
+            <type by_reference="false">boolean</type>
+          </tag>
+        </docblock>
+        <argument line="59">
+          <name>$service</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="65" package="LudoDB">
+        <name>getValidServices</name>
+        <full_name>getValidServices</full_name>
+        <docblock line="61">
+          <description>Return array with names of valid services</description>
+          <long-description/>
+          <tag line="61" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="72" package="LudoDB">
+        <name>getOnSuccessMessageFor</name>
+        <full_name>getOnSuccessMessageFor</full_name>
+        <docblock line="67">
+          <description>Return on success message for given service</description>
+          <long-description/>
+          <tag line="67" name="param" description="" type="String" variable="$service">
+            <type by_reference="false">String</type>
+          </tag>
+          <tag line="67" name="return" description="" type="String">
+            <type by_reference="false">String</type>
+          </tag>
+        </docblock>
+        <argument line="72">
+          <name>$service</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </interface>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBInterfaces.php</error>
+      <error line="12" code="50010">No DocBlock was found for method connect()</error>
+      <error line="14" code="50010">No DocBlock was found for method query()</error>
+      <error line="16" code="50010">No DocBlock was found for method one()</error>
+      <error line="18" code="50010">No DocBlock was found for method countRows()</error>
+      <error line="20" code="50010">No DocBlock was found for method getInsertId()</error>
+      <error line="22" code="50010">No DocBlock was found for method nextRow()</error>
+      <error line="24" code="50010">No DocBlock was found for method getValue()</error>
+      <error line="26" code="50010">No DocBlock was found for method escapeString()</error>
+      <error line="49" code="50010">No DocBlock was found for method validateServiceData()</error>
+      <error line="51" code="50015">Argument $service is missing from the Docblock of shouldCache()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBIterator.php" hash="71ff4dfd5de8f5456ddac77497e124eb" package="Default">
+    <class final="false" abstract="false" namespace="global" line="9" package="LudoDB">
+      <extends>\LudoDBObject</extends>
+      <implements>\Iterator</implements>
+      <name>LudoDBIterator</name>
+      <full_name>\LudoDBIterator</full_name>
+      <docblock line="2">
+        <description>Created by JetBrains PhpStorm.</description>
+        <long-description>&lt;p&gt;User: Alf Magne Kalleland
+Date: 21.12.12&lt;/p&gt;</long-description>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="11" namespace="global" package="Default">
+        <name>$loaded</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="12" namespace="global" package="Default">
+        <name>$dbResource</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="13" namespace="global" package="Default">
+        <name>$isValid</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="14" namespace="global" package="Default">
+        <name>$position</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="protected" line="15" namespace="global" package="Default">
+        <name>$currentRow</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="16" namespace="global" package="Default">
+        <name>$rows</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="69" namespace="global" package="Default">
+        <name>$valueCache</name>
+        <default/>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="18" package="LudoDB">
+        <name>rewind</name>
+        <full_name>rewind</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="32" package="LudoDB">
+        <name>current</name>
+        <full_name>current</full_name>
+        <docblock line="27">
+          <description>Return current value when iterating collection</description>
+          <long-description/>
+          <tag line="27" name="method" description="current" type="\" method_name=""/>
+          <tag line="27" name="return" description="" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="46" package="LudoDB">
+        <name>key</name>
+        <full_name>key</full_name>
+        <docblock line="36">
+          <description>Return key used for iterator.</description>
+          <long-description>&lt;p&gt;default is numeric.&lt;/p&gt;</long-description>
+          <tag line="36" name="method" description="key" type="\" method_name=""/>
+          <tag line="36" name="return" description="" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="36" name="example" description="function key(){&#13;&#10;return $this-&gt;currentRow['key']&#13;&#10;}&#13;&#10;to return key"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="50" package="LudoDB">
+        <name>next</name>
+        <full_name>next</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="56" package="LudoDB">
+        <name>valid</name>
+        <full_name>valid</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="63" package="LudoDB">
+        <name>load</name>
+        <full_name>load</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="75" package="LudoDB">
+        <name>getValues</name>
+        <full_name>getValues</full_name>
+        <docblock line="70">
+          <description>Return collection data</description>
+          <long-description/>
+          <tag line="70" name="method" description="getValues" type="\" method_name=""/>
+          <tag line="70" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="97" package="LudoDB">
+        <name>storeRow</name>
+        <full_name>storeRow</full_name>
+        <argument line="97">
+          <name>$row</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="101" package="LudoDB">
+        <name>getRowsAssoc</name>
+        <full_name>getRowsAssoc</full_name>
+        <argument line="101">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="116" package="LudoDB">
+        <name>getRows</name>
+        <full_name>getRows</full_name>
+        <docblock line="112">
+          <description>Returns reference to all tree nodes as numeric array</description>
+          <long-description/>
+          <tag line="112" name="return" description="" type="Array">
+            <type by_reference="false">Array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="120" package="LudoDB">
+        <name>clearStoredRows</name>
+        <full_name>clearStoredRows</full_name>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBIterator.php</error>
+      <error line="11" code="50018">No DocBlock was found for property $loaded</error>
+      <error line="12" code="50018">No DocBlock was found for property $dbResource</error>
+      <error line="13" code="50018">No DocBlock was found for property $isValid</error>
+      <error line="14" code="50018">No DocBlock was found for property $position</error>
+      <error line="15" code="50018">No DocBlock was found for property $currentRow</error>
+      <error line="16" code="50018">No DocBlock was found for property $rows</error>
+      <error line="69" code="50018">No DocBlock was found for property $valueCache</error>
+      <error line="18" code="50010">No DocBlock was found for method rewind()</error>
+      <error line="50" code="50010">No DocBlock was found for method next()</error>
+      <error line="56" code="50010">No DocBlock was found for method valid()</error>
+      <error line="63" code="50010">No DocBlock was found for method load()</error>
+      <error line="97" code="50010">No DocBlock was found for method storeRow()</error>
+      <error line="101" code="50010">No DocBlock was found for method getRowsAssoc()</error>
+      <error line="120" code="50010">No DocBlock was found for method clearStoredRows()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBModel.php" hash="d342fcb71d98761cf9396bfd64658787" package="Default">
+    <class final="false" abstract="true" namespace="global" line="7" package="LudoDB">
+      <extends>\LudoDBObject</extends>
+      <name>LudoDBModel</name>
+      <full_name>\LudoDBModel</full_name>
+      <docblock line="2">
+        <description>Representation of a ludoDB table</description>
+        <long-description/>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="9" namespace="global" package="Default">
+        <name>$data</name>
+        <default>array()</default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="10" namespace="global" package="Default">
+        <name>$updates</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="11" namespace="global" package="Default">
+        <name>$externalClasses</name>
+        <default>array()</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="12" namespace="global" package="Default">
+        <name>$commitDisabled</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="13" namespace="global" package="Default">
+        <name>$populated</name>
+        <default>false</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="243" namespace="global" package="Default">
+        <name>$riskyQuery</name>
+        <default/>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="15" package="LudoDB">
+        <name>populate</name>
+        <full_name>populate</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="26" package="LudoDB">
+        <name>getValidArguments</name>
+        <full_name>getValidArguments</full_name>
+        <argument line="26">
+          <name>$params</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="35" package="LudoDB">
+        <name>getValidArgument</name>
+        <full_name>getValidArgument</full_name>
+        <argument line="35">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="35">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="40" package="LudoDB">
+        <name>populateWith</name>
+        <full_name>populateWith</full_name>
+        <argument line="40">
+          <name>$data</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="47" package="LudoDB">
+        <name>getValue</name>
+        <full_name>getValue</full_name>
+        <argument line="47">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="62" package="LudoDB">
+        <name>autoPopulate</name>
+        <full_name>autoPopulate</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="69" package="LudoDB">
+        <name>getExternalValue</name>
+        <full_name>getExternalValue</full_name>
+        <argument line="69">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="79" package="LudoDB">
+        <name>getExternalClassFor</name>
+        <full_name>getExternalClassFor</full_name>
+        <docblock line="75">
+          <description/>
+          <long-description/>
+          <tag line="75" name="param" description="" type="String" variable="$column">
+            <type by_reference="false">String</type>
+          </tag>
+          <tag line="75" name="return" description="table" type="\LudoDBCollection">
+            <type by_reference="false">\LudoDBCollection</type>
+          </tag>
+        </docblock>
+        <argument line="79">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="95" package="LudoDB">
+        <name>setValue</name>
+        <full_name>setValue</full_name>
+        <argument line="95">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="95">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="107" package="LudoDB">
+        <name>setExternalValue</name>
+        <full_name>setExternalValue</full_name>
+        <argument line="107">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="107">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="115" package="LudoDB">
+        <name>disableCommit</name>
+        <full_name>disableCommit</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="120" package="LudoDB">
+        <name>enableCommit</name>
+        <full_name>enableCommit</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="125" package="LudoDB">
+        <name>commit</name>
+        <full_name>commit</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="154" package="LudoDB">
+        <name>commitExternal</name>
+        <full_name>commitExternal</full_name>
+        <docblock line="151">
+          <description/>
+          <long-description/>
+          <tag line="151" name="param" description="" type="\LudoDBObject" variable="$class">
+            <type by_reference="false">\LudoDBObject</type>
+          </tag>
+        </docblock>
+        <argument line="154">
+          <name>$class</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="159" package="LudoDB">
+        <name>update</name>
+        <full_name>update</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="168" package="LudoDB">
+        <name>getUncommitted</name>
+        <full_name>getUncommitted</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="173" package="LudoDB">
+        <name>insert</name>
+        <full_name>insert</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="186" package="LudoDB">
+        <name>beforeUpdate</name>
+        <full_name>beforeUpdate</full_name>
+        <docblock line="182">
+          <description>Method executed before record is updated</description>
+          <long-description/>
+          <tag line="182" name="method" description="beforeUpdate" type="\" method_name=""/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="194" package="LudoDB">
+        <name>beforeInsert</name>
+        <full_name>beforeInsert</full_name>
+        <docblock line="190">
+          <description>Method executed before new record is saved in db</description>
+          <long-description/>
+          <tag line="190" name="method" description="beforeInsert" type="\" method_name=""/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="202" package="LudoDB">
+        <name>rollback</name>
+        <full_name>rollback</full_name>
+        <docblock line="198">
+          <description>Rollback updates</description>
+          <long-description/>
+          <tag line="198" name="method" description="rollback" type="\" method_name=""/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="207" package="LudoDB">
+        <name>setId</name>
+        <full_name>setId</full_name>
+        <argument line="207">
+          <name>$id</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="216" package="LudoDB">
+        <name>getId</name>
+        <full_name>getId</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="227" package="LudoDB">
+        <name>createTable</name>
+        <full_name>createTable</full_name>
+        <docblock line="223">
+          <description>Create DB table</description>
+          <long-description/>
+          <tag line="223" name="method" description="createTable" type="\" method_name=""/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="238" package="LudoDB">
+        <name>exists</name>
+        <full_name>exists</full_name>
+        <docblock line="234">
+          <description>Returns true if database table exists.</description>
+          <long-description/>
+          <tag line="234" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="249" package="LudoDB">
+        <name>drop</name>
+        <full_name>drop</full_name>
+        <docblock line="245">
+          <description>Drop database table</description>
+          <long-description/>
+          <tag line="245" name="method" description="drop" type="\" method_name=""/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="257" package="LudoDB">
+        <name>deleteTableData</name>
+        <full_name>deleteTableData</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="263" package="LudoDB">
+        <name>beforeDelete</name>
+        <full_name>beforeDelete</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="273" package="LudoDB">
+        <name>yesImSure</name>
+        <full_name>yesImSure</full_name>
+        <docblock line="267">
+          <description>Execute risky query,</description>
+          <long-description/>
+          <tag line="267" name="example" description="$p = new Person();&#13;&#10;$p-&gt;drop()-&gt;yesImSure();"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="286" package="LudoDB">
+        <name>createIndexes</name>
+        <full_name>createIndexes</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="295" package="LudoDB">
+        <name>getIndexName</name>
+        <full_name>getIndexName</full_name>
+        <argument line="295">
+          <name>$field</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="300" package="LudoDB">
+        <name>insertDefaultData</name>
+        <full_name>insertDefaultData</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="317" package="LudoDB">
+        <name>getNewInstance</name>
+        <full_name>getNewInstance</full_name>
+        <docblock line="313">
+          <description/>
+          <long-description/>
+          <tag line="313" name="method" description="getClassName" type="\" method_name=""/>
+          <tag line="313" name="return" description="class" type="\LudoDBModel">
+            <type by_reference="false">\LudoDBModel</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="328" package="LudoDB">
+        <name>getSomeValuesFiltered</name>
+        <full_name>getSomeValuesFiltered</full_name>
+        <docblock line="323">
+          <description>Return key-pair values with null values removed.</description>
+          <long-description/>
+          <tag line="323" name="param" description="" type="array" variable="$keys">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="323" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="328">
+          <name>$keys</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="338" package="LudoDB">
+        <name>getSomeValues</name>
+        <full_name>getSomeValues</full_name>
+        <docblock line="333">
+          <description>Return model values.</description>
+          <long-description/>
+          <tag line="333" name="param" description="" type="array" variable="$keys">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="333" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="338">
+          <name>$keys</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="343" package="LudoDB">
+        <name>some</name>
+        <full_name>some</full_name>
+        <argument line="343">
+          <name>$keys</name>
+          <default/>
+          <type>array</type>
+        </argument>
+        <argument line="343">
+          <name>$filtered</name>
+          <default>false</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="357" package="LudoDB">
+        <name>clearValues</name>
+        <full_name>clearValues</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="363" package="LudoDB">
+        <name>getValues</name>
+        <full_name>getValues</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="377" package="LudoDB">
+        <name>getJoinColumns</name>
+        <full_name>getJoinColumns</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="390" package="LudoDB">
+        <name>isValid</name>
+        <full_name>isValid</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="395" package="LudoDB">
+        <name>__call</name>
+        <full_name>__call</full_name>
+        <argument line="395">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="395">
+          <name>$arguments</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="412" package="LudoDB">
+        <name>setValues</name>
+        <full_name>setValues</full_name>
+        <argument line="412">
+          <name>$data</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="425" package="LudoDB">
+        <name>save</name>
+        <full_name>save</full_name>
+        <argument line="425">
+          <name>$data</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="440" package="LudoDB">
+        <name>delete</name>
+        <full_name>delete</full_name>
+        <docblock line="437">
+          <description>Delete record</description>
+          <long-description/>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBModel.php</error>
+      <error line="9" code="50018">No DocBlock was found for property $data</error>
+      <error line="10" code="50018">No DocBlock was found for property $updates</error>
+      <error line="11" code="50018">No DocBlock was found for property $externalClasses</error>
+      <error line="12" code="50018">No DocBlock was found for property $commitDisabled</error>
+      <error line="13" code="50018">No DocBlock was found for property $populated</error>
+      <error line="243" code="50018">No DocBlock was found for property $riskyQuery</error>
+      <error line="15" code="50010">No DocBlock was found for method populate()</error>
+      <error line="26" code="50010">No DocBlock was found for method getValidArguments()</error>
+      <error line="35" code="50010">No DocBlock was found for method getValidArgument()</error>
+      <error line="40" code="50010">No DocBlock was found for method populateWith()</error>
+      <error line="47" code="50010">No DocBlock was found for method getValue()</error>
+      <error line="62" code="50010">No DocBlock was found for method autoPopulate()</error>
+      <error line="69" code="50010">No DocBlock was found for method getExternalValue()</error>
+      <error line="75" code="50012">No short description for method getExternalClassFor()</error>
+      <error line="95" code="50010">No DocBlock was found for method setValue()</error>
+      <error line="107" code="50010">No DocBlock was found for method setExternalValue()</error>
+      <error line="115" code="50010">No DocBlock was found for method disableCommit()</error>
+      <error line="120" code="50010">No DocBlock was found for method enableCommit()</error>
+      <error line="125" code="50010">No DocBlock was found for method commit()</error>
+      <error line="151" code="50012">No short description for method commitExternal()</error>
+      <error line="159" code="50010">No DocBlock was found for method update()</error>
+      <error line="168" code="50010">No DocBlock was found for method getUncommitted()</error>
+      <error line="173" code="50010">No DocBlock was found for method insert()</error>
+      <error line="207" code="50010">No DocBlock was found for method setId()</error>
+      <error line="216" code="50010">No DocBlock was found for method getId()</error>
+      <error line="257" code="50010">No DocBlock was found for method deleteTableData()</error>
+      <error line="263" code="50010">No DocBlock was found for method beforeDelete()</error>
+      <error line="286" code="50010">No DocBlock was found for method createIndexes()</error>
+      <error line="295" code="50010">No DocBlock was found for method getIndexName()</error>
+      <error line="300" code="50010">No DocBlock was found for method insertDefaultData()</error>
+      <error line="313" code="50012">No short description for method getNewInstance()</error>
+      <error line="343" code="50010">No DocBlock was found for method some()</error>
+      <error line="357" code="50010">No DocBlock was found for method clearValues()</error>
+      <error line="363" code="50010">No DocBlock was found for method getValues()</error>
+      <error line="377" code="50010">No DocBlock was found for method getJoinColumns()</error>
+      <error line="390" code="50010">No DocBlock was found for method isValid()</error>
+      <error line="395" code="50010">No DocBlock was found for method __call()</error>
+      <error line="412" code="50010">No DocBlock was found for method setValues()</error>
+      <error line="425" code="50010">No DocBlock was found for method save()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBMySqlI.php" hash="bf5fc56df068ef0903d00ff168d1d6f2" package="Default">
+    <class final="false" abstract="false" namespace="global" line="10" package="LudoDB">
+      <extends>\LudoDB</extends>
+      <implements>\LudoDBAdapter</implements>
+      <name>LudoDBMySqlI</name>
+      <full_name>\LudoDBMySqlI</full_name>
+      <docblock line="2">
+        <description>MysqlI adapter.</description>
+        <long-description>&lt;p&gt;PDO is the preferred adapter and should be used
+when supported by the server.
+User: Alf Magne
+Date: 01.02.13&lt;/p&gt;</long-description>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="true" visibility="protected" line="15" namespace="global" package="Default">
+        <name>$conn</name>
+        <default/>
+        <docblock line="12">
+          <description/>
+          <long-description/>
+          <tag line="12" name="var" description="" type="\mysqli">
+            <type by_reference="false">\mysqli</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="17" package="LudoDB">
+        <name>connect</name>
+        <full_name>connect</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="36" package="LudoDB">
+        <name>query</name>
+        <full_name>query</full_name>
+        <docblock line="30">
+          <description/>
+          <long-description/>
+          <tag line="30" name="param" description="" type="\" variable="$sql"/>
+          <tag line="30" name="param" description="" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="30" name="return" description="" type="bool|\mysqli_result">
+            <type by_reference="false">bool</type>
+            <type by_reference="false">\mysqli_result</type>
+          </tag>
+          <tag line="30" name="throws" description="" type="\Exception">
+            <type by_reference="false">\Exception</type>
+          </tag>
+        </docblock>
+        <argument line="36">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="36">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="56" package="LudoDB">
+        <name>one</name>
+        <full_name>one</full_name>
+        <docblock line="51">
+          <description/>
+          <long-description/>
+          <tag line="51" name="param" description="" type="\" variable="$sql"/>
+          <tag line="51" name="param" description="" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="51" name="return" description="" type="array|null">
+            <type by_reference="false">array</type>
+            <type by_reference="false">null</type>
+          </tag>
+        </docblock>
+        <argument line="56">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="56">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="71" package="LudoDB">
+        <name>countRows</name>
+        <full_name>countRows</full_name>
+        <docblock line="66">
+          <description/>
+          <long-description/>
+          <tag line="66" name="param" description="" type="\" variable="$sql"/>
+          <tag line="66" name="param" description="" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="66" name="return" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="71">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="71">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="82" package="LudoDB">
+        <name>getInsertId</name>
+        <full_name>getInsertId</full_name>
+        <docblock line="77">
+          <description>Get last insert id</description>
+          <long-description/>
+          <tag line="77" name="method" description="getInsertId" type="\" method_name=""/>
+          <tag line="77" name="return" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="91" package="LudoDB">
+        <name>nextRow</name>
+        <full_name>nextRow</full_name>
+        <docblock line="87">
+          <description/>
+          <long-description/>
+          <tag line="87" name="param" description="" type="\mysqli_result|resource|\PDOStatement" variable="$result">
+            <type by_reference="false">\mysqli_result</type>
+            <type by_reference="false">resource</type>
+            <type by_reference="false">\PDOStatement</type>
+          </tag>
+          <tag line="87" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="91">
+          <name>$result</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="101" package="LudoDB">
+        <name>getValue</name>
+        <full_name>getValue</full_name>
+        <docblock line="96">
+          <description/>
+          <long-description/>
+          <tag line="96" name="param" description="" type="\" variable="$sql"/>
+          <tag line="96" name="param" description="" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="96" name="return" description="" type="null">
+            <type by_reference="false">null</type>
+          </tag>
+        </docblock>
+        <argument line="101">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="101">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="108" package="LudoDB">
+        <name>escapeString</name>
+        <full_name>escapeString</full_name>
+        <argument line="108">
+          <name>$string</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBMySqlI.php</error>
+      <critical line="12" code="50019">No short description for property $conn</critical>
+      <error line="17" code="50010">No DocBlock was found for method connect()</error>
+      <error line="30" code="50012">No short description for method query()</error>
+      <error line="51" code="50012">No short description for method one()</error>
+      <error line="66" code="50012">No short description for method countRows()</error>
+      <error line="87" code="50012">No short description for method nextRow()</error>
+      <error line="96" code="50012">No short description for method getValue()</error>
+      <error line="108" code="50010">No DocBlock was found for method escapeString()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBMysql.php" hash="897d6853da5d7f3ba64dcca5bf99582a" package="Default">
+    <class final="false" abstract="false" namespace="global" line="10" package="LudoDB">
+      <extends>\LudoDB</extends>
+      <implements>\LudoDBAdapter</implements>
+      <name>LudoDBMysql</name>
+      <full_name>\LudoDBMysql</full_name>
+      <docblock line="2">
+        <description>Mysql adapter.</description>
+        <long-description>&lt;p&gt;Should only be used when neither
+PDO or MySqlI is supported on the server.
+User: Alf Magne
+Date: 01.02.13&lt;/p&gt;</long-description>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="12" package="LudoDB">
+        <name>connect</name>
+        <full_name>connect</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="22" package="LudoDB">
+        <name>escapeString</name>
+        <full_name>escapeString</full_name>
+        <argument line="22">
+          <name>$string</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="33" package="LudoDB">
+        <name>query</name>
+        <full_name>query</full_name>
+        <docblock line="27">
+          <description/>
+          <long-description/>
+          <tag line="27" name="param" description="" type="\" variable="$sql"/>
+          <tag line="27" name="param" description="" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="27" name="return" description="" type="bool|\mysqli_result|resource|\PDOStatement">
+            <type by_reference="false">bool</type>
+            <type by_reference="false">\mysqli_result</type>
+            <type by_reference="false">resource</type>
+            <type by_reference="false">\PDOStatement</type>
+          </tag>
+          <tag line="27" name="throws" description="" type="\Exception">
+            <type by_reference="false">\Exception</type>
+          </tag>
+        </docblock>
+        <argument line="33">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="33">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="46" package="LudoDB">
+        <name>one</name>
+        <full_name>one</full_name>
+        <argument line="46">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="46">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="55" package="LudoDB">
+        <name>countRows</name>
+        <full_name>countRows</full_name>
+        <argument line="55">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="55">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="66" package="LudoDB">
+        <name>getInsertId</name>
+        <full_name>getInsertId</full_name>
+        <docblock line="61">
+          <description>Get last insert id</description>
+          <long-description/>
+          <tag line="61" name="method" description="getInsertId" type="\" method_name=""/>
+          <tag line="61" name="return" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="75" package="LudoDB">
+        <name>nextRow</name>
+        <full_name>nextRow</full_name>
+        <docblock line="71">
+          <description/>
+          <long-description/>
+          <tag line="71" name="param" description="" type="\mysqli_result|resource|\PDOStatement" variable="$result">
+            <type by_reference="false">\mysqli_result</type>
+            <type by_reference="false">resource</type>
+            <type by_reference="false">\PDOStatement</type>
+          </tag>
+          <tag line="71" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="75">
+          <name>$result</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="85" package="LudoDB">
+        <name>getValue</name>
+        <full_name>getValue</full_name>
+        <docblock line="80">
+          <description/>
+          <long-description/>
+          <tag line="80" name="param" description="" type="\" variable="$sql"/>
+          <tag line="80" name="param" description="" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="80" name="return" description="" type="null|array">
+            <type by_reference="false">null</type>
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="85">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="85">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBMysql.php</error>
+      <error line="12" code="50010">No DocBlock was found for method connect()</error>
+      <error line="22" code="50010">No DocBlock was found for method escapeString()</error>
+      <error line="27" code="50012">No short description for method query()</error>
+      <error line="46" code="50010">No DocBlock was found for method one()</error>
+      <error line="55" code="50010">No DocBlock was found for method countRows()</error>
+      <error line="71" code="50012">No short description for method nextRow()</error>
+      <error line="80" code="50012">No short description for method getValue()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBObject.php" hash="a31bff6612a7bf7a9718118c77c0a796" package="Default">
+    <class final="false" abstract="true" namespace="global" line="9" package="LudoDB">
+      <extends/>
+      <name>LudoDBObject</name>
+      <full_name>\LudoDBObject</full_name>
+      <docblock line="2">
+        <description>Base class for LudoDB models and collections.</description>
+        <long-description>&lt;p&gt;User: Alf Magne Kalleland
+Date: 20.12.12&lt;/p&gt;</long-description>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="14" namespace="global" package="Default">
+        <name>$db</name>
+        <default/>
+        <docblock line="11">
+          <description/>
+          <long-description/>
+          <tag line="11" name="var" description="" type="\LudoDB">
+            <type by_reference="false">\LudoDB</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="15" namespace="global" package="Default">
+        <name>$arguments</name>
+        <default/>
+      </property>
+      <property final="false" static="true" visibility="protected" line="16" namespace="global" package="Default">
+        <name>$configParsers</name>
+        <default>array()</default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="35" namespace="global" package="Default">
+        <name>$JSONConfig</name>
+        <default>false</default>
+        <docblock line="31">
+          <description>True when config is in JSONConfig/&lt;class name&gt;.json file</description>
+          <long-description/>
+          <tag line="31" name="var" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="37" namespace="global" package="Default">
+        <name>$sql_handler</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="protected" line="38" namespace="global" package="Default">
+        <name>$config</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="protected" line="43" namespace="global" package="Default">
+        <name>$parser</name>
+        <default/>
+        <docblock line="40">
+          <description/>
+          <long-description/>
+          <tag line="40" name="var" description="" type="\LudoDBCollectionConfigParser|\LudoDBConfigParser">
+            <type by_reference="false">\LudoDBCollectionConfigParser</type>
+            <type by_reference="false">\LudoDBConfigParser</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="113" namespace="global" package="Default">
+        <name>$configParserKey</name>
+        <default/>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="22" package="LudoDB">
+        <name>getValidServices</name>
+        <full_name>getValidServices</full_name>
+        <docblock line="18">
+          <description>Valid public services offered by this class, example "read", "delete" and "save"</description>
+          <long-description/>
+          <tag line="18" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="27" package="LudoDB">
+        <name>getOnSuccessMessageFor</name>
+        <full_name>getOnSuccessMessageFor</full_name>
+        <argument line="27">
+          <name>$service</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="45" package="LudoDB">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="55" package="LudoDB">
+        <name>sqlHandler</name>
+        <full_name>sqlHandler</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="63" package="LudoDB">
+        <name>escapeArguments</name>
+        <full_name>escapeArguments</full_name>
+        <argument line="63">
+          <name>$values</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="72" package="LudoDB">
+        <name>onConstruct</name>
+        <full_name>onConstruct</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="78" package="LudoDB">
+        <name>hasConfigInExternalFile</name>
+        <full_name>hasConfigInExternalFile</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="83" package="LudoDB">
+        <name>getConstructorValues</name>
+        <full_name>getConstructorValues</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="88" package="LudoDB">
+        <name>commit</name>
+        <full_name>commit</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="96" package="LudoDB">
+        <name>configParser</name>
+        <full_name>configParser</full_name>
+        <docblock line="93">
+          <description/>
+          <long-description/>
+          <tag line="93" name="return" description="" type="\LudoDBConfigParser|\LudoDBCollectionConfigParser">
+            <type by_reference="false">\LudoDBConfigParser</type>
+            <type by_reference="false">\LudoDBCollectionConfigParser</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="108" package="LudoDB">
+        <name>getConfigParserInstance</name>
+        <full_name>getConfigParserInstance</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="115" package="LudoDB">
+        <name>getConfigParserKey</name>
+        <full_name>getConfigParserKey</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="123" package="LudoDB">
+        <name>clearParsers</name>
+        <full_name>clearParsers</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="128" package="LudoDB">
+        <name>getUncommitted</name>
+        <full_name>getUncommitted</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="133" package="LudoDB">
+        <name>getId</name>
+        <full_name>getId</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="138" package="LudoDB">
+        <name>__toString</name>
+        <full_name>__toString</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="146" package="LudoDB">
+        <name>asJSON</name>
+        <full_name>asJSON</full_name>
+        <docblock line="143">
+          <description/>
+          <long-description/>
+          <tag line="143" name="return" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="151" package="LudoDB">
+        <name>shouldCache</name>
+        <full_name>shouldCache</full_name>
+        <argument line="151">
+          <name>$service</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="true" static="false" visibility="public" namespace="global" line="156" package="LudoDB">
+        <name>getValues</name>
+        <full_name>getValues</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="158" package="LudoDB">
+        <name>clearCache</name>
+        <full_name>clearCache</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="165" package="LudoDB">
+        <name>read</name>
+        <full_name>read</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="177" package="LudoDB">
+        <name>hasRowWith</name>
+        <full_name>hasRowWith</full_name>
+        <docblock line="170">
+          <description/>
+          <long-description/>
+          <tag line="170" name="param" description="Returns true if database table has rows where one of the given columns has one of the&#13;&#10;given values," type="array" variable="$columnsEqual">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="170" name="example" description="if($this-&gt;hasRowWith(array(&quot;email&quot; =&gt; &quot;name@dhtmlgoodies.com&quot;));"/>
+        </docblock>
+        <argument line="177">
+          <name>$columnsEqual</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBObject.php</error>
+      <critical line="11" code="50019">No short description for property $db</critical>
+      <error line="15" code="50018">No DocBlock was found for property $arguments</error>
+      <error line="16" code="50018">No DocBlock was found for property $configParsers</error>
+      <error line="37" code="50018">No DocBlock was found for property $sql_handler</error>
+      <error line="38" code="50018">No DocBlock was found for property $config</error>
+      <critical line="40" code="50019">No short description for property $parser</critical>
+      <error line="113" code="50018">No DocBlock was found for property $configParserKey</error>
+      <error line="27" code="50010">No DocBlock was found for method getOnSuccessMessageFor()</error>
+      <error line="45" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="55" code="50010">No DocBlock was found for method sqlHandler()</error>
+      <error line="63" code="50010">No DocBlock was found for method escapeArguments()</error>
+      <error line="72" code="50010">No DocBlock was found for method onConstruct()</error>
+      <error line="78" code="50010">No DocBlock was found for method hasConfigInExternalFile()</error>
+      <error line="83" code="50010">No DocBlock was found for method getConstructorValues()</error>
+      <error line="88" code="50010">No DocBlock was found for method commit()</error>
+      <error line="93" code="50012">No short description for method configParser()</error>
+      <error line="108" code="50010">No DocBlock was found for method getConfigParserInstance()</error>
+      <error line="115" code="50010">No DocBlock was found for method getConfigParserKey()</error>
+      <error line="123" code="50010">No DocBlock was found for method clearParsers()</error>
+      <error line="128" code="50010">No DocBlock was found for method getUncommitted()</error>
+      <error line="133" code="50010">No DocBlock was found for method getId()</error>
+      <error line="138" code="50010">No DocBlock was found for method __toString()</error>
+      <error line="143" code="50012">No short description for method asJSON()</error>
+      <error line="151" code="50010">No DocBlock was found for method shouldCache()</error>
+      <error line="156" code="50010">No DocBlock was found for method getValues()</error>
+      <error line="158" code="50010">No DocBlock was found for method clearCache()</error>
+      <error line="165" code="50010">No DocBlock was found for method read()</error>
+      <error line="170" code="50012">No short description for method hasRowWith()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBPDO.php" hash="c9e8a4021c2bb964fb62f0ee92e25f5e" package="Default">
+    <class final="false" abstract="false" namespace="global" line="10" package="LudoDB">
+      <extends>\LudoDB</extends>
+      <implements>\LudoDBAdapter</implements>
+      <name>LudoDBPDO</name>
+      <full_name>\LudoDBPDO</full_name>
+      <docblock line="2">
+        <description>PDO Mysql Adapter.</description>
+        <long-description>&lt;p&gt;The default and preferred DB adapter to use.
+User: Alf Magne
+Date: 31.01.13&lt;/p&gt;</long-description>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="true" visibility="protected" line="15" namespace="global" package="Default">
+        <name>$conn</name>
+        <default/>
+        <docblock line="12">
+          <description/>
+          <long-description/>
+          <tag line="12" name="var" description="" type="\PDO">
+            <type by_reference="false">\PDO</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="17" package="LudoDB">
+        <name>connect</name>
+        <full_name>connect</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="28" package="LudoDB">
+        <name>escapeString</name>
+        <full_name>escapeString</full_name>
+        <argument line="28">
+          <name>$string</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="39" package="LudoDB">
+        <name>query</name>
+        <full_name>query</full_name>
+        <docblock line="33">
+          <description/>
+          <long-description/>
+          <tag line="33" name="param" description="" type="\" variable="$sql"/>
+          <tag line="33" name="param" description="" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="33" name="return" description="" type="bool|\mysqli_result|resource|\PDOStatement">
+            <type by_reference="false">bool</type>
+            <type by_reference="false">\mysqli_result</type>
+            <type by_reference="false">resource</type>
+            <type by_reference="false">\PDOStatement</type>
+          </tag>
+          <tag line="33" name="throws" description="" type="\Exception">
+            <type by_reference="false">\Exception</type>
+          </tag>
+        </docblock>
+        <argument line="39">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="39">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="58" package="LudoDB">
+        <name>one</name>
+        <full_name>one</full_name>
+        <docblock line="53">
+          <description/>
+          <long-description/>
+          <tag line="53" name="param" description="" type="\" variable="$sql"/>
+          <tag line="53" name="param" description="" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="53" name="return" description="" type="array|null">
+            <type by_reference="false">array</type>
+            <type by_reference="false">null</type>
+          </tag>
+        </docblock>
+        <argument line="58">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="58">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="70" package="LudoDB">
+        <name>countRows</name>
+        <full_name>countRows</full_name>
+        <docblock line="65">
+          <description/>
+          <long-description/>
+          <tag line="65" name="param" description="" type="\" variable="$sql"/>
+          <tag line="65" name="param" description="" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="65" name="return" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="70">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="70">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="81" package="LudoDB">
+        <name>getInsertId</name>
+        <full_name>getInsertId</full_name>
+        <docblock line="76">
+          <description>Get last insert id</description>
+          <long-description/>
+          <tag line="76" name="method" description="getInsertId" type="\" method_name=""/>
+          <tag line="76" name="return" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="90" package="LudoDB">
+        <name>nextRow</name>
+        <full_name>nextRow</full_name>
+        <docblock line="86">
+          <description/>
+          <long-description/>
+          <tag line="86" name="param" description="" type="\mysqli_result|resource|\PDOStatement" variable="$result">
+            <type by_reference="false">\mysqli_result</type>
+            <type by_reference="false">resource</type>
+            <type by_reference="false">\PDOStatement</type>
+          </tag>
+          <tag line="86" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="90">
+          <name>$result</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="100" package="LudoDB">
+        <name>getValue</name>
+        <full_name>getValue</full_name>
+        <docblock line="95">
+          <description/>
+          <long-description/>
+          <tag line="95" name="param" description="" type="\" variable="$sql"/>
+          <tag line="95" name="param" description="" type="array" variable="$params">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="95" name="return" description="" type="null|array">
+            <type by_reference="false">null</type>
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="100">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="100">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBPDO.php</error>
+      <critical line="12" code="50019">No short description for property $conn</critical>
+      <error line="17" code="50010">No DocBlock was found for method connect()</error>
+      <error line="28" code="50010">No DocBlock was found for method escapeString()</error>
+      <error line="33" code="50012">No short description for method query()</error>
+      <error line="53" code="50012">No short description for method one()</error>
+      <error line="65" code="50012">No short description for method countRows()</error>
+      <error line="86" code="50012">No short description for method nextRow()</error>
+      <error line="95" code="50012">No short description for method getValue()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBProfiling.php" hash="bd4a5545075215c20c2d9510b7110199" package="Default">
+    <class final="false" abstract="false" namespace="global" line="16" package="LudoDB">
+      <extends/>
+      <implements>\LudoDBService</implements>
+      <name>LudoDBProfiling</name>
+      <full_name>\LudoDBProfiling</full_name>
+      <docblock line="2">
+        <description>Class for profiling requests.</description>
+        <long-description>&lt;p&gt;This resources requires that you have the xhprof module enabled
+on your Apache web server. It's also easiest to use when you have the mod rewrite module enabled
+Syntax
+LudoDBProfiling/resourceToProfile/arg1/arg2/resourceServiceToProfile/profile
+i.e first argument is LudoDBProfiling and last argument should be profile. The arguments
+in between is the request you want to profile, example
+http://localhost/LudoDBProfiling/Person/1/read/profile
+User: Alf Magne Kalleland
+Date: 18.02.13
+Time: 20:48&lt;/p&gt;</long-description>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="19" namespace="global" package="Default">
+        <name>$arguments</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="20" namespace="global" package="Default">
+        <name>$name</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="21" namespace="global" package="Default">
+        <name>$start</name>
+        <default/>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="23" package="LudoDB">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="28" package="LudoDB">
+        <name>getValidServices</name>
+        <full_name>getValidServices</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="33" package="LudoDB">
+        <name>validateArguments</name>
+        <full_name>validateArguments</full_name>
+        <argument line="33">
+          <name>$service</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="33">
+          <name>$arguments</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="38" package="LudoDB">
+        <name>profile</name>
+        <full_name>profile</full_name>
+        <argument line="38">
+          <name>$data</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="68" package="LudoDB">
+        <name>validateServiceData</name>
+        <full_name>validateServiceData</full_name>
+        <argument line="68">
+          <name>$service</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="68">
+          <name>$data</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="73" package="LudoDB">
+        <name>shouldCache</name>
+        <full_name>shouldCache</full_name>
+        <argument line="73">
+          <name>$service</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="78" package="LudoDB">
+        <name>getOnSuccessMessageFor</name>
+        <full_name>getOnSuccessMessageFor</full_name>
+        <argument line="78">
+          <name>$service</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="83" package="LudoDB">
+        <name>start</name>
+        <full_name>start</full_name>
+        <argument line="83">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="95" package="LudoDB">
+        <name>getTimeUsage</name>
+        <full_name>getTimeUsage</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="100" package="LudoDB">
+        <name>end</name>
+        <full_name>end</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="111" package="LudoDB">
+        <name>getPath</name>
+        <full_name>getPath</full_name>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBProfiling.php</error>
+      <error line="19" code="50018">No DocBlock was found for property $arguments</error>
+      <error line="20" code="50018">No DocBlock was found for property $name</error>
+      <error line="21" code="50018">No DocBlock was found for property $start</error>
+      <error line="23" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="28" code="50010">No DocBlock was found for method getValidServices()</error>
+      <error line="33" code="50010">No DocBlock was found for method validateArguments()</error>
+      <error line="38" code="50010">No DocBlock was found for method profile()</error>
+      <error line="68" code="50010">No DocBlock was found for method validateServiceData()</error>
+      <error line="73" code="50010">No DocBlock was found for method shouldCache()</error>
+      <error line="78" code="50010">No DocBlock was found for method getOnSuccessMessageFor()</error>
+      <error line="83" code="50010">No DocBlock was found for method start()</error>
+      <error line="95" code="50010">No DocBlock was found for method getTimeUsage()</error>
+      <error line="100" code="50010">No DocBlock was found for method end()</error>
+      <error line="111" code="50010">No DocBlock was found for method getPath()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBRegistry.php" hash="11c88688b95ffc37f83d2fcce1c10057" package="Default">
+    <class final="false" abstract="false" namespace="global" line="9" package="LudoDB">
+      <extends/>
+      <name>LudoDBRegistry</name>
+      <full_name>\LudoDBRegistry</full_name>
+      <docblock line="2">
+        <description>Class for storage of values
+User: Alf Magne
+Date: 11.01.13</description>
+        <long-description/>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="true" visibility="private" line="11" namespace="global" package="Default">
+        <name>$storage</name>
+        <default>array()</default>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="13" package="LudoDB">
+        <name>set</name>
+        <full_name>set</full_name>
+        <argument line="13">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="13">
+          <name>$value</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="18" package="LudoDB">
+        <name>get</name>
+        <full_name>get</full_name>
+        <argument line="18">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="26" package="LudoDB">
+        <name>isValid</name>
+        <full_name>isValid</full_name>
+        <argument line="26">
+          <name>$key</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBRegistry.php</error>
+      <error line="11" code="50018">No DocBlock was found for property $storage</error>
+      <error line="13" code="50010">No DocBlock was found for method set()</error>
+      <error line="18" code="50010">No DocBlock was found for method get()</error>
+      <error line="26" code="50010">No DocBlock was found for method isValid()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBRequestHandler.php" hash="73efe2170a46c055f15d62623a006fd3" package="Default">
+    <class final="false" abstract="false" namespace="global" line="11" package="LudoDB">
+      <extends/>
+      <name>LudoDBRequestHandler</name>
+      <full_name>\LudoDBRequestHandler</full_name>
+      <docblock line="2">
+        <description>Request handler class for Front End Controller.</description>
+        <long-description>&lt;p&gt;This class will handle requests sent
+by Views and pass them to the correct LudoDBObject's.
+User: Alf Magne Kalleland
+Date: 13.01.13&lt;/p&gt;</long-description>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="16" namespace="global" package="Default">
+        <name>$resource</name>
+        <default/>
+        <docblock line="13">
+          <description/>
+          <long-description/>
+          <tag line="13" name="var" description="" type="\LudoDBObject|\LudoDBService">
+            <type by_reference="false">\LudoDBObject</type>
+            <type by_reference="false">\LudoDBService</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="17" namespace="global" package="Default">
+        <name>$serviceName</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="protected" line="18" namespace="global" package="Default">
+        <name>$cacheInstance</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="19" namespace="global" package="Default">
+        <name>$validServices</name>
+        <default>array()</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="20" namespace="global" package="Default">
+        <name>$success</name>
+        <default>true</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="21" namespace="global" package="Default">
+        <name>$message</name>
+        <default>""</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="22" namespace="global" package="Default">
+        <name>$code</name>
+        <default>200</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="23" namespace="global" package="Default">
+        <name>$arguments</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="24" namespace="global" package="Default">
+        <name>$responseKey</name>
+        <default>'response'</default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="26" package="LudoDB">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="31" package="LudoDB">
+        <name>handle</name>
+        <full_name>handle</full_name>
+        <argument line="31">
+          <name>$request</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="78" package="LudoDB">
+        <name>getParsed</name>
+        <full_name>getParsed</full_name>
+        <argument line="78">
+          <name>$request</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="86" package="LudoDB">
+        <name>toJSON</name>
+        <full_name>toJSON</full_name>
+        <argument line="86">
+          <name>$data</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="107" package="LudoDB">
+        <name>getArguments</name>
+        <full_name>getArguments</full_name>
+        <argument line="107">
+          <name>$request</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="124" package="LudoDB">
+        <name>getResource</name>
+        <full_name>getResource</full_name>
+        <docblock line="118">
+          <description/>
+          <long-description/>
+          <tag line="118" name="param" description="" type="array" variable="$request">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="118" name="param" description="" type="array" variable="$args">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="118" name="return" description="" type="null|object">
+            <type by_reference="false">null</type>
+            <type by_reference="false">object</type>
+          </tag>
+          <tag line="118" name="throws" description="" type="\LudoDBClassNotFoundException">
+            <type by_reference="false">\LudoDBClassNotFoundException</type>
+          </tag>
+        </docblock>
+        <argument line="124">
+          <name>$request</name>
+          <default/>
+          <type>array</type>
+        </argument>
+        <argument line="124">
+          <name>$args</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="138" package="LudoDB">
+        <name>getValidServices</name>
+        <full_name>getValidServices</full_name>
+        <argument line="138">
+          <name>$request</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="148" package="LudoDB">
+        <name>getReflectionClass</name>
+        <full_name>getReflectionClass</full_name>
+        <argument line="148">
+          <name>$className</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="161" package="LudoDB">
+        <name>getClassName</name>
+        <full_name>getClassName</full_name>
+        <docblock line="157">
+          <description/>
+          <long-description/>
+          <tag line="157" name="param" description="" type="\" variable="$request"/>
+          <tag line="157" name="return" description="" type="string|null">
+            <type by_reference="false">string</type>
+            <type by_reference="false">null</type>
+          </tag>
+        </docblock>
+        <argument line="161">
+          <name>$request</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="167" package="LudoDB">
+        <name>getServiceName</name>
+        <full_name>getServiceName</full_name>
+        <argument line="167">
+          <name>$request</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="172" package="LudoDB">
+        <name>getCached</name>
+        <full_name>getCached</full_name>
+        <argument line="172">
+          <name>$requestData</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="187" package="LudoDB">
+        <name>ludoDBCache</name>
+        <full_name>ludoDBCache</full_name>
+        <docblock line="184">
+          <description/>
+          <long-description/>
+          <tag line="184" name="return" description="" type="\LudoDBCache">
+            <type by_reference="false">\LudoDBCache</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="195" package="LudoDB">
+        <name>clearCacheObject</name>
+        <full_name>clearCacheObject</full_name>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBRequestHandler.php</error>
+      <critical line="13" code="50019">No short description for property $resource</critical>
+      <error line="17" code="50018">No DocBlock was found for property $serviceName</error>
+      <error line="18" code="50018">No DocBlock was found for property $cacheInstance</error>
+      <error line="19" code="50018">No DocBlock was found for property $validServices</error>
+      <error line="20" code="50018">No DocBlock was found for property $success</error>
+      <error line="21" code="50018">No DocBlock was found for property $message</error>
+      <error line="22" code="50018">No DocBlock was found for property $code</error>
+      <error line="23" code="50018">No DocBlock was found for property $arguments</error>
+      <error line="24" code="50018">No DocBlock was found for property $responseKey</error>
+      <error line="26" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="31" code="50010">No DocBlock was found for method handle()</error>
+      <error line="78" code="50010">No DocBlock was found for method getParsed()</error>
+      <error line="86" code="50010">No DocBlock was found for method toJSON()</error>
+      <error line="107" code="50010">No DocBlock was found for method getArguments()</error>
+      <error line="118" code="50012">No short description for method getResource()</error>
+      <error line="138" code="50010">No DocBlock was found for method getValidServices()</error>
+      <error line="148" code="50010">No DocBlock was found for method getReflectionClass()</error>
+      <error line="157" code="50012">No short description for method getClassName()</error>
+      <error line="167" code="50010">No DocBlock was found for method getServiceName()</error>
+      <error line="172" code="50010">No DocBlock was found for method getCached()</error>
+      <error line="184" code="50012">No short description for method ludoDBCache()</error>
+      <error line="195" code="50010">No DocBlock was found for method clearCacheObject()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBSQL.php" hash="e838862172571f529d34de21f22d0cac" package="Default">
+    <class final="false" abstract="false" namespace="global" line="8" package="LudoDB">
+      <extends/>
+      <name>LudoDBSql</name>
+      <full_name>\LudoDBSql</full_name>
+      <docblock line="2">
+        <description>User: Alf Magne Kalleland
+Date: 22.12.12</description>
+        <long-description/>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <constant namespace="global" line="14" package="LudoDB">
+        <name>DELETED</name>
+        <full_name>DELETED</full_name>
+        <value>'__DELETED__'</value>
+      </constant>
+      <property final="false" static="false" visibility="private" line="10" namespace="global" package="Default">
+        <name>$config</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="11" namespace="global" package="Default">
+        <name>$arguments</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="12" namespace="global" package="Default">
+        <name>$obj</name>
+        <default/>
+      </property>
+      <property final="false" static="false" visibility="private" line="13" namespace="global" package="Default">
+        <name>$limit</name>
+        <default>""</default>
+      </property>
+      <property final="false" static="false" visibility="private" line="19" namespace="global" package="Default">
+        <name>$configParser</name>
+        <default/>
+        <docblock line="16">
+          <description/>
+          <long-description/>
+          <tag line="16" name="var" description="" type="\LudoDBObject">
+            <type by_reference="false">\LudoDBObject</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="21" package="LudoDB">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <argument line="21">
+          <name>$obj</name>
+          <default/>
+          <type>\LudoDBObject</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="30" package="LudoDB">
+        <name>validate</name>
+        <full_name>validate</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="35" package="LudoDB">
+        <name>getSql</name>
+        <full_name>getSql</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="44" package="LudoDB">
+        <name>setLimit</name>
+        <full_name>setLimit</full_name>
+        <argument line="44">
+          <name>$start</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="44">
+          <name>$count</name>
+          <default>null</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="48" package="LudoDB">
+        <name>clearLimit</name>
+        <full_name>clearLimit</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="52" package="LudoDB">
+        <name>getCompiledSql</name>
+        <full_name>getCompiledSql</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="57" package="LudoDB">
+        <name>getColumns</name>
+        <full_name>getColumns</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="70" package="LudoDB">
+        <name>getColumnsForSql</name>
+        <full_name>getColumnsForSql</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="78" package="LudoDB">
+        <name>getColumnsForCollectionSQL</name>
+        <full_name>getColumnsForCollectionSQL</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="83" package="LudoDB">
+        <name>getColumnsFromJoins</name>
+        <full_name>getColumnsFromJoins</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="92" package="LudoDB">
+        <name>getTables</name>
+        <full_name>getTables</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="97" package="LudoDB">
+        <name>getJoins</name>
+        <full_name>getJoins</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="113" package="LudoDB">
+        <name>getTableAndColumn</name>
+        <full_name>getTableAndColumn</full_name>
+        <argument line="113">
+          <name>$column</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="118" package="LudoDB">
+        <name>getOrderBy</name>
+        <full_name>getOrderBy</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="124" package="LudoDB">
+        <name>getCreateTableSql</name>
+        <full_name>getCreateTableSql</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="151" package="LudoDB">
+        <name>getInsertSQL</name>
+        <full_name>getInsertSQL</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="169" package="LudoDB">
+        <name>getPDOInsert</name>
+        <full_name>getPDOInsert</full_name>
+        <argument line="169">
+          <name>$data</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="187" package="LudoDB">
+        <name>getUpdateSql</name>
+        <full_name>getUpdateSql</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="192" package="LudoDB">
+        <name>getUpdatesForSql</name>
+        <full_name>getUpdatesForSql</full_name>
+        <argument line="192">
+          <name>$updates</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="203" package="LudoDB">
+        <name>fromPrepared</name>
+        <full_name>fromPrepared</full_name>
+        <argument line="203">
+          <name>$sql</name>
+          <default/>
+          <type/>
+        </argument>
+        <argument line="203">
+          <name>$params</name>
+          <default>array()</default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBSQL.php</error>
+      <error line="10" code="50018">No DocBlock was found for property $config</error>
+      <error line="11" code="50018">No DocBlock was found for property $arguments</error>
+      <error line="12" code="50018">No DocBlock was found for property $obj</error>
+      <error line="13" code="50018">No DocBlock was found for property $limit</error>
+      <critical line="16" code="50019">No short description for property $configParser</critical>
+      <error line="21" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="30" code="50010">No DocBlock was found for method validate()</error>
+      <error line="35" code="50010">No DocBlock was found for method getSql()</error>
+      <error line="44" code="50010">No DocBlock was found for method setLimit()</error>
+      <error line="48" code="50010">No DocBlock was found for method clearLimit()</error>
+      <error line="52" code="50010">No DocBlock was found for method getCompiledSql()</error>
+      <error line="57" code="50010">No DocBlock was found for method getColumns()</error>
+      <error line="70" code="50010">No DocBlock was found for method getColumnsForSql()</error>
+      <error line="78" code="50010">No DocBlock was found for method getColumnsForCollectionSQL()</error>
+      <error line="83" code="50010">No DocBlock was found for method getColumnsFromJoins()</error>
+      <error line="92" code="50010">No DocBlock was found for method getTables()</error>
+      <error line="97" code="50010">No DocBlock was found for method getJoins()</error>
+      <error line="113" code="50010">No DocBlock was found for method getTableAndColumn()</error>
+      <error line="118" code="50010">No DocBlock was found for method getOrderBy()</error>
+      <error line="124" code="50010">No DocBlock was found for method getCreateTableSql()</error>
+      <error line="151" code="50010">No DocBlock was found for method getInsertSQL()</error>
+      <error line="169" code="50010">No DocBlock was found for method getPDOInsert()</error>
+      <error line="187" code="50010">No DocBlock was found for method getUpdateSql()</error>
+      <error line="192" code="50010">No DocBlock was found for method getUpdatesForSql()</error>
+      <error line="203" code="50010">No DocBlock was found for method fromPrepared()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBServiceRegistry.php" hash="5d35d52eac96d2952aa5d06f88892c38" package="Default">
+    <class final="false" abstract="false" namespace="global" line="11" package="LudoDB">
+      <extends/>
+      <name>LudoDBServiceRegistry</name>
+      <full_name>\LudoDBServiceRegistry</full_name>
+      <docblock line="2">
+        <description>By registering LudoDBService classes, you may get an overview of all the resources and
+services you have available.</description>
+        <long-description>&lt;p&gt;User: Alf Magne Kalleland
+Date: 12.02.13
+Time: 23:14&lt;/p&gt;</long-description>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="true" visibility="private" line="13" namespace="global" package="Default">
+        <name>$registeredServices</name>
+        <default>array()</default>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="20" package="LudoDB">
+        <name>register</name>
+        <full_name>register</full_name>
+        <docblock line="15">
+          <description>Register service resource.</description>
+          <long-description>&lt;p&gt;If you need access to all available services, you can call
+LudoDBServiceRegistry::getAll(). Argument is name of a LudoDBService class.&lt;/p&gt;</long-description>
+          <tag line="15" name="param" description="" type="String" variable="$resource">
+            <type by_reference="false">String</type>
+          </tag>
+        </docblock>
+        <argument line="20">
+          <name>$resource</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="38" package="LudoDB">
+        <name>getAll</name>
+        <full_name>getAll</full_name>
+        <docblock line="34">
+          <description>Return array of all registered service resources with service names.</description>
+          <long-description/>
+          <tag line="34" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBServiceRegistry.php</error>
+      <error line="13" code="50018">No DocBlock was found for property $registeredServices</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBTreeCollection.php" hash="9a44345bcd3505100c83eb070ea1f8c7" package="Default">
+    <class final="false" abstract="true" namespace="global" line="10" package="LudoDB">
+      <extends>\LudoDBCollection</extends>
+      <name>LudoDBTreeCollection</name>
+      <full_name>\LudoDBTreeCollection</full_name>
+      <docblock line="2">
+        <description>Tree collection
+User: Alf Magne Kalleland
+Date: 08.02.13
+Time: 22:00</description>
+        <long-description/>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="13" package="LudoDB">
+        <name>getValues</name>
+        <full_name>getValues</full_name>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBTreeCollection.php</error>
+      <error line="13" code="50010">No DocBlock was found for method getValues()</error>
+    </parse_markers>
+  </file>
+  <file path="LudoDBUtility.php" hash="9cec9d18041e8cac4f1cc5131b7806ea" package="Default">
+    <class final="false" abstract="false" namespace="global" line="9" package="LudoDB">
+      <extends/>
+      <name>LudoDBUtility</name>
+      <full_name>\LudoDBUtility</full_name>
+      <docblock line="2">
+        <description>Class used during Development/Debugging.</description>
+        <long-description>&lt;p&gt;User: Alf Magne
+Date: 06.02.13&lt;/p&gt;</long-description>
+        <tag line="2" name="package" description="LudoDB"/>
+        <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="139" namespace="global" package="Default">
+        <name>$instances</name>
+        <default>array()</default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="20" package="LudoDB">
+        <name>dropAndCreate</name>
+        <full_name>dropAndCreate</full_name>
+        <docblock line="12">
+          <description>Drop and create database tables for the given class names
+$classNames is an array of LudoDBModel sub classes.</description>
+          <long-description>&lt;p&gt;This method is useful during development since it will check
+table references(defined in config) and drop and create the tables
+in the right order&lt;/p&gt;</long-description>
+          <tag line="12" name="param" description="" type="array" variable="$classNames">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="20">
+          <name>$classNames</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="29" package="LudoDB">
+        <name>dropDatabaseTables</name>
+        <full_name>dropDatabaseTables</full_name>
+        <docblock line="25">
+          <description>Drop the database tables of the given classes.</description>
+          <long-description/>
+          <tag line="25" name="param" description="" type="array" variable="$classNames">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="29">
+          <name>$classNames</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="37" package="LudoDB">
+        <name>createDatabaseTables</name>
+        <full_name>createDatabaseTables</full_name>
+        <argument line="37">
+          <name>$classNames</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="46" package="LudoDB">
+        <name>getLudoDBModelTables</name>
+        <full_name>getLudoDBModelTables</full_name>
+        <argument line="46">
+          <name>$classNames</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="60" package="LudoDB">
+        <name>getClassesRearranged</name>
+        <full_name>getClassesRearranged</full_name>
+        <argument line="60">
+          <name>$classNames</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="104" package="LudoDB">
+        <name>withDuplicatesRemoved</name>
+        <full_name>withDuplicatesRemoved</full_name>
+        <docblock line="99">
+          <description>Remove duplicate class names, i.e.</description>
+          <long-description>&lt;p&gt;classes using the same database table.&lt;/p&gt;</long-description>
+          <tag line="99" name="param" description="" type="\" variable="$classNames"/>
+          <tag line="99" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="104">
+          <name>$classNames</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="118" package="LudoDB">
+        <name>getTableNames</name>
+        <full_name>getTableNames</full_name>
+        <argument line="118">
+          <name>$classNames</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="128" package="LudoDB">
+        <name>getReferencedTables</name>
+        <full_name>getReferencedTables</full_name>
+        <argument line="128">
+          <name>$model</name>
+          <default/>
+          <type>\LudoDBModel</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="145" package="LudoDB">
+        <name>getClassInstance</name>
+        <full_name>getClassInstance</full_name>
+        <docblock line="141">
+          <description/>
+          <long-description/>
+          <tag line="141" name="param" description="" type="\" variable="$name"/>
+          <tag line="141" name="return" description="" type="\LudoDBModel">
+            <type by_reference="false">\LudoDBModel</type>
+          </tag>
+        </docblock>
+        <argument line="145">
+          <name>$name</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="154" package="LudoDB">
+        <name>validateConfigsOf</name>
+        <full_name>validateConfigsOf</full_name>
+        <argument line="154">
+          <name>$classNames</name>
+          <default/>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="158" package="LudoDB">
+        <name>getAllAvailableServices</name>
+        <full_name>getAllAvailableServices</full_name>
+      </method>
+    </class>
+    <markers>
+      <todo line="153">implement</todo>
+      <todo line="157">implement</todo>
+    </markers>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file LudoDBUtility.php</error>
+      <error line="139" code="50018">No DocBlock was found for property $instances</error>
+      <error line="37" code="50010">No DocBlock was found for method createDatabaseTables()</error>
+      <error line="46" code="50010">No DocBlock was found for method getLudoDBModelTables()</error>
+      <error line="60" code="50010">No DocBlock was found for method getClassesRearranged()</error>
+      <error line="99" code="50016">The type hint of the argument is incorrect for the type definition of the @param tag with argument $classNames in withDuplicatesRemoved()</error>
+      <error line="118" code="50010">No DocBlock was found for method getTableNames()</error>
+      <error line="128" code="50010">No DocBlock was found for method getReferencedTables()</error>
+      <error line="141" code="50012">No short description for method getClassInstance()</error>
+      <error line="154" code="50010">No DocBlock was found for method validateConfigsOf()</error>
+      <error line="158" code="50010">No DocBlock was found for method getAllAvailableServices()</error>
+    </parse_markers>
+  </file>
+  <file path="Router.template.php" hash="fe93a6a29951c96c410fafa4cd346440" package="Default">
+    <include line="6" type="Require Once" package="Default">
+      <name/>
+      <docblock line="2">
+        <description>Template for a router, i.e.</description>
+        <long-description>&lt;p&gt;entry point for all requests sent by Ajax
+from GUI.&lt;/p&gt;</long-description>
+      </docblock>
+    </include>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file Router.template.php</error>
+    </parse_markers>
+  </file>
+  <file path="autoload.php" hash="d51baaab0d9bcef244469fc98a15ec9a" package="Default">
+    <include line="114" type="Require" package="Default">
+      <name/>
+    </include>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file autoload.php</error>
+    </parse_markers>
+  </file>
+  <package name="Default" full_name="Default"/>
+  <package name="LudoDB" full_name="LudoDB"/>
+  <namespace name="global" full_name="global"/>
+  <marker count="3">todo</marker>
+  <marker count="0">fixme</marker>
+  <deprecated count="0"/>
+</project>

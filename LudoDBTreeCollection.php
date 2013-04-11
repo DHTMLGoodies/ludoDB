@@ -4,6 +4,8 @@
  * User: Alf Magne Kalleland
  * Date: 08.02.13
  * Time: 22:00
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 abstract class LudoDBTreeCollection extends LudoDBCollection
 {

@@ -1,0 +1,764 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \LudoDBIterator</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/LudoDB.html"><i class="icon-folder-open"></i> LudoDB</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">3</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public inherited"><a href="#method___construct" title="__construct :: "><span class="description">__construct()
+        </span><pre>__construct()</pre></a></li>
+<li class="method public inherited"><a href="#method___toString" title="__toString :: "><span class="description">__toString()
+        </span><pre>__toString()</pre></a></li>
+<li class="method public inherited"><a href="#method_asJSON" title="asJSON :: "><span class="description">asJSON()
+        </span><pre>asJSON()</pre></a></li>
+<li class="method public inherited"><a href="#method_clearParsers" title="clearParsers :: "><span class="description">clearParsers()
+        </span><pre>clearParsers()</pre></a></li>
+<li class="method public inherited"><a href="#method_commit" title="commit :: "><span class="description">commit()
+        </span><pre>commit()</pre></a></li>
+<li class="method public inherited"><a href="#method_configParser" title="configParser :: "><span class="description">configParser()
+        </span><pre>configParser()</pre></a></li>
+<li class="method public "><a href="#method_current" title="current :: Return current value when iterating collection"><span class="description">Return current value when iterating collection</span><pre>current()</pre></a></li>
+<li class="method public inherited"><a href="#method_getConstructorValues" title="getConstructorValues :: "><span class="description">getConstructorValues()
+        </span><pre>getConstructorValues()</pre></a></li>
+<li class="method public inherited"><a href="#method_getId" title="getId :: "><span class="description">getId()
+        </span><pre>getId()</pre></a></li>
+<li class="method public inherited"><a href="#method_getOnSuccessMessageFor" title="getOnSuccessMessageFor :: "><span class="description">getOnSuccessMessageFor()
+        </span><pre>getOnSuccessMessageFor()</pre></a></li>
+<li class="method public "><a href="#method_getRows" title="getRows :: Returns reference to all tree nodes as numeric array"><span class="description">Returns reference to all tree nodes as numeric array</span><pre>getRows()</pre></a></li>
+<li class="method public inherited"><a href="#method_getUncommitted" title="getUncommitted :: "><span class="description">getUncommitted()
+        </span><pre>getUncommitted()</pre></a></li>
+<li class="method public inherited"><a href="#method_getValidServices" title='getValidServices :: Valid public services offered by this class, example "read", "delete" and "save"'><span class="description">Valid public services offered by this class, example "read", "delete" and "save"</span><pre>getValidServices()</pre></a></li>
+<li class="method public "><a href="#method_getValues" title="getValues :: Return collection data"><span class="description">Return collection data</span><pre>getValues()</pre></a></li>
+<li class="method public inherited"><a href="#method_hasConfigInExternalFile" title="hasConfigInExternalFile :: "><span class="description">hasConfigInExternalFile()
+        </span><pre>hasConfigInExternalFile()</pre></a></li>
+<li class="method public inherited"><a href="#method_hasRowWith" title="hasRowWith :: "><span class="description">hasRowWith()
+        </span><pre>hasRowWith()</pre></a></li>
+<li class="method public "><a href="#method_key" title="key :: Return key used for iterator."><span class="description">Return key used for iterator.</span><pre>key()</pre></a></li>
+<li class="method public "><a href="#method_next" title="next :: "><span class="description">next()
+        </span><pre>next()</pre></a></li>
+<li class="method public inherited"><a href="#method_read" title="read :: "><span class="description">read()
+        </span><pre>read()</pre></a></li>
+<li class="method public "><a href="#method_rewind" title="rewind :: "><span class="description">rewind()
+        </span><pre>rewind()</pre></a></li>
+<li class="method public inherited"><a href="#method_shouldCache" title="shouldCache :: "><span class="description">shouldCache()
+        </span><pre>shouldCache()</pre></a></li>
+<li class="method public "><a href="#method_valid" title="valid :: "><span class="description">valid()
+        </span><pre>valid()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="method protected inherited"><a href="#method_clearCache" title="clearCache :: "><span class="description">clearCache()
+        </span><pre>clearCache()</pre></a></li>
+<li class="method protected "><a href="#method_clearStoredRows" title="clearStoredRows :: "><span class="description">clearStoredRows()
+        </span><pre>clearStoredRows()</pre></a></li>
+<li class="method protected inherited"><a href="#method_escapeArguments" title="escapeArguments :: "><span class="description">escapeArguments()
+        </span><pre>escapeArguments()</pre></a></li>
+<li class="method protected inherited"><a href="#method_getConfigParserInstance" title="getConfigParserInstance :: "><span class="description">getConfigParserInstance()
+        </span><pre>getConfigParserInstance()</pre></a></li>
+<li class="method protected inherited"><a href="#method_getConfigParserKey" title="getConfigParserKey :: "><span class="description">getConfigParserKey()
+        </span><pre>getConfigParserKey()</pre></a></li>
+<li class="method protected "><a href="#method_getRowsAssoc" title="getRowsAssoc :: "><span class="description">getRowsAssoc()
+        </span><pre>getRowsAssoc()</pre></a></li>
+<li class="method protected inherited"><a href="#method_onConstruct" title="onConstruct :: "><span class="description">onConstruct()
+        </span><pre>onConstruct()</pre></a></li>
+<li class="method protected inherited"><a href="#method_sqlHandler" title="sqlHandler :: "><span class="description">sqlHandler()
+        </span><pre>sqlHandler()</pre></a></li>
+<li class="method protected "><a href="#method_storeRow" title="storeRow :: "><span class="description">storeRow()
+        </span><pre>storeRow()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method_load" title="load :: "><span class="description">load()
+        </span><pre>load()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected inherited"><a href="#property_JSONConfig" title="$JSONConfig :: True when config is in JSONConfig/&lt;class name&gt;.json file"><span class="description"></span><pre>$JSONConfig</pre></a></li>
+<li class="property protected inherited"><a href="#property_arguments" title="$arguments :: "><span class="description"></span><pre>$arguments</pre></a></li>
+<li class="property protected inherited"><a href="#property_config" title="$config :: "><span class="description"></span><pre>$config</pre></a></li>
+<li class="property protected inherited"><a href="#property_configParsers" title="$configParsers :: "><span class="description"></span><pre>$configParsers</pre></a></li>
+<li class="property protected "><a href="#property_currentRow" title="$currentRow :: "><span class="description"></span><pre>$currentRow</pre></a></li>
+<li class="property protected inherited"><a href="#property_db" title="$db :: "><span class="description"></span><pre>$db</pre></a></li>
+<li class="property protected inherited"><a href="#property_parser" title="$parser :: "><span class="description"></span><pre>$parser</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private inherited"><a href="#property_configParserKey" title="$configParserKey :: "><span class="description"></span><pre>$configParserKey</pre></a></li>
+<li class="property private "><a href="#property_dbResource" title="$dbResource :: "><span class="description"></span><pre>$dbResource</pre></a></li>
+<li class="property private "><a href="#property_isValid" title="$isValid :: "><span class="description"></span><pre>$isValid</pre></a></li>
+<li class="property private "><a href="#property_loaded" title="$loaded :: "><span class="description"></span><pre>$loaded</pre></a></li>
+<li class="property private "><a href="#property_position" title="$position :: "><span class="description"></span><pre>$position</pre></a></li>
+<li class="property private "><a href="#property_rows" title="$rows :: "><span class="description"></span><pre>$rows</pre></a></li>
+<li class="property private inherited"><a href="#property_sql_handler" title="$sql_handler :: "><span class="description"></span><pre>$sql_handler</pre></a></li>
+<li class="property private "><a href="#property_valueCache" title="$valueCache :: "><span class="description"></span><pre>$valueCache</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\LudoDBIterator"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/global.html">global</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/LudoDBIterator.html">LudoDBIterator</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Created by JetBrains PhpStorm.</p>
+<div class="details">
+<div class="long_description"><p>User: Alf Magne Kalleland
+Date: 21.12.12</p></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/LudoDB.html">LudoDB</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:post@dhtmlgoodies.com">Alf Magne Kalleland</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>__construct()
+        </h2>
+<pre>__construct() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::__construct()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method___toString"></a><div class="element clickable method public method___toString" data-toggle="collapse" data-target=".method___toString .collapse">
+<h2>__toString()
+        </h2>
+<pre>__toString() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::__toString()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_asJSON"></a><div class="element clickable method public method_asJSON" data-toggle="collapse" data-target=".method_asJSON .collapse">
+<h2>asJSON()
+        </h2>
+<pre>asJSON() : string</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::asJSON()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
+<a id="method_clearParsers"></a><div class="element clickable method public method_clearParsers" data-toggle="collapse" data-target=".method_clearParsers .collapse">
+<h2>clearParsers()
+        </h2>
+<pre>clearParsers() </pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::clearParsers()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_commit"></a><div class="element clickable method public method_commit" data-toggle="collapse" data-target=".method_commit .collapse">
+<h2>commit()
+        </h2>
+<pre>commit() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::commit()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_configParser"></a><div class="element clickable method public method_configParser" data-toggle="collapse" data-target=".method_configParser .collapse">
+<h2>configParser()
+        </h2>
+<pre>configParser() : <a href="../classes/LudoDBConfigParser.html">\LudoDBConfigParser</a> | <a href="../classes/LudoDBCollectionConfigParser.html">\LudoDBCollectionConfigParser</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::configParser()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/LudoDBConfigParser.html">\LudoDBConfigParser</a></code><code><a href="../classes/LudoDBCollectionConfigParser.html">\LudoDBCollectionConfigParser</a></code>
+</div>
+</div></div>
+</div>
+<a id="method_current"></a><div class="element clickable method public method_current" data-toggle="collapse" data-target=".method_current .collapse">
+<h2>Return current value when iterating collection</h2>
+<pre>current() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>method</th>
+<td>current</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_getConstructorValues"></a><div class="element clickable method public method_getConstructorValues" data-toggle="collapse" data-target=".method_getConstructorValues .collapse">
+<h2>getConstructorValues()
+        </h2>
+<pre>getConstructorValues() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::getConstructorValues()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getId"></a><div class="element clickable method public method_getId" data-toggle="collapse" data-target=".method_getId .collapse">
+<h2>getId()
+        </h2>
+<pre>getId() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::getId()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getOnSuccessMessageFor"></a><div class="element clickable method public method_getOnSuccessMessageFor" data-toggle="collapse" data-target=".method_getOnSuccessMessageFor .collapse">
+<h2>getOnSuccessMessageFor()
+        </h2>
+<pre>getOnSuccessMessageFor($service) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::getOnSuccessMessageFor()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$service</h4></div>
+</div></div>
+</div>
+<a id="method_getRows"></a><div class="element clickable method public method_getRows" data-toggle="collapse" data-target=".method_getRows .collapse">
+<h2>Returns reference to all tree nodes as numeric array</h2>
+<pre>getRows() : Array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>Array</code></div>
+</div></div>
+</div>
+<a id="method_getUncommitted"></a><div class="element clickable method public method_getUncommitted" data-toggle="collapse" data-target=".method_getUncommitted .collapse">
+<h2>getUncommitted()
+        </h2>
+<pre>getUncommitted() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::getUncommitted()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getValidServices"></a><div class="element clickable method public method_getValidServices" data-toggle="collapse" data-target=".method_getValidServices .collapse">
+<h2>Valid public services offered by this class, example "read", "delete" and "save"</h2>
+<pre>getValidServices() : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::getValidServices()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getValues"></a><div class="element clickable method public method_getValues" data-toggle="collapse" data-target=".method_getValues .collapse">
+<h2>Return collection data</h2>
+<pre>getValues() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>method</th>
+<td>getValues</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_hasConfigInExternalFile"></a><div class="element clickable method public method_hasConfigInExternalFile" data-toggle="collapse" data-target=".method_hasConfigInExternalFile .collapse">
+<h2>hasConfigInExternalFile()
+        </h2>
+<pre>hasConfigInExternalFile() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::hasConfigInExternalFile()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_hasRowWith"></a><div class="element clickable method public method_hasRowWith" data-toggle="collapse" data-target=".method_hasRowWith .collapse">
+<h2>hasRowWith()
+        </h2>
+<pre>hasRowWith(array $columnsEqual) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse">
+<div class="span4">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>example</th>
+<td>if($this->hasRowWith(array("email" => "name@dhtmlgoodies.com"));</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::hasRowWith()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$columnsEqual</h4>
+<code>array</code><p>Returns true if database table has rows where one of the given columns has one of the
+given values,</p></div>
+</div>
+<div class="span4">
+<h3>Examples</h3>
+<pre class="prettyprint linenums"></pre>
+</div>
+</div>
+</div>
+<a id="method_key"></a><div class="element clickable method public method_key" data-toggle="collapse" data-target=".method_key .collapse">
+<h2>Return key used for iterator.</h2>
+<pre>key() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse">
+<div class="span4">
+<div class="long_description"><p>default is numeric.</p></div>
+<table class="table table-bordered">
+<tr>
+<th>method</th>
+<td>key</td>
+</tr>
+<tr>
+<th>example</th>
+<td>function key(){
+return $this->currentRow['key']
+}
+to return key</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div>
+<div class="span4">
+<h3>Examples</h3>
+<pre class="prettyprint linenums"></pre>
+</div>
+</div>
+</div>
+<a id="method_next"></a><div class="element clickable method public method_next" data-toggle="collapse" data-target=".method_next .collapse">
+<h2>next()
+        </h2>
+<pre>next() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_read"></a><div class="element clickable method public method_read" data-toggle="collapse" data-target=".method_read .collapse">
+<h2>read()
+        </h2>
+<pre>read() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::read()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_rewind"></a><div class="element clickable method public method_rewind" data-toggle="collapse" data-target=".method_rewind .collapse">
+<h2>rewind()
+        </h2>
+<pre>rewind() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_shouldCache"></a><div class="element clickable method public method_shouldCache" data-toggle="collapse" data-target=".method_shouldCache .collapse">
+<h2>shouldCache()
+        </h2>
+<pre>shouldCache($service) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::shouldCache()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$service</h4></div>
+</div></div>
+</div>
+<a id="method_valid"></a><div class="element clickable method public method_valid" data-toggle="collapse" data-target=".method_valid .collapse">
+<h2>valid()
+        </h2>
+<pre>valid() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_clearCache"></a><div class="element clickable method protected method_clearCache" data-toggle="collapse" data-target=".method_clearCache .collapse">
+<h2>clearCache()
+        </h2>
+<pre>clearCache() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::clearCache()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_clearStoredRows"></a><div class="element clickable method protected method_clearStoredRows" data-toggle="collapse" data-target=".method_clearStoredRows .collapse">
+<h2>clearStoredRows()
+        </h2>
+<pre>clearStoredRows() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_escapeArguments"></a><div class="element clickable method protected method_escapeArguments" data-toggle="collapse" data-target=".method_escapeArguments .collapse">
+<h2>escapeArguments()
+        </h2>
+<pre>escapeArguments($values) </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::escapeArguments()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$values</h4></div>
+</div></div>
+</div>
+<a id="method_getConfigParserInstance"></a><div class="element clickable method protected method_getConfigParserInstance" data-toggle="collapse" data-target=".method_getConfigParserInstance .collapse">
+<h2>getConfigParserInstance()
+        </h2>
+<pre>getConfigParserInstance() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::getConfigParserInstance()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getConfigParserKey"></a><div class="element clickable method protected method_getConfigParserKey" data-toggle="collapse" data-target=".method_getConfigParserKey .collapse">
+<h2>getConfigParserKey()
+        </h2>
+<pre>getConfigParserKey() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::getConfigParserKey()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_getRowsAssoc"></a><div class="element clickable method protected method_getRowsAssoc" data-toggle="collapse" data-target=".method_getRowsAssoc .collapse">
+<h2>getRowsAssoc()
+        </h2>
+<pre>getRowsAssoc($key) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$key</h4></div>
+</div></div>
+</div>
+<a id="method_onConstruct"></a><div class="element clickable method protected method_onConstruct" data-toggle="collapse" data-target=".method_onConstruct .collapse">
+<h2>onConstruct()
+        </h2>
+<pre>onConstruct() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::onConstruct()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_sqlHandler"></a><div class="element clickable method protected method_sqlHandler" data-toggle="collapse" data-target=".method_sqlHandler .collapse">
+<h2>sqlHandler()
+        </h2>
+<pre>sqlHandler() </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::sqlHandler()</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_storeRow"></a><div class="element clickable method protected method_storeRow" data-toggle="collapse" data-target=".method_storeRow .collapse">
+<h2>storeRow()
+        </h2>
+<pre>storeRow($row) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$row</h4></div>
+</div></div>
+</div>
+<a id="method_load"></a><div class="element clickable method private method_load" data-toggle="collapse" data-target=".method_load .collapse">
+<h2>load()
+        </h2>
+<pre>load() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_JSONConfig"> </a><div class="element clickable property protected property_JSONConfig" data-toggle="collapse" data-target=".property_JSONConfig .collapse">
+<h2></h2>
+<pre>$JSONConfig : bool</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::$$JSONConfig</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_arguments"> </a><div class="element clickable property protected property_arguments" data-toggle="collapse" data-target=".property_arguments .collapse">
+<h2></h2>
+<pre>$arguments </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::$$arguments</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_config"> </a><div class="element clickable property protected property_config" data-toggle="collapse" data-target=".property_config .collapse">
+<h2></h2>
+<pre>$config </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::$$config</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_configParsers"> </a><div class="element clickable property protected property_configParsers" data-toggle="collapse" data-target=".property_configParsers .collapse">
+<h2></h2>
+<pre>$configParsers </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::$$configParsers</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_currentRow"> </a><div class="element clickable property protected property_currentRow" data-toggle="collapse" data-target=".property_currentRow .collapse">
+<h2></h2>
+<pre>$currentRow </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_db"> </a><div class="element clickable property protected property_db" data-toggle="collapse" data-target=".property_db .collapse">
+<h2></h2>
+<pre>$db : <a href="../classes/LudoDB.html">\LudoDB</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::$$db</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_parser"> </a><div class="element clickable property protected property_parser" data-toggle="collapse" data-target=".property_parser .collapse">
+<h2></h2>
+<pre>$parser : <a href="../classes/LudoDBCollectionConfigParser.html">\LudoDBCollectionConfigParser</a> | <a href="../classes/LudoDBConfigParser.html">\LudoDBConfigParser</a></pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::$$parser</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_configParserKey"> </a><div class="element clickable property private property_configParserKey" data-toggle="collapse" data-target=".property_configParserKey .collapse">
+<h2></h2>
+<pre>$configParserKey </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::$$configParserKey</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_dbResource"> </a><div class="element clickable property private property_dbResource" data-toggle="collapse" data-target=".property_dbResource .collapse">
+<h2></h2>
+<pre>$dbResource </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_isValid"> </a><div class="element clickable property private property_isValid" data-toggle="collapse" data-target=".property_isValid .collapse">
+<h2></h2>
+<pre>$isValid </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_loaded"> </a><div class="element clickable property private property_loaded" data-toggle="collapse" data-target=".property_loaded .collapse">
+<h2></h2>
+<pre>$loaded </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_position"> </a><div class="element clickable property private property_position" data-toggle="collapse" data-target=".property_position .collapse">
+<h2></h2>
+<pre>$position </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_rows"> </a><div class="element clickable property private property_rows" data-toggle="collapse" data-target=".property_rows .collapse">
+<h2></h2>
+<pre>$rows </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property_sql_handler"> </a><div class="element clickable property private property_sql_handler" data-toggle="collapse" data-target=".property_sql_handler .collapse">
+<h2></h2>
+<pre>$sql_handler </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBObject::$$sql_handler</td>
+</tr></table>
+</div></div>
+</div>
+<a id="property_valueCache"> </a><div class="element clickable property private property_valueCache" data-toggle="collapse" data-target=".property_valueCache .collapse">
+<h2></h2>
+<pre>$valueCache </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-04-12T01:30:29+02:00.<br></footer></div>
+</div>
+</body>
+</html>

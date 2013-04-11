@@ -3,6 +3,8 @@
  * Caching of serialized LudoDBObjects
  * User: Alf Magne
  * Date: 28.01.13
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBCache extends LudoDBModel
 {

@@ -3,6 +3,8 @@
  * PDO Mysql Adapter. The default and preferred DB adapter to use.
  * User: Alf Magne
  * Date: 31.01.13
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
 
  */
 class LudoDBPDO extends LudoDB implements LudoDBAdapter

@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » LudoDB</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/LudoDB.html"><i class="icon-folder-open"></i> LudoDB</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">339</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">3</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/LudoDB.html" title="LudoDB"><i class="icon-folder-open"></i>LudoDB</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-interface"></i> Interfaces</li>
+<li><a href="#LudoDBAdapter" title="LudoDB interfaces
+User: Alf Magne
+Date: 31.01.13">LudoDBAdapter</a></li>
+<li><a href="#LudoDBService" title="Classes for request handlers has to implement the LudoDBService interface">LudoDBService</a></li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#LudoDB" title="Base class for LudoDB adapters
+User: Alf Magne Kalleland
+Date: 03.11.12">LudoDB</a></li>
+<li><a href="#LudoDBCache" title="Caching of serialized LudoDBObjects
+User: Alf Magne
+Date: 28.01.13">LudoDBCache</a></li>
+<li><a href="#LudoDBCollection" title="LudoDB collection class
+User: Alf Magne Kalleland
+Date: 19.12.12">LudoDBCollection</a></li>
+<li><a href="#LudoDBCollectionConfigParser" title="Created by JetBrains PhpStorm.">LudoDBCollectionConfigParser</a></li>
+<li><a href="#LudoDBConfigParser" title="parser for LudoDBObject
+User: Alf Magne
+Date: 10.01.13">LudoDBConfigParser</a></li>
+<li><a href="#LudoDBException" title="Created by JetBrains PhpStorm.">LudoDBException</a></li>
+<li><a href="#LudoDBClassNotFoundException" title="Class not found exception.">LudoDBClassNotFoundException</a></li>
+<li><a href="#LudoDBObjectNotFoundException" title="Object not found exception.">LudoDBObjectNotFoundException</a></li>
+<li><a href="#LudoDBConnectionException" title="DB Connection error exception.">LudoDBConnectionException</a></li>
+<li><a href="#LudoDBInvalidArgumentsException" title="Invalid constructor arguments exception.">LudoDBInvalidArgumentsException</a></li>
+<li><a href="#LudoDBUnauthorizedException" title="Unauthorized exception
+Thrown by LudoDBRequestHandler">LudoDBUnauthorizedException</a></li>
+<li><a href="#LudoDBServiceNotImplementedException" title="Service not implemented exception.">LudoDBServiceNotImplementedException</a></li>
+<li><a href="#LudoDBInvalidServiceException" title="Invalid service exception.">LudoDBInvalidServiceException</a></li>
+<li><a href="#LudoDBIterator" title="Created by JetBrains PhpStorm.">LudoDBIterator</a></li>
+<li><a href="#LudoDBModel" title="Representation of a ludoDB table">LudoDBModel</a></li>
+<li><a href="#LudoDBMySqlI" title="MysqlI adapter.">LudoDBMySqlI</a></li>
+<li><a href="#LudoDBMysql" title="Mysql adapter.">LudoDBMysql</a></li>
+<li><a href="#LudoDBObject" title="Base class for LudoDB models and collections.">LudoDBObject</a></li>
+<li><a href="#LudoDBPDO" title="PDO Mysql Adapter.">LudoDBPDO</a></li>
+<li><a href="#LudoDBProfiling" title="Class for profiling requests.">LudoDBProfiling</a></li>
+<li><a href="#LudoDBRegistry" title="Class for storage of values
+User: Alf Magne
+Date: 11.01.13">LudoDBRegistry</a></li>
+<li><a href="#LudoDBRequestHandler" title="Request handler class for Front End Controller.">LudoDBRequestHandler</a></li>
+<li><a href="#LudoDBSql" title="User: Alf Magne Kalleland
+Date: 22.12.12">LudoDBSql</a></li>
+<li><a href="#LudoDBServiceRegistry" title="By registering LudoDBService classes, you may get an overview of all the resources and
+services you have available.">LudoDBServiceRegistry</a></li>
+<li><a href="#LudoDBTreeCollection" title="Tree collection
+User: Alf Magne Kalleland
+Date: 08.02.13
+Time: 22:00">LudoDBTreeCollection</a></li>
+<li><a href="#LudoDBUtility" title="Class used during Development/Debugging.">LudoDBUtility</a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li class="active"><a href="../packages/LudoDB.html">LudoDB</a></li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="LudoDBAdapter" class="element ajax clickable interface">
+<h1>LudoDBAdapter<a href="../classes/LudoDBAdapter.html">¶</a>
+</h1>
+<p class="short_description">LudoDB interfaces
+User: Alf Magne
+Date: 31.01.13</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBAdapter.html" class="more">« More »</a>
+</div>
+<div id="LudoDBService" class="element ajax clickable interface">
+<h1>LudoDBService<a href="../classes/LudoDBService.html">¶</a>
+</h1>
+<p class="short_description">Classes for request handlers has to implement the LudoDBService interface</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBService.html" class="more">« More »</a>
+</div>
+<div id="LudoDB" class="element ajax clickable class">
+<h1>LudoDB<a href="../classes/LudoDB.html">¶</a>
+</h1>
+<p class="short_description">Base class for LudoDB adapters
+User: Alf Magne Kalleland
+Date: 03.11.12</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDB.html" class="more">« More »</a>
+</div>
+<div id="LudoDBCache" class="element ajax clickable class">
+<h1>LudoDBCache<a href="../classes/LudoDBCache.html">¶</a>
+</h1>
+<p class="short_description">Caching of serialized LudoDBObjects
+User: Alf Magne
+Date: 28.01.13</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBCache.html" class="more">« More »</a>
+</div>
+<div id="LudoDBClassNotFoundException" class="element ajax clickable class">
+<h1>LudoDBClassNotFoundException<a href="../classes/LudoDBClassNotFoundException.html">¶</a>
+</h1>
+<p class="short_description">Class not found exception.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBClassNotFoundException.html" class="more">« More »</a>
+</div>
+<div id="LudoDBCollection" class="element ajax clickable class">
+<h1>LudoDBCollection<a href="../classes/LudoDBCollection.html">¶</a>
+</h1>
+<p class="short_description">LudoDB collection class
+User: Alf Magne Kalleland
+Date: 19.12.12</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBCollection.html" class="more">« More »</a>
+</div>
+<div id="LudoDBCollectionConfigParser" class="element ajax clickable class">
+<h1>LudoDBCollectionConfigParser<a href="../classes/LudoDBCollectionConfigParser.html">¶</a>
+</h1>
+<p class="short_description">Created by JetBrains PhpStorm.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBCollectionConfigParser.html" class="more">« More »</a>
+</div>
+<div id="LudoDBConfigParser" class="element ajax clickable class">
+<h1>LudoDBConfigParser<a href="../classes/LudoDBConfigParser.html">¶</a>
+</h1>
+<p class="short_description">parser for LudoDBObject
+User: Alf Magne
+Date: 10.01.13</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBConfigParser.html" class="more">« More »</a>
+</div>
+<div id="LudoDBConnectionException" class="element ajax clickable class">
+<h1>LudoDBConnectionException<a href="../classes/LudoDBConnectionException.html">¶</a>
+</h1>
+<p class="short_description">DB Connection error exception.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBConnectionException.html" class="more">« More »</a>
+</div>
+<div id="LudoDBException" class="element ajax clickable class">
+<h1>LudoDBException<a href="../classes/LudoDBException.html">¶</a>
+</h1>
+<p class="short_description">Created by JetBrains PhpStorm.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBException.html" class="more">« More »</a>
+</div>
+<div id="LudoDBInvalidArgumentsException" class="element ajax clickable class">
+<h1>LudoDBInvalidArgumentsException<a href="../classes/LudoDBInvalidArgumentsException.html">¶</a>
+</h1>
+<p class="short_description">Invalid constructor arguments exception.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBInvalidArgumentsException.html" class="more">« More »</a>
+</div>
+<div id="LudoDBInvalidServiceException" class="element ajax clickable class">
+<h1>LudoDBInvalidServiceException<a href="../classes/LudoDBInvalidServiceException.html">¶</a>
+</h1>
+<p class="short_description">Invalid service exception.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBInvalidServiceException.html" class="more">« More »</a>
+</div>
+<div id="LudoDBIterator" class="element ajax clickable class">
+<h1>LudoDBIterator<a href="../classes/LudoDBIterator.html">¶</a>
+</h1>
+<p class="short_description">Created by JetBrains PhpStorm.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBIterator.html" class="more">« More »</a>
+</div>
+<div id="LudoDBModel" class="element ajax clickable class">
+<h1>LudoDBModel<a href="../classes/LudoDBModel.html">¶</a>
+</h1>
+<p class="short_description">Representation of a ludoDB table</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBModel.html" class="more">« More »</a>
+</div>
+<div id="LudoDBMySqlI" class="element ajax clickable class">
+<h1>LudoDBMySqlI<a href="../classes/LudoDBMySqlI.html">¶</a>
+</h1>
+<p class="short_description">MysqlI adapter.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBMySqlI.html" class="more">« More »</a>
+</div>
+<div id="LudoDBMysql" class="element ajax clickable class">
+<h1>LudoDBMysql<a href="../classes/LudoDBMysql.html">¶</a>
+</h1>
+<p class="short_description">Mysql adapter.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBMysql.html" class="more">« More »</a>
+</div>
+<div id="LudoDBObject" class="element ajax clickable class">
+<h1>LudoDBObject<a href="../classes/LudoDBObject.html">¶</a>
+</h1>
+<p class="short_description">Base class for LudoDB models and collections.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBObject.html" class="more">« More »</a>
+</div>
+<div id="LudoDBObjectNotFoundException" class="element ajax clickable class">
+<h1>LudoDBObjectNotFoundException<a href="../classes/LudoDBObjectNotFoundException.html">¶</a>
+</h1>
+<p class="short_description">Object not found exception.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBObjectNotFoundException.html" class="more">« More »</a>
+</div>
+<div id="LudoDBPDO" class="element ajax clickable class">
+<h1>LudoDBPDO<a href="../classes/LudoDBPDO.html">¶</a>
+</h1>
+<p class="short_description">PDO Mysql Adapter.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBPDO.html" class="more">« More »</a>
+</div>
+<div id="LudoDBProfiling" class="element ajax clickable class">
+<h1>LudoDBProfiling<a href="../classes/LudoDBProfiling.html">¶</a>
+</h1>
+<p class="short_description">Class for profiling requests.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBProfiling.html" class="more">« More »</a>
+</div>
+<div id="LudoDBRegistry" class="element ajax clickable class">
+<h1>LudoDBRegistry<a href="../classes/LudoDBRegistry.html">¶</a>
+</h1>
+<p class="short_description">Class for storage of values
+User: Alf Magne
+Date: 11.01.13</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBRegistry.html" class="more">« More »</a>
+</div>
+<div id="LudoDBRequestHandler" class="element ajax clickable class">
+<h1>LudoDBRequestHandler<a href="../classes/LudoDBRequestHandler.html">¶</a>
+</h1>
+<p class="short_description">Request handler class for Front End Controller.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBRequestHandler.html" class="more">« More »</a>
+</div>
+<div id="LudoDBServiceNotImplementedException" class="element ajax clickable class">
+<h1>LudoDBServiceNotImplementedException<a href="../classes/LudoDBServiceNotImplementedException.html">¶</a>
+</h1>
+<p class="short_description">Service not implemented exception.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBServiceNotImplementedException.html" class="more">« More »</a>
+</div>
+<div id="LudoDBServiceRegistry" class="element ajax clickable class">
+<h1>LudoDBServiceRegistry<a href="../classes/LudoDBServiceRegistry.html">¶</a>
+</h1>
+<p class="short_description">By registering LudoDBService classes, you may get an overview of all the resources and
+services you have available.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBServiceRegistry.html" class="more">« More »</a>
+</div>
+<div id="LudoDBSql" class="element ajax clickable class">
+<h1>LudoDBSql<a href="../classes/LudoDBSql.html">¶</a>
+</h1>
+<p class="short_description">User: Alf Magne Kalleland
+Date: 22.12.12</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBSql.html" class="more">« More »</a>
+</div>
+<div id="LudoDBTreeCollection" class="element ajax clickable class">
+<h1>LudoDBTreeCollection<a href="../classes/LudoDBTreeCollection.html">¶</a>
+</h1>
+<p class="short_description">Tree collection
+User: Alf Magne Kalleland
+Date: 08.02.13
+Time: 22:00</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBTreeCollection.html" class="more">« More »</a>
+</div>
+<div id="LudoDBUnauthorizedException" class="element ajax clickable class">
+<h1>LudoDBUnauthorizedException<a href="../classes/LudoDBUnauthorizedException.html">¶</a>
+</h1>
+<p class="short_description">Unauthorized exception
+Thrown by LudoDBRequestHandler</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBUnauthorizedException.html" class="more">« More »</a>
+</div>
+<div id="LudoDBUtility" class="element ajax clickable class">
+<h1>LudoDBUtility<a href="../classes/LudoDBUtility.html">¶</a>
+</h1>
+<p class="short_description">Class used during Development/Debugging.</p>
+<div class="details collapse"></div>
+<a href="../classes/LudoDBUtility.html" class="more">« More »</a>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-04-12T01:30:29+02:00.<br></footer></div>
+</div>
+</body>
+</html>
