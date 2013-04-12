@@ -31,10 +31,10 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">302</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
-                <span class="label label-info">3</span>
+                <span class="label label-info">4</span>
 </li></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
                 <span class="label label-info">0</span></a></li>
@@ -58,53 +58,34 @@
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
-<li class="method public "><a href="#method___construct" title="__construct :: "><span class="description">__construct()
-        </span><pre>__construct()</pre></a></li>
-<li class="method public "><a href="#method___toString" title="__toString :: "><span class="description">__toString()
-        </span><pre>__toString()</pre></a></li>
-<li class="method public "><a href="#method_asJSON" title="asJSON :: "><span class="description">asJSON()
-        </span><pre>asJSON()</pre></a></li>
-<li class="method public "><a href="#method_clearParsers" title="clearParsers :: "><span class="description">clearParsers()
-        </span><pre>clearParsers()</pre></a></li>
-<li class="method public "><a href="#method_commit" title="commit :: "><span class="description">commit()
-        </span><pre>commit()</pre></a></li>
-<li class="method public "><a href="#method_configParser" title="configParser :: "><span class="description">configParser()
-        </span><pre>configParser()</pre></a></li>
-<li class="method public "><a href="#method_getConstructorValues" title="getConstructorValues :: "><span class="description">getConstructorValues()
-        </span><pre>getConstructorValues()</pre></a></li>
-<li class="method public "><a href="#method_getId" title="getId :: "><span class="description">getId()
-        </span><pre>getId()</pre></a></li>
-<li class="method public "><a href="#method_getOnSuccessMessageFor" title="getOnSuccessMessageFor :: "><span class="description">getOnSuccessMessageFor()
-        </span><pre>getOnSuccessMessageFor()</pre></a></li>
-<li class="method public "><a href="#method_getUncommitted" title="getUncommitted :: "><span class="description">getUncommitted()
-        </span><pre>getUncommitted()</pre></a></li>
+<li class="method public "><a href="#method___construct" title="__construct :: Constructs a new LudoDBModel/LudoDBCollection"><span class="description">Constructs a new LudoDBModel/LudoDBCollection</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#method___toString" title="__toString :: Return data as JSON string."><span class="description">Return data as JSON string.</span><pre>__toString()</pre></a></li>
+<li class="method public "><a href="#method_asJSON" title="asJSON :: Return data as JSON."><span class="description">Return data as JSON.</span><pre>asJSON()</pre></a></li>
+<li class="method public "><a href="#method_clearParsers" title="clearParsers :: Clear all cached config parsers"><span class="description">Clear all cached config parsers</span><pre>clearParsers()</pre></a></li>
+<li class="method public "><a href="#method_commit" title="commit :: Commit method implemented by sub classes."><span class="description">Commit method implemented by sub classes.</span><pre>commit()</pre></a></li>
+<li class="method public "><a href="#method_configParser" title="configParser :: Return reference to config parser."><span class="description">Return reference to config parser.</span><pre>configParser()</pre></a></li>
+<li class="method public "><a href="#method_getConstructorValues" title="getConstructorValues :: Return array of values sent to constructor."><span class="description">Return array of values sent to constructor.</span><pre>getConstructorValues()</pre></a></li>
+<li class="method public "><a href="#method_getId" title="getId :: Implemented by sub classes."><span class="description">Implemented by sub classes.</span><pre>getId()</pre></a></li>
+<li class="method public "><a href="#method_getOnSuccessMessageFor" title="getOnSuccessMessageFor :: LudoDBService getOnSuccessMessageFor method."><span class="description">LudoDBService getOnSuccessMessageFor method.</span><pre>getOnSuccessMessageFor()</pre></a></li>
+<li class="method public "><a href="#method_getUncommitted" title="getUncommitted :: Return uncommitted data."><span class="description">Return uncommitted data.</span><pre>getUncommitted()</pre></a></li>
 <li class="method public "><a href="#method_getValidServices" title='getValidServices :: Valid public services offered by this class, example "read", "delete" and "save"'><span class="description">Valid public services offered by this class, example "read", "delete" and "save"</span><pre>getValidServices()</pre></a></li>
-<li class="method public "><a href="#method_getValues" title="getValues :: "><span class="description">getValues()
-        </span><pre>getValues()</pre></a></li>
-<li class="method public "><a href="#method_hasConfigInExternalFile" title="hasConfigInExternalFile :: "><span class="description">hasConfigInExternalFile()
-        </span><pre>hasConfigInExternalFile()</pre></a></li>
-<li class="method public "><a href="#method_hasRowWith" title="hasRowWith :: "><span class="description">hasRowWith()
-        </span><pre>hasRowWith()</pre></a></li>
-<li class="method public "><a href="#method_read" title="read :: "><span class="description">read()
-        </span><pre>read()</pre></a></li>
-<li class="method public "><a href="#method_shouldCache" title="shouldCache :: "><span class="description">shouldCache()
-        </span><pre>shouldCache()</pre></a></li>
+<li class="method public "><a href="#method_getValues" title="getValues :: Implemented by sub classes."><span class="description">Implemented by sub classes.</span><pre>getValues()</pre></a></li>
+<li class="method public "><a href="#method_hasConfigInExternalFile" title="hasConfigInExternalFile :: Returns true if config is defined in external file."><span class="description">Returns true if config is defined in external file.</span><pre>hasConfigInExternalFile()</pre></a></li>
+<li class="method public "><a href="#method_hasRowWith" title="hasRowWith :: Returns true if database table has rows where one of the given columns has one of the
+given values."><span class="description">Returns true if database table has rows where one of the given columns has one of the
+given values.</span><pre>hasRowWith()</pre></a></li>
+<li class="method public "><a href="#method_read" title="read :: Return data for this instance."><span class="description">Return data for this instance.</span><pre>read()</pre></a></li>
+<li class="method public "><a href="#method_shouldCache" title="shouldCache :: When handled by LudoDBRequestHandler no services will by default be cached."><span class="description">When handled by LudoDBRequestHandler no services will by default be cached.</span><pre>shouldCache()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
-<li class="method protected "><a href="#method_clearCache" title="clearCache :: "><span class="description">clearCache()
-        </span><pre>clearCache()</pre></a></li>
-<li class="method protected "><a href="#method_escapeArguments" title="escapeArguments :: "><span class="description">escapeArguments()
-        </span><pre>escapeArguments()</pre></a></li>
-<li class="method protected "><a href="#method_getConfigParserInstance" title="getConfigParserInstance :: "><span class="description">getConfigParserInstance()
-        </span><pre>getConfigParserInstance()</pre></a></li>
-<li class="method protected "><a href="#method_getConfigParserKey" title="getConfigParserKey :: "><span class="description">getConfigParserKey()
-        </span><pre>getConfigParserKey()</pre></a></li>
-<li class="method protected "><a href="#method_onConstruct" title="onConstruct :: "><span class="description">onConstruct()
-        </span><pre>onConstruct()</pre></a></li>
-<li class="method protected "><a href="#method_sqlHandler" title="sqlHandler :: "><span class="description">sqlHandler()
-        </span><pre>sqlHandler()</pre></a></li>
+<li class="method protected "><a href="#method_clearCache" title="clearCache :: Clear database cache for this instance."><span class="description">Clear database cache for this instance.</span><pre>clearCache()</pre></a></li>
+<li class="method protected "><a href="#method_escapeArguments" title="escapeArguments :: Escape constructor arguments."><span class="description">Escape constructor arguments.</span><pre>escapeArguments()</pre></a></li>
+<li class="method protected "><a href="#method_getConfigParserInstance" title="getConfigParserInstance :: Return config parser instance."><span class="description">Return config parser instance.</span><pre>getConfigParserInstance()</pre></a></li>
+<li class="method protected "><a href="#method_getConfigParserKey" title="getConfigParserKey :: Return config parser key of this class."><span class="description">Return config parser key of this class.</span><pre>getConfigParserKey()</pre></a></li>
+<li class="method protected "><a href="#method_onConstruct" title="onConstruct :: On construct method which can be implemented by sub classes."><span class="description">On construct method which can be implemented by sub classes.</span><pre>onConstruct()</pre></a></li>
+<li class="method protected "><a href="#method_sqlHandler" title="sqlHandler :: Return SQL handler"><span class="description">Return SQL handler</span><pre>sqlHandler()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
@@ -114,17 +95,17 @@
 <li class="nav-header protected">» Protected
                     <ul>
 <li class="property protected "><a href="#property_JSONConfig" title="$JSONConfig :: True when config is in JSONConfig/&lt;class name&gt;.json file"><span class="description"></span><pre>$JSONConfig</pre></a></li>
-<li class="property protected "><a href="#property_arguments" title="$arguments :: "><span class="description"></span><pre>$arguments</pre></a></li>
-<li class="property protected "><a href="#property_config" title="$config :: "><span class="description"></span><pre>$config</pre></a></li>
-<li class="property protected "><a href="#property_configParsers" title="$configParsers :: "><span class="description"></span><pre>$configParsers</pre></a></li>
-<li class="property protected "><a href="#property_db" title="$db :: "><span class="description"></span><pre>$db</pre></a></li>
-<li class="property protected "><a href="#property_parser" title="$parser :: "><span class="description"></span><pre>$parser</pre></a></li>
+<li class="property protected "><a href="#property_arguments" title="$arguments :: Constructor arguments"><span class="description"></span><pre>$arguments</pre></a></li>
+<li class="property protected "><a href="#property_config" title="$config :: LudoDB config"><span class="description"></span><pre>$config</pre></a></li>
+<li class="property protected "><a href="#property_configParsers" title="$configParsers :: Internal cache of config parsers for LudoDBObjects."><span class="description"></span><pre>$configParsers</pre></a></li>
+<li class="property protected "><a href="#property_db" title="$db :: Internal LudoDB instance."><span class="description"></span><pre>$db</pre></a></li>
+<li class="property protected "><a href="#property_parser" title="$parser :: Internal reference to config parser"><span class="description"></span><pre>$parser</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
                     <ul>
-<li class="property private "><a href="#property_configParserKey" title="$configParserKey :: "><span class="description"></span><pre>$configParserKey</pre></a></li>
-<li class="property private "><a href="#property_sql_handler" title="$sql_handler :: "><span class="description"></span><pre>$sql_handler</pre></a></li>
+<li class="property private "><a href="#property_configParserKey" title="$configParserKey :: The key of this class in the static $configParsers cache array."><span class="description"></span><pre>$configParserKey</pre></a></li>
+<li class="property private "><a href="#property_sql_handler" title="$sql_handler :: Internal reference to LudoDBSql"><span class="description"></span><pre>$sql_handler</pre></a></li>
 </ul>
 </li>
 </ul>
@@ -140,10 +121,9 @@
 </li>
 </ul>
 <div class="element class">
-<p class="short_description">Base class for LudoDB models and collections.</p>
+<p class="short_description">Base class for LudoDBModel and LudoDBCollection</p>
 <div class="details">
-<div class="long_description"><p>User: Alf Magne Kalleland
-Date: 20.12.12</p></div>
+<div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>package</th>
@@ -157,22 +137,23 @@ Date: 20.12.12</p></div>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
 <a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
-<h2>__construct()
-        </h2>
+<h2>Constructs a new LudoDBModel/LudoDBCollection</h2>
 <pre>__construct() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="method___toString"></a><div class="element clickable method public method___toString" data-toggle="collapse" data-target=".method___toString .collapse">
-<h2>__toString()
-        </h2>
-<pre>__toString() </pre>
+<h2>Return data as JSON string.</h2>
+<pre>__toString() : string</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
 </div>
 <a id="method_asJSON"></a><div class="element clickable method public method_asJSON" data-toggle="collapse" data-target=".method_asJSON .collapse">
-<h2>asJSON()
-        </h2>
+<h2>Return data as JSON.</h2>
 <pre>asJSON() : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -182,22 +163,19 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_clearParsers"></a><div class="element clickable method public method_clearParsers" data-toggle="collapse" data-target=".method_clearParsers .collapse">
-<h2>clearParsers()
-        </h2>
+<h2>Clear all cached config parsers</h2>
 <pre>clearParsers() </pre>
 <div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="method_commit"></a><div class="element clickable method public method_commit" data-toggle="collapse" data-target=".method_commit .collapse">
-<h2>commit()
-        </h2>
+<h2>Commit method implemented by sub classes.</h2>
 <pre>commit() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="method_configParser"></a><div class="element clickable method public method_configParser" data-toggle="collapse" data-target=".method_configParser .collapse">
-<h2>configParser()
-        </h2>
+<h2>Return reference to config parser.</h2>
 <pre>configParser() : <a href="../classes/LudoDBConfigParser.html">\LudoDBConfigParser</a> | <a href="../classes/LudoDBCollectionConfigParser.html">\LudoDBCollectionConfigParser</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -209,36 +187,46 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_getConstructorValues"></a><div class="element clickable method public method_getConstructorValues" data-toggle="collapse" data-target=".method_getConstructorValues .collapse">
-<h2>getConstructorValues()
-        </h2>
-<pre>getConstructorValues() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="method_getId"></a><div class="element clickable method public method_getId" data-toggle="collapse" data-target=".method_getId .collapse">
-<h2>getId()
-        </h2>
-<pre>getId() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="method_getOnSuccessMessageFor"></a><div class="element clickable method public method_getOnSuccessMessageFor" data-toggle="collapse" data-target=".method_getOnSuccessMessageFor .collapse">
-<h2>getOnSuccessMessageFor()
-        </h2>
-<pre>getOnSuccessMessageFor($service) </pre>
+<h2>Return array of values sent to constructor.</h2>
+<pre>getConstructorValues() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getId"></a><div class="element clickable method public method_getId" data-toggle="collapse" data-target=".method_getId .collapse">
+<h2>Implemented by sub classes.</h2>
+<pre>getId() : null</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>null</code></div>
+</div></div>
+</div>
+<a id="method_getOnSuccessMessageFor"></a><div class="element clickable method public method_getOnSuccessMessageFor" data-toggle="collapse" data-target=".method_getOnSuccessMessageFor .collapse">
+<h2>LudoDBService getOnSuccessMessageFor method.</h2>
+<pre>getOnSuccessMessageFor($service) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>By default, it returns an empty string.</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$service</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <a id="method_getUncommitted"></a><div class="element clickable method public method_getUncommitted" data-toggle="collapse" data-target=".method_getUncommitted .collapse">
-<h2>getUncommitted()
-        </h2>
-<pre>getUncommitted() </pre>
+<h2>Return uncommitted data.</h2>
+<pre>getUncommitted() : array</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method is implemented in LudoDBModel.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
 </div>
 <a id="method_getValidServices"></a><div class="element clickable method public method_getValidServices" data-toggle="collapse" data-target=".method_getValidServices .collapse">
 <h2>Valid public services offered by this class, example "read", "delete" and "save"</h2>
@@ -251,106 +239,121 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_getValues"></a><div class="element clickable method public method_getValues" data-toggle="collapse" data-target=".method_getValues .collapse">
-<h2>getValues()
-        </h2>
-<pre>getValues() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="method_hasConfigInExternalFile"></a><div class="element clickable method public method_hasConfigInExternalFile" data-toggle="collapse" data-target=".method_hasConfigInExternalFile .collapse">
-<h2>hasConfigInExternalFile()
-        </h2>
-<pre>hasConfigInExternalFile() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="method_hasRowWith"></a><div class="element clickable method public method_hasRowWith" data-toggle="collapse" data-target=".method_hasRowWith .collapse">
-<h2>hasRowWith()
-        </h2>
-<pre>hasRowWith(array $columnsEqual) </pre>
-<div class="labels"></div>
-<div class="row collapse">
-<div class="span4">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>example</th>
-<td>if($this->hasRowWith(array("email" => "name@dhtmlgoodies.com"));</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$columnsEqual</h4>
-<code>array</code><p>Returns true if database table has rows where one of the given columns has one of the
-given values,</p></div>
-</div>
-<div class="span4">
-<h3>Examples</h3>
-<pre class="prettyprint linenums"></pre>
-</div>
-</div>
-</div>
-<a id="method_read"></a><div class="element clickable method public method_read" data-toggle="collapse" data-target=".method_read .collapse">
-<h2>read()
-        </h2>
-<pre>read() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="method_shouldCache"></a><div class="element clickable method public method_shouldCache" data-toggle="collapse" data-target=".method_shouldCache .collapse">
-<h2>shouldCache()
-        </h2>
-<pre>shouldCache($service) </pre>
+<h2>Implemented by sub classes.</h2>
+<pre>getValues() : mixed</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_hasConfigInExternalFile"></a><div class="element clickable method public method_hasConfigInExternalFile" data-toggle="collapse" data-target=".method_hasConfigInExternalFile .collapse">
+<h2>Returns true if config is defined in external file.</h2>
+<pre>hasConfigInExternalFile() : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_hasRowWith"></a><div class="element clickable method public method_hasRowWith" data-toggle="collapse" data-target=".method_hasRowWith .collapse">
+<h2>Returns true if database table has rows where one of the given columns has one of the
+given values.</h2>
+<pre>hasRowWith(array $columnsEqual) </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Example:</p>
+
+<pre><code>if($this->hasRowWith(array("email" => "name@dhtmlgoodies.com"));
+</code></pre></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$service</h4></div>
+<div class="subelement argument">
+<h4>$columnsEqual</h4>
+<code>array</code>
+</div>
+</div></div>
+</div>
+<a id="method_read"></a><div class="element clickable method public method_read" data-toggle="collapse" data-target=".method_read .collapse">
+<h2>Return data for this instance.</h2>
+<pre>read() : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
+</div></div>
+</div>
+<a id="method_shouldCache"></a><div class="element clickable method public method_shouldCache" data-toggle="collapse" data-target=".method_shouldCache .collapse">
+<h2>When handled by LudoDBRequestHandler no services will by default be cached.</h2>
+<pre>shouldCache(string $service) : bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>This method should
+be implemented by sub classes when needed.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$service</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
 <a id="method_clearCache"></a><div class="element clickable method protected method_clearCache" data-toggle="collapse" data-target=".method_clearCache .collapse">
-<h2>clearCache()
-        </h2>
+<h2>Clear database cache for this instance.</h2>
 <pre>clearCache() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="method_escapeArguments"></a><div class="element clickable method protected method_escapeArguments" data-toggle="collapse" data-target=".method_escapeArguments .collapse">
-<h2>escapeArguments()
-        </h2>
-<pre>escapeArguments($values) </pre>
+<h2>Escape constructor arguments.</h2>
+<pre>escapeArguments($values) : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$values</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_getConfigParserInstance"></a><div class="element clickable method protected method_getConfigParserInstance" data-toggle="collapse" data-target=".method_getConfigParserInstance .collapse">
-<h2>getConfigParserInstance()
-        </h2>
-<pre>getConfigParserInstance() </pre>
+<h2>Return config parser instance.</h2>
+<pre>getConfigParserInstance() : <a href="../classes/LudoDBConfigParser.html">\LudoDBConfigParser</a></pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/LudoDBConfigParser.html">\LudoDBConfigParser</a></code></div>
+</div></div>
 </div>
 <a id="method_getConfigParserKey"></a><div class="element clickable method protected method_getConfigParserKey" data-toggle="collapse" data-target=".method_getConfigParserKey .collapse">
-<h2>getConfigParserKey()
-        </h2>
-<pre>getConfigParserKey() </pre>
+<h2>Return config parser key of this class.</h2>
+<pre>getConfigParserKey() : string</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
 </div>
 <a id="method_onConstruct"></a><div class="element clickable method protected method_onConstruct" data-toggle="collapse" data-target=".method_onConstruct .collapse">
-<h2>onConstruct()
-        </h2>
+<h2>On construct method which can be implemented by sub classes.</h2>
 <pre>onConstruct() </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="method_sqlHandler"></a><div class="element clickable method protected method_sqlHandler" data-toggle="collapse" data-target=".method_sqlHandler .collapse">
-<h2>sqlHandler()
-        </h2>
-<pre>sqlHandler() </pre>
+<h2>Return SQL handler</h2>
+<pre>sqlHandler() : <a href="../classes/LudoDBSql.html">\LudoDBSql</a></pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/LudoDBSql.html">\LudoDBSql</a></code></div>
+</div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
@@ -362,19 +365,31 @@ given values,</p></div>
 </div>
 <a id="property_arguments"> </a><div class="element clickable property protected property_arguments" data-toggle="collapse" data-target=".property_arguments .collapse">
 <h2></h2>
-<pre>$arguments </pre>
+<pre>$arguments : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_config"> </a><div class="element clickable property protected property_config" data-toggle="collapse" data-target=".property_config .collapse">
 <h2></h2>
-<pre>$config </pre>
+<pre>$config : array</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse">
+<div class="span4">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>example</th>
+<td>examples/cities/DemoCity.php</td>
+</tr></table>
+</div>
+<div class="span4">
+<h3>Examples</h3>
+<pre class="prettyprint linenums"></pre>
+</div>
+</div>
 </div>
 <a id="property_configParsers"> </a><div class="element clickable property protected property_configParsers" data-toggle="collapse" data-target=".property_configParsers .collapse">
 <h2></h2>
-<pre>$configParsers </pre>
+<pre>$configParsers : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
@@ -392,13 +407,13 @@ given values,</p></div>
 </div>
 <a id="property_configParserKey"> </a><div class="element clickable property private property_configParserKey" data-toggle="collapse" data-target=".property_configParserKey .collapse">
 <h2></h2>
-<pre>$configParserKey </pre>
+<pre>$configParserKey : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_sql_handler"> </a><div class="element clickable property private property_sql_handler" data-toggle="collapse" data-target=".property_sql_handler .collapse">
 <h2></h2>
-<pre>$sql_handler </pre>
+<pre>$sql_handler : <a href="../classes/LudoDBSql.html">\LudoDBSql</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
@@ -409,7 +424,7 @@ given values,</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-04-12T03:17:14+02:00.<br></footer></div>
+            generated on 2013-04-12T17:11:35+02:00.<br></footer></div>
 </div>
 </body>
 </html>

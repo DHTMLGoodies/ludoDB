@@ -4,14 +4,50 @@
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
+/**
+ * Abstract LudoDBModel class
+ * @package LudoDB
+ * @example examples/cities/DemoCity.php
+ */
 abstract class LudoDBModel extends LudoDBObject
 {
+    /**
+     * Record data
+     * @var array
+     */
     protected $data = array();
+    /**
+     * Uncommited data
+     * @var array
+     */
     protected $updates;
+    /**
+     * Array of external class references
+     * @var array
+     */
     private $externalClasses = array();
+    /**
+     * True when commit has been disabled, i.e. no saving will be done
+     * for this object.
+     * @var
+     */
     private $commitDisabled;
+
+    /**
+     * True when object has been populated with data from db
+     * @var bool
+     */
     private $populated = false;
 
+    /**
+     * Risky delete table data or drop table sql query waiting for execution.
+     * @var string
+     */
+    private $riskyQuery;
+
+    /**
+     * Populate with data from db
+     */
     protected function populate()
     {
         $this->populated = true;
@@ -23,6 +59,11 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
+    /**
+     * Validates constructor arguments.
+     * @param $params
+     * @return array
+     */
     private function getValidArguments($params)
     {
         $paramNames = $this->parser->getConstructorParams();
@@ -32,11 +73,21 @@ abstract class LudoDBModel extends LudoDBObject
         return $params;
     }
 
+    /**
+     * Return valid value for argument with given name
+     * @param $key
+     * @param $value
+     * @return mixed
+     */
     protected function getValidArgument($key, $value)
     {
         return $value;
     }
 
+    /**
+     * Populate model with these data
+     * @param array $data
+     */
     private function populateWith($data = array())
     {
         foreach ($data as $key => $value) {
@@ -44,6 +95,21 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
+    /**
+     * Return column value. This method will return
+     * * Uncommitted value if exists or value from db
+     * * Value from external models/collection
+     * * Value of static columns
+     * * Default values.
+     * Example:
+     * <code>
+     * public function getFirstname(){
+     *      return $this->getValue('firstname');
+     * }
+     * </code>
+     * @param $column
+     * @return null
+     */
     protected function getValue($column)
     {
         $this->autoPopulate();
@@ -59,6 +125,9 @@ abstract class LudoDBModel extends LudoDBObject
         return isset($this->data[$column]) ? $this->data[$column] : $this->parser->getDefaultValue($column);
     }
 
+    /**
+     * Auto populate model with data from db.
+     */
     private function autoPopulate()
     {
         if (!$this->populated && !empty($this->arguments)) {
@@ -66,6 +135,11 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
+    /**
+     * Return external value
+     * @param $column
+     * @return mixed
+     */
     private function getExternalValue($column)
     {
         $method = $this->parser->getGetMethod($column);
@@ -73,6 +147,7 @@ abstract class LudoDBModel extends LudoDBObject
     }
 
     /**
+     * Return external class reference for external column
      * @param String $column
      * @return LudoDBCollection table
      */
@@ -92,6 +167,19 @@ abstract class LudoDBModel extends LudoDBObject
         return $this->externalClasses[$column];
     }
 
+    /**
+     * Set a column value. This value will not be committed to db until
+     * a call to commit is made.
+     * Example:
+     * <code>
+     * public function setFirstName($name){
+     *      $this->setValue('firstname', $name');
+     * }
+     * </code>
+     * @param $column
+     * @param $value
+     * @return null
+     */
     protected function setValue($column, $value)
     {
         if ($this->parser->isExternalColumn($column)) {
@@ -104,6 +192,11 @@ abstract class LudoDBModel extends LudoDBObject
         return null;
     }
 
+    /**
+     * Update column value of external column
+     * @param $column
+     * @param $value
+     */
     private function setExternalValue($column, $value)
     {
         $method = $this->parser->getSetMethod($column);
@@ -112,16 +205,34 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
+    /**
+     * Disable commit for this object
+     */
     public function disableCommit()
     {
         $this->commitDisabled = true;
     }
 
+    /**
+     * Enable commit for this object. commit is by default enabled
+     */
     public function enableCommit()
     {
         $this->commitDisabled = false;
     }
 
+    /**
+     * Commit changes to the database.
+     * Example:
+     * <code>
+     * $person = new Person();
+     * $person->setFirstname('John');
+     * $person->setLastname('Johnson');
+     * $person->commit();
+     * echo $person->getId();
+     * </code>
+     * @return null|void
+     */
     public function commit()
     {
         if ($this->commitDisabled) return null;
@@ -149,6 +260,7 @@ abstract class LudoDBModel extends LudoDBObject
     }
 
     /**
+     * Execute commit on classes for external columns.
      * @param LudoDBObject $class
      */
     private function commitExternal($class)
@@ -156,6 +268,9 @@ abstract class LudoDBModel extends LudoDBObject
         $class->commit();
     }
 
+    /**
+     * Internal update method
+     */
     private function update()
     {
         if ($this->isValid()) {
@@ -165,11 +280,18 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
+    /**
+     * Return uncommited data
+     * @return array
+     */
     public function getUncommitted()
     {
         return $this->updates;
     }
 
+    /**
+     * Private insert method
+     */
     private function insert()
     {
         if ($this->isValid()) {
@@ -204,6 +326,10 @@ abstract class LudoDBModel extends LudoDBObject
         $this->updates = null;
     }
 
+    /**
+     * Update id field
+     * @param $id
+     */
     protected function setId($id)
     {
         $field = $this->parser->getIdField();
@@ -213,6 +339,10 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
+    /**
+     * Return id of current record.
+     * @return string|int|null
+     */
     public function getId()
     {
         $this->autoPopulate();
@@ -240,10 +370,15 @@ abstract class LudoDBModel extends LudoDBObject
         return $this->db->tableExists($this->parser->getTableName());
     }
 
-    private $riskyQuery;
+
 
     /**
-     * Drop database table
+     * Drop database table. You need to call yesImSure afterwards.
+      * Example:
+      * <code>
+      * $person = new Person();
+      * $person->drop()->yesImSure();
+      * </code>
      * @method drop
      */
     public function drop()
@@ -254,18 +389,23 @@ abstract class LudoDBModel extends LudoDBObject
         return $this;
     }
 
+    /**
+     * Delete all data from this table. You need to call yesImSure afterwards.
+     * Example:
+     * <code>
+     * $person = new Person();
+     * $person->deleteTableData()->yesImSure();
+     * </code>
+     * @return LudoDBModel
+     */
     public function deleteTableData()
     {
         $this->riskyQuery = "delete from " . $this->parser->getTableName();
         return $this;
     }
 
-    protected function beforeDelete(){
-
-    }
-
     /**
-     * Execute risky query,
+     * Executes drop or deleteTableData
      * @example
      * $p = new Person();
      * $p->drop()->yesImSure();
@@ -283,6 +423,9 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
+    /**
+     * Create database indexes defined in table config
+     */
     private function createIndexes()
     {
         $indexes = $this->parser->getIndexes();
@@ -292,11 +435,19 @@ abstract class LudoDBModel extends LudoDBObject
         }
     }
 
+    /**
+     * Returns unique index name
+     * @param $field
+     * @return string
+     */
     private function getIndexName($field)
     {
         return 'IND_' . md5($this->parser->getTableName() . $field);
     }
 
+    /**
+     * Populate database table with default data defined in table config
+     */
     protected function insertDefaultData()
     {
         $data = $this->parser->getDefaultData();
@@ -311,6 +462,7 @@ abstract class LudoDBModel extends LudoDBObject
     }
 
     /**
+     * Return new instance of this LudoDBModel
      * @method getClassName
      * @return LudoDBModel class
      */
@@ -340,6 +492,13 @@ abstract class LudoDBModel extends LudoDBObject
         return $this->some($keys, false);
     }
 
+    /**
+     * Return values for these keys. When $filtered is true, onlye
+     * columns with values(not null) will be returned.
+     * @param array $keys
+     * @param bool $filtered
+     * @return array
+     */
     private function some(array $keys, $filtered = false)
     {
         $ret = array();
@@ -354,12 +513,19 @@ abstract class LudoDBModel extends LudoDBObject
         return $ret;
     }
 
+    /**
+     * Clear data from model.
+     */
     public function clearValues()
     {
         $this->data = array();
         $this->updates = null;
     }
 
+    /**
+     * Return value of public columns
+     * @return array
+     */
     public function getValues()
     {
         $this->autoPopulate();
@@ -374,6 +540,10 @@ abstract class LudoDBModel extends LudoDBObject
         return array_merge($ret, $this->getJoinColumns());
     }
 
+    /**
+     * Return values from joined columns.
+     * @return array
+     */
     private function getJoinColumns()
     {
         $ret = array();
@@ -387,11 +557,23 @@ abstract class LudoDBModel extends LudoDBObject
         return $ret;
     }
 
+    /**
+     * Return true if update and save is allowed to run.
+     * @return bool
+     */
     public function isValid()
     {
         return true;
     }
 
+    /**
+     * Creates magic get and set methods for columns. Example
+     * columns "firstname" will have it's own "getFirstname" and "setFirstname" method.
+     * @param $name
+     * @param $arguments
+     * @return null
+     * @throws Exception
+     */
     public function __call($name, $arguments)
     {
         if (substr($name, 0, 3) === 'set' && $name !== "setId") {
@@ -409,6 +591,19 @@ abstract class LudoDBModel extends LudoDBObject
         throw new Exception("Invalid method call " . $name);
     }
 
+    /**
+     * Populate columns you can write to with these data
+     * @example:
+     * <code>
+     * $person = new Person(1);
+     * $person->populate(array(
+     *  "firstname" => "Jane", "lastname" => "Johnson"
+     * ));
+     * $person->commit();
+     * </code>
+     * @param $data
+     * @return bool
+     */
     public function setValues($data)
     {
         $valuesSet = false;
@@ -421,7 +616,17 @@ abstract class LudoDBModel extends LudoDBObject
         return $valuesSet;
     }
 
-
+    /**
+     * Populate and save data. Returns array "<idField>" => "<id>"
+     * Example:
+     * <code>
+     * $city = new City();
+     * $data = $city->save(array("city" => "Stavanger", "country" => "Norway"));
+     * var_dump($data);
+     * </code>
+     * @param $data
+     * @return array
+     */
     public function save($data)
     {
         if (empty($data)) return array();

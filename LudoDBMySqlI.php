@@ -1,19 +1,29 @@
 <?php
 /**
- * MysqlI adapter. PDO is the preferred adapter and should be used
- * when supported by the server.
  * User: Alf Magne
  * Date: 01.02.13
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
+ */
+/**
+ * MysqlI adapter. PDO is the preferred adapter and should be used
+ * when supported by the server.
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
 {
     /**
+     * Database connection resource reference
      * @var mysqli
      */
     protected static $conn;
 
+    /**
+     * Connect to database
+     * @return mixed|void
+     * @throws LudoDBConnectionException
+     */
     public function connect()
     {
 
@@ -28,6 +38,7 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
 
 
     /**
+     * Execute query and return resource.
      * @param $sql
      * @param array $params
      * @return bool|mysqli_result
@@ -49,6 +60,7 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
     }
 
     /**
+     * Get one row
      * @param $sql
      * @param array $params
      * @return array|null
@@ -64,6 +76,7 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
     }
 
     /**
+     * Return number of rows for given query with given arguments.
      * @param $sql
      * @param array $params
      * @return int
@@ -85,6 +98,7 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
     }
 
     /**
+     * Return reference to next row in result set.
      * @param mysqli_result|resource|PDOStatement $result
      * @return array
      */
@@ -94,6 +108,7 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
     }
 
     /**
+     * Return value of first column of first row.
      * @param $sql
      * @param array $params
      * @return null
@@ -105,6 +120,11 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
         return (isset($row)) ? $row[0] : null;
     }
 
+    /**
+     * Return safe string for insertion into database.
+     * @param $string
+     * @return mixed|string
+     */
     public function escapeString($string)
     {
         return is_string($string) ? self::$conn->escape_string(stripslashes($string)) : $string;

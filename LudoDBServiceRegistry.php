@@ -1,19 +1,25 @@
 <?php
 /**
- * By registering LudoDBService classes, you may get an overview of all the resources and
- * services you have available.
  * User: Alf Magne Kalleland
  * Date: 12.02.13
  * Time: 23:14
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
-/*
- * LudoDBServiceRegistyr
+/**
+ * Registry of LudoDBService classes.
+ *
+ * By registering LudoDBService classes, you may get an overview of all the resources and
+ * services you have available.
+ * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBServiceRegistry
 {
+    /**
+     * Array of registered resource services.
+     * @var array
+     */
     private static $registeredServices = array();
 
     /**

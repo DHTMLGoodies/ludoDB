@@ -31,10 +31,10 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">302</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
-                <span class="label label-info">3</span>
+                <span class="label label-info">4</span>
 </li></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
                 <span class="label label-info">0</span></a></li>
@@ -58,141 +58,84 @@
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
-<li class="method public inherited"><a href="#method___call" title="__call :: "><span class="description">__call()
-        </span><pre>__call()</pre></a></li>
-<li class="method public "><a href="#method___construct" title="__construct :: "><span class="description">__construct()
-        </span><pre>__construct()</pre></a></li>
-<li class="method public inherited"><a href="#method___toString" title="__toString :: "><span class="description">__toString()
-        </span><pre>__toString()</pre></a></li>
-<li class="method public inherited"><a href="#method_asJSON" title="asJSON :: "><span class="description">asJSON()
-        </span><pre>asJSON()</pre></a></li>
-<li class="method public "><a href="#method_clearBy" title="clearBy :: "><span class="description">clearBy()
-        </span><pre>clearBy()</pre></a></li>
-<li class="method public "><a href="#method_clearByClass" title="clearByClass :: "><span class="description">clearByClass()
-        </span><pre>clearByClass()</pre></a></li>
-<li class="method public inherited"><a href="#method_clearParsers" title="clearParsers :: "><span class="description">clearParsers()
-        </span><pre>clearParsers()</pre></a></li>
-<li class="method public inherited"><a href="#method_clearValues" title="clearValues :: "><span class="description">clearValues()
-        </span><pre>clearValues()</pre></a></li>
-<li class="method public inherited"><a href="#method_commit" title="commit :: "><span class="description">commit()
-        </span><pre>commit()</pre></a></li>
-<li class="method public inherited"><a href="#method_configParser" title="configParser :: "><span class="description">configParser()
-        </span><pre>configParser()</pre></a></li>
+<li class="method public inherited"><a href="#method___call" title="__call :: Creates magic get and set methods for columns."><span class="description">Creates magic get and set methods for columns.</span><pre>__call()</pre></a></li>
+<li class="method public "><a href="#method___construct" title="__construct :: Creates new LudoDBCache instance."><span class="description">Creates new LudoDBCache instance.</span><pre>__construct()</pre></a></li>
+<li class="method public inherited"><a href="#method___toString" title="__toString :: Return data as JSON string."><span class="description">Return data as JSON string.</span><pre>__toString()</pre></a></li>
+<li class="method public inherited"><a href="#method_asJSON" title="asJSON :: Return data as JSON."><span class="description">Return data as JSON.</span><pre>asJSON()</pre></a></li>
+<li class="method public "><a href="#method_clearBy" title="clearBy :: Clear cache records from db where cache_key equals key"><span class="description">Clear cache records from db where cache_key equals key</span><pre>clearBy()</pre></a></li>
+<li class="method public "><a href="#method_clearByClass" title="clearByClass :: Clear all cache record for given class name / resource."><span class="description">Clear all cache record for given class name / resource.</span><pre>clearByClass()</pre></a></li>
+<li class="method public inherited"><a href="#method_clearParsers" title="clearParsers :: Clear all cached config parsers"><span class="description">Clear all cached config parsers</span><pre>clearParsers()</pre></a></li>
+<li class="method public inherited"><a href="#method_clearValues" title="clearValues :: Clear data from model."><span class="description">Clear data from model.</span><pre>clearValues()</pre></a></li>
+<li class="method public inherited"><a href="#method_commit" title="commit :: Commit changes to the database."><span class="description">Commit changes to the database.</span><pre>commit()</pre></a></li>
+<li class="method public inherited"><a href="#method_configParser" title="configParser :: Return reference to config parser."><span class="description">Return reference to config parser.</span><pre>configParser()</pre></a></li>
 <li class="method public inherited"><a href="#method_createTable" title="createTable :: Create DB table"><span class="description">Create DB table</span><pre>createTable()</pre></a></li>
 <li class="method public inherited"><a href="#method_delete" title="delete :: Delete record"><span class="description">Delete record</span><pre>delete()</pre></a></li>
-<li class="method public inherited"><a href="#method_deleteTableData" title="deleteTableData :: "><span class="description">deleteTableData()
-        </span><pre>deleteTableData()</pre></a></li>
-<li class="method public inherited"><a href="#method_disableCommit" title="disableCommit :: "><span class="description">disableCommit()
-        </span><pre>disableCommit()</pre></a></li>
-<li class="method public inherited"><a href="#method_drop" title="drop :: Drop database table"><span class="description">Drop database table</span><pre>drop()</pre></a></li>
-<li class="method public inherited"><a href="#method_enableCommit" title="enableCommit :: "><span class="description">enableCommit()
-        </span><pre>enableCommit()</pre></a></li>
+<li class="method public inherited"><a href="#method_deleteTableData" title="deleteTableData :: Delete all data from this table."><span class="description">Delete all data from this table.</span><pre>deleteTableData()</pre></a></li>
+<li class="method public inherited"><a href="#method_disableCommit" title="disableCommit :: Disable commit for this object"><span class="description">Disable commit for this object</span><pre>disableCommit()</pre></a></li>
+<li class="method public inherited"><a href="#method_drop" title="drop :: Drop database table."><span class="description">Drop database table.</span><pre>drop()</pre></a></li>
+<li class="method public inherited"><a href="#method_enableCommit" title="enableCommit :: Enable commit for this object."><span class="description">Enable commit for this object.</span><pre>enableCommit()</pre></a></li>
 <li class="method public inherited"><a href="#method_exists" title="exists :: Returns true if database table exists."><span class="description">Returns true if database table exists.</span><pre>exists()</pre></a></li>
-<li class="method public "><a href="#method_getCache" title="getCache :: "><span class="description">getCache()
-        </span><pre>getCache()</pre></a></li>
-<li class="method public inherited"><a href="#method_getConstructorValues" title="getConstructorValues :: "><span class="description">getConstructorValues()
-        </span><pre>getConstructorValues()</pre></a></li>
-<li class="method public inherited"><a href="#method_getId" title="getId :: "><span class="description">getId()
-        </span><pre>getId()</pre></a></li>
-<li class="method public inherited"><a href="#method_getOnSuccessMessageFor" title="getOnSuccessMessageFor :: "><span class="description">getOnSuccessMessageFor()
-        </span><pre>getOnSuccessMessageFor()</pre></a></li>
+<li class="method public "><a href="#method_getCache" title="getCache :: Return cache data"><span class="description">Return cache data</span><pre>getCache()</pre></a></li>
+<li class="method public inherited"><a href="#method_getConstructorValues" title="getConstructorValues :: Return array of values sent to constructor."><span class="description">Return array of values sent to constructor.</span><pre>getConstructorValues()</pre></a></li>
+<li class="method public inherited"><a href="#method_getId" title="getId :: Return id of current record."><span class="description">Return id of current record.</span><pre>getId()</pre></a></li>
+<li class="method public inherited"><a href="#method_getOnSuccessMessageFor" title="getOnSuccessMessageFor :: LudoDBService getOnSuccessMessageFor method."><span class="description">LudoDBService getOnSuccessMessageFor method.</span><pre>getOnSuccessMessageFor()</pre></a></li>
 <li class="method public inherited"><a href="#method_getSomeValues" title="getSomeValues :: Return model values."><span class="description">Return model values.</span><pre>getSomeValues()</pre></a></li>
 <li class="method public inherited"><a href="#method_getSomeValuesFiltered" title="getSomeValuesFiltered :: Return key-pair values with null values removed."><span class="description">Return key-pair values with null values removed.</span><pre>getSomeValuesFiltered()</pre></a></li>
-<li class="method public inherited"><a href="#method_getUncommitted" title="getUncommitted :: "><span class="description">getUncommitted()
-        </span><pre>getUncommitted()</pre></a></li>
+<li class="method public inherited"><a href="#method_getUncommitted" title="getUncommitted :: Return uncommited data"><span class="description">Return uncommited data</span><pre>getUncommitted()</pre></a></li>
 <li class="method public inherited"><a href="#method_getValidServices" title='getValidServices :: Valid public services offered by this class, example "read", "delete" and "save"'><span class="description">Valid public services offered by this class, example "read", "delete" and "save"</span><pre>getValidServices()</pre></a></li>
-<li class="method public inherited"><a href="#method_getValues" title="getValues :: "><span class="description">getValues()
-        </span><pre>getValues()</pre></a></li>
-<li class="method public inherited"><a href="#method_hasConfigInExternalFile" title="hasConfigInExternalFile :: "><span class="description">hasConfigInExternalFile()
-        </span><pre>hasConfigInExternalFile()</pre></a></li>
-<li class="method public "><a href="#method_hasData" title="hasData :: "><span class="description">hasData()
-        </span><pre>hasData()</pre></a></li>
-<li class="method public inherited"><a href="#method_hasRowWith" title="hasRowWith :: "><span class="description">hasRowWith()
-        </span><pre>hasRowWith()</pre></a></li>
-<li class="method public inherited"><a href="#method_isValid" title="isValid :: "><span class="description">isValid()
-        </span><pre>isValid()</pre></a></li>
-<li class="method public inherited"><a href="#method_read" title="read :: "><span class="description">read()
-        </span><pre>read()</pre></a></li>
+<li class="method public inherited"><a href="#method_getValues" title="getValues :: Return value of public columns"><span class="description">Return value of public columns</span><pre>getValues()</pre></a></li>
+<li class="method public inherited"><a href="#method_hasConfigInExternalFile" title="hasConfigInExternalFile :: Returns true if config is defined in external file."><span class="description">Returns true if config is defined in external file.</span><pre>hasConfigInExternalFile()</pre></a></li>
+<li class="method public "><a href="#method_hasData" title="hasData :: Returns true if cache data exists."><span class="description">Returns true if cache data exists.</span><pre>hasData()</pre></a></li>
+<li class="method public inherited"><a href="#method_hasRowWith" title="hasRowWith :: Returns true if database table has rows where one of the given columns has one of the
+given values."><span class="description">Returns true if database table has rows where one of the given columns has one of the
+given values.</span><pre>hasRowWith()</pre></a></li>
+<li class="method public inherited"><a href="#method_isValid" title="isValid :: Return true if update and save is allowed to run."><span class="description">Return true if update and save is allowed to run.</span><pre>isValid()</pre></a></li>
+<li class="method public inherited"><a href="#method_read" title="read :: Return data for this instance."><span class="description">Return data for this instance.</span><pre>read()</pre></a></li>
 <li class="method public inherited"><a href="#method_rollback" title="rollback :: Rollback updates"><span class="description">Rollback updates</span><pre>rollback()</pre></a></li>
-<li class="method public inherited"><a href="#method_save" title="save :: "><span class="description">save()
-        </span><pre>save()</pre></a></li>
-<li class="method public "><a href="#method_setCache" title="setCache :: "><span class="description">setCache()
-        </span><pre>setCache()</pre></a></li>
-<li class="method public "><a href="#method_setKey" title="setKey :: "><span class="description">setKey()
-        </span><pre>setKey()</pre></a></li>
-<li class="method public inherited"><a href="#method_setValues" title="setValues :: "><span class="description">setValues()
-        </span><pre>setValues()</pre></a></li>
-<li class="method public inherited"><a href="#method_shouldCache" title="shouldCache :: "><span class="description">shouldCache()
-        </span><pre>shouldCache()</pre></a></li>
-<li class="method public inherited"><a href="#method_yesImSure" title="yesImSure :: Execute risky query,"><span class="description">Execute risky query,</span><pre>yesImSure()</pre></a></li>
+<li class="method public inherited"><a href="#method_save" title="save :: Populate and save data."><span class="description">Populate and save data.</span><pre>save()</pre></a></li>
+<li class="method public "><a href="#method_setCache" title="setCache :: Store service data to cache"><span class="description">Store service data to cache</span><pre>setCache()</pre></a></li>
+<li class="method public "><a href="#method_setKey" title="setKey :: Set cache_key of new cache record"><span class="description">Set cache_key of new cache record</span><pre>setKey()</pre></a></li>
+<li class="method public inherited"><a href="#method_setValues" title="setValues :: Populate columns you can write to with these data"><span class="description">Populate columns you can write to with these data</span><pre>setValues()</pre></a></li>
+<li class="method public inherited"><a href="#method_shouldCache" title="shouldCache :: When handled by LudoDBRequestHandler no services will by default be cached."><span class="description">When handled by LudoDBRequestHandler no services will by default be cached.</span><pre>shouldCache()</pre></a></li>
+<li class="method public inherited"><a href="#method_yesImSure" title="yesImSure :: Executes drop or deleteTableData"><span class="description">Executes drop or deleteTableData</span><pre>yesImSure()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
-<li class="method protected inherited"><a href="#method_beforeDelete" title="beforeDelete :: "><span class="description">beforeDelete()
-        </span><pre>beforeDelete()</pre></a></li>
 <li class="method protected inherited"><a href="#method_beforeInsert" title="beforeInsert :: Method executed before new record is saved in db"><span class="description">Method executed before new record is saved in db</span><pre>beforeInsert()</pre></a></li>
 <li class="method protected inherited"><a href="#method_beforeUpdate" title="beforeUpdate :: Method executed before record is updated"><span class="description">Method executed before record is updated</span><pre>beforeUpdate()</pre></a></li>
-<li class="method protected inherited"><a href="#method_clearCache" title="clearCache :: "><span class="description">clearCache()
-        </span><pre>clearCache()</pre></a></li>
-<li class="method protected inherited"><a href="#method_escapeArguments" title="escapeArguments :: "><span class="description">escapeArguments()
-        </span><pre>escapeArguments()</pre></a></li>
-<li class="method protected inherited"><a href="#method_getConfigParserInstance" title="getConfigParserInstance :: "><span class="description">getConfigParserInstance()
-        </span><pre>getConfigParserInstance()</pre></a></li>
-<li class="method protected inherited"><a href="#method_getConfigParserKey" title="getConfigParserKey :: "><span class="description">getConfigParserKey()
-        </span><pre>getConfigParserKey()</pre></a></li>
-<li class="method protected inherited"><a href="#method_getValidArgument" title="getValidArgument :: "><span class="description">getValidArgument()
-        </span><pre>getValidArgument()</pre></a></li>
-<li class="method protected inherited"><a href="#method_getValue" title="getValue :: "><span class="description">getValue()
-        </span><pre>getValue()</pre></a></li>
-<li class="method protected inherited"><a href="#method_insertDefaultData" title="insertDefaultData :: "><span class="description">insertDefaultData()
-        </span><pre>insertDefaultData()</pre></a></li>
-<li class="method protected inherited"><a href="#method_onConstruct" title="onConstruct :: "><span class="description">onConstruct()
-        </span><pre>onConstruct()</pre></a></li>
-<li class="method protected inherited"><a href="#method_populate" title="populate :: "><span class="description">populate()
-        </span><pre>populate()</pre></a></li>
-<li class="method protected inherited"><a href="#method_setId" title="setId :: "><span class="description">setId()
-        </span><pre>setId()</pre></a></li>
-<li class="method protected inherited"><a href="#method_setValue" title="setValue :: "><span class="description">setValue()
-        </span><pre>setValue()</pre></a></li>
-<li class="method protected inherited"><a href="#method_sqlHandler" title="sqlHandler :: "><span class="description">sqlHandler()
-        </span><pre>sqlHandler()</pre></a></li>
+<li class="method protected inherited"><a href="#method_clearCache" title="clearCache :: Clear database cache for this instance."><span class="description">Clear database cache for this instance.</span><pre>clearCache()</pre></a></li>
+<li class="method protected inherited"><a href="#method_escapeArguments" title="escapeArguments :: Escape constructor arguments."><span class="description">Escape constructor arguments.</span><pre>escapeArguments()</pre></a></li>
+<li class="method protected inherited"><a href="#method_getConfigParserInstance" title="getConfigParserInstance :: Return config parser instance."><span class="description">Return config parser instance.</span><pre>getConfigParserInstance()</pre></a></li>
+<li class="method protected inherited"><a href="#method_getConfigParserKey" title="getConfigParserKey :: Return config parser key of this class."><span class="description">Return config parser key of this class.</span><pre>getConfigParserKey()</pre></a></li>
+<li class="method protected inherited"><a href="#method_getValidArgument" title="getValidArgument :: Return valid value for argument with given name"><span class="description">Return valid value for argument with given name</span><pre>getValidArgument()</pre></a></li>
+<li class="method protected inherited"><a href="#method_getValue" title="getValue :: Return column value."><span class="description">Return column value.</span><pre>getValue()</pre></a></li>
+<li class="method protected inherited"><a href="#method_insertDefaultData" title="insertDefaultData :: Populate database table with default data defined in table config"><span class="description">Populate database table with default data defined in table config</span><pre>insertDefaultData()</pre></a></li>
+<li class="method protected inherited"><a href="#method_onConstruct" title="onConstruct :: On construct method which can be implemented by sub classes."><span class="description">On construct method which can be implemented by sub classes.</span><pre>onConstruct()</pre></a></li>
+<li class="method protected inherited"><a href="#method_populate" title="populate :: Populate with data from db"><span class="description">Populate with data from db</span><pre>populate()</pre></a></li>
+<li class="method protected inherited"><a href="#method_setId" title="setId :: Update id field"><span class="description">Update id field</span><pre>setId()</pre></a></li>
+<li class="method protected inherited"><a href="#method_setValue" title="setValue :: Set a column value."><span class="description">Set a column value.</span><pre>setValue()</pre></a></li>
+<li class="method protected inherited"><a href="#method_sqlHandler" title="sqlHandler :: Return SQL handler"><span class="description">Return SQL handler</span><pre>sqlHandler()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
                     <ul>
-<li class="method private inherited"><a href="#method_autoPopulate" title="autoPopulate :: "><span class="description">autoPopulate()
-        </span><pre>autoPopulate()</pre></a></li>
-<li class="method private inherited"><a href="#method_commitExternal" title="commitExternal :: "><span class="description">commitExternal()
-        </span><pre>commitExternal()</pre></a></li>
-<li class="method private inherited"><a href="#method_createIndexes" title="createIndexes :: "><span class="description">createIndexes()
-        </span><pre>createIndexes()</pre></a></li>
-<li class="method private "><a href="#method_getCacheKey" title="getCacheKey :: "><span class="description">getCacheKey()
-        </span><pre>getCacheKey()</pre></a></li>
-<li class="method private inherited"><a href="#method_getExternalClassFor" title="getExternalClassFor :: "><span class="description">getExternalClassFor()
-        </span><pre>getExternalClassFor()</pre></a></li>
-<li class="method private inherited"><a href="#method_getExternalValue" title="getExternalValue :: "><span class="description">getExternalValue()
-        </span><pre>getExternalValue()</pre></a></li>
-<li class="method private inherited"><a href="#method_getIndexName" title="getIndexName :: "><span class="description">getIndexName()
-        </span><pre>getIndexName()</pre></a></li>
-<li class="method private inherited"><a href="#method_getJoinColumns" title="getJoinColumns :: "><span class="description">getJoinColumns()
-        </span><pre>getJoinColumns()</pre></a></li>
-<li class="method private inherited"><a href="#method_getNewInstance" title="getNewInstance :: "><span class="description">getNewInstance()
-        </span><pre>getNewInstance()</pre></a></li>
-<li class="method private inherited"><a href="#method_getValidArguments" title="getValidArguments :: "><span class="description">getValidArguments()
-        </span><pre>getValidArguments()</pre></a></li>
-<li class="method private inherited"><a href="#method_insert" title="insert :: "><span class="description">insert()
-        </span><pre>insert()</pre></a></li>
-<li class="method private inherited"><a href="#method_populateWith" title="populateWith :: "><span class="description">populateWith()
-        </span><pre>populateWith()</pre></a></li>
-<li class="method private "><a href="#method_setClassName" title="setClassName :: "><span class="description">setClassName()
-        </span><pre>setClassName()</pre></a></li>
-<li class="method private inherited"><a href="#method_setExternalValue" title="setExternalValue :: "><span class="description">setExternalValue()
-        </span><pre>setExternalValue()</pre></a></li>
-<li class="method private inherited"><a href="#method_some" title="some :: "><span class="description">some()
-        </span><pre>some()</pre></a></li>
-<li class="method private inherited"><a href="#method_update" title="update :: "><span class="description">update()
-        </span><pre>update()</pre></a></li>
+<li class="method private inherited"><a href="#method_autoPopulate" title="autoPopulate :: Auto populate model with data from db."><span class="description">Auto populate model with data from db.</span><pre>autoPopulate()</pre></a></li>
+<li class="method private inherited"><a href="#method_commitExternal" title="commitExternal :: Execute commit on classes for external columns."><span class="description">Execute commit on classes for external columns.</span><pre>commitExternal()</pre></a></li>
+<li class="method private inherited"><a href="#method_createIndexes" title="createIndexes :: Create database indexes defined in table config"><span class="description">Create database indexes defined in table config</span><pre>createIndexes()</pre></a></li>
+<li class="method private "><a href="#method_getCacheKey" title="getCacheKey :: Return cache key based on class name and arguments."><span class="description">Return cache key based on class name and arguments.</span><pre>getCacheKey()</pre></a></li>
+<li class="method private inherited"><a href="#method_getExternalClassFor" title="getExternalClassFor :: Return external class reference for external column"><span class="description">Return external class reference for external column</span><pre>getExternalClassFor()</pre></a></li>
+<li class="method private inherited"><a href="#method_getExternalValue" title="getExternalValue :: Return external value"><span class="description">Return external value</span><pre>getExternalValue()</pre></a></li>
+<li class="method private inherited"><a href="#method_getIndexName" title="getIndexName :: Returns unique index name"><span class="description">Returns unique index name</span><pre>getIndexName()</pre></a></li>
+<li class="method private inherited"><a href="#method_getJoinColumns" title="getJoinColumns :: Return values from joined columns."><span class="description">Return values from joined columns.</span><pre>getJoinColumns()</pre></a></li>
+<li class="method private inherited"><a href="#method_getNewInstance" title="getNewInstance :: Return new instance of this LudoDBModel"><span class="description">Return new instance of this LudoDBModel</span><pre>getNewInstance()</pre></a></li>
+<li class="method private inherited"><a href="#method_getValidArguments" title="getValidArguments :: Validates constructor arguments."><span class="description">Validates constructor arguments.</span><pre>getValidArguments()</pre></a></li>
+<li class="method private inherited"><a href="#method_insert" title="insert :: Private insert method"><span class="description">Private insert method</span><pre>insert()</pre></a></li>
+<li class="method private inherited"><a href="#method_populateWith" title="populateWith :: Populate model with these data"><span class="description">Populate model with these data</span><pre>populateWith()</pre></a></li>
+<li class="method private "><a href="#method_setClassName" title="setClassName :: Set class name for new cache record"><span class="description">Set class name for new cache record</span><pre>setClassName()</pre></a></li>
+<li class="method private inherited"><a href="#method_setExternalValue" title="setExternalValue :: Update column value of external column"><span class="description">Update column value of external column</span><pre>setExternalValue()</pre></a></li>
+<li class="method private inherited"><a href="#method_some" title="some :: Return values for these keys."><span class="description">Return values for these keys.</span><pre>some()</pre></a></li>
+<li class="method private inherited"><a href="#method_update" title="update :: Internal update method"><span class="description">Internal update method</span><pre>update()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
@@ -201,25 +144,25 @@
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
-<li class="property protected "><a href="#property_JSONConfig" title="$JSONConfig :: True when config is in JSONConfig/&lt;class name&gt;.json file"><span class="description"></span><pre>$JSONConfig</pre></a></li>
-<li class="property protected inherited"><a href="#property_arguments" title="$arguments :: "><span class="description"></span><pre>$arguments</pre></a></li>
-<li class="property protected "><a href="#property_config" title="$config :: "><span class="description"></span><pre>$config</pre></a></li>
-<li class="property protected inherited"><a href="#property_configParsers" title="$configParsers :: "><span class="description"></span><pre>$configParsers</pre></a></li>
-<li class="property protected inherited"><a href="#property_data" title="$data :: "><span class="description"></span><pre>$data</pre></a></li>
-<li class="property protected inherited"><a href="#property_db" title="$db :: "><span class="description"></span><pre>$db</pre></a></li>
-<li class="property protected inherited"><a href="#property_parser" title="$parser :: "><span class="description"></span><pre>$parser</pre></a></li>
-<li class="property protected inherited"><a href="#property_updates" title="$updates :: "><span class="description"></span><pre>$updates</pre></a></li>
+<li class="property protected "><a href="#property_JSONConfig" title="$JSONConfig :: JSONConfig set to false"><span class="description"></span><pre>$JSONConfig</pre></a></li>
+<li class="property protected inherited"><a href="#property_arguments" title="$arguments :: Constructor arguments"><span class="description"></span><pre>$arguments</pre></a></li>
+<li class="property protected "><a href="#property_config" title="$config :: Config of ludo_db_cache"><span class="description"></span><pre>$config</pre></a></li>
+<li class="property protected inherited"><a href="#property_configParsers" title="$configParsers :: Internal cache of config parsers for LudoDBObjects."><span class="description"></span><pre>$configParsers</pre></a></li>
+<li class="property protected inherited"><a href="#property_data" title="$data :: Record data"><span class="description"></span><pre>$data</pre></a></li>
+<li class="property protected inherited"><a href="#property_db" title="$db :: Internal LudoDB instance."><span class="description"></span><pre>$db</pre></a></li>
+<li class="property protected inherited"><a href="#property_parser" title="$parser :: Internal reference to config parser"><span class="description"></span><pre>$parser</pre></a></li>
+<li class="property protected inherited"><a href="#property_updates" title="$updates :: Uncommited data"><span class="description"></span><pre>$updates</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
                     <ul>
-<li class="property private "><a href="#property_JSON" title="$JSON :: "><span class="description"></span><pre>$JSON</pre></a></li>
-<li class="property private inherited"><a href="#property_commitDisabled" title="$commitDisabled :: "><span class="description"></span><pre>$commitDisabled</pre></a></li>
-<li class="property private inherited"><a href="#property_configParserKey" title="$configParserKey :: "><span class="description"></span><pre>$configParserKey</pre></a></li>
-<li class="property private inherited"><a href="#property_externalClasses" title="$externalClasses :: "><span class="description"></span><pre>$externalClasses</pre></a></li>
-<li class="property private inherited"><a href="#property_populated" title="$populated :: "><span class="description"></span><pre>$populated</pre></a></li>
-<li class="property private inherited"><a href="#property_riskyQuery" title="$riskyQuery :: "><span class="description"></span><pre>$riskyQuery</pre></a></li>
-<li class="property private inherited"><a href="#property_sql_handler" title="$sql_handler :: "><span class="description"></span><pre>$sql_handler</pre></a></li>
+<li class="property private "><a href="#property_JSON" title="$JSON :: Internal JSON cache"><span class="description"></span><pre>$JSON</pre></a></li>
+<li class="property private inherited"><a href="#property_commitDisabled" title="$commitDisabled :: True when commit has been disabled, i.e."><span class="description"></span><pre>$commitDisabled</pre></a></li>
+<li class="property private inherited"><a href="#property_configParserKey" title="$configParserKey :: The key of this class in the static $configParsers cache array."><span class="description"></span><pre>$configParserKey</pre></a></li>
+<li class="property private inherited"><a href="#property_externalClasses" title="$externalClasses :: Array of external class references"><span class="description"></span><pre>$externalClasses</pre></a></li>
+<li class="property private inherited"><a href="#property_populated" title="$populated :: True when object has been populated with data from db"><span class="description"></span><pre>$populated</pre></a></li>
+<li class="property private inherited"><a href="#property_riskyQuery" title="$riskyQuery :: Risky delete table data or drop table sql query waiting for execution."><span class="description"></span><pre>$riskyQuery</pre></a></li>
+<li class="property private inherited"><a href="#property_sql_handler" title="$sql_handler :: Internal reference to LudoDBSql"><span class="description"></span><pre>$sql_handler</pre></a></li>
 </ul>
 </li>
 </ul>
@@ -235,12 +178,12 @@
 </li>
 </ul>
 <div class="element class">
-<p class="short_description">Caching of serialized LudoDBObjects
-User: Alf Magne
-Date: 28.01.13</p>
+<p class="short_description">Cache class used by LudoDBRequestHandler.</p>
 <div class="details">
-<div class="long_description"><p>User: Alf Magne Kalleland
-Date: 20.12.12</p></div>
+<div class="long_description"><p>This is a LudoDBModel storing data as serialized
+strings in the database. When caching is enabled for a service, LudoDBRequestHandler will
+attempt to retrieve data from cache before calling the service method. This may save time
+for services requiring many SQL queries to complete.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>package</th>
@@ -254,12 +197,12 @@ Date: 20.12.12</p></div>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
 <a id="method___call"></a><div class="element clickable method public method___call" data-toggle="collapse" data-target=".method___call .collapse">
-<h2>__call()
-        </h2>
-<pre>__call($name, $arguments) </pre>
+<h2>Creates magic get and set methods for columns.</h2>
+<pre>__call($name, $arguments) : null</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>Example
+columns "firstname" will have it's own "getFirstname" and "setFirstname" method.</p></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDBModel::__call()</td>
@@ -267,24 +210,37 @@ Date: 20.12.12</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$name</h4></div>
 <div class="subelement argument"><h4>$arguments</h4></div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code><a href="http://php.net/manual/en/class.exception.php">\Exception</a></code></th>
+<td></td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>null</code></div>
 </div></div>
 </div>
 <a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
-<h2>__construct()
-        </h2>
+<h2>Creates new LudoDBCache instance.</h2>
 <pre>__construct(\LudoDBService $resource, array $arguments) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>An empty LudoDBService class is sent to the constructor along
+with constructor arguments. The cache class will search for records where "class_name" equals
+class of given service and arguments compiled to a key matches cache_key in the database table.</p></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$resource</h4></div>
-<div class="subelement argument"><h4>$arguments</h4></div>
+<div class="subelement argument">
+<h4>$resource</h4>
+<code><a href="../classes/LudoDBService.html">\LudoDBService</a></code>
+</div>
+<div class="subelement argument">
+<h4>$arguments</h4>
+<code>array</code>
+</div>
 </div></div>
 </div>
 <a id="method___toString"></a><div class="element clickable method public method___toString" data-toggle="collapse" data-target=".method___toString .collapse">
-<h2>__toString()
-        </h2>
-<pre>__toString() </pre>
+<h2>Return data as JSON string.</h2>
+<pre>__toString() : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -298,11 +254,12 @@ Date: 20.12.12</p></div>
 <td>\LudoDBModel::__toString()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <a id="method_asJSON"></a><div class="element clickable method public method_asJSON" data-toggle="collapse" data-target=".method_asJSON .collapse">
-<h2>asJSON()
-        </h2>
+<h2>Return data as JSON.</h2>
 <pre>asJSON() : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -322,19 +279,20 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_clearBy"></a><div class="element clickable method public method_clearBy" data-toggle="collapse" data-target=".method_clearBy .collapse">
-<h2>clearBy()
-        </h2>
-<pre>clearBy($key) </pre>
+<h2>Clear cache records from db where cache_key equals key</h2>
+<pre>clearBy(string $key) </pre>
 <div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$key</h4></div>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code>
+</div>
 </div></div>
 </div>
 <a id="method_clearByClass"></a><div class="element clickable method public method_clearByClass" data-toggle="collapse" data-target=".method_clearByClass .collapse">
-<h2>clearByClass()
-        </h2>
+<h2>Clear all cache record for given class name / resource.</h2>
 <pre>clearByClass($className) </pre>
 <div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -344,8 +302,7 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_clearParsers"></a><div class="element clickable method public method_clearParsers" data-toggle="collapse" data-target=".method_clearParsers .collapse">
-<h2>clearParsers()
-        </h2>
+<h2>Clear all cached config parsers</h2>
 <pre>clearParsers() </pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
@@ -365,8 +322,7 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_clearValues"></a><div class="element clickable method public method_clearValues" data-toggle="collapse" data-target=".method_clearValues .collapse">
-<h2>clearValues()
-        </h2>
+<h2>Clear data from model.</h2>
 <pre>clearValues() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -378,21 +334,30 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_commit"></a><div class="element clickable method public method_commit" data-toggle="collapse" data-target=".method_commit .collapse">
-<h2>commit()
-        </h2>
-<pre>commit() </pre>
+<h2>Commit changes to the database.</h2>
+<pre>commit() : null | void</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>Example:</p>
+
+<pre><code>$person = new Person();
+$person->setFirstname('John');
+$person->setLastname('Johnson');
+$person->commit();
+echo $person->getId();
+</code></pre></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDBModel::commit()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>null</code><code>void</code>
+</div>
 </div></div>
 </div>
 <a id="method_configParser"></a><div class="element clickable method public method_configParser" data-toggle="collapse" data-target=".method_configParser .collapse">
-<h2>configParser()
-        </h2>
+<h2>Return reference to config parser.</h2>
 <pre>configParser() : <a href="../classes/LudoDBConfigParser.html">\LudoDBConfigParser</a> | <a href="../classes/LudoDBCollectionConfigParser.html">\LudoDBCollectionConfigParser</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -444,21 +409,26 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_deleteTableData"></a><div class="element clickable method public method_deleteTableData" data-toggle="collapse" data-target=".method_deleteTableData .collapse">
-<h2>deleteTableData()
-        </h2>
-<pre>deleteTableData() </pre>
+<h2>Delete all data from this table.</h2>
+<pre>deleteTableData() : <a href="../classes/LudoDBModel.html">\LudoDBModel</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>You need to call yesImSure afterwards.
+Example:</p>
+
+<pre><code>$person = new Person();
+$person->deleteTableData()->yesImSure();
+</code></pre></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDBModel::deleteTableData()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/LudoDBModel.html">\LudoDBModel</a></code></div>
 </div></div>
 </div>
 <a id="method_disableCommit"></a><div class="element clickable method public method_disableCommit" data-toggle="collapse" data-target=".method_disableCommit .collapse">
-<h2>disableCommit()
-        </h2>
+<h2>Disable commit for this object</h2>
 <pre>disableCommit() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -470,11 +440,16 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_drop"></a><div class="element clickable method public method_drop" data-toggle="collapse" data-target=".method_drop .collapse">
-<h2>Drop database table</h2>
+<h2>Drop database table.</h2>
 <pre>drop() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>You need to call yesImSure afterwards.
+Example:</p>
+
+<pre><code>$person = new Person();
+$person->drop()->yesImSure();
+</code></pre></div>
 <table class="table table-bordered">
 <tr>
 <th>method</th>
@@ -488,12 +463,11 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_enableCommit"></a><div class="element clickable method public method_enableCommit" data-toggle="collapse" data-target=".method_enableCommit .collapse">
-<h2>enableCommit()
-        </h2>
+<h2>Enable commit for this object.</h2>
 <pre>enableCommit() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>commit is by default enabled</p></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDBModel::enableCommit()</td>
@@ -515,16 +489,18 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_getCache"></a><div class="element clickable method public method_getCache" data-toggle="collapse" data-target=".method_getCache .collapse">
-<h2>getCache()
-        </h2>
-<pre>getCache() </pre>
+<h2>Return cache data</h2>
+<pre>getCache() : array</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
 </div>
 <a id="method_getConstructorValues"></a><div class="element clickable method public method_getConstructorValues" data-toggle="collapse" data-target=".method_getConstructorValues .collapse">
-<h2>getConstructorValues()
-        </h2>
-<pre>getConstructorValues() </pre>
+<h2>Return array of values sent to constructor.</h2>
+<pre>getConstructorValues() : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -538,12 +514,13 @@ Date: 20.12.12</p></div>
 <td>\LudoDBModel::getConstructorValues()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_getId"></a><div class="element clickable method public method_getId" data-toggle="collapse" data-target=".method_getId .collapse">
-<h2>getId()
-        </h2>
-<pre>getId() </pre>
+<h2>Return id of current record.</h2>
+<pre>getId() : string | int | null</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -551,15 +528,18 @@ Date: 20.12.12</p></div>
 <th>inherited_from</th>
 <td>\LudoDBModel::getId()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code><code>int</code><code>null</code>
+</div>
 </div></div>
 </div>
 <a id="method_getOnSuccessMessageFor"></a><div class="element clickable method public method_getOnSuccessMessageFor" data-toggle="collapse" data-target=".method_getOnSuccessMessageFor .collapse">
-<h2>getOnSuccessMessageFor()
-        </h2>
-<pre>getOnSuccessMessageFor($service) </pre>
+<h2>LudoDBService getOnSuccessMessageFor method.</h2>
+<pre>getOnSuccessMessageFor($service) : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>By default, it returns an empty string.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -572,6 +552,8 @@ Date: 20.12.12</p></div>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$service</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <a id="method_getSomeValues"></a><div class="element clickable method public method_getSomeValues" data-toggle="collapse" data-target=".method_getSomeValues .collapse">
@@ -613,16 +595,17 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_getUncommitted"></a><div class="element clickable method public method_getUncommitted" data-toggle="collapse" data-target=".method_getUncommitted .collapse">
-<h2>getUncommitted()
-        </h2>
-<pre>getUncommitted() </pre>
+<h2>Return uncommited data</h2>
+<pre>getUncommitted() : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>This method is implemented in LudoDBModel.</p></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDBModel::getUncommitted()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_getValidServices"></a><div class="element clickable method public method_getValidServices" data-toggle="collapse" data-target=".method_getValidServices .collapse">
@@ -646,9 +629,8 @@ Date: 20.12.12</p></div>
 </div></div>
 </div>
 <a id="method_getValues"></a><div class="element clickable method public method_getValues" data-toggle="collapse" data-target=".method_getValues .collapse">
-<h2>getValues()
-        </h2>
-<pre>getValues() </pre>
+<h2>Return value of public columns</h2>
+<pre>getValues() : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -656,12 +638,13 @@ Date: 20.12.12</p></div>
 <th>inherited_from</th>
 <td>\LudoDBModel::getValues()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_hasConfigInExternalFile"></a><div class="element clickable method public method_hasConfigInExternalFile" data-toggle="collapse" data-target=".method_hasConfigInExternalFile .collapse">
-<h2>hasConfigInExternalFile()
-        </h2>
-<pre>hasConfigInExternalFile() </pre>
+<h2>Returns true if config is defined in external file.</h2>
+<pre>hasConfigInExternalFile() : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -675,28 +658,31 @@ Date: 20.12.12</p></div>
 <td>\LudoDBModel::hasConfigInExternalFile()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
 <a id="method_hasData"></a><div class="element clickable method public method_hasData" data-toggle="collapse" data-target=".method_hasData .collapse">
-<h2>hasData()
-        </h2>
-<pre>hasData() </pre>
+<h2>Returns true if cache data exists.</h2>
+<pre>hasData() : bool</pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
 </div>
 <a id="method_hasRowWith"></a><div class="element clickable method public method_hasRowWith" data-toggle="collapse" data-target=".method_hasRowWith .collapse">
-<h2>hasRowWith()
-        </h2>
+<h2>Returns true if database table has rows where one of the given columns has one of the
+given values.</h2>
 <pre>hasRowWith(array $columnsEqual) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse">
-<div class="span4">
-<div class="long_description"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Example:</p>
+
+<pre><code>if($this->hasRowWith(array("email" => "name@dhtmlgoodies.com"));
+</code></pre></div>
 <table class="table table-bordered">
-<tr>
-<th>example</th>
-<td>if($this->hasRowWith(array("email" => "name@dhtmlgoodies.com"));</td>
-</tr>
 <tr>
 <th>inherited_from</th>
 <td>\LudoDBObject::hasRowWith()</td>
@@ -709,19 +695,13 @@ Date: 20.12.12</p></div>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$columnsEqual</h4>
-<code>array</code><p>Returns true if database table has rows where one of the given columns has one of the
-given values,</p></div>
+<code>array</code>
 </div>
-<div class="span4">
-<h3>Examples</h3>
-<pre class="prettyprint linenums"></pre>
-</div>
-</div>
+</div></div>
 </div>
 <a id="method_isValid"></a><div class="element clickable method public method_isValid" data-toggle="collapse" data-target=".method_isValid .collapse">
-<h2>isValid()
-        </h2>
-<pre>isValid() </pre>
+<h2>Return true if update and save is allowed to run.</h2>
+<pre>isValid() : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -729,12 +709,13 @@ given values,</p></div>
 <th>inherited_from</th>
 <td>\LudoDBModel::isValid()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
 <a id="method_read"></a><div class="element clickable method public method_read" data-toggle="collapse" data-target=".method_read .collapse">
-<h2>read()
-        </h2>
-<pre>read() </pre>
+<h2>Return data for this instance.</h2>
+<pre>read() : mixed</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -748,6 +729,8 @@ given values,</p></div>
 <td>\LudoDBModel::read()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
 <a id="method_rollback"></a><div class="element clickable method public method_rollback" data-toggle="collapse" data-target=".method_rollback .collapse">
@@ -769,64 +752,96 @@ given values,</p></div>
 </div></div>
 </div>
 <a id="method_save"></a><div class="element clickable method public method_save" data-toggle="collapse" data-target=".method_save .collapse">
-<h2>save()
-        </h2>
-<pre>save($data) </pre>
+<h2>Populate and save data.</h2>
+<pre>save($data) : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>Returns array "<idField>" => "<id>"
+Example:</p>
+
+<pre><code>$city = new City();
+$data = $city->save(array("city" => "Stavanger", "country" => "Norway"));
+var_dump($data);
+</code></pre></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDBModel::save()</td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$data</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_setCache"></a><div class="element clickable method public method_setCache" data-toggle="collapse" data-target=".method_setCache .collapse">
-<h2>setCache()
-        </h2>
-<pre>setCache(array $json) </pre>
+<h2>Store service data to cache</h2>
+<pre>setCache(array $json) : <a href="../classes/LudoDBCache.html">\LudoDBCache</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$json</h4></div>
+<div class="subelement argument">
+<h4>$json</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/LudoDBCache.html">\LudoDBCache</a></code></div>
 </div></div>
 </div>
 <a id="method_setKey"></a><div class="element clickable method public method_setKey" data-toggle="collapse" data-target=".method_setKey .collapse">
-<h2>setKey()
-        </h2>
-<pre>setKey($key) </pre>
+<h2>Set cache_key of new cache record</h2>
+<pre>setKey($key) : <a href="../classes/LudoDBCache.html">\LudoDBCache</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$key</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/LudoDBCache.html">\LudoDBCache</a></code></div>
 </div></div>
 </div>
 <a id="method_setValues"></a><div class="element clickable method public method_setValues" data-toggle="collapse" data-target=".method_setValues .collapse">
-<h2>setValues()
-        </h2>
-<pre>setValues($data) </pre>
+<h2>Populate columns you can write to with these data</h2>
+<pre>setValues($data) : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
+<div class="row collapse">
+<div class="span4">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
+<table class="table table-bordered">
+<tr>
+<th>example</th>
+<td>:
+<code>
+$person = new Person(1);
+$person->populate(array(
+ "firstname" => "Jane", "lastname" => "Johnson"
+));
+$person->commit();
+</code></td>
+</tr>
+<tr>
 <th>inherited_from</th>
 <td>\LudoDBModel::setValues()</td>
-</tr></table>
+</tr>
+</table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$data</h4></div>
-</div></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div>
+<div class="span4">
+<h3>Examples</h3>
+<pre class="prettyprint linenums"></pre>
+</div>
+</div>
 </div>
 <a id="method_shouldCache"></a><div class="element clickable method public method_shouldCache" data-toggle="collapse" data-target=".method_shouldCache .collapse">
-<h2>shouldCache()
-        </h2>
-<pre>shouldCache($service) </pre>
+<h2>When handled by LudoDBRequestHandler no services will by default be cached.</h2>
+<pre>shouldCache(string $service) : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>This method should
+be implemented by sub classes when needed.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
@@ -838,11 +853,16 @@ given values,</p></div>
 </tr>
 </table>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$service</h4></div>
+<div class="subelement argument">
+<h4>$service</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
 <a id="method_yesImSure"></a><div class="element clickable method public method_yesImSure" data-toggle="collapse" data-target=".method_yesImSure .collapse">
-<h2>Execute risky query,</h2>
+<h2>Executes drop or deleteTableData</h2>
 <pre>yesImSure() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse">
@@ -865,19 +885,6 @@ $p->drop()->yesImSure();</td>
 <pre class="prettyprint linenums"></pre>
 </div>
 </div>
-</div>
-<a id="method_beforeDelete"></a><div class="element clickable method protected method_beforeDelete" data-toggle="collapse" data-target=".method_beforeDelete .collapse">
-<h2>beforeDelete()
-        </h2>
-<pre>beforeDelete() </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\LudoDBModel::beforeDelete()</td>
-</tr></table>
-</div></div>
 </div>
 <a id="method_beforeInsert"></a><div class="element clickable method protected method_beforeInsert" data-toggle="collapse" data-target=".method_beforeInsert .collapse">
 <h2>Method executed before new record is saved in db</h2>
@@ -916,8 +923,7 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_clearCache"></a><div class="element clickable method protected method_clearCache" data-toggle="collapse" data-target=".method_clearCache .collapse">
-<h2>clearCache()
-        </h2>
+<h2>Clear database cache for this instance.</h2>
 <pre>clearCache() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -935,9 +941,8 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_escapeArguments"></a><div class="element clickable method protected method_escapeArguments" data-toggle="collapse" data-target=".method_escapeArguments .collapse">
-<h2>escapeArguments()
-        </h2>
-<pre>escapeArguments($values) </pre>
+<h2>Escape constructor arguments.</h2>
+<pre>escapeArguments($values) : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -953,12 +958,13 @@ $p->drop()->yesImSure();</td>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$values</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_getConfigParserInstance"></a><div class="element clickable method protected method_getConfigParserInstance" data-toggle="collapse" data-target=".method_getConfigParserInstance .collapse">
-<h2>getConfigParserInstance()
-        </h2>
-<pre>getConfigParserInstance() </pre>
+<h2>Return config parser instance.</h2>
+<pre>getConfigParserInstance() : <a href="../classes/LudoDBConfigParser.html">\LudoDBConfigParser</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -972,12 +978,13 @@ $p->drop()->yesImSure();</td>
 <td>\LudoDBModel::getConfigParserInstance()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/LudoDBConfigParser.html">\LudoDBConfigParser</a></code></div>
 </div></div>
 </div>
 <a id="method_getConfigParserKey"></a><div class="element clickable method protected method_getConfigParserKey" data-toggle="collapse" data-target=".method_getConfigParserKey .collapse">
-<h2>getConfigParserKey()
-        </h2>
-<pre>getConfigParserKey() </pre>
+<h2>Return config parser key of this class.</h2>
+<pre>getConfigParserKey() : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -991,12 +998,13 @@ $p->drop()->yesImSure();</td>
 <td>\LudoDBModel::getConfigParserKey()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <a id="method_getValidArgument"></a><div class="element clickable method protected method_getValidArgument" data-toggle="collapse" data-target=".method_getValidArgument .collapse">
-<h2>getValidArgument()
-        </h2>
-<pre>getValidArgument($key, $value) </pre>
+<h2>Return valid value for argument with given name</h2>
+<pre>getValidArgument($key, $value) : mixed</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1007,26 +1015,38 @@ $p->drop()->yesImSure();</td>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$key</h4></div>
 <div class="subelement argument"><h4>$value</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
 <a id="method_getValue"></a><div class="element clickable method protected method_getValue" data-toggle="collapse" data-target=".method_getValue .collapse">
-<h2>getValue()
-        </h2>
-<pre>getValue($column) </pre>
+<h2>Return column value.</h2>
+<pre>getValue($column) : null</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>This method will return
+* Uncommitted value if exists or value from db
+* Value from external models/collection
+* Value of static columns
+* Default values.
+Example:</p>
+
+<pre><code>public function getFirstname(){
+     return $this->getValue('firstname');
+}
+</code></pre></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDBModel::getValue()</td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$column</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>null</code></div>
 </div></div>
 </div>
 <a id="method_insertDefaultData"></a><div class="element clickable method protected method_insertDefaultData" data-toggle="collapse" data-target=".method_insertDefaultData .collapse">
-<h2>insertDefaultData()
-        </h2>
+<h2>Populate database table with default data defined in table config</h2>
 <pre>insertDefaultData() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1038,8 +1058,7 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_onConstruct"></a><div class="element clickable method protected method_onConstruct" data-toggle="collapse" data-target=".method_onConstruct .collapse">
-<h2>onConstruct()
-        </h2>
+<h2>On construct method which can be implemented by sub classes.</h2>
 <pre>onConstruct() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1057,8 +1076,7 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_populate"></a><div class="element clickable method protected method_populate" data-toggle="collapse" data-target=".method_populate .collapse">
-<h2>populate()
-        </h2>
+<h2>Populate with data from db</h2>
 <pre>populate() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1070,8 +1088,7 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_setId"></a><div class="element clickable method protected method_setId" data-toggle="collapse" data-target=".method_setId .collapse">
-<h2>setId()
-        </h2>
+<h2>Update id field</h2>
 <pre>setId($id) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1085,12 +1102,18 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_setValue"></a><div class="element clickable method protected method_setValue" data-toggle="collapse" data-target=".method_setValue .collapse">
-<h2>setValue()
-        </h2>
-<pre>setValue($column, $value) </pre>
+<h2>Set a column value.</h2>
+<pre>setValue($column, $value) : null</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>This value will not be committed to db until
+a call to commit is made.
+Example:</p>
+
+<pre><code>public function setFirstName($name){
+     $this->setValue('firstname', $name');
+}
+</code></pre></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDBModel::setValue()</td>
@@ -1098,12 +1121,13 @@ $p->drop()->yesImSure();</td>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$column</h4></div>
 <div class="subelement argument"><h4>$value</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>null</code></div>
 </div></div>
 </div>
 <a id="method_sqlHandler"></a><div class="element clickable method protected method_sqlHandler" data-toggle="collapse" data-target=".method_sqlHandler .collapse">
-<h2>sqlHandler()
-        </h2>
-<pre>sqlHandler() </pre>
+<h2>Return SQL handler</h2>
+<pre>sqlHandler() : <a href="../classes/LudoDBSql.html">\LudoDBSql</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1117,11 +1141,12 @@ $p->drop()->yesImSure();</td>
 <td>\LudoDBModel::sqlHandler()</td>
 </tr>
 </table>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/LudoDBSql.html">\LudoDBSql</a></code></div>
 </div></div>
 </div>
 <a id="method_autoPopulate"></a><div class="element clickable method private method_autoPopulate" data-toggle="collapse" data-target=".method_autoPopulate .collapse">
-<h2>autoPopulate()
-        </h2>
+<h2>Auto populate model with data from db.</h2>
 <pre>autoPopulate() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1133,8 +1158,7 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_commitExternal"></a><div class="element clickable method private method_commitExternal" data-toggle="collapse" data-target=".method_commitExternal .collapse">
-<h2>commitExternal()
-        </h2>
+<h2>Execute commit on classes for external columns.</h2>
 <pre>commitExternal(<a href="../classes/LudoDBObject.html">\LudoDBObject</a> $class) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1151,8 +1175,7 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_createIndexes"></a><div class="element clickable method private method_createIndexes" data-toggle="collapse" data-target=".method_createIndexes .collapse">
-<h2>createIndexes()
-        </h2>
+<h2>Create database indexes defined in table config</h2>
 <pre>createIndexes() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1164,20 +1187,20 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_getCacheKey"></a><div class="element clickable method private method_getCacheKey" data-toggle="collapse" data-target=".method_getCacheKey .collapse">
-<h2>getCacheKey()
-        </h2>
-<pre>getCacheKey($resourceName, $arguments) </pre>
+<h2>Return cache key based on class name and arguments.</h2>
+<pre>getCacheKey($resourceName, $arguments) : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$resourceName</h4></div>
 <div class="subelement argument"><h4>$arguments</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <a id="method_getExternalClassFor"></a><div class="element clickable method private method_getExternalClassFor" data-toggle="collapse" data-target=".method_getExternalClassFor .collapse">
-<h2>getExternalClassFor()
-        </h2>
+<h2>Return external class reference for external column</h2>
 <pre>getExternalClassFor(String $column) : <a href="../classes/LudoDBCollection.html">\LudoDBCollection</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1197,9 +1220,8 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_getExternalValue"></a><div class="element clickable method private method_getExternalValue" data-toggle="collapse" data-target=".method_getExternalValue .collapse">
-<h2>getExternalValue()
-        </h2>
-<pre>getExternalValue($column) </pre>
+<h2>Return external value</h2>
+<pre>getExternalValue($column) : mixed</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1209,12 +1231,13 @@ $p->drop()->yesImSure();</td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$column</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
 <a id="method_getIndexName"></a><div class="element clickable method private method_getIndexName" data-toggle="collapse" data-target=".method_getIndexName .collapse">
-<h2>getIndexName()
-        </h2>
-<pre>getIndexName($field) </pre>
+<h2>Returns unique index name</h2>
+<pre>getIndexName($field) : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1224,12 +1247,13 @@ $p->drop()->yesImSure();</td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$field</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <a id="method_getJoinColumns"></a><div class="element clickable method private method_getJoinColumns" data-toggle="collapse" data-target=".method_getJoinColumns .collapse">
-<h2>getJoinColumns()
-        </h2>
-<pre>getJoinColumns() </pre>
+<h2>Return values from joined columns.</h2>
+<pre>getJoinColumns() : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1237,11 +1261,12 @@ $p->drop()->yesImSure();</td>
 <th>inherited_from</th>
 <td>\LudoDBModel::getJoinColumns()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_getNewInstance"></a><div class="element clickable method private method_getNewInstance" data-toggle="collapse" data-target=".method_getNewInstance .collapse">
-<h2>getNewInstance()
-        </h2>
+<h2>Return new instance of this LudoDBModel</h2>
 <pre>getNewInstance() : <a href="../classes/LudoDBModel.html">\LudoDBModel</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1262,9 +1287,8 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_getValidArguments"></a><div class="element clickable method private method_getValidArguments" data-toggle="collapse" data-target=".method_getValidArguments .collapse">
-<h2>getValidArguments()
-        </h2>
-<pre>getValidArguments($params) </pre>
+<h2>Validates constructor arguments.</h2>
+<pre>getValidArguments($params) : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1274,11 +1298,12 @@ $p->drop()->yesImSure();</td>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$params</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_insert"></a><div class="element clickable method private method_insert" data-toggle="collapse" data-target=".method_insert .collapse">
-<h2>insert()
-        </h2>
+<h2>Private insert method</h2>
 <pre>insert() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1290,9 +1315,8 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_populateWith"></a><div class="element clickable method private method_populateWith" data-toggle="collapse" data-target=".method_populateWith .collapse">
-<h2>populateWith()
-        </h2>
-<pre>populateWith($data) </pre>
+<h2>Populate model with these data</h2>
+<pre>populateWith(array $data) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1301,12 +1325,14 @@ $p->drop()->yesImSure();</td>
 <td>\LudoDBModel::populateWith()</td>
 </tr></table>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$data</h4></div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code>
+</div>
 </div></div>
 </div>
 <a id="method_setClassName"></a><div class="element clickable method private method_setClassName" data-toggle="collapse" data-target=".method_setClassName .collapse">
-<h2>setClassName()
-        </h2>
+<h2>Set class name for new cache record</h2>
 <pre>setClassName($name) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -1316,8 +1342,7 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_setExternalValue"></a><div class="element clickable method private method_setExternalValue" data-toggle="collapse" data-target=".method_setExternalValue .collapse">
-<h2>setExternalValue()
-        </h2>
+<h2>Update column value of external column</h2>
 <pre>setExternalValue($column, $value) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1332,24 +1357,31 @@ $p->drop()->yesImSure();</td>
 </div></div>
 </div>
 <a id="method_some"></a><div class="element clickable method private method_some" data-toggle="collapse" data-target=".method_some .collapse">
-<h2>some()
-        </h2>
-<pre>some(array $keys, $filtered) </pre>
+<h2>Return values for these keys.</h2>
+<pre>some(array $keys, bool $filtered) : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>When $filtered is true, onlye
+columns with values(not null) will be returned.</p></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDBModel::some()</td>
 </tr></table>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$keys</h4></div>
-<div class="subelement argument"><h4>$filtered</h4></div>
+<div class="subelement argument">
+<h4>$keys</h4>
+<code>array</code>
+</div>
+<div class="subelement argument">
+<h4>$filtered</h4>
+<code>bool</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_update"></a><div class="element clickable method private method_update" data-toggle="collapse" data-target=".method_update .collapse">
-<h2>update()
-        </h2>
+<h2>Internal update method</h2>
 <pre>update() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -1370,7 +1402,7 @@ $p->drop()->yesImSure();</td>
 </div>
 <a id="property_arguments"> </a><div class="element clickable property protected property_arguments" data-toggle="collapse" data-target=".property_arguments .collapse">
 <h2></h2>
-<pre>$arguments </pre>
+<pre>$arguments : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1388,13 +1420,13 @@ $p->drop()->yesImSure();</td>
 </div>
 <a id="property_config"> </a><div class="element clickable property protected property_config" data-toggle="collapse" data-target=".property_config .collapse">
 <h2></h2>
-<pre>$config </pre>
+<pre>$config : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_configParsers"> </a><div class="element clickable property protected property_configParsers" data-toggle="collapse" data-target=".property_configParsers .collapse">
 <h2></h2>
-<pre>$configParsers </pre>
+<pre>$configParsers : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1412,7 +1444,7 @@ $p->drop()->yesImSure();</td>
 </div>
 <a id="property_data"> </a><div class="element clickable property protected property_data" data-toggle="collapse" data-target=".property_data .collapse">
 <h2></h2>
-<pre>$data </pre>
+<pre>$data : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1460,7 +1492,7 @@ $p->drop()->yesImSure();</td>
 </div>
 <a id="property_updates"> </a><div class="element clickable property protected property_updates" data-toggle="collapse" data-target=".property_updates .collapse">
 <h2></h2>
-<pre>$updates </pre>
+<pre>$updates : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1472,16 +1504,17 @@ $p->drop()->yesImSure();</td>
 </div>
 <a id="property_JSON"> </a><div class="element clickable property private property_JSON" data-toggle="collapse" data-target=".property_JSON .collapse">
 <h2></h2>
-<pre>$JSON </pre>
+<pre>$JSON : null</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_commitDisabled"> </a><div class="element clickable property private property_commitDisabled" data-toggle="collapse" data-target=".property_commitDisabled .collapse">
 <h2></h2>
-<pre>$commitDisabled </pre>
+<pre>$commitDisabled : </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>no saving will be done
+for this object.</p></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDBModel::$$commitDisabled</td>
@@ -1490,7 +1523,7 @@ $p->drop()->yesImSure();</td>
 </div>
 <a id="property_configParserKey"> </a><div class="element clickable property private property_configParserKey" data-toggle="collapse" data-target=".property_configParserKey .collapse">
 <h2></h2>
-<pre>$configParserKey </pre>
+<pre>$configParserKey : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1508,7 +1541,7 @@ $p->drop()->yesImSure();</td>
 </div>
 <a id="property_externalClasses"> </a><div class="element clickable property private property_externalClasses" data-toggle="collapse" data-target=".property_externalClasses .collapse">
 <h2></h2>
-<pre>$externalClasses </pre>
+<pre>$externalClasses : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1520,7 +1553,7 @@ $p->drop()->yesImSure();</td>
 </div>
 <a id="property_populated"> </a><div class="element clickable property private property_populated" data-toggle="collapse" data-target=".property_populated .collapse">
 <h2></h2>
-<pre>$populated </pre>
+<pre>$populated : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1532,7 +1565,7 @@ $p->drop()->yesImSure();</td>
 </div>
 <a id="property_riskyQuery"> </a><div class="element clickable property private property_riskyQuery" data-toggle="collapse" data-target=".property_riskyQuery .collapse">
 <h2></h2>
-<pre>$riskyQuery </pre>
+<pre>$riskyQuery : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1544,7 +1577,7 @@ $p->drop()->yesImSure();</td>
 </div>
 <a id="property_sql_handler"> </a><div class="element clickable property private property_sql_handler" data-toggle="collapse" data-target=".property_sql_handler .collapse">
 <h2></h2>
-<pre>$sql_handler </pre>
+<pre>$sql_handler : <a href="../classes/LudoDBSql.html">\LudoDBSql</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -1567,7 +1600,7 @@ $p->drop()->yesImSure();</td>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-04-12T03:17:14+02:00.<br></footer></div>
+            generated on 2013-04-12T17:11:35+02:00.<br></footer></div>
 </div>
 </body>
 </html>

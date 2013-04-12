@@ -15,6 +15,12 @@ class LudoDBUtility
 {
 
     /**
+     * Array of LudoDBModel instances
+     * @var array
+     */
+    private $instances = array();
+
+    /**
      * Drop and create database tables for the given class names
      * $classNames is an array of LudoDBModel sub classes.
      * This method is useful during development since it will check
@@ -39,6 +45,11 @@ class LudoDBUtility
         }
     }
 
+    /**
+     * Create database tables for the given classes. $classNames is an array of
+     * valid LudoDBModel class names.
+     * @param array $classNames
+     */
     public function createDatabaseTables(array $classNames)
     {
         $classes = $this->getClassesRearranged($classNames);
@@ -48,6 +59,11 @@ class LudoDBUtility
         }
     }
 
+    /**
+     * Return database tables for given class names
+     * @param array $classNames
+     * @return array
+     */
     protected function getLudoDBModelTables(array $classNames)
     {
         $ret = array();
@@ -62,6 +78,11 @@ class LudoDBUtility
         return $ret;
     }
 
+    /**
+     * Return classes in right order based on dependencies (foreign keys)
+     * @param array $classNames
+     * @return array
+     */
     protected function getClassesRearranged(array $classNames)
     {
         $classes = $this->getLudoDBModelTables($classNames);
@@ -103,7 +124,7 @@ class LudoDBUtility
 
     /**
      * Remove duplicate class names, i.e. classes using the same database table.
-     * @param $classNames
+     * @param array $classNames
      * @return array
      */
     private function withDuplicatesRemoved(array $classNames){
@@ -120,6 +141,11 @@ class LudoDBUtility
         return $ret;
     }
 
+    /**
+     * Return table names for given classes.
+     * @param $classNames
+     * @return array
+     */
     private function getTableNames($classNames)
     {
         $ret = array();
@@ -130,6 +156,11 @@ class LudoDBUtility
     }
 
 
+    /**
+     * Get tables referenced by a model, i.e. foreign keys.
+     * @param LudoDBModel $model
+     * @return array
+     */
     private function getReferencedTables(LudoDBModel $model)
     {
         $ret = array();
@@ -141,9 +172,10 @@ class LudoDBUtility
     }
 
 
-    private $instances = array();
+
 
     /**
+     * Return instance of a LudoDBModel
      * @param $name
      * @return LudoDBModel
      */
@@ -156,10 +188,17 @@ class LudoDBUtility
         return $this->instances[$name];
     }
     // TODO implement
+    /**
+     * To be implemented
+     * @param array $classNames
+     */
     public function validateConfigsOf(array $classNames){
 
     }
     // TODO implement
+    /**
+     * To be implemented.
+     */
     public function getAllAvailableServices(){
 
     }

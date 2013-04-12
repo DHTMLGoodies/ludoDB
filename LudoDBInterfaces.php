@@ -6,23 +6,76 @@
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
+
+/**
+ * Interface for LudoDB database connection adapters
+ * @package LudoDB
+ */
 interface LudoDBAdapter
 {
-
+    /**
+     * Connect to database
+     * @return mixed
+     */
     public function connect();
 
+    /**
+     * Execute a query and return resource
+     * @param $sql
+     * @param array $params
+     * @return mixed
+     */
     public function query($sql, $params = array());
 
+    /**
+     * Execute query and return first row.
+     * @param $sql
+     * @param array $params
+     * @return mixed
+     */
     public function one($sql, $params = array());
 
+    /**
+     * Return number of rows for given SQL with given params (for prepared statements).
+     *
+     * Example
+     *
+     * <code>
+     * $count = LudoDB::getInstance()->countRows("select * from city where country=?", array("Norway"));
+     * </code>
+     *
+     * @param $sql
+     * @param array $params
+     * @return mixed
+     */
     public function countRows($sql, $params = array());
 
+    /**
+     * Return id of last inserted record
+     * @return string
+     */
     public function getInsertId();
 
+    /**
+     * Return next row in result set.
+     * @param $result
+     * @return array
+     */
     public function nextRow($result);
 
+    /**
+     * Return value of first column in first row of query.
+     * @param $sql
+     * @param array $params
+     * @return mixed
+     */
     public function getValue($sql, $params = array());
 
+    /**
+     * Escape string to be inserted into the database
+     * @param $string
+     * @return mixed
+     */
     public function escapeString($string);
 }
 
@@ -46,6 +99,12 @@ interface LudoDBService
      */
     public function validateArguments($service, $arguments);
 
+    /**
+     * Validate data sent to service method
+     * @param string $service
+     * @param array $data
+     * @return bool
+     */
     public function validateServiceData($service, $data);
 
     /**
@@ -54,6 +113,7 @@ interface LudoDBService
      * be stored in a caching table. When caching is enabled,
      * you should also implement clearCache() to clear cache in
      * case Data has been changed.
+     * @param string $service
      * @return boolean
      */
     public function shouldCache($service);

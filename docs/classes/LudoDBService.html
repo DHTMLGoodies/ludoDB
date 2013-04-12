@@ -31,10 +31,10 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">302</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
-                <span class="label label-info">3</span>
+                <span class="label label-info">4</span>
 </li></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
                 <span class="label label-info">0</span></a></li>
@@ -61,8 +61,7 @@
 <li class="method public "><a href="#method_getValidServices" title="getValidServices :: Return array with names of valid services"><span class="description">Return array with names of valid services</span><pre>getValidServices()</pre></a></li>
 <li class="method public "><a href="#method_shouldCache" title="shouldCache :: Return true to enable caching in LudoDBRequest handler for the read service."><span class="description">Return true to enable caching in LudoDBRequest handler for the read service.</span><pre>shouldCache()</pre></a></li>
 <li class="method public "><a href="#method_validateArguments" title="validateArguments :: Returns true is passed arguments are acceptable for the constructor."><span class="description">Returns true is passed arguments are acceptable for the constructor.</span><pre>validateArguments()</pre></a></li>
-<li class="method public "><a href="#method_validateServiceData" title="validateServiceData :: "><span class="description">validateServiceData()
-        </span><pre>validateServiceData()</pre></a></li>
+<li class="method public "><a href="#method_validateServiceData" title="validateServiceData :: Validate data sent to service method"><span class="description">Validate data sent to service method</span><pre>validateServiceData()</pre></a></li>
 </ul>
 </li></ul>
 </div>
@@ -122,7 +121,7 @@ are already implemented for LudoDBModel.</p></div>
 </div>
 <a id="method_shouldCache"></a><div class="element clickable method public method_shouldCache" data-toggle="collapse" data-target=".method_shouldCache .collapse">
 <h2>Return true to enable caching in LudoDBRequest handler for the read service.</h2>
-<pre>shouldCache($service) : boolean</pre>
+<pre>shouldCache(string $service) : boolean</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>When true a serialized version of LudoDBModel::read will
@@ -130,7 +129,10 @@ be stored in a caching table. When caching is enabled,
 you should also implement clearCache() to clear cache in
 case Data has been changed.</p></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$service</h4></div>
+<div class="subelement argument">
+<h4>$service</h4>
+<code>string</code>
+</div>
 <h3>Returns</h3>
 <div class="subelement response"><code>boolean</code></div>
 </div></div>
@@ -155,15 +157,22 @@ case Data has been changed.</p></div>
 </div></div>
 </div>
 <a id="method_validateServiceData"></a><div class="element clickable method public method_validateServiceData" data-toggle="collapse" data-target=".method_validateServiceData .collapse">
-<h2>validateServiceData()
-        </h2>
-<pre>validateServiceData($service, $data) </pre>
+<h2>Validate data sent to service method</h2>
+<pre>validateServiceData(string $service, array $data) : bool</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$service</h4></div>
-<div class="subelement argument"><h4>$data</h4></div>
+<div class="subelement argument">
+<h4>$service</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$data</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
 </div>
@@ -173,7 +182,7 @@ case Data has been changed.</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-04-12T03:17:14+02:00.<br></footer></div>
+            generated on 2013-04-12T17:11:35+02:00.<br></footer></div>
 </div>
 </body>
 </html>

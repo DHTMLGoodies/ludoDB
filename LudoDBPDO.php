@@ -1,19 +1,29 @@
 <?php
 /**
- * PDO Mysql Adapter. The default and preferred DB adapter to use.
  * User: Alf Magne
  * Date: 31.01.13
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
 
  */
+/**
+ * PDO Mysql Adapter. The default and preferred DB adapter to use.
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
+ */
 class LudoDBPDO extends LudoDB implements LudoDBAdapter
 {
     /**
+     * Database connection resource reference
      * @var PDO
      */
     protected static $conn;
 
+    /**
+     *
+     * Connect to database
+     * @throws LudoDBConnectionException
+     */
     public function connect()
     {
         try{
@@ -25,12 +35,18 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
         }
     }
 
+    /**
+     * Escape string - nothing to do here since we're using prepared statements.
+     * @param $string
+     * @return mixed
+     */
     public function escapeString($string)
     {
         return $string;
     }
 
     /**
+     * Execute query and return resource.
      * @param $sql
      * @param array $params
      * @return bool|mysqli_result|resource|PDOStatement
@@ -51,6 +67,7 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
     }
 
     /**
+     * Get one row.
      * @param $sql
      * @param array $params
      * @return array|null
@@ -63,6 +80,7 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
     }
 
     /**
+     * Return number of rows.
      * @param $sql
      * @param array $params
      * @return int
@@ -84,6 +102,7 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
     }
 
     /**
+     * Go to next row
      * @param mysqli_result|resource|PDOStatement $result
      * @return array
      */
@@ -93,6 +112,7 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
     }
 
     /**
+     * Return value of first column in a query
      * @param $sql
      * @param array $params
      * @return null|array

@@ -16,24 +16,83 @@
 class LudoDBRequestHandler
 {
     /**
+     * Resource handled
      * @var LudoDBObject|LudoDBService
      */
     protected $resource;
+    /**
+     * Service name
+     * @var string
+     */
     protected $serviceName;
+    /**
+     * Cache instance
+     * @var LudoDBCache
+     */
     protected $cacheInstance;
+    /**
+     * Internal array of valid services for given resource.
+     * @var array
+     */
     private $validServices = array();
+    /**
+     * Success value for handles request.
+     * @var bool
+     */
     private $success = true;
+    /**
+     * Response message for handled request
+     * @var string
+     */
     private $message = "";
+    /**
+     * Response code for handled request
+     * @var int
+     */
     private $code = 200;
+    /**
+     * Arguments for given request
+     * @var array
+     */
     private $arguments;
+    /**
+     * Key used in response from service handler.
+     * @var string
+     */
     private $responseKey = 'response';
 
-    public function __construct()
-    {
-
-    }
-
     /**
+     * Handle request
+     *
+     * router.template.php can be used as a template on how to create a controller for a request handler.
+     *
+     * Example code:
+     *
+     * <code>
+     * require_once(dirname(__FILE__)."/autoload.php");
+     * require_once("php/jsonwrapper/jsonwrapper.php");
+     * date_default_timezone_set("Europe/Berlin");
+     * if(file_exists("connection.php")){
+     *     require("connection.php");
+     * }
+     *
+     * LudoDBRegistry::set('DEVELOP_MODE', true);
+     * LudoDB::enableLogging();
+     *
+     * $request = array('request' => isset($_GET['request']) ? $_GET['request'] : $_POST['request']);
+     *
+     * if(isset($_POST['data'])){
+     *     $request['data'] = isset($_POST['data']) ? $_POST['data'] : null;
+     * }
+     *
+     * if(isset($_POST['arguments'])){
+     *     $request['arguments'] = $_POST['arguments'];
+     * }
+     *
+     * $handler = new LudoDBRequestHandler();
+     * echo $handler->handle($request);
+     * </code>
+     *
      * @param $request
      * @return string
      * @throws LudoDBObjectNotFoundException
@@ -88,6 +147,12 @@ class LudoDBRequestHandler
         }
     }
 
+    /**
+     * Returned request sent to handler in valid internal format.
+     * @param $request
+     * @return array
+     */
+
     private function getParsed($request)
     {
         if (is_string($request)) $request = array('request' => $request);
@@ -96,6 +161,11 @@ class LudoDBRequestHandler
         return $request;
     }
 
+    /**
+     * Return data from handler in JSON format.
+     * @param array $data
+     * @return string
+     */
     private function toJSON($data = array())
     {
         if($this->success){
@@ -117,6 +187,11 @@ class LudoDBRequestHandler
         return json_encode($ret);
     }
 
+    /**
+     * Get arguments from request sent to handler.
+     * @param array $request
+     * @return array
+     */
     protected function getArguments(array $request)
     {
         if (isset($request['arguments'])) {
@@ -129,6 +204,7 @@ class LudoDBRequestHandler
     }
 
     /**
+     * Get name of resource for request.
      * @param array $request
      * @param array $args
      * @return null|object
@@ -148,6 +224,11 @@ class LudoDBRequestHandler
         throw new LudoDBClassNotFoundException('Invalid request for: ' . $request['request']);
     }
 
+    /**
+     * Return valid services for handled resource.
+     * @param array $request
+     * @return array|mixed
+     */
     private function getValidServices(array $request)
     {
         $className = $this->getClassName($request);
@@ -158,6 +239,12 @@ class LudoDBRequestHandler
         return array();
     }
 
+    /**
+     * Use Reflection to get instance of resource class
+     * @param $className
+     * @return ReflectionClass
+     * @throws LudoDBClassNotFoundException
+     */
     private function getReflectionClass($className)
     {
         $cl = new ReflectionClass($className);
@@ -168,6 +255,7 @@ class LudoDBRequestHandler
     }
 
     /**
+     * Return name of resource/class to be handled.
      * @param $request
      * @return string|null
      */
@@ -177,11 +265,21 @@ class LudoDBRequestHandler
         return class_exists($tokens[0]) ? $tokens[0] : null;
     }
 
+    /**
+     * Return service method to execute
+     * @param $request
+     * @return mixed
+     */
     protected function getServiceName($request)
     {
         return array_pop(explode("/", $request['request']));
     }
 
+    /**
+     * Return data from cache
+     * @param array $requestData
+     * @return array
+     */
     private function getCached($requestData = array())
     {
         if (empty($requestData)) $requestData = null;
@@ -195,6 +293,7 @@ class LudoDBRequestHandler
     }
 
     /**
+     * Return LudoDBCache instance
      * @return LudoDBCache
      */
     protected function ludoDBCache()
@@ -205,6 +304,9 @@ class LudoDBRequestHandler
         return $this->cacheInstance;
     }
 
+    /**
+     * Clear cache instance
+     */
     public function clearCacheObject()
     {
         $this->cacheInstance = null;

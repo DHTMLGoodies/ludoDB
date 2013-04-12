@@ -1,20 +1,57 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ *
  * User: Alf Magne Kalleland
  * Date: 21.12.12
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
+/**
+ * Iterator class for LudoDBCollection
+ * @package LudoDB
+ */
 class LudoDBIterator extends LudoDBObject implements Iterator
 {
+    /**
+     * true when resource ref has been created
+     * @var
+     */
     private $loaded;
+    /**
+     * DB query resource reference
+     * @var
+     */
     private $dbResource;
+    /**
+     * is valid, i.e. has a row
+     * @var
+     */
     private $isValid;
+    /**
+     * Internal position reference
+     * @var int
+     */
     private $position;
+    /**
+     * Current row
+     * @var array
+     */
     protected $currentRow;
+    /**
+     * Array of returned rows.
+     * @var
+     */
     private $rows;
 
+    /**
+     * Internal data cache
+     * @var array
+     */
+    private $valueCache;
+
+    /**
+     * Rewind iterator, i.e. start from beginning.
+     */
     function rewind() {
         if ($this->dbResource) {
             $this->dbResource = null;
@@ -47,12 +84,19 @@ class LudoDBIterator extends LudoDBObject implements Iterator
         return $this->position;
     }
 
+    /**
+     * Go to next row.
+     */
     public function next() {
         ++$this->position;
         $this->currentRow = $this->db->nextRow($this->dbResource);
         $this->isValid = $this->currentRow ? true : false;
     }
 
+    /**
+     * Returns true when
+     * @return bool
+     */
     public function valid() {
         if (!$this->loaded) {
             $this->load();
@@ -60,19 +104,23 @@ class LudoDBIterator extends LudoDBObject implements Iterator
         return $this->isValid;
     }
 
+    /**
+     * Execute query and get result set reference.
+     */
     private function load(){
         $this->dbResource = $this->db->query($this->sqlHandler()->getSql(), $this->arguments);
         $this->loaded = true;
         $this->next();
     }
 
-    private $valueCache;
+
     /**
      * Return collection data
      * @method getValues
      * @return array
      */
     public function getValues(){
+        // TODO checkout the difference between $this->valueCache and $this->rows
         if(!isset($this->valueCache)){
             $this->clearStoredRows();
             $groupBy = $this->parser->getGroupBy();
@@ -82,7 +130,8 @@ class LudoDBIterator extends LudoDBObject implements Iterator
                 if(is_array($value)) $value = array_merge($value, $staticValues);
                 if(isset($groupBy) && isset($value[$groupBy])){
                     if(!isset($this->valueCache[$groupBy])){
-                        $this->valueCache[$groupBy] = array();                    }
+                        $this->valueCache[$groupBy] = array();
+                    }
                     $this->valueCache[$groupBy] = $value;
                     $this->storeRow($this->valueCache[$groupBy]);
                 }else{
@@ -94,10 +143,20 @@ class LudoDBIterator extends LudoDBObject implements Iterator
         return $this->valueCache;
     }
 
+    /**
+     * Append current row to stored rows.
+     * @param $row
+     */
     protected function storeRow(&$row){
         $this->rows[] = &$row;
     }
 
+
+    /**
+     * Return rows as associated array where key is the value of one column.
+     * @param $key
+     * @return array
+     */
     protected function getRowsAssoc($key){
         $rows = $this->getRows();
         $ret = array();
@@ -117,6 +176,9 @@ class LudoDBIterator extends LudoDBObject implements Iterator
         return $this->rows;
     }
 
+    /**
+     * Clear internal row array
+     */
     protected function clearStoredRows(){
         $this->rows = array();
     }

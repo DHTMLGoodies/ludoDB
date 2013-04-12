@@ -7,6 +7,42 @@
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 /**
+ * LudoDBCollection class.
+ *
+ * Example of implementation:
+ *
+ * With external config in JSON file:
+ *
+ * PHP:
+ *
+ * <code>
+ *  class People extends LudoDBCollection
+ *  {
+ *      protected $JSONConfig = true;
+ *  }
+ * </code>
+ *
+ * JSON in JSONConfig/People.json:
+ *
+ * <code>
+ * {
+ *    "model": "Person",
+ *    "sql": "select firstname, lastname, nick_name, p.zip,c.city from person p left join city c on c.zip = p.zip where p.zip=?",
+ *    "columns": ["firstname", "lastname", "nick_name","zip", "city"]
+ * }
+ * </code>
+ *
+ * Example with internal PHP config:
+ *
+ * <code>
+ * class DemoCities extends LudoDBCollection
+ * {
+ *    protected $config = array(
+ *        "sql" => "select * from demo_city order by name",
+ *        "model" => "DemoCity"
+ *    );
+ * }
+ * </code>
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
@@ -18,6 +54,10 @@ abstract class LudoDBCollection extends LudoDBIterator
      */
     protected $arguments;
 
+    /**
+     * Delete all database records involved in this collection. This method requires that the collection
+     * has arguments. Use LudoDB::deleteTab
+     */
     public function deleteRecords()
     {
         if (isset($this->arguments)) {
@@ -29,6 +69,10 @@ abstract class LudoDBCollection extends LudoDBIterator
         }
     }
 
+    /**
+     * Return instance of config parser for this LudoDBCollection
+     * @return LudoDBCollectionConfigParser|LudoDBConfigParser
+     */
     protected function getConfigParserInstance()
     {
         return new LudoDBCollectionConfigParser($this, $this->config);
@@ -57,6 +101,12 @@ abstract class LudoDBCollection extends LudoDBIterator
         return $ret;
     }
 
+    /**
+     * Return values for a row in the collection using a LudoDBModel as filter/parser. This will be called when
+     * "model" is set in the config.
+     * @param LudoDBModel $model
+     * @return array
+     */
     private function getValuesUsingModel(LudoDBModel $model)
     {
         $model->disableCommit();
@@ -94,6 +144,7 @@ abstract class LudoDBCollection extends LudoDBIterator
     }
 
     /**
+     * Return values for a row using LudoDBModel as a parser/filter.
      * @param LudoDBModel $model
      * @param array $columns
      * @return array
@@ -103,6 +154,10 @@ abstract class LudoDBCollection extends LudoDBIterator
         return $model->getSomeValues($columns);
     }
 
+    /**
+     * Return
+     * @return string
+     */
     public function getCacheKey()
     {
         $ret = get_class($this);
@@ -129,6 +184,9 @@ abstract class LudoDBCollection extends LudoDBIterator
         return $ret;
     }
 
+    /**
+     * Merge in values from other collections
+     */
     protected function mergeInOthers()
     {
         $collectionsToMerge = $this->parser->getMerged();
@@ -161,6 +219,7 @@ abstract class LudoDBCollection extends LudoDBIterator
     }
 
     /**
+     * Return a LudoDBCollection for a merged collection.
      * @param $className
      * @return LudoDBCollection
      */

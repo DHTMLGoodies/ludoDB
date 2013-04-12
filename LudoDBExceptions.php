@@ -7,7 +7,15 @@
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 
+/**
+ * LudoDBException base class
+ * @package LudoDB
+ */
 class LudoDBException extends Exception{
+    /**
+     * Exception code
+     * @var int
+     */
     protected $code = 400;
 }
 
@@ -19,6 +27,10 @@ class LudoDBException extends Exception{
  */
 class LudoDBClassNotFoundException extends LudoDBException
 {
+    /**
+     * Exception code
+     * @var int
+     */
     protected $code = 404;
 }
 
@@ -29,6 +41,10 @@ class LudoDBClassNotFoundException extends LudoDBException
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBObjectNotFoundException extends LudoDBException{
+    /**
+     * Exception code
+     * @var int
+     */
     protected $code = 404;
 }
 
@@ -58,6 +74,10 @@ class LudoDBInvalidArgumentsException extends LudoDBException{
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBUnauthorizedException extends LudoDBException{
+    /**
+     * Exception code
+     * @var int
+     */
     protected $code = 401;
 }
 
@@ -69,6 +89,10 @@ class LudoDBUnauthorizedException extends LudoDBException{
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBServiceNotImplementedException extends LudoDBException{
+    /**
+     * Exception code
+     * @var int
+     */
     protected $code = 404;
 }
 
@@ -80,6 +104,10 @@ class LudoDBServiceNotImplementedException extends LudoDBException{
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBInvalidServiceException extends Exception{
+    /**
+     * Exception code
+     * @var int
+     */
     protected $code = 405;
 }
 
