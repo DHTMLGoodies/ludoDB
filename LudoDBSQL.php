@@ -1,13 +1,20 @@
 <?php
 /**
+ * Class for building SQL queries in LudoDB
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
+ */
+/**
  * User: Alf Magne Kalleland
  * Date: 22.12.12
- * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBSql
 {
     private $config;
+    /**
+     * @var array
+     */
     private $arguments;
     private $obj;
     private $limit = "";

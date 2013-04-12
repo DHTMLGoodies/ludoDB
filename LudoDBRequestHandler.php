@@ -1,11 +1,14 @@
 <?php
 /**
+ * LudoDB Request Handler - Handle WebService requests
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
+ */
+/**
  * Request handler class for Front End Controller. This class will handle requests sent
  * by Views and pass them to the correct LudoDBObject's.
  * User: Alf Magne Kalleland
  * Date: 13.01.13
- * @package LudoDB
- * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 
 class LudoDBRequestHandler
@@ -28,6 +31,14 @@ class LudoDBRequestHandler
 
     }
 
+    /**
+     * @param $request
+     * @return string
+     * @throws LudoDBObjectNotFoundException
+     * @throws LudoDBServiceNotImplementedException
+     * @throws LudoDBInvalidServiceException
+     * @throws LudoDBInvalidArgumentsException
+     */
     public function handle($request)
     {
         $request = $this->getParsed($request);
