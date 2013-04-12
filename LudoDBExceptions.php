@@ -83,6 +83,12 @@ class LudoDBInvalidServiceException extends Exception{
     protected $code = 405;
 }
 
+/**
+ * Invalid Config Exception. Executed on invalid configuration of LudoDB classes
+ * Thrown by LudoDBRequestHandler
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
+ */
 class LudoDBInvalidConfigException extends LudoDBException{
 
 }

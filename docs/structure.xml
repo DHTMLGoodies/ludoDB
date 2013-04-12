@@ -1116,7 +1116,7 @@ example array(
       <error line="459" code="50010">No DocBlock was found for method getDefaultValues()</error>
     </parse_markers>
   </file>
-  <file path="LudoDBExceptions.php" hash="c6f614d98efffb907e7bea475a716e23" package="Default">
+  <file path="LudoDBExceptions.php" hash="e58905afe1b4b8a71d30d5348a2b1b17" package="Default">
     <class final="false" abstract="false" namespace="global" line="10" package="LudoDB">
       <extends>\Exception</extends>
       <name>LudoDBException</name>
@@ -1234,10 +1234,17 @@ Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
         <default>405</default>
       </property>
     </class>
-    <class final="false" abstract="false" namespace="global" line="86" package="Default">
+    <class final="false" abstract="false" namespace="global" line="92" package="LudoDB">
       <extends>\LudoDBException</extends>
       <name>LudoDBInvalidConfigException</name>
       <full_name>\LudoDBInvalidConfigException</full_name>
+      <docblock line="86">
+        <description>Invalid Config Exception.</description>
+        <long-description>&lt;p&gt;Executed on invalid configuration of LudoDB classes
+Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
+        <tag line="86" name="package" description="LudoDB"/>
+        <tag line="86" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
     </class>
     <parse_markers>
       <error line="0" code="50007">No page-level DocBlock was found in file LudoDBExceptions.php</error>
@@ -1247,7 +1254,6 @@ Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
       <error line="61" code="50018">No DocBlock was found for property $code</error>
       <error line="72" code="50018">No DocBlock was found for property $code</error>
       <error line="83" code="50018">No DocBlock was found for property $code</error>
-      <error line="86" code="50000">No DocBlock was found for \LudoDBInvalidConfigException</error>
     </parse_markers>
   </file>
   <file path="LudoDBInterfaces.php" hash="1e140bf9d55c8fc8522928bae6ce250d" package="Default">
