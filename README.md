@@ -27,6 +27,9 @@ LudoDB is open source software according to the LGPL license.
 ###Website
 http://www.ludodb.com
 
+###Documentation
+http://www.ludodb.com/ludodb/docs
+
 ###Classes
 This is an overview of the most important PHP classes in ludoDB:
 
