@@ -263,6 +263,15 @@ class LudoDB
 
     /**
      * Returns true if database with given name exists.
+     * Example:
+     * <code>
+     *
+     * $instance =
+     * if(!LudoDB::getInstance()->databaseExists('nameOfDatabase')){
+     *      LudoDB::getInstance()->createDatabase('nameOfDatabase');
+     * }
+     *
+     * </code>
      * @param $name
      * @return bool
      */
@@ -291,6 +300,12 @@ class LudoDB
 
     /**
      * Returns true if we have a database connection.
+     * Example:
+     * <code>
+     *
+     * LudoDB::hasConnection()
+     *
+     * </code>
      * @return bool
      */
     public static function hasConnection(){

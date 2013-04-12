@@ -210,7 +210,15 @@ Date: 01.02.13</p></div>
 <pre>databaseExists($name) : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>Example:</p>
+
+<pre><code>
+$instance =
+if(!LudoDB::getInstance()->databaseExists('nameOfDatabase')){
+     LudoDB::getInstance()->createDatabase('nameOfDatabase');
+}
+
+</code></pre></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDB::databaseExists()</td>
@@ -364,7 +372,12 @@ Date: 01.02.13</p></div>
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
 <div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
+<div class="long_description"><p>Example:</p>
+
+<pre><code>
+LudoDB::hasConnection()
+
+</code></pre></div>
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDB::hasConnection()</td>
@@ -743,7 +756,7 @@ Date: 01.02.13</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-04-12T03:08:42+02:00.<br></footer></div>
+            generated on 2013-04-12T03:17:14+02:00.<br></footer></div>
 </div>
 </body>
 </html>

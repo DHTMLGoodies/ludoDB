@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project version="2.0.0a12" title="LudoDB PHP WebService framework">
-  <file path="LudoDB.php" hash="da5c434e9ee6958a172c26ee5c8c4bb5" package="LudoDB">
+  <file path="LudoDB.php" hash="3fea5e763503b77f082326b01e8a30fc" package="LudoDB">
     <docblock line="2">
       <description>Base class for LudoDB adapters
 User: Alf Magne Kalleland
@@ -359,52 +359,65 @@ Date: 03.11.12</description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="269" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="278" package="LudoDB">
         <name>databaseExists</name>
         <full_name>databaseExists</full_name>
         <docblock line="264">
           <description>Returns true if database with given name exists.</description>
-          <long-description></long-description>
+          <long-description>&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+$instance =
+if(!LudoDB::getInstance()-&gt;databaseExists('nameOfDatabase')){
+     LudoDB::getInstance()-&gt;createDatabase('nameOfDatabase');
+}
+
+&lt;/code&gt;&lt;/pre&gt;</long-description>
           <tag line="264" name="param" description="" type="\" variable="$name"/>
           <tag line="264" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="269">
+        <argument line="278">
           <name>$name</name>
           <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="278" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="287" package="LudoDB">
         <name>log</name>
         <full_name>log</full_name>
-        <docblock line="273">
+        <docblock line="282">
           <description>Log SQL - this method is mostly used internally.</description>
           <long-description></long-description>
-          <tag line="273" name="param" description="" type="\" variable="$sql"/>
-          <tag line="273" name="param" description="" type="array" variable="$arguments">
+          <tag line="282" name="param" description="" type="\" variable="$sql"/>
+          <tag line="282" name="param" description="" type="array" variable="$arguments">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="278">
+        <argument line="287">
           <name>$sql</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="278">
+        <argument line="287">
           <name>$arguments</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="296" package="LudoDB">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="311" package="LudoDB">
         <name>hasConnection</name>
         <full_name>hasConnection</full_name>
-        <docblock line="292">
+        <docblock line="301">
           <description>Returns true if we have a database connection.</description>
-          <long-description></long-description>
-          <tag line="292" name="return" description="" type="bool">
+          <long-description>&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+LudoDB::hasConnection()
+
+&lt;/code&gt;&lt;/pre&gt;</long-description>
+          <tag line="301" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
