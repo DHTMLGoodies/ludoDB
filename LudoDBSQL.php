@@ -7,6 +7,7 @@
 /**
  * User: Alf Magne Kalleland
  * Date: 22.12.12
+ * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
 class LudoDBSql

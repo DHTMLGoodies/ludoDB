@@ -6,6 +6,10 @@
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
+/**
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
+ */
 abstract class LudoDBCollection extends LudoDBIterator
 {
     /**

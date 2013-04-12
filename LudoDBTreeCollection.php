@@ -7,6 +7,11 @@
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
+/*
+ * Tree collection
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
+ */
 abstract class LudoDBTreeCollection extends LudoDBCollection
 {
 

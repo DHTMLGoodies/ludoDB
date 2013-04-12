@@ -8,6 +8,10 @@
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
+/*
+ * LudoDBServiceRegistyr
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
+ */
 class LudoDBServiceRegistry
 {
     private static $registeredServices = array();

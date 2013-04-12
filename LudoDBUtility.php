@@ -6,6 +6,11 @@
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
+/**
+ * LudoDBUtility class with development methods for manipulation of database tables.
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
+ */
 class LudoDBUtility
 {
 

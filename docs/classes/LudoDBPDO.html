@@ -20,7 +20,6 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
-<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/LudoDB.html"><i class="icon-folder-open"></i> LudoDB</a></li>
 </ul>
 </li>
@@ -32,7 +31,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">336</span></a></li>
+                <span class="label label-info">302</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">3</span>
@@ -59,40 +58,27 @@
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
-<li class="method public inherited"><a href="#method___construct" title="__construct :: "><span class="description">__construct()
-        </span><pre>__construct()</pre></a></li>
+<li class="method public inherited"><a href="#method___construct" title="__construct :: Constructor"><span class="description">Constructor</span><pre>__construct()</pre></a></li>
 <li class="method public "><a href="#method_connect" title="connect :: "><span class="description">connect()
         </span><pre>connect()</pre></a></li>
-<li class="method public "><a href="#method_countRows" title="countRows :: "><span class="description">countRows()
-        </span><pre>countRows()</pre></a></li>
-<li class="method public inherited"><a href="#method_createDatabase" title="createDatabase :: "><span class="description">createDatabase()
-        </span><pre>createDatabase()</pre></a></li>
-<li class="method public inherited"><a href="#method_databaseExists" title="databaseExists :: "><span class="description">databaseExists()
-        </span><pre>databaseExists()</pre></a></li>
-<li class="method public inherited"><a href="#method_enableLogging" title="enableLogging :: "><span class="description">enableLogging()
-        </span><pre>enableLogging()</pre></a></li>
+<li class="method public "><a href="#method_countRows" title="countRows :: countRows is implemented in sub classes."><span class="description">countRows is implemented in sub classes.</span><pre>countRows()</pre></a></li>
+<li class="method public inherited"><a href="#method_createDatabase" title="createDatabase :: Create database with given name"><span class="description">Create database with given name</span><pre>createDatabase()</pre></a></li>
+<li class="method public inherited"><a href="#method_databaseExists" title="databaseExists :: Returns true if database with given name exists."><span class="description">Returns true if database with given name exists.</span><pre>databaseExists()</pre></a></li>
+<li class="method public inherited"><a href="#method_enableLogging" title="enableLogging :: Used to enable logging details(elapsed time and number of SQL queries) in JSON response from LudoDBRequestHandler"><span class="description">Used to enable logging details(elapsed time and number of SQL queries) in JSON response from LudoDBRequestHandler</span><pre>enableLogging()</pre></a></li>
 <li class="method public inherited"><a href="#method_enableSqlLogging" title="enableSqlLogging :: Logs all sql queries to sql.txt"><span class="description">Logs all sql queries to sql.txt</span><pre>enableSqlLogging()</pre></a></li>
 <li class="method public "><a href="#method_escapeString" title="escapeString :: "><span class="description">escapeString()
         </span><pre>escapeString()</pre></a></li>
-<li class="method public inherited"><a href="#method_getDb" title="getDb :: "><span class="description">getDb()
-        </span><pre>getDb()</pre></a></li>
-<li class="method public inherited"><a href="#method_getElapsed" title="getElapsed :: "><span class="description">getElapsed()
-        </span><pre>getElapsed()</pre></a></li>
+<li class="method public inherited"><a href="#method_getDb" title="getDb :: Return name of database for database connection."><span class="description">Return name of database for database connection.</span><pre>getDb()</pre></a></li>
+<li class="method public inherited"><a href="#method_getElapsed" title="getElapsed :: Return elapsed time for LudoDB operations."><span class="description">Return elapsed time for LudoDB operations.</span><pre>getElapsed()</pre></a></li>
 <li class="method public "><a href="#method_getInsertId" title="getInsertId :: Get last insert id"><span class="description">Get last insert id</span><pre>getInsertId()</pre></a></li>
-<li class="method public inherited"><a href="#method_getInstance" title="getInstance :: "><span class="description">getInstance()
-        </span><pre>getInstance()</pre></a></li>
-<li class="method public inherited"><a href="#method_getQueryCount" title="getQueryCount :: "><span class="description">getQueryCount()
-        </span><pre>getQueryCount()</pre></a></li>
+<li class="method public inherited"><a href="#method_getInstance" title="getInstance :: Return new LudoDB object with connection to the database."><span class="description">Return new LudoDB object with connection to the database.</span><pre>getInstance()</pre></a></li>
+<li class="method public inherited"><a href="#method_getQueryCount" title="getQueryCount :: Return number of executed SQL queries."><span class="description">Return number of executed SQL queries.</span><pre>getQueryCount()</pre></a></li>
 <li class="method public "><a href="#method_getValue" title="getValue :: "><span class="description">getValue()
         </span><pre>getValue()</pre></a></li>
-<li class="method public inherited"><a href="#method_hasConnection" title="hasConnection :: "><span class="description">hasConnection()
-        </span><pre>hasConnection()</pre></a></li>
-<li class="method public inherited"><a href="#method_hasPDO" title="hasPDO :: "><span class="description">hasPDO()
-        </span><pre>hasPDO()</pre></a></li>
-<li class="method public inherited"><a href="#method_isLoggingEnabled" title="isLoggingEnabled :: "><span class="description">isLoggingEnabled()
-        </span><pre>isLoggingEnabled()</pre></a></li>
-<li class="method public inherited"><a href="#method_log" title="log :: "><span class="description">log()
-        </span><pre>log()</pre></a></li>
+<li class="method public inherited"><a href="#method_hasConnection" title="hasConnection :: Returns true if we have a database connection."><span class="description">Returns true if we have a database connection.</span><pre>hasConnection()</pre></a></li>
+<li class="method public inherited"><a href="#method_hasPDO" title="hasPDO :: Returns true if connection type is PDO"><span class="description">Returns true if connection type is PDO</span><pre>hasPDO()</pre></a></li>
+<li class="method public inherited"><a href="#method_isLoggingEnabled" title="isLoggingEnabled :: Returns true if logging of SQL queries and elapsed time in LudoDBRequestHandler"><span class="description">Returns true if logging of SQL queries and elapsed time in LudoDBRequestHandler</span><pre>isLoggingEnabled()</pre></a></li>
+<li class="method public inherited"><a href="#method_log" title="log :: Log SQL - this method is mostly used internally."><span class="description">Log SQL - this method is mostly used internally.</span><pre>log()</pre></a></li>
 <li class="method public "><a href="#method_nextRow" title="nextRow :: "><span class="description">nextRow()
         </span><pre>nextRow()</pre></a></li>
 <li class="method public "><a href="#method_one" title="one :: "><span class="description">one()
@@ -100,33 +86,23 @@
 <li class="method public "><a href="#method_query" title="query :: "><span class="description">query()
         </span><pre>query()</pre></a></li>
 <li class="method public inherited"><a href="#method_setConnectionType" title="setConnectionType :: Set connection type,  PDO|MySqlI|MySql"><span class="description">Set connection type,  PDO|MySqlI|MySql</span><pre>setConnectionType()</pre></a></li>
-<li class="method public inherited"><a href="#method_setDb" title="setDb :: "><span class="description">setDb()
-        </span><pre>setDb()</pre></a></li>
-<li class="method public inherited"><a href="#method_setHost" title="setHost :: "><span class="description">setHost()
-        </span><pre>setHost()</pre></a></li>
-<li class="method public inherited"><a href="#method_setPassword" title="setPassword :: "><span class="description">setPassword()
-        </span><pre>setPassword()</pre></a></li>
-<li class="method public inherited"><a href="#method_setUser" title="setUser :: "><span class="description">setUser()
-        </span><pre>setUser()</pre></a></li>
-<li class="method public inherited"><a href="#method_tableExists" title="tableExists :: "><span class="description">tableExists()
-        </span><pre>tableExists()</pre></a></li>
-<li class="method public inherited"><a href="#method_useDatabase" title="useDatabase :: "><span class="description">useDatabase()
-        </span><pre>useDatabase()</pre></a></li>
+<li class="method public inherited"><a href="#method_setDb" title="setDb :: Set name of database used in database connection."><span class="description">Set name of database used in database connection.</span><pre>setDb()</pre></a></li>
+<li class="method public inherited"><a href="#method_setHost" title="setHost :: Set host for database connection."><span class="description">Set host for database connection.</span><pre>setHost()</pre></a></li>
+<li class="method public inherited"><a href="#method_setPassword" title="setPassword :: Set password for database connection."><span class="description">Set password for database connection.</span><pre>setPassword()</pre></a></li>
+<li class="method public inherited"><a href="#method_setUser" title="setUser :: Set user name for database connection"><span class="description">Set user name for database connection</span><pre>setUser()</pre></a></li>
+<li class="method public inherited"><a href="#method_tableExists" title="tableExists :: Returns true if given database table exists."><span class="description">Returns true if given database table exists.</span><pre>tableExists()</pre></a></li>
+<li class="method public inherited"><a href="#method_useDatabase" title="useDatabase :: Use this databsae."><span class="description">Use this databsae.</span><pre>useDatabase()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
-<li class="method protected inherited"><a href="#method_getHost" title="getHost :: "><span class="description">getHost()
-        </span><pre>getHost()</pre></a></li>
-<li class="method protected inherited"><a href="#method_getPassword" title="getPassword :: "><span class="description">getPassword()
-        </span><pre>getPassword()</pre></a></li>
-<li class="method protected inherited"><a href="#method_getUser" title="getUser :: "><span class="description">getUser()
-        </span><pre>getUser()</pre></a></li>
+<li class="method protected inherited"><a href="#method_getHost" title="getHost :: Return specified host for database connection."><span class="description">Return specified host for database connection.</span><pre>getHost()</pre></a></li>
+<li class="method protected inherited"><a href="#method_getPassword" title="getPassword :: Return password for database connection."><span class="description">Return password for database connection.</span><pre>getPassword()</pre></a></li>
+<li class="method protected inherited"><a href="#method_getUser" title="getUser :: Return username for database connection."><span class="description">Return username for database connection.</span><pre>getUser()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
-                    <ul><li class="method private inherited"><a href="#method_getTime" title="getTime :: "><span class="description">getTime()
-        </span><pre>getTime()</pre></a></li></ul>
+                    <ul><li class="method private inherited"><a href="#method_getTime" title="getTime :: Return microtime"><span class="description">Return microtime</span><pre>getTime()</pre></a></li></ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
@@ -134,17 +110,17 @@
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
-<li class="property protected "><a href="#property_conn" title="$conn :: "><span class="description"></span><pre>$conn</pre></a></li>
-<li class="property protected inherited"><a href="#property_logSQLs" title="$logSQLs :: "><span class="description"></span><pre>$logSQLs</pre></a></li>
-<li class="property protected inherited"><a href="#property_loggingEnabled" title="$loggingEnabled :: "><span class="description"></span><pre>$loggingEnabled</pre></a></li>
-<li class="property protected inherited"><a href="#property_queryCounter" title="$queryCounter :: "><span class="description"></span><pre>$queryCounter</pre></a></li>
-<li class="property protected inherited"><a href="#property_startTime" title="$startTime :: "><span class="description"></span><pre>$startTime</pre></a></li>
+<li class="property protected "><a href="#property_conn" title="$conn :: Connection object"><span class="description"></span><pre>$conn</pre></a></li>
+<li class="property protected inherited"><a href="#property_logSQLs" title="$logSQLs :: True when logging SQL's to file"><span class="description"></span><pre>$logSQLs</pre></a></li>
+<li class="property protected inherited"><a href="#property_loggingEnabled" title="$loggingEnabled :: Return logging details in response from LudoDBRequestHandler"><span class="description"></span><pre>$loggingEnabled</pre></a></li>
+<li class="property protected inherited"><a href="#property_queryCounter" title="$queryCounter :: Number of SQL queries executed"><span class="description"></span><pre>$queryCounter</pre></a></li>
+<li class="property protected inherited"><a href="#property_startTime" title="$startTime :: Internal microtime representing start time for LudoDB operations."><span class="description"></span><pre>$startTime</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
                     <ul>
-<li class="property private inherited"><a href="#property_connectionType" title="$connectionType :: "><span class="description"></span><pre>$connectionType</pre></a></li>
-<li class="property private inherited"><a href="#property_instance" title="$instance :: "><span class="description"></span><pre>$instance</pre></a></li>
+<li class="property private inherited"><a href="#property_connectionType" title="$connectionType :: Connection type"><span class="description"></span><pre>$connectionType</pre></a></li>
+<li class="property private inherited"><a href="#property_instance" title="$instance :: LudoDB references"><span class="description"></span><pre>$instance</pre></a></li>
 </ul>
 </li>
 </ul>
@@ -178,8 +154,7 @@ Date: 31.01.13</p></div>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
 <a id="method___construct"></a><div class="element clickable method public method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
-<h2>__construct()
-        </h2>
+<h2>Constructor</h2>
 <pre>__construct() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -198,8 +173,7 @@ Date: 31.01.13</p></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="method_countRows"></a><div class="element clickable method public method_countRows" data-toggle="collapse" data-target=".method_countRows .collapse">
-<h2>countRows()
-        </h2>
+<h2>countRows is implemented in sub classes.</h2>
 <pre>countRows($sql, array $params) : int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -215,8 +189,7 @@ Date: 31.01.13</p></div>
 </div></div>
 </div>
 <a id="method_createDatabase"></a><div class="element clickable method public method_createDatabase" data-toggle="collapse" data-target=".method_createDatabase .collapse">
-<h2>createDatabase()
-        </h2>
+<h2>Create database with given name</h2>
 <pre>createDatabase($name) </pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
@@ -232,9 +205,8 @@ Date: 31.01.13</p></div>
 </div></div>
 </div>
 <a id="method_databaseExists"></a><div class="element clickable method public method_databaseExists" data-toggle="collapse" data-target=".method_databaseExists .collapse">
-<h2>databaseExists()
-        </h2>
-<pre>databaseExists($name) </pre>
+<h2>Returns true if database with given name exists.</h2>
+<pre>databaseExists($name) : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -244,11 +216,12 @@ Date: 31.01.13</p></div>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$name</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
 <a id="method_enableLogging"></a><div class="element clickable method public method_enableLogging" data-toggle="collapse" data-target=".method_enableLogging .collapse">
-<h2>enableLogging()
-        </h2>
+<h2>Used to enable logging details(elapsed time and number of SQL queries) in JSON response from LudoDBRequestHandler</h2>
 <pre>enableLogging() </pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
@@ -287,9 +260,8 @@ Date: 31.01.13</p></div>
 </div></div>
 </div>
 <a id="method_getDb"></a><div class="element clickable method public method_getDb" data-toggle="collapse" data-target=".method_getDb .collapse">
-<h2>getDb()
-        </h2>
-<pre>getDb() </pre>
+<h2>Return name of database for database connection.</h2>
+<pre>getDb() : String</pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -299,12 +271,13 @@ Date: 31.01.13</p></div>
 <th>inherited_from</th>
 <td>\LudoDB::getDb()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>String</code></div>
 </div></div>
 </div>
 <a id="method_getElapsed"></a><div class="element clickable method public method_getElapsed" data-toggle="collapse" data-target=".method_getElapsed .collapse">
-<h2>getElapsed()
-        </h2>
-<pre>getElapsed() </pre>
+<h2>Return elapsed time for LudoDB operations.</h2>
+<pre>getElapsed() : mixed</pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -314,6 +287,8 @@ Date: 31.01.13</p></div>
 <th>inherited_from</th>
 <td>\LudoDB::getElapsed()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
 <a id="method_getInsertId"></a><div class="element clickable method public method_getInsertId" data-toggle="collapse" data-target=".method_getInsertId .collapse">
@@ -331,9 +306,8 @@ Date: 31.01.13</p></div>
 </div></div>
 </div>
 <a id="method_getInstance"></a><div class="element clickable method public method_getInstance" data-toggle="collapse" data-target=".method_getInstance .collapse">
-<h2>getInstance()
-        </h2>
-<pre>getInstance() </pre>
+<h2>Return new LudoDB object with connection to the database.</h2>
+<pre>getInstance() : <a href="../classes/LudoDB.html">\LudoDB</a> | \LudoDBMySql | <a href="../classes/LudoDBMySqlI.html">\LudoDBMySqlI</a> | <a href="../classes/LudoDBPDO.html">\LudoDBPDO</a></pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -343,12 +317,15 @@ Date: 31.01.13</p></div>
 <th>inherited_from</th>
 <td>\LudoDB::getInstance()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/LudoDB.html">\LudoDB</a></code><code>\LudoDBMySql</code><code><a href="../classes/LudoDBMySqlI.html">\LudoDBMySqlI</a></code><code><a href="../classes/LudoDBPDO.html">\LudoDBPDO</a></code>
+</div>
 </div></div>
 </div>
 <a id="method_getQueryCount"></a><div class="element clickable method public method_getQueryCount" data-toggle="collapse" data-target=".method_getQueryCount .collapse">
-<h2>getQueryCount()
-        </h2>
-<pre>getQueryCount() </pre>
+<h2>Return number of executed SQL queries.</h2>
+<pre>getQueryCount() : int</pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -358,6 +335,8 @@ Date: 31.01.13</p></div>
 <th>inherited_from</th>
 <td>\LudoDB::getQueryCount()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>int</code></div>
 </div></div>
 </div>
 <a id="method_getValue"></a><div class="element clickable method public method_getValue" data-toggle="collapse" data-target=".method_getValue .collapse">
@@ -380,9 +359,8 @@ Date: 31.01.13</p></div>
 </div></div>
 </div>
 <a id="method_hasConnection"></a><div class="element clickable method public method_hasConnection" data-toggle="collapse" data-target=".method_hasConnection .collapse">
-<h2>hasConnection()
-        </h2>
-<pre>hasConnection() </pre>
+<h2>Returns true if we have a database connection.</h2>
+<pre>hasConnection() : bool</pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -392,12 +370,13 @@ Date: 31.01.13</p></div>
 <th>inherited_from</th>
 <td>\LudoDB::hasConnection()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
 <a id="method_hasPDO"></a><div class="element clickable method public method_hasPDO" data-toggle="collapse" data-target=".method_hasPDO .collapse">
-<h2>hasPDO()
-        </h2>
-<pre>hasPDO() </pre>
+<h2>Returns true if connection type is PDO</h2>
+<pre>hasPDO() : bool</pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -407,12 +386,13 @@ Date: 31.01.13</p></div>
 <th>inherited_from</th>
 <td>\LudoDB::hasPDO()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
 <a id="method_isLoggingEnabled"></a><div class="element clickable method public method_isLoggingEnabled" data-toggle="collapse" data-target=".method_isLoggingEnabled .collapse">
-<h2>isLoggingEnabled()
-        </h2>
-<pre>isLoggingEnabled() </pre>
+<h2>Returns true if logging of SQL queries and elapsed time in LudoDBRequestHandler</h2>
+<pre>isLoggingEnabled() : bool</pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -422,12 +402,13 @@ Date: 31.01.13</p></div>
 <th>inherited_from</th>
 <td>\LudoDB::isLoggingEnabled()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
 <a id="method_log"></a><div class="element clickable method public method_log" data-toggle="collapse" data-target=".method_log .collapse">
-<h2>log()
-        </h2>
-<pre>log($sql, $arguments) </pre>
+<h2>Log SQL - this method is mostly used internally.</h2>
+<pre>log($sql, array $arguments) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -437,7 +418,10 @@ Date: 31.01.13</p></div>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$sql</h4></div>
-<div class="subelement argument"><h4>$arguments</h4></div>
+<div class="subelement argument">
+<h4>$arguments</h4>
+<code>array</code>
+</div>
 </div></div>
 </div>
 <a id="method_nextRow"></a><div class="element clickable method public method_nextRow" data-toggle="collapse" data-target=".method_nextRow .collapse">
@@ -516,8 +500,7 @@ Date: 31.01.13</p></div>
 </div></div>
 </div>
 <a id="method_setDb"></a><div class="element clickable method public method_setDb" data-toggle="collapse" data-target=".method_setDb .collapse">
-<h2>setDb()
-        </h2>
+<h2>Set name of database used in database connection.</h2>
 <pre>setDb($dbName) </pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
@@ -533,8 +516,7 @@ Date: 31.01.13</p></div>
 </div></div>
 </div>
 <a id="method_setHost"></a><div class="element clickable method public method_setHost" data-toggle="collapse" data-target=".method_setHost .collapse">
-<h2>setHost()
-        </h2>
+<h2>Set host for database connection.</h2>
 <pre>setHost($host) </pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
@@ -550,8 +532,7 @@ Date: 31.01.13</p></div>
 </div></div>
 </div>
 <a id="method_setPassword"></a><div class="element clickable method public method_setPassword" data-toggle="collapse" data-target=".method_setPassword .collapse">
-<h2>setPassword()
-        </h2>
+<h2>Set password for database connection.</h2>
 <pre>setPassword($pwd) </pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
@@ -567,8 +548,7 @@ Date: 31.01.13</p></div>
 </div></div>
 </div>
 <a id="method_setUser"></a><div class="element clickable method public method_setUser" data-toggle="collapse" data-target=".method_setUser .collapse">
-<h2>setUser()
-        </h2>
+<h2>Set user name for database connection</h2>
 <pre>setUser($user) </pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
@@ -584,9 +564,8 @@ Date: 31.01.13</p></div>
 </div></div>
 </div>
 <a id="method_tableExists"></a><div class="element clickable method public method_tableExists" data-toggle="collapse" data-target=".method_tableExists .collapse">
-<h2>tableExists()
-        </h2>
-<pre>tableExists($tableName) </pre>
+<h2>Returns true if given database table exists.</h2>
+<pre>tableExists($tableName) : String</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -596,11 +575,12 @@ Date: 31.01.13</p></div>
 </tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$tableName</h4></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>String</code></div>
 </div></div>
 </div>
 <a id="method_useDatabase"></a><div class="element clickable method public method_useDatabase" data-toggle="collapse" data-target=".method_useDatabase .collapse">
-<h2>useDatabase()
-        </h2>
+<h2>Use this databsae.</h2>
 <pre>useDatabase($name) </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
@@ -614,9 +594,8 @@ Date: 31.01.13</p></div>
 </div></div>
 </div>
 <a id="method_getHost"></a><div class="element clickable method protected method_getHost" data-toggle="collapse" data-target=".method_getHost .collapse">
-<h2>getHost()
-        </h2>
-<pre>getHost() </pre>
+<h2>Return specified host for database connection.</h2>
+<pre>getHost() : String</pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -626,12 +605,13 @@ Date: 31.01.13</p></div>
 <th>inherited_from</th>
 <td>\LudoDB::getHost()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>String</code></div>
 </div></div>
 </div>
 <a id="method_getPassword"></a><div class="element clickable method protected method_getPassword" data-toggle="collapse" data-target=".method_getPassword .collapse">
-<h2>getPassword()
-        </h2>
-<pre>getPassword() </pre>
+<h2>Return password for database connection.</h2>
+<pre>getPassword() : String</pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -641,12 +621,13 @@ Date: 31.01.13</p></div>
 <th>inherited_from</th>
 <td>\LudoDB::getPassword()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>String</code></div>
 </div></div>
 </div>
 <a id="method_getUser"></a><div class="element clickable method protected method_getUser" data-toggle="collapse" data-target=".method_getUser .collapse">
-<h2>getUser()
-        </h2>
-<pre>getUser() </pre>
+<h2>Return username for database connection.</h2>
+<pre>getUser() : String</pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -656,12 +637,13 @@ Date: 31.01.13</p></div>
 <th>inherited_from</th>
 <td>\LudoDB::getUser()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>String</code></div>
 </div></div>
 </div>
 <a id="method_getTime"></a><div class="element clickable method private method_getTime" data-toggle="collapse" data-target=".method_getTime .collapse">
-<h2>getTime()
-        </h2>
-<pre>getTime() </pre>
+<h2>Return microtime</h2>
+<pre>getTime() : mixed</pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -671,6 +653,8 @@ Date: 31.01.13</p></div>
 <th>inherited_from</th>
 <td>\LudoDB::getTime()</td>
 </tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
 <h3>
@@ -683,7 +667,7 @@ Date: 31.01.13</p></div>
 </div>
 <a id="property_logSQLs"> </a><div class="element clickable property protected property_logSQLs" data-toggle="collapse" data-target=".property_logSQLs .collapse">
 <h2></h2>
-<pre>$logSQLs </pre>
+<pre>$logSQLs : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -695,7 +679,7 @@ Date: 31.01.13</p></div>
 </div>
 <a id="property_loggingEnabled"> </a><div class="element clickable property protected property_loggingEnabled" data-toggle="collapse" data-target=".property_loggingEnabled .collapse">
 <h2></h2>
-<pre>$loggingEnabled </pre>
+<pre>$loggingEnabled : bool</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -707,7 +691,7 @@ Date: 31.01.13</p></div>
 </div>
 <a id="property_queryCounter"> </a><div class="element clickable property protected property_queryCounter" data-toggle="collapse" data-target=".property_queryCounter .collapse">
 <h2></h2>
-<pre>$queryCounter </pre>
+<pre>$queryCounter : int</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -719,7 +703,7 @@ Date: 31.01.13</p></div>
 </div>
 <a id="property_startTime"> </a><div class="element clickable property protected property_startTime" data-toggle="collapse" data-target=".property_startTime .collapse">
 <h2></h2>
-<pre>$startTime </pre>
+<pre>$startTime : float</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -731,7 +715,7 @@ Date: 31.01.13</p></div>
 </div>
 <a id="property_connectionType"> </a><div class="element clickable property private property_connectionType" data-toggle="collapse" data-target=".property_connectionType .collapse">
 <h2></h2>
-<pre>$connectionType </pre>
+<pre>$connectionType : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -743,7 +727,7 @@ Date: 31.01.13</p></div>
 </div>
 <a id="property_instance"> </a><div class="element clickable property private property_instance" data-toggle="collapse" data-target=".property_instance .collapse">
 <h2></h2>
-<pre>$instance </pre>
+<pre>$instance : <a href="../classes/LudoDB.html">\LudoDB</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -760,7 +744,7 @@ Date: 31.01.13</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-04-12T02:48:17+02:00.<br></footer></div>
+            generated on 2013-04-12T03:08:42+02:00.<br></footer></div>
 </div>
 </body>
 </html>
