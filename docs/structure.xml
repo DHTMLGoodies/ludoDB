@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project version="2.0.0a12" title="">
+<project version="2.0.0a12" title="LudoDB PHP WebService framework">
   <file path="LudoDB.php" hash="47d7dc02d777bf83a83c3483bcf4af66" package="Default">
     <class final="false" abstract="false" namespace="global" line="9" package="LudoDB">
       <extends/>
@@ -1192,7 +1192,7 @@ Date: 30.01.13&lt;/p&gt;</long-description>
       <docblock line="54">
         <description>Unauthorized exception
 Thrown by LudoDBRequestHandler</description>
-        <long-description></long-description>
+        <long-description/>
         <tag line="54" name="package" description="LudoDB"/>
         <tag line="54" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
       </docblock>
