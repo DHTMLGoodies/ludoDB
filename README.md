@@ -779,3 +779,38 @@ class LudoJSCountries extends LudoDBCollection implements LudoDBService
 }
 ```
 
+This is an example of how you configure this in LudoJS:
+
+```Javascript
+<script type="text/javascript">
+    var w = new ludo.Window({
+        title:'LudoDB Integration',
+        layout:{
+            'width':500, height:400
+        },
+        children:[
+            {
+                'layout':{
+                    type:'linear',
+                    orientation:'vertical'
+                },
+                'ludoDB':{
+                    'resource':'LudoJSPerson',
+                    'arguments':1,
+                    'url':'../ludoDB/router.php'
+                }
+            }
+        ],
+        buttons:[
+            { type:'form.SubmitButton', value:'Save' },
+            { type:'form.CancelButton', value:'Cancel' }
+        ]
+    });
+
+</script>
+```
+
+Notice the ludoDB config object. It refers to the _LudoJSPerson_ resource and loads instance with id 1. 
+
+_April, 13th, 2013_: LudoJS integration is currently a work in progress. A lot more features will be added. An example
+
