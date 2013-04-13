@@ -39,14 +39,16 @@ class LudoJSPerson extends LudoDBModel implements LudoDBService
                     'type' => 'form.Select',
                     'order' => '4',
                     'dataSource' => 'LudoJSCountries'
-                )
+                ),
+                "access" => "rw"
             ),
             "address" => array(
                 "db" => "varchar(4000)",
                 "ludoJS" => array(
                     'type' => 'form.Textarea',
                     'order' => 3
-                )
+                ),
+                "access" => "rw"
             )
         ),
         "static" => array(

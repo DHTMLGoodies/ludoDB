@@ -17,8 +17,9 @@ LudoDB::enableLogging();
 $request = array('request' => isset($_GET['request']) ? $_GET['request'] : $_POST['request']);
 
 if(isset($_POST['request'])){
-    $request['data'] = isset($_POST['request']['data']) ? $_POST['request']['data'] : $_POST['request'];
+    $request['data'] = isset($_POST['request']['data']) && is_array($_POST['request']['data']) ? $_POST['request']['data'] : null;
 }
+
 
 if(isset($_POST['arguments'])){
     $request['arguments'] = $_POST['arguments'];
