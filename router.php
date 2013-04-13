@@ -19,6 +19,8 @@ if (!file_exists("connect.php")) {
         LudoDB::enableLogging();");
 }
 
+require_once("connect.php");
+
 
 $util = new LudoDBUtility();
 $util->dropAndCreate(array("LudoJSPerson","LudoJSCountry"));
