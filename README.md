@@ -810,7 +810,7 @@ This is an example of how you configure this in LudoJS:
 </script>
 ```
 
-Notice the ludoDB config object. It refers to the _LudoJSPerson_ resource and loads instance with id 1. 
+Notice the ludoDB config object. It refers to the _LudoJSPerson_ resource and loads instance with id 1.
 
 _April, 13th, 2013_: LudoJS integration is currently a work in progress. A lot more features will be added. An example
 
