@@ -39,6 +39,10 @@ class Person extends LudoDBModel implements LudoDBService
         return $this->getValue('type');
     }
 
+    public function getCoffee(){
+        return $this->getValue('coffee');
+    }
+
     public function getFirstname(){
         return $this->getValue('firstname');
     }

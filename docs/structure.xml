@@ -990,7 +990,7 @@ Date: 14.01.13&lt;/p&gt;</long-description>
       <todo line="49">singleton.</todo>
     </markers>
   </file>
-  <file path="LudoDBConfigParser.php" hash="c54879ad8eb32d7349b7ba1f502269d3" package="LudoDB">
+  <file path="LudoDBConfigParser.php" hash="14338fdf806c3067e4fc373bc51c3846" package="LudoDB">
     <docblock line="2">
       <description>Parser for LudoDBObject
 User: Alf Magne
@@ -1097,13 +1097,13 @@ Date: 10.01.13</description>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="private" line="620" namespace="global" package="Default">
+      <property final="false" static="false" visibility="private" line="619" namespace="global" package="Default">
         <name>$columnAccessCache</name>
         <default>array()</default>
-        <docblock line="616">
+        <docblock line="615">
           <description>Cache of access to columns for fast lookup.</description>
           <long-description/>
-          <tag line="616" name="var" description="" type="array">
+          <tag line="615" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
@@ -1148,739 +1148,792 @@ Date: 10.01.13</description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="92" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="91" package="LudoDB">
         <name>getExtends</name>
         <full_name>getExtends</full_name>
-        <docblock line="88">
+        <docblock line="87">
           <description>Return a LudoDBObject instance this LudoDBObject object extends.</description>
           <long-description>&lt;p&gt;(Only when this class extends another LudoDBObject).&lt;/p&gt;</long-description>
-          <tag line="88" name="return" description="" type="\LudoDBObject">
+          <tag line="87" name="return" description="" type="\LudoDBObject">
             <type by_reference="false">\LudoDBObject</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="113" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="112" package="LudoDB">
         <name>getConfigFromFile</name>
         <full_name>getConfigFromFile</full_name>
-        <docblock line="108">
+        <docblock line="107">
           <description>Return config from JSON file as array.</description>
           <long-description/>
-          <tag line="108" name="return" description="" type="array">
+          <tag line="107" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="108" name="throws" description="" type="\Exception">
+          <tag line="107" name="throws" description="" type="\Exception">
             <type by_reference="false">\Exception</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="128" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="127" package="LudoDB">
         <name>getPathToJSONConfig</name>
         <full_name>getPathToJSONConfig</full_name>
-        <docblock line="124">
+        <docblock line="123">
           <description>Return path to JSON config file.</description>
           <long-description/>
-          <tag line="124" name="return" description="" type="string">
+          <tag line="123" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="137" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="136" package="LudoDB">
         <name>getPathToJsonConfigDefaultData</name>
         <full_name>getPathToJsonConfigDefaultData</full_name>
-        <docblock line="133">
+        <docblock line="132">
           <description>Return path to JSON file for default data (name is ClassName.data.json).</description>
           <long-description/>
-          <tag line="133" name="return" description="" type="string">
+          <tag line="132" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="146" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="145" package="LudoDB">
         <name>getFileLocation</name>
         <full_name>getFileLocation</full_name>
-        <docblock line="142">
+        <docblock line="141">
           <description>Return file location of this class.</description>
           <long-description/>
-          <tag line="142" name="return" description="" type="string">
+          <tag line="141" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="155" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="154" package="LudoDB">
         <name>mapColumnAliases</name>
         <full_name>mapColumnAliases</full_name>
-        <docblock line="152">
+        <docblock line="151">
           <description>Save column alias to cache.</description>
           <long-description/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="172" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="171" package="LudoDB">
         <name>getMergedConfigs</name>
         <full_name>getMergedConfigs</full_name>
-        <docblock line="166">
+        <docblock line="165">
           <description>Return config of this LudoDBObject with config of parent LudoDBObject.</description>
           <long-description/>
-          <tag line="166" name="param" description="" type="\" variable="$config1"/>
-          <tag line="166" name="param" description="" type="\" variable="$config2"/>
-          <tag line="166" name="return" description="" type="array">
+          <tag line="165" name="param" description="" type="\" variable="$config1"/>
+          <tag line="165" name="param" description="" type="\" variable="$config2"/>
+          <tag line="165" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="172">
+        <argument line="171">
           <name>$config1</name>
           <default/>
           <type/>
         </argument>
-        <argument line="172">
+        <argument line="171">
           <name>$config2</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="187" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="186" package="LudoDB">
         <name>getConfig</name>
         <full_name>getConfig</full_name>
-        <docblock line="183">
+        <docblock line="182">
           <description>Return config</description>
           <long-description/>
-          <tag line="183" name="return" description="" type="array|null">
+          <tag line="182" name="return" description="" type="array|null">
             <type by_reference="false">array</type>
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="197" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="196" package="LudoDB">
         <name>getValidConfig</name>
         <full_name>getValidConfig</full_name>
-        <docblock line="192">
+        <docblock line="191">
           <description>Return input config validated.</description>
           <long-description/>
-          <tag line="192" name="param" description="" type="\" variable="$config"/>
-          <tag line="192" name="return" description="" type="array">
+          <tag line="191" name="param" description="" type="\" variable="$config"/>
+          <tag line="191" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="197">
+        <argument line="196">
           <name>$config</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="222" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="221" package="LudoDB">
         <name>getTableName</name>
         <full_name>getTableName</full_name>
-        <docblock line="218">
+        <docblock line="217">
           <description>Return table name for LudoDB</description>
           <long-description/>
-          <tag line="218" name="return" description="" type="mixed">
+          <tag line="217" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="231" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="230" package="LudoDB">
         <name>getConstructorParams</name>
         <full_name>getConstructorParams</full_name>
-        <docblock line="227">
+        <docblock line="226">
           <description>Return constructor params.</description>
           <long-description/>
-          <tag line="227" name="return" description="" type="array|null">
+          <tag line="226" name="return" description="" type="array|null">
             <type by_reference="false">array</type>
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="242" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="241" package="LudoDB">
         <name>externalClassNameFor</name>
         <full_name>externalClassNameFor</full_name>
-        <docblock line="237">
+        <docblock line="236">
           <description>Return name of external class for column.</description>
           <long-description/>
-          <tag line="237" name="param" description="" type="\" variable="$column"/>
-          <tag line="237" name="return" description="" type="null">
+          <tag line="236" name="param" description="" type="\" variable="$column"/>
+          <tag line="236" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="242">
+        <argument line="241">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="253" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="252" package="LudoDB">
         <name>getColumnProperty</name>
         <full_name>getColumnProperty</full_name>
-        <docblock line="247">
+        <docblock line="246">
           <description>Return a column property from config, example: "db", "references", "alias"</description>
           <long-description/>
-          <tag line="247" name="param" description="" type="\" variable="$name"/>
-          <tag line="247" name="param" description="" type="\" variable="$property"/>
-          <tag line="247" name="return" description="" type="null">
+          <tag line="246" name="param" description="" type="\" variable="$name"/>
+          <tag line="246" name="param" description="" type="\" variable="$property"/>
+          <tag line="246" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="253">
+        <argument line="252">
           <name>$name</name>
           <default/>
           <type/>
         </argument>
-        <argument line="253">
+        <argument line="252">
           <name>$property</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="268" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="267" package="LudoDB">
         <name>getExternalClassProperty</name>
         <full_name>getExternalClassProperty</full_name>
-        <docblock line="262">
+        <docblock line="261">
           <description>Return config property from external class referenced in config of the LudoDBObject of this class.</description>
           <long-description/>
-          <tag line="262" name="param" description="" type="\" variable="$column"/>
-          <tag line="262" name="param" description="" type="\" variable="$property"/>
-          <tag line="262" name="return" description="" type="null">
+          <tag line="261" name="param" description="" type="\" variable="$column"/>
+          <tag line="261" name="param" description="" type="\" variable="$property"/>
+          <tag line="261" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="268">
+        <argument line="267">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
-        <argument line="268">
+        <argument line="267">
           <name>$property</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="283" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="282" package="LudoDB">
         <name>isExternalColumn</name>
         <full_name>isExternalColumn</full_name>
-        <docblock line="278">
+        <docblock line="277">
           <description>Returns true if given column is from external LudoDBObject</description>
           <long-description/>
-          <tag line="278" name="param" description="" type="\" variable="$name"/>
-          <tag line="278" name="return" description="" type="mixed">
+          <tag line="277" name="param" description="" type="\" variable="$name"/>
+          <tag line="277" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="283">
+        <argument line="282">
           <name>$name</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="297" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="296" package="LudoDB">
         <name>getIdField</name>
         <full_name>getIdField</full_name>
-        <docblock line="293">
+        <docblock line="292">
           <description>Return name of id field.</description>
           <long-description/>
-          <tag line="293" name="return" description="" type="string">
+          <tag line="292" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="306" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="305" package="LudoDB">
         <name>isIdAutoIncremented</name>
         <full_name>isIdAutoIncremented</full_name>
-        <docblock line="302">
+        <docblock line="301">
           <description>Returns true if auto increment of id is specified in config.</description>
           <long-description/>
-          <tag line="302" name="return" description="" type="bool">
+          <tag line="301" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="316" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="315" package="LudoDB">
         <name>getDbDefinition</name>
         <full_name>getDbDefinition</full_name>
-        <docblock line="311">
+        <docblock line="310">
           <description>Return db definition of a column, example: "int auto_increment not null primary key"</description>
           <long-description/>
-          <tag line="311" name="param" description="" type="\" variable="$column"/>
-          <tag line="311" name="return" description="" type="mixed">
+          <tag line="310" name="param" description="" type="\" variable="$column"/>
+          <tag line="310" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="316">
+        <argument line="315">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="327" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="326" package="LudoDB">
         <name>getSetMethod</name>
         <full_name>getSetMethod</full_name>
-        <docblock line="322">
+        <docblock line="321">
           <description>Return "set" property of a column in config, i.e.</description>
           <long-description>&lt;p&gt;name of set method.&lt;/p&gt;</long-description>
-          <tag line="322" name="param" description="" type="\" variable="$column"/>
-          <tag line="322" name="return" description="" type="null">
+          <tag line="321" name="param" description="" type="\" variable="$column"/>
+          <tag line="321" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="327">
+        <argument line="326">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="337" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="336" package="LudoDB">
         <name>getGetMethod</name>
         <full_name>getGetMethod</full_name>
-        <docblock line="332">
+        <docblock line="331">
           <description>Return "get" property of a column in config, i.e.</description>
           <long-description>&lt;p&gt;name of get method.&lt;/p&gt;</long-description>
-          <tag line="332" name="param" description="" type="\" variable="$column"/>
-          <tag line="332" name="return" description="" type="null|string">
+          <tag line="331" name="param" description="" type="\" variable="$column"/>
+          <tag line="331" name="return" description="" type="null|string">
             <type by_reference="false">null</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="337">
+        <argument line="336">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="349" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="348" package="LudoDB">
         <name>foreignKeyFor</name>
         <full_name>foreignKeyFor</full_name>
-        <docblock line="344">
+        <docblock line="343">
           <description>Return foreign key for a column if exists.</description>
           <long-description/>
-          <tag line="344" name="param" description="" type="\" variable="$column"/>
-          <tag line="344" name="return" description="" type="null">
+          <tag line="343" name="param" description="" type="\" variable="$column"/>
+          <tag line="343" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="349">
+        <argument line="348">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="359" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="358" package="LudoDB">
         <name>getIndexes</name>
         <full_name>getIndexes</full_name>
-        <docblock line="355">
+        <docblock line="354">
           <description>Return indexed columns from config.</description>
           <long-description/>
-          <tag line="355" name="return" description="" type="null">
+          <tag line="354" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="368" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="367" package="LudoDB">
         <name>getDefaultData</name>
         <full_name>getDefaultData</full_name>
-        <docblock line="364">
+        <docblock line="363">
           <description>Get default data for database table.</description>
           <long-description/>
-          <tag line="364" name="return" description="" type="array|null">
+          <tag line="363" name="return" description="" type="array|null">
             <type by_reference="false">array</type>
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="387" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="386" package="LudoDB">
         <name>getJoins</name>
         <full_name>getJoins</full_name>
-        <docblock line="383">
+        <docblock line="382">
           <description>Return array of joined tables</description>
           <long-description/>
-          <tag line="383" name="return" description="" type="null|array">
+          <tag line="382" name="return" description="" type="null|array">
             <type by_reference="false">null</type>
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="397" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="396" package="LudoDB">
         <name>getMyColumnsForSQL</name>
         <full_name>getMyColumnsForSQL</full_name>
-        <docblock line="393">
+        <docblock line="392">
           <description>Return name of my columns prefixed by tableName + .</description>
           <long-description/>
-          <tag line="393" name="return" description="" type="array">
+          <tag line="392" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="417" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="416" package="LudoDB">
         <name>getJoinsForSQL</name>
         <full_name>getJoinsForSQL</full_name>
-        <docblock line="413">
+        <docblock line="412">
           <description>Return array of names of joined columns prefixed by their table names.</description>
           <long-description/>
-          <tag line="413" name="return" description="" type="array">
+          <tag line="412" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="433" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="432" package="LudoDB">
         <name>getColumnsToSelectFromJoins</name>
         <full_name>getColumnsToSelectFromJoins</full_name>
-        <docblock line="429">
+        <docblock line="428">
           <description>Return columns to select from joined tables prefixed by their table names.</description>
           <long-description/>
-          <tag line="429" name="return" description="" type="array">
+          <tag line="428" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="451" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="450" package="LudoDB">
         <name>getColumns</name>
         <full_name>getColumns</full_name>
-        <docblock line="447">
+        <docblock line="446">
           <description>Return array of columns from config.</description>
           <long-description/>
-          <tag line="447" name="return" description="" type="array">
+          <tag line="446" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="461" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="460" package="LudoDB">
         <name>getPublicColumnName</name>
         <full_name>getPublicColumnName</full_name>
-        <docblock line="456">
+        <docblock line="455">
           <description>Return public column name.</description>
           <long-description>&lt;p&gt;If "alias" is defined in config, that&lt;/p&gt;</long-description>
-          <tag line="456" name="param" description="" type="\" variable="$name"/>
-          <tag line="456" name="return" description="" type="mixed">
+          <tag line="455" name="param" description="" type="\" variable="$name"/>
+          <tag line="455" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="461">
+        <argument line="460">
           <name>$name</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="473" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="472" package="LudoDB">
         <name>getColumn</name>
         <full_name>getColumn</full_name>
-        <docblock line="468">
+        <docblock line="467">
           <description>Return config of a column</description>
           <long-description/>
-          <tag line="468" name="param" description="" type="\" variable="$column"/>
-          <tag line="468" name="return" description="" type="array|null">
+          <tag line="467" name="param" description="" type="\" variable="$column"/>
+          <tag line="467" name="return" description="" type="array|null">
             <type by_reference="false">array</type>
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="473">
+        <argument line="472">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="484" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="483" package="LudoDB">
         <name>getInternalColName</name>
         <full_name>getInternalColName</full_name>
-        <docblock line="479">
+        <docblock line="478">
           <description>Return internal column name, i.e.</description>
           <long-description>&lt;p&gt;key in column config. alias name will be translated to internal names.&lt;/p&gt;</long-description>
-          <tag line="479" name="param" description="" type="\" variable="$column"/>
-          <tag line="479" name="return" description="" type="mixed">
+          <tag line="478" name="param" description="" type="\" variable="$column"/>
+          <tag line="478" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="484">
+        <argument line="483">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="493" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="492" package="LudoDB">
         <name>getOrderBy</name>
         <full_name>getOrderBy</full_name>
-        <docblock line="489">
+        <docblock line="488">
           <description>Return orderBy property from config.</description>
           <long-description/>
-          <tag line="489" name="return" description="" type="null">
+          <tag line="488" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="502" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="501" package="LudoDB">
         <name>hasColumns</name>
         <full_name>hasColumns</full_name>
-        <docblock line="498">
+        <docblock line="497">
           <description>Return true if any columns are defined in config.</description>
           <long-description/>
-          <tag line="498" name="return" description="" type="bool">
+          <tag line="497" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="512" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="511" package="LudoDB">
         <name>getTableNamesFromJoins</name>
         <full_name>getTableNamesFromJoins</full_name>
-        <docblock line="508">
+        <docblock line="507">
           <description>Return array of table names for joined columns.</description>
           <long-description/>
-          <tag line="508" name="return" description="" type="array">
+          <tag line="507" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="529" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="528" package="LudoDB">
         <name>getProperty</name>
         <full_name>getProperty</full_name>
-        <docblock line="524">
+        <docblock line="523">
           <description>Return a config property by key.</description>
           <long-description/>
-          <tag line="524" name="param" description="" type="\" variable="$key"/>
-          <tag line="524" name="return" description="" type="null">
+          <tag line="523" name="param" description="" type="\" variable="$key"/>
+          <tag line="523" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="529">
+        <argument line="528">
           <name>$key</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="539" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="538" package="LudoDB">
         <name>hasColumn</name>
         <full_name>hasColumn</full_name>
-        <docblock line="534">
+        <docblock line="533">
           <description>Return true if config for given column is defined in config.</description>
           <long-description/>
-          <tag line="534" name="param" description="" type="\" variable="$columnName"/>
-          <tag line="534" name="return" description="" type="bool">
+          <tag line="533" name="param" description="" type="\" variable="$columnName"/>
+          <tag line="533" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="539">
+        <argument line="538">
           <name>$columnName</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="549" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="548" package="LudoDB">
         <name>getColumnByMethod</name>
         <full_name>getColumnByMethod</full_name>
-        <docblock line="544">
+        <docblock line="543">
           <description>Return name of column by "set" or "get" method.</description>
           <long-description/>
-          <tag line="544" name="param" description="" type="\" variable="$methodName"/>
-          <tag line="544" name="return" description="" type="null|string">
+          <tag line="543" name="param" description="" type="\" variable="$methodName"/>
+          <tag line="543" name="return" description="" type="null|string">
             <type by_reference="false">null</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="549">
+        <argument line="548">
           <name>$methodName</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="570" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="569" package="LudoDB">
         <name>saveInMappingCache</name>
         <full_name>saveInMappingCache</full_name>
-        <docblock line="564">
+        <docblock line="563">
           <description>Save mapping between set and get methods and column names in internal cache for fast lookup.</description>
           <long-description/>
-          <tag line="564" name="param" description="" type="\" variable="$methodName"/>
-          <tag line="564" name="param" description="" type="\" variable="$col"/>
-          <tag line="564" name="return" description="" type="mixed">
+          <tag line="563" name="param" description="" type="\" variable="$methodName"/>
+          <tag line="563" name="param" description="" type="\" variable="$col"/>
+          <tag line="563" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="570">
+        <argument line="569">
           <name>$methodName</name>
           <default/>
           <type/>
         </argument>
-        <argument line="570">
+        <argument line="569">
           <name>$col</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="585" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="584" package="LudoDB">
         <name>getFromMappingCache</name>
         <full_name>getFromMappingCache</full_name>
-        <docblock line="580">
+        <docblock line="579">
           <description>Return column name for given set or get method from mapping cache (fast lookup).</description>
           <long-description/>
-          <tag line="580" name="param" description="" type="\" variable="$methodName"/>
-          <tag line="580" name="return" description="" type="null">
+          <tag line="579" name="param" description="" type="\" variable="$methodName"/>
+          <tag line="579" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="585">
+        <argument line="584">
           <name>$methodName</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="600" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="599" package="LudoDB">
         <name>canWriteTo</name>
         <full_name>canWriteTo</full_name>
-        <docblock line="594">
+        <docblock line="593">
           <description>Returns true if user can write to given column.</description>
           <long-description>&lt;p&gt;This is for the "save" and "setValues" methods of a LudoDBModel. You can
 always call $this-&gt;setValue($name, $value) internally in your LudoDBModel classes.&lt;/p&gt;</long-description>
-          <tag line="594" name="param" description="" type="\" variable="$name"/>
-          <tag line="594" name="return" description="" type="mixed">
+          <tag line="593" name="param" description="" type="\" variable="$name"/>
+          <tag line="593" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="600">
+        <argument line="599">
           <name>$name</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="611" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="610" package="LudoDB">
         <name>canReadFrom</name>
         <full_name>canReadFrom</full_name>
-        <docblock line="605">
+        <docblock line="604">
           <description>Returns true if user can read value of given column.</description>
           <long-description>&lt;p&gt;This is for the getValues and read methods of a LudoDBModel. You
 will get access to column values internally using $this-&gt;getValue($columnName);&lt;/p&gt;</long-description>
-          <tag line="605" name="param" description="" type="\" variable="$name"/>
-          <tag line="605" name="return" description="" type="mixed">
+          <tag line="604" name="param" description="" type="\" variable="$name"/>
+          <tag line="604" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="611">
+        <argument line="610">
           <name>$name</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="628" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="627" package="LudoDB">
         <name>hasColumnAccess</name>
         <full_name>hasColumnAccess</full_name>
-        <docblock line="622">
+        <docblock line="621">
           <description>Returns true if you have given access (read or write) to given column.</description>
           <long-description/>
-          <tag line="622" name="param" description="" type="\" variable="$name"/>
-          <tag line="622" name="param" description="" type="\" variable="$access"/>
-          <tag line="622" name="return" description="" type="mixed">
+          <tag line="621" name="param" description="" type="\" variable="$name"/>
+          <tag line="621" name="param" description="" type="\" variable="$access"/>
+          <tag line="621" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="628">
+        <argument line="627">
           <name>$name</name>
           <default/>
           <type/>
         </argument>
-        <argument line="628">
+        <argument line="627">
           <name>$access</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="656" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="655" package="LudoDB">
         <name>isStaticColumn</name>
         <full_name>isStaticColumn</full_name>
-        <docblock line="650">
+        <docblock line="649">
           <description>Returns true if given column is a static column, i.e.</description>
           <long-description>&lt;p&gt;column not defined in database which should have a static value
 defined in config.&lt;/p&gt;</long-description>
-          <tag line="650" name="param" description="" type="\" variable="$column"/>
-          <tag line="650" name="return" description="" type="bool">
+          <tag line="649" name="param" description="" type="\" variable="$column"/>
+          <tag line="649" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="656">
+        <argument line="655">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="666" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="665" package="LudoDB">
         <name>getStaticValue</name>
         <full_name>getStaticValue</full_name>
-        <docblock line="661">
+        <docblock line="660">
           <description>Return value of static column.</description>
           <long-description/>
-          <tag line="661" name="param" description="" type="\" variable="$column"/>
-          <tag line="661" name="return" description="" type="mixed">
+          <tag line="660" name="param" description="" type="\" variable="$column"/>
+          <tag line="660" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="666">
+        <argument line="665">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="674" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="673" package="LudoDB">
         <name>getStaticValues</name>
         <full_name>getStaticValues</full_name>
-        <docblock line="670">
+        <docblock line="669">
           <description>Return array of values for static columns.</description>
           <long-description>&lt;p&gt;Name of column is the key in the returned array.&lt;/p&gt;</long-description>
-          <tag line="670" name="return" description="" type="array">
+          <tag line="669" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="683" package="LudoDB">
-        <name>canBePopulatedBy</name>
-        <full_name>canBePopulatedBy</full_name>
-        <docblock line="678">
-          <description>Returns true when LudoDBModel can be populated/constructed by this column.</description>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="685" package="LudoDB">
+        <name>getStaticColumns</name>
+        <full_name>getStaticColumns</full_name>
+        <docblock line="681">
+          <description>Return static columns</description>
           <long-description/>
-          <tag line="678" name="param" description="" type="\" variable="$column"/>
-          <tag line="678" name="return" description="" type="bool">
+          <tag line="681" name="return" description="" type="array|null">
+            <type by_reference="false">array</type>
+            <type by_reference="false">null</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="693" package="LudoDB">
+        <name>hasStaticColumns</name>
+        <full_name>hasStaticColumns</full_name>
+        <docblock line="689">
+          <description>Returns true if config has static columns.</description>
+          <long-description/>
+          <tag line="689" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="683">
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="702" package="LudoDB">
+        <name>canBePopulatedBy</name>
+        <full_name>canBePopulatedBy</full_name>
+        <docblock line="697">
+          <description>Returns true when LudoDBModel can be populated/constructed by this column.</description>
+          <long-description/>
+          <tag line="697" name="param" description="" type="\" variable="$column"/>
+          <tag line="697" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="702">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="701" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="720" package="LudoDB">
         <name>getTableReferences</name>
         <full_name>getTableReferences</full_name>
-        <docblock line="693">
+        <docblock line="712">
           <description>Returns references to other tables as array,
 example array(
  array('table' =&gt; 'city', 'column' =&gt; 'zip'),
  array('table' =&gt; 'country', 'column' =&gt; 'id')
 )</description>
           <long-description/>
-          <tag line="693" name="return" description="" type="array">
+          <tag line="712" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="721" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="740" package="LudoDB">
         <name>getDefaultValue</name>
         <full_name>getDefaultValue</full_name>
-        <docblock line="716">
+        <docblock line="735">
           <description>Return default value of a column.</description>
           <long-description/>
-          <tag line="716" name="param" description="" type="\" variable="$column"/>
-          <tag line="716" name="return" description="" type="null">
+          <tag line="735" name="param" description="" type="\" variable="$column"/>
+          <tag line="735" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="721">
+        <argument line="740">
           <name>$column</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="730" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="749" package="LudoDB">
         <name>getDefaultValues</name>
         <full_name>getDefaultValues</full_name>
-        <docblock line="726">
+        <docblock line="745">
           <description>Return default values of all columns.</description>
           <long-description/>
-          <tag line="726" name="return" description="" type="array|null">
+          <tag line="745" name="return" description="" type="array|null">
             <type by_reference="false">array</type>
             <type by_reference="false">null</type>
           </tag>
         </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="765" package="LudoDB">
+        <name>getLudoJSConfig</name>
+        <full_name>getLudoJSConfig</full_name>
+        <docblock line="761">
+          <description>Returns ludoJS config for database columns and static columns.</description>
+          <long-description/>
+          <tag line="761" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="777" package="LudoDB">
+        <name>getLudoJSOf</name>
+        <full_name>getLudoJSOf</full_name>
+        <docblock line="772">
+          <description>Return LudoJS config of these columns</description>
+          <long-description/>
+          <tag line="772" name="param" description="" type="array" variable="$columns">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="772" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="777">
+          <name>$columns</name>
+          <default/>
+          <type/>
+        </argument>
       </method>
     </class>
   </file>
@@ -2359,7 +2412,7 @@ case Data has been changed.&lt;/p&gt;</long-description>
       </method>
     </interface>
   </file>
-  <file path="LudoDBIterator.php" hash="292758896a4da3103044a8561d9bd193" package="LudoDB">
+  <file path="LudoDBIterator.php" hash="b175aa4fd4fc97193560be770c5b6486" package="LudoDB">
     <docblock line="2">
       <description>User: Alf Magne Kalleland
 Date: 21.12.12</description>
@@ -2573,7 +2626,7 @@ Date: 21.12.12</description>
       <todo line="123">checkout the difference between $this-&gt;valueCache and $this-&gt;rows</todo>
     </markers>
   </file>
-  <file path="LudoDBModel.php" hash="a8b8cb2bcb29be50955b64332a656ba9" package="LudoDB">
+  <file path="LudoDBModel.php" hash="408cae5205c205a52d083a550c3ee689" package="LudoDB">
     <docblock line="2">
       <description>Representation of a ludoDB table</description>
       <long-description/>
@@ -3161,77 +3214,77 @@ columns with values(not null) will be returned.&lt;/p&gt;</long-description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="547" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="550" package="LudoDB">
         <name>getJoinColumns</name>
         <full_name>getJoinColumns</full_name>
-        <docblock line="543">
+        <docblock line="546">
           <description>Return values from joined columns.</description>
           <long-description/>
-          <tag line="543" name="return" description="" type="array">
+          <tag line="546" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="564" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="567" package="LudoDB">
         <name>isValid</name>
         <full_name>isValid</full_name>
-        <docblock line="560">
+        <docblock line="563">
           <description>Return true if update and save is allowed to run.</description>
           <long-description/>
-          <tag line="560" name="return" description="" type="bool">
+          <tag line="563" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="577" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="580" package="LudoDB">
         <name>__call</name>
         <full_name>__call</full_name>
-        <docblock line="569">
+        <docblock line="572">
           <description>Creates magic get and set methods for columns.</description>
           <long-description>&lt;p&gt;Example
 columns "firstname" will have it's own "getFirstname" and "setFirstname" method.&lt;/p&gt;</long-description>
-          <tag line="569" name="param" description="" type="\" variable="$name"/>
-          <tag line="569" name="param" description="" type="\" variable="$arguments"/>
-          <tag line="569" name="return" description="" type="null">
+          <tag line="572" name="param" description="" type="\" variable="$name"/>
+          <tag line="572" name="param" description="" type="\" variable="$arguments"/>
+          <tag line="572" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="569" name="throws" description="" type="\Exception">
+          <tag line="572" name="throws" description="" type="\Exception">
             <type by_reference="false">\Exception</type>
           </tag>
         </docblock>
-        <argument line="577">
+        <argument line="580">
           <name>$name</name>
           <default/>
           <type/>
         </argument>
-        <argument line="577">
+        <argument line="580">
           <name>$arguments</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="607" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="610" package="LudoDB">
         <name>setValues</name>
         <full_name>setValues</full_name>
-        <docblock line="594">
+        <docblock line="597">
           <description>Populate columns you can write to with these data</description>
           <long-description/>
-          <tag line="594" name="example" description=":&#13;&#10;&lt;code&gt;&#13;&#10;$person = new Person(1);&#13;&#10;$person-&gt;populate(array(&#13;&#10; &quot;firstname&quot; =&gt; &quot;Jane&quot;, &quot;lastname&quot; =&gt; &quot;Johnson&quot;&#13;&#10;));&#13;&#10;$person-&gt;commit();&#13;&#10;&lt;/code&gt;"/>
-          <tag line="594" name="param" description="" type="\" variable="$data"/>
-          <tag line="594" name="return" description="" type="bool">
+          <tag line="597" name="example" description=":&#13;&#10;&lt;code&gt;&#13;&#10;$person = new Person(1);&#13;&#10;$person-&gt;populate(array(&#13;&#10; &quot;firstname&quot; =&gt; &quot;Jane&quot;, &quot;lastname&quot; =&gt; &quot;Johnson&quot;&#13;&#10;));&#13;&#10;$person-&gt;commit();&#13;&#10;&lt;/code&gt;"/>
+          <tag line="597" name="param" description="" type="\" variable="$data"/>
+          <tag line="597" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="607">
+        <argument line="610">
           <name>$data</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="630" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="633" package="LudoDB">
         <name>save</name>
         <full_name>save</full_name>
-        <docblock line="619">
+        <docblock line="622">
           <description>Populate and save data.</description>
           <long-description>&lt;p&gt;Returns array "&lt;idField&gt;" =&gt; "&lt;id&gt;"
 Example:&lt;/p&gt;
@@ -3240,21 +3293,21 @@ Example:&lt;/p&gt;
 $data = $city-&gt;save(array("city" =&gt; "Stavanger", "country" =&gt; "Norway"));
 var_dump($data);
 &lt;/code&gt;&lt;/pre&gt;</long-description>
-          <tag line="619" name="param" description="" type="\" variable="$data"/>
-          <tag line="619" name="return" description="" type="array">
+          <tag line="622" name="param" description="" type="\" variable="$data"/>
+          <tag line="622" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="630">
+        <argument line="633">
           <name>$data</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="645" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="648" package="LudoDB">
         <name>delete</name>
         <full_name>delete</full_name>
-        <docblock line="642">
+        <docblock line="645">
           <description>Delete record</description>
           <long-description/>
         </docblock>
@@ -4232,7 +4285,7 @@ Date: 31.01.13</description>
       </method>
     </class>
   </file>
-  <file path="LudoDBProfiling.php" hash="9f986a0894435fbbd5e8f2e004645c4b" package="LudoDB">
+  <file path="LudoDBProfiling.php" hash="cedc61b30ab2516bc7c569976126889e" package="LudoDB">
     <docblock line="2">
       <description>http://localhost/LudoDBProfiling/Person/1/read/profile
 User: Alf Magne Kalleland
@@ -5290,7 +5343,7 @@ of LudoDBModel or LudoDBCollection does not contain any "sql" key/value.&lt;/p&g
       <description>User: Alf Magne Kalleland
 Date: 12.02.13
 Time: 23:14</description>
-      <long-description></long-description>
+      <long-description/>
       <tag line="2" name="package" description="LudoDB"/>
       <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
     </docblock>
@@ -5310,7 +5363,7 @@ services you have available.&lt;/p&gt;</long-description>
         <default>array()</default>
         <docblock line="19">
           <description>Array of registered resource services.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="19" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -5329,7 +5382,7 @@ LudoDBServiceRegistry::getAll(). Argument is name of a LudoDBService class.&lt;/
         </docblock>
         <argument line="30">
           <name>$resource</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -5338,7 +5391,7 @@ LudoDBServiceRegistry::getAll(). Argument is name of a LudoDBService class.&lt;/
         <full_name>getAll</full_name>
         <docblock line="44">
           <description>Return array of all registered service resources with service names.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="44" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -5634,6 +5687,290 @@ valid LudoDBModel class names.&lt;/p&gt;</long-description>
       <todo line="190">implement</todo>
       <todo line="198">implement</todo>
     </markers>
+  </file>
+  <file path="LudoJS.php" hash="6614161118777d6c26c9ef3e5fd78644" package="LudoDB">
+    <docblock line="2">
+      <description>Comment pending.</description>
+      <long-description>&lt;p&gt;User: Alf Magne Kalleland
+Date: 13.04.13
+Time: 15:59&lt;/p&gt;</long-description>
+      <tag line="2" name="package" description="LudoDB"/>
+      <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="global" line="26" package="LudoDB">
+      <extends/>
+      <implements>\LudoDBService</implements>
+      <name>LudoJS</name>
+      <full_name>\LudoJS</full_name>
+      <docblock line="10">
+        <description>LudoJS service class.</description>
+        <long-description>&lt;p&gt;This class outputs LudoJS config objects for LudoDB instances&lt;/p&gt;
+
+&lt;p&gt;Example where LudoJS config for LudoDBModel Person is returned with values of Person with id equals 1:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$handler = new LudoDBRequestHandler();
+echo $handler-&gt;handle('LudoJS/Person/1/form');
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will return the config as a JSON string.&lt;/p&gt;</long-description>
+        <tag line="10" name="package" description="LudoDB"/>
+        <tag line="10" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="32" namespace="global" package="Default">
+        <name>$resource</name>
+        <default></default>
+        <docblock line="28">
+          <description>Reference to the LudoDBObject to handle</description>
+          <long-description></long-description>
+          <tag line="28" name="var" description="" type="\LudoDBObject">
+            <type by_reference="false">\LudoDBObject</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="36" package="LudoDB">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="33">
+          <description>Construct new instance</description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="45" package="LudoDB">
+        <name>getValidServices</name>
+        <full_name>getValidServices</full_name>
+        <docblock line="41">
+          <description>Return "form" as only valid service</description>
+          <long-description></long-description>
+          <tag line="41" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="55" package="LudoDB">
+        <name>validateArguments</name>
+        <full_name>validateArguments</full_name>
+        <docblock line="49">
+          <description>Accepted number of arguments is 1 or 2 (second argument is optional "id" of resource)</description>
+          <long-description></long-description>
+          <tag line="49" name="param" description="" type="String" variable="$service">
+            <type by_reference="false">String</type>
+          </tag>
+          <tag line="49" name="param" description="" type="Array" variable="$arguments">
+            <type by_reference="false">Array</type>
+          </tag>
+          <tag line="49" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="55">
+          <name>$service</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="55">
+          <name>$arguments</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="66" package="LudoDB">
+        <name>validateServiceData</name>
+        <full_name>validateServiceData</full_name>
+        <docblock line="60">
+          <description>No data is allowed to this service</description>
+          <long-description></long-description>
+          <tag line="60" name="param" description="" type="string" variable="$service">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="60" name="param" description="" type="array" variable="$data">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="60" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="66">
+          <name>$service</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="66">
+          <name>$data</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="75" package="LudoDB">
+        <name>shouldCache</name>
+        <full_name>shouldCache</full_name>
+        <docblock line="70">
+          <description>No caching</description>
+          <long-description></long-description>
+          <tag line="70" name="param" description="" type="string" variable="$service">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="70" name="return" description="" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="75">
+          <name>$service</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="84" package="LudoDB">
+        <name>getOnSuccessMessageFor</name>
+        <full_name>getOnSuccessMessageFor</full_name>
+        <docblock line="79">
+          <description>Returns empty string as on success message for service</description>
+          <long-description></long-description>
+          <tag line="79" name="param" description="" type="String" variable="$service">
+            <type by_reference="false">String</type>
+          </tag>
+          <tag line="79" name="return" description="" type="String">
+            <type by_reference="false">String</type>
+          </tag>
+        </docblock>
+        <argument line="84">
+          <name>$service</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="92" package="LudoDB">
+        <name>form</name>
+        <full_name>form</full_name>
+        <docblock line="88">
+          <description>"form" service</description>
+          <long-description></long-description>
+          <tag line="88" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="113" package="LudoDB">
+        <name>setMissingProperties</name>
+        <full_name>setMissingProperties</full_name>
+        <docblock line="108">
+          <description>Update child array with default properties when not specified in config, example "label"</description>
+          <long-description></long-description>
+          <tag line="108" name="param" description="" type="\" variable="$children"/>
+          <tag line="108" name="return" description="" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="113">
+          <name>$children</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="127" package="LudoDB">
+        <name>createDataSources</name>
+        <full_name>createDataSources</full_name>
+        <docblock line="122">
+          <description>Create dataSource objects for children.</description>
+          <long-description></long-description>
+          <tag line="122" name="param" description="" type="\" variable="$children"/>
+          <tag line="122" name="return" description="" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="127">
+          <name>$children</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="141" package="LudoDB">
+        <name>getDataSourceConfig</name>
+        <full_name>getDataSourceConfig</full_name>
+        <docblock line="136">
+          <description>Return data source config with values for columns.</description>
+          <long-description></long-description>
+          <tag line="136" name="param" description="" type="\" variable="$source"/>
+          <tag line="136" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="141">
+          <name>$source</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="162" package="LudoDB">
+        <name>getChildrenInRightOrder</name>
+        <full_name>getChildrenInRightOrder</full_name>
+        <docblock line="157">
+          <description>Return childrne in correct order according to "order" attribute</description>
+          <long-description></long-description>
+          <tag line="157" name="param" description="" type="array" variable="$children">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="157" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="162">
+          <name>$children</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="181" package="LudoDB">
+        <name>setChildValues</name>
+        <full_name>setChildValues</full_name>
+        <docblock line="176">
+          <description>Add "value" properties to children.</description>
+          <long-description></long-description>
+          <tag line="176" name="param" description="" type="\" variable="$children"/>
+          <tag line="176" name="return" description="" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="181">
+          <name>$children</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="198" package="LudoDB">
+        <name>getModelResource</name>
+        <full_name>getModelResource</full_name>
+        <docblock line="193">
+          <description>Return model resource to handle</description>
+          <long-description></long-description>
+          <tag line="193" name="return" description="" type="\LudoDBObject">
+            <type by_reference="false">\LudoDBObject</type>
+          </tag>
+          <tag line="193" name="throws" description="" type="\LudoDBClassNotFoundException">
+            <type by_reference="false">\LudoDBClassNotFoundException</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="216" package="LudoDB">
+        <name>getReflectionClass</name>
+        <full_name>getReflectionClass</full_name>
+        <docblock line="210">
+          <description>Use Reflection to get instance of resource class</description>
+          <long-description></long-description>
+          <tag line="210" name="param" description="" type="\" variable="$className"/>
+          <tag line="210" name="return" description="" type="\ReflectionClass">
+            <type by_reference="false">\ReflectionClass</type>
+          </tag>
+          <tag line="210" name="throws" description="" type="\LudoDBClassNotFoundException">
+            <type by_reference="false">\LudoDBClassNotFoundException</type>
+          </tag>
+        </docblock>
+        <argument line="216">
+          <name>$className</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
   </file>
   <package name="Default" full_name="Default"/>
   <package name="LudoDB" full_name="LudoDB"/>

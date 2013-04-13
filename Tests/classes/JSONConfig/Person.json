@@ -41,7 +41,11 @@
         }
     },
     "static": {
-        "type": "person"
+        "type": "person",
+        "coffee": {
+            "value": "Segafredo",
+            "otherConfig": {}
+        }
     },
     "classes": {
         "city": {

@@ -84,7 +84,6 @@ class LudoDBConfigParser
     }
 
 
-
     /**
      * Return a LudoDBObject instance this LudoDBObject object extends. (Only when this class extends another LudoDBObject).
      * @return LudoDBObject
@@ -664,7 +663,7 @@ class LudoDBConfigParser
      * @return mixed
      */
     public function getStaticValue($column){
-        return $this->config['static'][$column];
+        return is_array($this->config['static'][$column]) ? $this->config['static'][$column]['value'] : $this->config['static'][$column];
     }
 
     /**
@@ -672,7 +671,27 @@ class LudoDBConfigParser
      * @return array
      */
     public function getStaticValues(){
+        $ret = array();
+        foreach($this->config['static'] as $key=>$value){
+            $ret[$key] = $this->getStaticValue($key);
+        }
+        return $ret;
+    }
+
+    /**
+     * Return static columns
+     * @return array|null
+     */
+    public function getStaticColumns(){
         return $this->config['static'];
+    }
+
+    /**
+     * Returns true if config has static columns.
+     * @return bool
+     */
+    public function hasStaticColumns(){
+        return !empty($this->config['static']);
     }
 
     /**
@@ -737,5 +756,32 @@ class LudoDBConfigParser
             }
         }
         return count($ret) ? $ret : null;
+    }
+
+    /**
+     * Returns ludoJS config for database columns and static columns.
+     * @return array
+     */
+    public function getLudoJSConfig(){
+        $ret = $this->getLudoJSOf($this->getColumns());
+        $static = $this->getStaticColumns();
+        if(isset($static))$ret = array_merge($ret, $this->getLudoJSOf($static));
+        return $ret;
+    }
+
+    /**
+     * Return LudoJS config of these columns
+     * @param array $columns
+     * @return array
+     */
+    private function getLudoJSOf($columns){
+        $ret = array();
+        foreach($columns as $name=>$def){
+            if(isset($def['ludoJS'])){
+                $ret[$name] = $def['ludoJS'];
+                $ret[$name]['name'] = $name;
+            }
+        }
+        return $ret;
     }
 }

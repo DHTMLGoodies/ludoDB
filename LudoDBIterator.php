@@ -132,8 +132,8 @@ class LudoDBIterator extends LudoDBObject implements Iterator
                     if(!isset($this->valueCache[$groupBy])){
                         $this->valueCache[$groupBy] = array();
                     }
-                    $this->valueCache[$groupBy] = $value;
-                    $this->storeRow($this->valueCache[$groupBy]);
+                    $this->valueCache[$groupBy][] = $value;
+                    $this->storeRow($value);
                 }else{
                     $this->valueCache[$key] = $value;
                     $this->storeRow($this->valueCache[$key]);

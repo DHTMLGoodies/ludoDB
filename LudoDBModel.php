@@ -537,6 +537,9 @@ abstract class LudoDBModel extends LudoDBObject
                 $ret[$colName] = $this->getValue($column);
             }
         }
+        if($this->parser->hasStaticColumns()){
+            $ret = array_merge($ret, $this->parser->getStaticValues());
+        }
         return array_merge($ret, $this->getJoinColumns());
     }
 

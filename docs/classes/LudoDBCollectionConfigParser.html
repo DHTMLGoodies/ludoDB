@@ -82,6 +82,7 @@
 <li class="method public inherited"><a href="#method_getIndexes" title="getIndexes :: Return indexed columns from config."><span class="description">Return indexed columns from config.</span><pre>getIndexes()</pre></a></li>
 <li class="method public inherited"><a href="#method_getInternalColName" title="getInternalColName :: Return internal column name, i.e."><span class="description">Return internal column name, i.e.</span><pre>getInternalColName()</pre></a></li>
 <li class="method public inherited"><a href="#method_getJoinsForSQL" title="getJoinsForSQL :: Return array of names of joined columns prefixed by their table names."><span class="description">Return array of names of joined columns prefixed by their table names.</span><pre>getJoinsForSQL()</pre></a></li>
+<li class="method public inherited"><a href="#method_getLudoJSConfig" title="getLudoJSConfig :: Returns ludoJS config for database columns and static columns."><span class="description">Returns ludoJS config for database columns and static columns.</span><pre>getLudoJSConfig()</pre></a></li>
 <li class="method public "><a href="#method_getMerged" title="getMerged :: Return merge config property."><span class="description">Return merge config property.</span><pre>getMerged()</pre></a></li>
 <li class="method public "><a href="#method_getModel" title="getModel :: Return LudoDBCollection handled by the parser."><span class="description">Return LudoDBCollection handled by the parser.</span><pre>getModel()</pre></a></li>
 <li class="method public inherited"><a href="#method_getMyColumnsForSQL" title="getMyColumnsForSQL :: Return name of my columns prefixed by tableName + ."><span class="description">Return name of my columns prefixed by tableName + .</span><pre>getMyColumnsForSQL()</pre></a></li>
@@ -90,6 +91,7 @@
 <li class="method public inherited"><a href="#method_getPathToJsonConfigDefaultData" title="getPathToJsonConfigDefaultData :: Return path to JSON file for default data (name is ClassName.data.json)."><span class="description">Return path to JSON file for default data (name is ClassName.data.json).</span><pre>getPathToJsonConfigDefaultData()</pre></a></li>
 <li class="method public inherited"><a href="#method_getPublicColumnName" title="getPublicColumnName :: Return public column name."><span class="description">Return public column name.</span><pre>getPublicColumnName()</pre></a></li>
 <li class="method public inherited"><a href="#method_getSetMethod" title='getSetMethod :: Return "set" property of a column in config, i.e.'><span class="description">Return "set" property of a column in config, i.e.</span><pre>getSetMethod()</pre></a></li>
+<li class="method public inherited"><a href="#method_getStaticColumns" title="getStaticColumns :: Return static columns"><span class="description">Return static columns</span><pre>getStaticColumns()</pre></a></li>
 <li class="method public inherited"><a href="#method_getStaticValue" title="getStaticValue :: Return value of static column."><span class="description">Return value of static column.</span><pre>getStaticValue()</pre></a></li>
 <li class="method public inherited"><a href="#method_getStaticValues" title="getStaticValues :: Return array of values for static columns."><span class="description">Return array of values for static columns.</span><pre>getStaticValues()</pre></a></li>
 <li class="method public "><a href="#method_getTableName" title="getTableName :: Return table name"><span class="description">Return table name</span><pre>getTableName()</pre></a></li>
@@ -104,6 +106,7 @@ example array(
  array('table' =&gt; 'country', 'column' =&gt; 'id')
 )</span><pre>getTableReferences()</pre></a></li>
 <li class="method public inherited"><a href="#method_hasColumns" title="hasColumns :: Return true if any columns are defined in config."><span class="description">Return true if any columns are defined in config.</span><pre>hasColumns()</pre></a></li>
+<li class="method public inherited"><a href="#method_hasStaticColumns" title="hasStaticColumns :: Returns true if config has static columns."><span class="description">Returns true if config has static columns.</span><pre>hasStaticColumns()</pre></a></li>
 <li class="method public inherited"><a href="#method_isExternalColumn" title="isExternalColumn :: Returns true if given column is from external LudoDBObject"><span class="description">Returns true if given column is from external LudoDBObject</span><pre>isExternalColumn()</pre></a></li>
 <li class="method public inherited"><a href="#method_isIdAutoIncremented" title="isIdAutoIncremented :: Returns true if auto increment of id is specified in config."><span class="description">Returns true if auto increment of id is specified in config.</span><pre>isIdAutoIncremented()</pre></a></li>
 <li class="method public inherited"><a href="#method_isStaticColumn" title="isStaticColumn :: Returns true if given column is a static column, i.e."><span class="description">Returns true if given column is a static column, i.e.</span><pre>isStaticColumn()</pre></a></li>
@@ -122,6 +125,7 @@ example array(
 <li class="method private inherited"><a href="#method_getExternalClassProperty" title="getExternalClassProperty :: Return config property from external class referenced in config of the LudoDBObject of this class."><span class="description">Return config property from external class referenced in config of the LudoDBObject of this class.</span><pre>getExternalClassProperty()</pre></a></li>
 <li class="method private inherited"><a href="#method_getFromMappingCache" title="getFromMappingCache :: Return column name for given set or get method from mapping cache (fast lookup)."><span class="description">Return column name for given set or get method from mapping cache (fast lookup).</span><pre>getFromMappingCache()</pre></a></li>
 <li class="method private inherited"><a href="#method_getJoins" title="getJoins :: Return array of joined tables"><span class="description">Return array of joined tables</span><pre>getJoins()</pre></a></li>
+<li class="method private inherited"><a href="#method_getLudoJSOf" title="getLudoJSOf :: Return LudoJS config of these columns"><span class="description">Return LudoJS config of these columns</span><pre>getLudoJSOf()</pre></a></li>
 <li class="method private inherited"><a href="#method_getMergedConfigs" title="getMergedConfigs :: Return config of this LudoDBObject with config of parent LudoDBObject."><span class="description">Return config of this LudoDBObject with config of parent LudoDBObject.</span><pre>getMergedConfigs()</pre></a></li>
 <li class="method private "><a href="#method_getModelInstance" title="getModelInstance :: Return LudoDBCollection instance"><span class="description">Return LudoDBCollection instance</span><pre>getModelInstance()</pre></a></li>
 <li class="method private inherited"><a href="#method_getPathToJSONConfig" title="getPathToJSONConfig :: Return path to JSON config file."><span class="description">Return path to JSON config file.</span><pre>getPathToJSONConfig()</pre></a></li>
@@ -549,6 +553,20 @@ always call $this->setValue($name, $value) internally in your LudoDBModel classe
 <div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
+<a id="method_getLudoJSConfig"></a><div class="element clickable method public method_getLudoJSConfig" data-toggle="collapse" data-target=".method_getLudoJSConfig .collapse">
+<h2>Returns ludoJS config for database columns and static columns.</h2>
+<pre>getLudoJSConfig() : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBConfigParser::getLudoJSConfig()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
 <a id="method_getMerged"></a><div class="element clickable method public method_getMerged" data-toggle="collapse" data-target=".method_getMerged .collapse">
 <h2>Return merge config property.</h2>
 <pre>getMerged() : array | null</pre>
@@ -659,6 +677,22 @@ always call $this->setValue($name, $value) internally in your LudoDBModel classe
 <div class="subelement response"><code>null</code></div>
 </div></div>
 </div>
+<a id="method_getStaticColumns"></a><div class="element clickable method public method_getStaticColumns" data-toggle="collapse" data-target=".method_getStaticColumns .collapse">
+<h2>Return static columns</h2>
+<pre>getStaticColumns() : array | null</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBConfigParser::getStaticColumns()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>null</code>
+</div>
+</div></div>
+</div>
 <a id="method_getStaticValue"></a><div class="element clickable method public method_getStaticValue" data-toggle="collapse" data-target=".method_getStaticValue .collapse">
 <h2>Return value of static column.</h2>
 <pre>getStaticValue($column) : mixed</pre>
@@ -740,6 +774,20 @@ example array(
 <table class="table table-bordered"><tr>
 <th>inherited_from</th>
 <td>\LudoDBConfigParser::hasColumns()</td>
+</tr></table>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
+</div></div>
+</div>
+<a id="method_hasStaticColumns"></a><div class="element clickable method public method_hasStaticColumns" data-toggle="collapse" data-target=".method_hasStaticColumns .collapse">
+<h2>Returns true if config has static columns.</h2>
+<pre>hasStaticColumns() : bool</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBConfigParser::hasStaticColumns()</td>
 </tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>bool</code></div>
@@ -931,6 +979,25 @@ defined in config.</p></div>
 <div class="subelement response">
 <code>null</code><code>array</code>
 </div>
+</div></div>
+</div>
+<a id="method_getLudoJSOf"></a><div class="element clickable method private method_getLudoJSOf" data-toggle="collapse" data-target=".method_getLudoJSOf .collapse">
+<h2>Return LudoJS config of these columns</h2>
+<pre>getLudoJSOf(array $columns) : array</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\LudoDBConfigParser::getLudoJSOf()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$columns</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_getMergedConfigs"></a><div class="element clickable method private method_getMergedConfigs" data-toggle="collapse" data-target=".method_getMergedConfigs .collapse">
@@ -1198,7 +1265,7 @@ defined in config.</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-04-12T17:11:35+02:00.<br></footer></div>
+            generated on 2013-04-13T19:55:05+02:00.<br></footer></div>
 </div>
 </body>
 </html>

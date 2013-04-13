@@ -404,6 +404,20 @@ class LudoDBModelTests extends TestBase
 
     }
 
+    /**
+     * @test
+     */
+    public function shouldBeAbleToDefineStaticAsArray(){
+        // given
+        $person = new Person();
+
+        // when
+        $coffee = $person->getCoffee();
+
+        // then
+        $this->assertEquals('Segafredo', $coffee);
+    }
+
 
     private function getExistingRecord(){
         $this->clearTable();

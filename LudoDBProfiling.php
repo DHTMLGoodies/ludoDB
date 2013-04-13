@@ -81,7 +81,7 @@ class LudoDBProfiling implements LudoDBService
     {
         $inDevelop = LudoDBRegistry::get('DEVELOP_MODE');
         if (!isset($inDevelop) || !$inDevelop) {
-            throw new LudoDBException("Profiling can only executed in develop mode. Use LudoDBRegistry::set('DEVELOP_MODE', true) to activate develop mode");
+            throw new LudoDBException("Profiling can only be executed in develop mode. Use LudoDBRegistry::set('DEVELOP_MODE', true) to activate develop mode");
         }
 
         $request = implode("/", $this->arguments);

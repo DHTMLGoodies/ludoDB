@@ -31,6 +31,7 @@ class LudoDBAllTests
         $suite->addTestSuite("LudoDBTreeCollectionTest");
         $suite->addTestSuite("LudoDBAdapterTest");
         $suite->addTestSuite("AvailableServicesTest");
+        $suite->addTestSuite("LudoJSTests");
         return $suite;
     }
 }
