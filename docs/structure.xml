@@ -5718,10 +5718,10 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
       </docblock>
       <property final="false" static="false" visibility="private" line="32" namespace="global" package="Default">
         <name>$resource</name>
-        <default></default>
+        <default/>
         <docblock line="28">
           <description>Reference to the LudoDBObject to handle</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="28" name="var" description="" type="\LudoDBObject">
             <type by_reference="false">\LudoDBObject</type>
           </tag>
@@ -5732,7 +5732,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>__construct</full_name>
         <docblock line="33">
           <description>Construct new instance</description>
-          <long-description></long-description>
+          <long-description/>
         </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="45" package="LudoDB">
@@ -5740,7 +5740,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>getValidServices</full_name>
         <docblock line="41">
           <description>Return "form" as only valid service</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="41" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -5751,7 +5751,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>validateArguments</full_name>
         <docblock line="49">
           <description>Accepted number of arguments is 1 or 2 (second argument is optional "id" of resource)</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="49" name="param" description="" type="String" variable="$service">
             <type by_reference="false">String</type>
           </tag>
@@ -5764,12 +5764,12 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         </docblock>
         <argument line="55">
           <name>$service</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
         <argument line="55">
           <name>$arguments</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -5778,7 +5778,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>validateServiceData</full_name>
         <docblock line="60">
           <description>No data is allowed to this service</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="60" name="param" description="" type="string" variable="$service">
             <type by_reference="false">string</type>
           </tag>
@@ -5791,12 +5791,12 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         </docblock>
         <argument line="66">
           <name>$service</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
         <argument line="66">
           <name>$data</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -5805,7 +5805,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>shouldCache</full_name>
         <docblock line="70">
           <description>No caching</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="70" name="param" description="" type="string" variable="$service">
             <type by_reference="false">string</type>
           </tag>
@@ -5815,7 +5815,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         </docblock>
         <argument line="75">
           <name>$service</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -5824,7 +5824,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>getOnSuccessMessageFor</full_name>
         <docblock line="79">
           <description>Returns empty string as on success message for service</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="79" name="param" description="" type="String" variable="$service">
             <type by_reference="false">String</type>
           </tag>
@@ -5834,7 +5834,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         </docblock>
         <argument line="84">
           <name>$service</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -5843,7 +5843,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>form</full_name>
         <docblock line="88">
           <description>"form" service</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="88" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
@@ -5854,7 +5854,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>setMissingProperties</full_name>
         <docblock line="108">
           <description>Update child array with default properties when not specified in config, example "label"</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="108" name="param" description="" type="\" variable="$children"/>
           <tag line="108" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
@@ -5862,7 +5862,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         </docblock>
         <argument line="113">
           <name>$children</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -5871,7 +5871,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>createDataSources</full_name>
         <docblock line="122">
           <description>Create dataSource objects for children.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="122" name="param" description="" type="\" variable="$children"/>
           <tag line="122" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
@@ -5879,7 +5879,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         </docblock>
         <argument line="127">
           <name>$children</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -5888,7 +5888,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>getDataSourceConfig</full_name>
         <docblock line="136">
           <description>Return data source config with values for columns.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="136" name="param" description="" type="\" variable="$source"/>
           <tag line="136" name="return" description="" type="array">
             <type by_reference="false">array</type>
@@ -5896,7 +5896,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         </docblock>
         <argument line="141">
           <name>$source</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -5905,7 +5905,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>getChildrenInRightOrder</full_name>
         <docblock line="157">
           <description>Return childrne in correct order according to "order" attribute</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="157" name="param" description="" type="array" variable="$children">
             <type by_reference="false">array</type>
           </tag>
@@ -5915,7 +5915,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         </docblock>
         <argument line="162">
           <name>$children</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -5924,7 +5924,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>setChildValues</full_name>
         <docblock line="176">
           <description>Add "value" properties to children.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="176" name="param" description="" type="\" variable="$children"/>
           <tag line="176" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
@@ -5932,7 +5932,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         </docblock>
         <argument line="181">
           <name>$children</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
@@ -5941,7 +5941,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>getModelResource</full_name>
         <docblock line="193">
           <description>Return model resource to handle</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="193" name="return" description="" type="\LudoDBObject">
             <type by_reference="false">\LudoDBObject</type>
           </tag>
@@ -5955,7 +5955,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         <full_name>getReflectionClass</full_name>
         <docblock line="210">
           <description>Use Reflection to get instance of resource class</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="210" name="param" description="" type="\" variable="$className"/>
           <tag line="210" name="return" description="" type="\ReflectionClass">
             <type by_reference="false">\ReflectionClass</type>
@@ -5966,7 +5966,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
         </docblock>
         <argument line="216">
           <name>$className</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>
