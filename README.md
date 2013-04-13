@@ -658,3 +658,124 @@ Will return something like:
     }
 ]
 ```
+
+___Implement with LudoJS___
+LudoDBObject classes(LudoDBModel and LudoDBCollection) can be configured to output config objects in JSON format for the
+LudoJS Javascript framework.
+
+This is done by specifying a ludoJS object in the configuration of your columns.
+
+Example
+
+```PHP
+<?php
+/**
+ * Comment pending.
+ * User: Alf Magne Kalleland
+ * Date: 13.04.13
+ * Time: 16:37
+ */
+class LudoJSPerson extends LudoDBModel implements LudoDBService
+{
+    protected $config = array(
+        'table' => 'LudoJSPerson',
+        'columns' => array(
+            'id' => array(
+                'db' => 'int auto_increment not null primary key',
+                'ludoJS' => array(
+                    'type' => 'form.Hidden'
+                )
+            ),
+            'lastname' => array(
+                'db' => 'varchar(32)',
+                'ludoJS' => array(
+                    'type' => 'form.Text',
+                    'order' => 2
+                ),
+                "access" => "rw"
+            ),
+            'firstname' => array(
+                'db' => 'varchar(32)',
+                'ludoJS' => array(
+                    'type' => 'form.Text',
+                    'order' => 1
+                ),
+                "access" => "rw"
+            ),
+            "country" => array(
+                "db" => "int",
+                "references" => "LudoJSCountry(id)",
+                "ludoJS" => array(
+                    'valueKey' => 'id',
+                    'textKey' => 'name',
+                    'type' => 'form.Select',
+                    'order' => '4',
+                    'dataSource' => 'LudoJSCountries'
+                ),
+                "access" => "rw"
+            ),
+            "address" => array(
+                "db" => "varchar(4000)",
+                "ludoJS" => array(
+                    'type' => 'form.Textarea',
+                    'order' => 3,
+                    'layout' => array(
+                        'weight' => 1
+                    )
+                ),
+                "access" => "rw"
+            )
+        ),
+        "static" => array(
+            "type" => array(
+                "value" => "person",
+                "ludoJS" => array(
+                    'type' => 'form.Hidden'
+                ),
+                "access" => "rw"
+            )
+        ),
+        "data" => array(
+            array("firstname" => "John", "lastname" => "Johnson", "country" => 131, "address" => "Main street 99")
+        )
+    );
+
+    public function validateArguments($service, $arguments){
+        return true;
+    }
+
+    public function validateServiceData($service, $data){
+        return true;
+    }
+
+}
+```
+
+The ludoJS configuration supports all the properties defined in LudoJS.
+
+The most important is "type" which defines which kind of ludoJS view to show for this column, example: "form.Text" for a
+form text input field.
+
+In the example above, you also have a select box which is populated with countries. This is done by
+
+* Defining a dataSource to the name of a LudoDBCollection, i.e. "dataSource": "LudoJSCountries"
+
+The LudoJSCountries class looks like this:
+
+```PHP
+class LudoJSCountries extends LudoDBCollection implements LudoDBService
+{
+    protected $config = array(
+        "sql" => "select * from LudoJSCountry order by name"
+    );
+
+    public function validateArguments($service, $arguments){
+        return empty($arguments);
+    }
+
+    public function validateServiceData($service, $data){
+        return empty($data);
+    }
+}
+```
+
