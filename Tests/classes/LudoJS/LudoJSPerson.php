@@ -36,6 +36,8 @@ class LudoJSPerson extends LudoDBModel implements LudoDBService
                 "db" => "int",
                 "references" => "LudoJSCountry(id)",
                 "ludoJS" => array(
+                    'valueKey' => 'id',
+                    'textKey' => 'name',
                     'type' => 'form.Select',
                     'order' => '4',
                     'dataSource' => 'LudoJSCountries'
