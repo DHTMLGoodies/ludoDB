@@ -48,7 +48,10 @@ class LudoJSPerson extends LudoDBModel implements LudoDBService
                 "db" => "varchar(4000)",
                 "ludoJS" => array(
                     'type' => 'form.Textarea',
-                    'order' => 3
+                    'order' => 3,
+                    'layout' => array(
+                        'weight' => 1
+                    )
                 ),
                 "access" => "rw"
             )
