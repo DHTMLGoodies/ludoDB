@@ -21,10 +21,6 @@ if (!file_exists("connect.php")) {
 
 require_once("connect.php");
 
-
-$util = new LudoDBUtility();
-$util->dropAndCreate(array("LudoJSPerson","LudoJSCountry"));
-
 LudoDB::enableLogging();
 
 $request = array('request' => isset($_GET['request']) ? $_GET['request'] : $_POST['request']);
