@@ -446,10 +446,13 @@ LudoDB looks for the file inside the JSONConfig sub folder.
 * __validation__ : Array of validation configuration, example:
 
 ```PHP
-"validation" => array(
-    "required" => true,
-    "minLength" => 5,
-    "maxLength" => 10
+"firstname" => array(
+    "db" => "varchar(64)",
+    "validation" => array(
+        "required" => true,
+        "minLength" => 2,
+        "maxLength" => 64
+    )
 )
 ```
 When set, validation will be done automatically on insert and update. A LudoDBInvalidModelDataException
