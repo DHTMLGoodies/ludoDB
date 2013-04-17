@@ -1959,7 +1959,7 @@ example array(
       </method>
     </class>
   </file>
-  <file path="LudoDBExceptions.php" hash="65664d3260ecb9b3382c08b1b5e77677" package="LudoDB">
+  <file path="LudoDBExceptions.php" hash="a7abb0b071d7b3f8249aefdf539257dc" package="LudoDB">
     <docblock line="2">
       <description>Created by JetBrains PhpStorm.</description>
       <long-description>&lt;p&gt;User: Alf Magne
@@ -1973,7 +1973,7 @@ Date: 30.01.13&lt;/p&gt;</long-description>
       <full_name>\LudoDBException</full_name>
       <docblock line="10">
         <description>LudoDBException base class</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="10" name="package" description="LudoDB"/>
       </docblock>
       <property final="false" static="false" visibility="protected" line="19" namespace="global" package="Default">
@@ -1981,7 +1981,7 @@ Date: 30.01.13&lt;/p&gt;</long-description>
         <default>400</default>
         <docblock line="15">
           <description>Exception code</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="15" name="var" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
@@ -2003,7 +2003,7 @@ Date: 30.01.13&lt;/p&gt;</long-description>
         <default>404</default>
         <docblock line="30">
           <description>Exception code</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="30" name="var" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
@@ -2025,7 +2025,7 @@ Date: 30.01.13&lt;/p&gt;</long-description>
         <default>404</default>
         <docblock line="44">
           <description>Exception code</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="44" name="var" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
@@ -2061,7 +2061,7 @@ Date: 30.01.13&lt;/p&gt;</long-description>
       <docblock line="70">
         <description>Unauthorized exception
 Thrown by LudoDBRequestHandler</description>
-        <long-description/>
+        <long-description></long-description>
         <tag line="70" name="package" description="LudoDB"/>
         <tag line="70" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
       </docblock>
@@ -2070,7 +2070,7 @@ Thrown by LudoDBRequestHandler</description>
         <default>401</default>
         <docblock line="77">
           <description>Exception code</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="77" name="var" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
@@ -2094,7 +2094,7 @@ Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
         <default>404</default>
         <docblock line="92">
           <description>Exception code</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="92" name="var" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
@@ -2117,7 +2117,7 @@ Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
         <default>405</default>
         <docblock line="107">
           <description>Exception code</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="107" name="var" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
@@ -2136,14 +2136,18 @@ Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
         <tag line="114" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
       </docblock>
     </class>
-    <class final="false" abstract="false" namespace="global" line="124" package="Default">
+    <class final="false" abstract="false" namespace="global" line="130" package="LudoDB">
       <extends>\LudoDBException</extends>
       <name>LudoDBInvalidModelDataException</name>
       <full_name>\LudoDBInvalidModelDataException</full_name>
+      <docblock line="124">
+        <description>Exception thrown when trying to save invalid model data
+Thrown by LudoDBRequestHandler</description>
+        <long-description></long-description>
+        <tag line="124" name="package" description="LudoDB"/>
+        <tag line="124" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+      </docblock>
     </class>
-    <parse_markers>
-      <error line="124" code="50000">No DocBlock was found for \LudoDBInvalidModelDataException</error>
-    </parse_markers>
   </file>
   <file path="LudoDBInterfaces.php" hash="8e4c01510565440504b9c8658e6190c7" package="LudoDB">
     <docblock line="2">
@@ -5726,7 +5730,7 @@ Time: 21:37&lt;/p&gt;</long-description>
       <full_name>\LudoDBValidator</full_name>
       <docblock line="9">
         <description>Singleton class used to validate data before they are inserted into the database</description>
-        <long-description></long-description>
+        <long-description/>
         <tag line="9" name="package" description="LudoDB"/>
       </docblock>
       <constant namespace="global" line="29" package="LudoDB">
@@ -5839,10 +5843,10 @@ Example:&lt;/p&gt;
       </constant>
       <property final="false" static="true" visibility="private" line="109" namespace="global" package="Default">
         <name>$instance</name>
-        <default></default>
+        <default/>
         <docblock line="105">
           <description>Singleton LudoDBValidator instance.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="105" name="var" description="" type="\LudoDBValidator">
             <type by_reference="false">\LudoDBValidator</type>
           </tag>
@@ -5853,7 +5857,7 @@ Example:&lt;/p&gt;
         <full_name>getInstance</full_name>
         <docblock line="111">
           <description>Return singleton instance.</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="111" name="return" description="" type="\LudoDBValidator">
             <type by_reference="false">\LudoDBValidator</type>
           </tag>
@@ -5864,7 +5868,7 @@ Example:&lt;/p&gt;
         <full_name>validateSave</full_name>
         <docblock line="123">
           <description>Validate data for "save statement"</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="123" name="param" description="" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
@@ -5877,12 +5881,12 @@ Example:&lt;/p&gt;
         </docblock>
         <argument line="129">
           <name>$data</name>
-          <default></default>
+          <default/>
           <type>array</type>
         </argument>
         <argument line="129">
           <name>$validationDef</name>
-          <default></default>
+          <default/>
           <type>array</type>
         </argument>
       </method>
@@ -5891,7 +5895,7 @@ Example:&lt;/p&gt;
         <full_name>validateUpdate</full_name>
         <docblock line="144">
           <description>Validate data for "update" statement</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="144" name="param" description="" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
@@ -5901,12 +5905,12 @@ Example:&lt;/p&gt;
         </docblock>
         <argument line="149">
           <name>$data</name>
-          <default></default>
+          <default/>
           <type>array</type>
         </argument>
         <argument line="149">
           <name>$validationDef</name>
-          <default></default>
+          <default/>
           <type>array</type>
         </argument>
       </method>
@@ -5915,7 +5919,7 @@ Example:&lt;/p&gt;
         <full_name>validateColumn</full_name>
         <docblock line="160">
           <description>Run validation on a column</description>
-          <long-description></long-description>
+          <long-description/>
           <tag line="160" name="param" description="" type="\" variable="$column"/>
           <tag line="160" name="param" description="" type="\" variable="$dataValue"/>
           <tag line="160" name="param" description="" type="\" variable="$def"/>
@@ -5925,17 +5929,17 @@ Example:&lt;/p&gt;
         </docblock>
         <argument line="167">
           <name>$column</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
         <argument line="167">
           <name>$dataValue</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
         <argument line="167">
           <name>$def</name>
-          <default></default>
+          <default/>
           <type/>
         </argument>
       </method>

@@ -121,6 +121,12 @@ class LudoDBInvalidConfigException extends LudoDBException{
 
 }
 
+/**
+ * Exception thrown when trying to save invalid model data
+ * Thrown by LudoDBRequestHandler
+ * @package LudoDB
+ * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
+ */
 class LudoDBInvalidModelDataException extends LudoDBException{
 
 }
