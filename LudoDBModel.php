@@ -273,6 +273,8 @@ abstract class LudoDBModel extends LudoDBObject
      */
     private function update()
     {
+        LudoDBValidator::getInstance()->validateUpdate($this->updates, $this->configParser()->getColumnsToValidate());
+
         if ($this->isValid()) {
             $this->beforeUpdate();
             $this->clearCache();
@@ -294,6 +296,8 @@ abstract class LudoDBModel extends LudoDBObject
      */
     private function insert()
     {
+        LudoDBValidator::getInstance()->validateSave($this->updates, $this->configParser()->getColumnsToValidate());
+
         if ($this->isValid()) {
             $this->beforeInsert();
             $this->db->query($this->sqlHandler()->getInsertSQL(), isset($this->updates) ? array_values($this->updates) : null);
@@ -303,7 +307,6 @@ abstract class LudoDBModel extends LudoDBObject
 
     /**
      * Method executed before record is updated
-     * @method beforeUpdate
      */
     protected function beforeUpdate()
     {
@@ -311,7 +314,6 @@ abstract class LudoDBModel extends LudoDBObject
 
     /**
      * Method executed before new record is saved in db
-     * @method beforeInsert
      */
     protected function beforeInsert()
     {
@@ -319,7 +321,6 @@ abstract class LudoDBModel extends LudoDBObject
 
     /**
      * Rollback updates
-     * @method rollback
      */
     public function rollback()
     {
@@ -352,7 +353,6 @@ abstract class LudoDBModel extends LudoDBObject
 
     /**
      * Create DB table
-     * @method createTable
      */
     public function createTable()
     {
@@ -379,7 +379,6 @@ abstract class LudoDBModel extends LudoDBObject
       * $person = new Person();
       * $person->drop()->yesImSure();
       * </code>
-     * @method drop
      */
     public function drop()
     {
@@ -463,7 +462,6 @@ abstract class LudoDBModel extends LudoDBObject
 
     /**
      * Return new instance of this LudoDBModel
-     * @method getClassName
      * @return LudoDBModel class
      */
     private function getNewInstance()
@@ -633,6 +631,9 @@ abstract class LudoDBModel extends LudoDBObject
     public function save($data)
     {
         if (empty($data)) return array();
+
+
+
         $idField = $this->parser->getIdField();
         if (isset($data[$idField])) $this->setId($data[$idField]);
 

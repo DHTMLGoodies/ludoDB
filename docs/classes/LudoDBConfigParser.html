@@ -20,6 +20,7 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/LudoDB.html"><i class="icon-folder-open"></i> LudoDB</a></li>
 </ul>
 </li>
@@ -31,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">0</span></a></li>
+                <span class="label label-info">1</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">4</span>
@@ -68,6 +69,7 @@
 <li class="method public "><a href="#method_getColumnByMethod" title='getColumnByMethod :: Return name of column by "set" or "get" method.'><span class="description">Return name of column by "set" or "get" method.</span><pre>getColumnByMethod()</pre></a></li>
 <li class="method public "><a href="#method_getColumns" title="getColumns :: Return array of columns from config."><span class="description">Return array of columns from config.</span><pre>getColumns()</pre></a></li>
 <li class="method public "><a href="#method_getColumnsToSelectFromJoins" title="getColumnsToSelectFromJoins :: Return columns to select from joined tables prefixed by their table names."><span class="description">Return columns to select from joined tables prefixed by their table names.</span><pre>getColumnsToSelectFromJoins()</pre></a></li>
+<li class="method public "><a href="#method_getColumnsToValidate" title="getColumnsToValidate :: Return columns to validate"><span class="description">Return columns to validate</span><pre>getColumnsToValidate()</pre></a></li>
 <li class="method public "><a href="#method_getConfig" title="getConfig :: Return config"><span class="description">Return config</span><pre>getConfig()</pre></a></li>
 <li class="method public "><a href="#method_getConstructorParams" title="getConstructorParams :: Return constructor params."><span class="description">Return constructor params.</span><pre>getConstructorParams()</pre></a></li>
 <li class="method public "><a href="#method_getDefaultData" title="getDefaultData :: Get default data for database table."><span class="description">Get default data for database table.</span><pre>getDefaultData()</pre></a></li>
@@ -146,6 +148,7 @@ example array(
 <li class="property private "><a href="#property_externalCache" title="$externalCache :: Cache of names of external columns."><span class="description"></span><pre>$externalCache</pre></a></li>
 <li class="property private "><a href="#property_myColumns" title="$myColumns :: Array of columns of LudoDBObject for this parser."><span class="description"></span><pre>$myColumns</pre></a></li>
 <li class="property private "><a href="#property_obj" title="$obj :: Reference to the LudoDBObject the parser is assigned to handle"><span class="description"></span><pre>$obj</pre></a></li>
+<li class="property private "><a href="#property_validationColumns" title="$validationColumns :: Cached columns requiring validation"><span class="description"></span><pre>$validationColumns</pre></a></li>
 </ul>
 </li>
 </ul>
@@ -290,6 +293,16 @@ always call $this->setValue($name, $value) internally in your LudoDBModel classe
 <a id="method_getColumnsToSelectFromJoins"></a><div class="element clickable method public method_getColumnsToSelectFromJoins" data-toggle="collapse" data-target=".method_getColumnsToSelectFromJoins .collapse">
 <h2>Return columns to select from joined tables prefixed by their table names.</h2>
 <pre>getColumnsToSelectFromJoins() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getColumnsToValidate"></a><div class="element clickable method public method_getColumnsToValidate" data-toggle="collapse" data-target=".method_getColumnsToValidate .collapse">
+<h2>Return columns to validate</h2>
+<pre>getColumnsToValidate() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -872,6 +885,12 @@ defined in config.</p></div>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
+<a id="property_validationColumns"> </a><div class="element clickable property private property_validationColumns" data-toggle="collapse" data-target=".property_validationColumns .collapse">
+<h2></h2>
+<pre>$validationColumns : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
 </div>
 </div>
 </div>
@@ -879,7 +898,7 @@ defined in config.</p></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-04-13T22:00:25+02:00.<br></footer></div>
+            generated on 2013-04-17T23:38:16+02:00.<br></footer></div>
 </div>
 </body>
 </html>

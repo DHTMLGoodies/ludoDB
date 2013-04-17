@@ -990,7 +990,7 @@ Date: 14.01.13&lt;/p&gt;</long-description>
       <todo line="49">singleton.</todo>
     </markers>
   </file>
-  <file path="LudoDBConfigParser.php" hash="14338fdf806c3067e4fc373bc51c3846" package="LudoDB">
+  <file path="LudoDBConfigParser.php" hash="317ea827875ed74d98fd6f3b03cfb69b" package="LudoDB">
     <docblock line="2">
       <description>Parser for LudoDBObject
 User: Alf Magne
@@ -1104,6 +1104,17 @@ Date: 10.01.13</description>
           <description>Cache of access to columns for fast lookup.</description>
           <long-description/>
           <tag line="615" name="var" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="792" namespace="global" package="Default">
+        <name>$validationColumns</name>
+        <default/>
+        <docblock line="788">
+          <description>Cached columns requiring validation</description>
+          <long-description/>
+          <tag line="788" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
@@ -1935,9 +1946,20 @@ example array(
           <type/>
         </argument>
       </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="798" package="LudoDB">
+        <name>getColumnsToValidate</name>
+        <full_name>getColumnsToValidate</full_name>
+        <docblock line="794">
+          <description>Return columns to validate</description>
+          <long-description/>
+          <tag line="794" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
     </class>
   </file>
-  <file path="LudoDBExceptions.php" hash="337ef660d97b1ff90e79810f0734e144" package="LudoDB">
+  <file path="LudoDBExceptions.php" hash="65664d3260ecb9b3382c08b1b5e77677" package="LudoDB">
     <docblock line="2">
       <description>Created by JetBrains PhpStorm.</description>
       <long-description>&lt;p&gt;User: Alf Magne
@@ -2114,6 +2136,14 @@ Thrown by LudoDBRequestHandler&lt;/p&gt;</long-description>
         <tag line="114" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
       </docblock>
     </class>
+    <class final="false" abstract="false" namespace="global" line="124" package="Default">
+      <extends>\LudoDBException</extends>
+      <name>LudoDBInvalidModelDataException</name>
+      <full_name>\LudoDBInvalidModelDataException</full_name>
+    </class>
+    <parse_markers>
+      <error line="124" code="50000">No DocBlock was found for \LudoDBInvalidModelDataException</error>
+    </parse_markers>
   </file>
   <file path="LudoDBInterfaces.php" hash="8e4c01510565440504b9c8658e6190c7" package="LudoDB">
     <docblock line="2">
@@ -2626,7 +2656,7 @@ Date: 21.12.12</description>
       <todo line="123">checkout the difference between $this-&gt;valueCache and $this-&gt;rows</todo>
     </markers>
   </file>
-  <file path="LudoDBModel.php" hash="408cae5205c205a52d083a550c3ee689" package="LudoDB">
+  <file path="LudoDBModel.php" hash="d4598b9155e59c2c85a1bb06f45fada2" package="LudoDB">
     <docblock line="2">
       <description>Representation of a ludoDB table</description>
       <long-description/>
@@ -2952,73 +2982,70 @@ echo $person-&gt;getId();
           <long-description/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="287" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="289" package="LudoDB">
         <name>getUncommitted</name>
         <full_name>getUncommitted</full_name>
-        <docblock line="283">
+        <docblock line="285">
           <description>Return uncommited data</description>
           <long-description/>
-          <tag line="283" name="return" description="" type="array">
+          <tag line="285" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="295" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="297" package="LudoDB">
         <name>insert</name>
         <full_name>insert</full_name>
-        <docblock line="292">
+        <docblock line="294">
           <description>Private insert method</description>
           <long-description/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="308" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="311" package="LudoDB">
         <name>beforeUpdate</name>
         <full_name>beforeUpdate</full_name>
-        <docblock line="304">
+        <docblock line="308">
           <description>Method executed before record is updated</description>
           <long-description/>
-          <tag line="304" name="method" description="beforeUpdate" type="\" method_name=""/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="316" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="318" package="LudoDB">
         <name>beforeInsert</name>
         <full_name>beforeInsert</full_name>
-        <docblock line="312">
+        <docblock line="315">
           <description>Method executed before new record is saved in db</description>
           <long-description/>
-          <tag line="312" name="method" description="beforeInsert" type="\" method_name=""/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="324" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="325" package="LudoDB">
         <name>rollback</name>
         <full_name>rollback</full_name>
-        <docblock line="320">
+        <docblock line="322">
           <description>Rollback updates</description>
           <long-description/>
-          <tag line="320" name="method" description="rollback" type="\" method_name=""/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="333" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="334" package="LudoDB">
         <name>setId</name>
         <full_name>setId</full_name>
-        <docblock line="329">
+        <docblock line="330">
           <description>Update id field</description>
           <long-description/>
-          <tag line="329" name="param" description="" type="\" variable="$id"/>
+          <tag line="330" name="param" description="" type="\" variable="$id"/>
         </docblock>
-        <argument line="333">
+        <argument line="334">
           <name>$id</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="346" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="347" package="LudoDB">
         <name>getId</name>
         <full_name>getId</full_name>
-        <docblock line="342">
+        <docblock line="343">
           <description>Return id of current record.</description>
           <long-description/>
-          <tag line="342" name="return" description="" type="string|int|null">
+          <tag line="343" name="return" description="" type="string|int|null">
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
             <type by_reference="false">null</type>
@@ -3028,10 +3055,9 @@ echo $person-&gt;getId();
       <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="357" package="LudoDB">
         <name>createTable</name>
         <full_name>createTable</full_name>
-        <docblock line="353">
+        <docblock line="354">
           <description>Create DB table</description>
           <long-description/>
-          <tag line="353" name="method" description="createTable" type="\" method_name=""/>
         </docblock>
       </method>
       <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="368" package="LudoDB">
@@ -3045,7 +3071,7 @@ echo $person-&gt;getId();
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="384" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="383" package="LudoDB">
         <name>drop</name>
         <full_name>drop</full_name>
         <docblock line="375">
@@ -3056,13 +3082,12 @@ Example:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$person = new Person();
 $person-&gt;drop()-&gt;yesImSure();
 &lt;/code&gt;&lt;/pre&gt;</long-description>
-          <tag line="375" name="method" description="drop" type="\" method_name=""/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="401" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="400" package="LudoDB">
         <name>deleteTableData</name>
         <full_name>deleteTableData</full_name>
-        <docblock line="392">
+        <docblock line="391">
           <description>Delete all data from this table.</description>
           <long-description>&lt;p&gt;You need to call yesImSure afterwards.
 Example:&lt;/p&gt;
@@ -3070,221 +3095,220 @@ Example:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;$person = new Person();
 $person-&gt;deleteTableData()-&gt;yesImSure();
 &lt;/code&gt;&lt;/pre&gt;</long-description>
-          <tag line="392" name="return" description="" type="\LudoDBModel">
+          <tag line="391" name="return" description="" type="\LudoDBModel">
             <type by_reference="false">\LudoDBModel</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="413" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="412" package="LudoDB">
         <name>yesImSure</name>
         <full_name>yesImSure</full_name>
-        <docblock line="407">
+        <docblock line="406">
           <description>Executes drop or deleteTableData</description>
           <long-description/>
-          <tag line="407" name="example" description="$p = new Person();&#13;&#10;$p-&gt;drop()-&gt;yesImSure();"/>
+          <tag line="406" name="example" description="$p = new Person();&#13;&#10;$p-&gt;drop()-&gt;yesImSure();"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="429" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="428" package="LudoDB">
         <name>createIndexes</name>
         <full_name>createIndexes</full_name>
-        <docblock line="426">
+        <docblock line="425">
           <description>Create database indexes defined in table config</description>
           <long-description/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="443" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="442" package="LudoDB">
         <name>getIndexName</name>
         <full_name>getIndexName</full_name>
-        <docblock line="438">
+        <docblock line="437">
           <description>Returns unique index name</description>
           <long-description/>
-          <tag line="438" name="param" description="" type="\" variable="$field"/>
-          <tag line="438" name="return" description="" type="string">
+          <tag line="437" name="param" description="" type="\" variable="$field"/>
+          <tag line="437" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="443">
+        <argument line="442">
           <name>$field</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="451" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="450" package="LudoDB">
         <name>insertDefaultData</name>
         <full_name>insertDefaultData</full_name>
-        <docblock line="448">
+        <docblock line="447">
           <description>Populate database table with default data defined in table config</description>
           <long-description/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="469" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="467" package="LudoDB">
         <name>getNewInstance</name>
         <full_name>getNewInstance</full_name>
-        <docblock line="464">
+        <docblock line="463">
           <description>Return new instance of this LudoDBModel</description>
           <long-description/>
-          <tag line="464" name="method" description="getClassName" type="\" method_name=""/>
-          <tag line="464" name="return" description="class" type="\LudoDBModel">
+          <tag line="463" name="return" description="class" type="\LudoDBModel">
             <type by_reference="false">\LudoDBModel</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="480" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="478" package="LudoDB">
         <name>getSomeValuesFiltered</name>
         <full_name>getSomeValuesFiltered</full_name>
-        <docblock line="475">
+        <docblock line="473">
           <description>Return key-pair values with null values removed.</description>
           <long-description/>
-          <tag line="475" name="param" description="" type="array" variable="$keys">
+          <tag line="473" name="param" description="" type="array" variable="$keys">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="475" name="return" description="" type="array">
+          <tag line="473" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="480">
+        <argument line="478">
           <name>$keys</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="490" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="488" package="LudoDB">
         <name>getSomeValues</name>
         <full_name>getSomeValues</full_name>
-        <docblock line="485">
+        <docblock line="483">
           <description>Return model values.</description>
           <long-description/>
-          <tag line="485" name="param" description="" type="array" variable="$keys">
+          <tag line="483" name="param" description="" type="array" variable="$keys">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="485" name="return" description="" type="array">
+          <tag line="483" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="490">
+        <argument line="488">
           <name>$keys</name>
           <default/>
           <type>array</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="502" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="500" package="LudoDB">
         <name>some</name>
         <full_name>some</full_name>
-        <docblock line="495">
+        <docblock line="493">
           <description>Return values for these keys.</description>
           <long-description>&lt;p&gt;When $filtered is true, onlye
 columns with values(not null) will be returned.&lt;/p&gt;</long-description>
-          <tag line="495" name="param" description="" type="array" variable="$keys">
+          <tag line="493" name="param" description="" type="array" variable="$keys">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="495" name="param" description="" type="bool" variable="$filtered">
+          <tag line="493" name="param" description="" type="bool" variable="$filtered">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="495" name="return" description="" type="array">
+          <tag line="493" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="502">
+        <argument line="500">
           <name>$keys</name>
           <default/>
           <type>array</type>
         </argument>
-        <argument line="502">
+        <argument line="500">
           <name>$filtered</name>
           <default>false</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="519" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="517" package="LudoDB">
         <name>clearValues</name>
         <full_name>clearValues</full_name>
-        <docblock line="516">
+        <docblock line="514">
           <description>Clear data from model.</description>
           <long-description/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="529" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="527" package="LudoDB">
         <name>getValues</name>
         <full_name>getValues</full_name>
-        <docblock line="525">
+        <docblock line="523">
           <description>Return value of public columns</description>
           <long-description/>
-          <tag line="525" name="return" description="" type="array">
+          <tag line="523" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="550" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="548" package="LudoDB">
         <name>getJoinColumns</name>
         <full_name>getJoinColumns</full_name>
-        <docblock line="546">
+        <docblock line="544">
           <description>Return values from joined columns.</description>
           <long-description/>
-          <tag line="546" name="return" description="" type="array">
+          <tag line="544" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="567" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="565" package="LudoDB">
         <name>isValid</name>
         <full_name>isValid</full_name>
-        <docblock line="563">
+        <docblock line="561">
           <description>Return true if update and save is allowed to run.</description>
           <long-description/>
-          <tag line="563" name="return" description="" type="bool">
+          <tag line="561" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="580" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="578" package="LudoDB">
         <name>__call</name>
         <full_name>__call</full_name>
-        <docblock line="572">
+        <docblock line="570">
           <description>Creates magic get and set methods for columns.</description>
           <long-description>&lt;p&gt;Example
 columns "firstname" will have it's own "getFirstname" and "setFirstname" method.&lt;/p&gt;</long-description>
-          <tag line="572" name="param" description="" type="\" variable="$name"/>
-          <tag line="572" name="param" description="" type="\" variable="$arguments"/>
-          <tag line="572" name="return" description="" type="null">
+          <tag line="570" name="param" description="" type="\" variable="$name"/>
+          <tag line="570" name="param" description="" type="\" variable="$arguments"/>
+          <tag line="570" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
-          <tag line="572" name="throws" description="" type="\Exception">
+          <tag line="570" name="throws" description="" type="\Exception">
             <type by_reference="false">\Exception</type>
           </tag>
         </docblock>
-        <argument line="580">
+        <argument line="578">
           <name>$name</name>
           <default/>
           <type/>
         </argument>
-        <argument line="580">
+        <argument line="578">
           <name>$arguments</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="610" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="608" package="LudoDB">
         <name>setValues</name>
         <full_name>setValues</full_name>
-        <docblock line="597">
+        <docblock line="595">
           <description>Populate columns you can write to with these data</description>
           <long-description/>
-          <tag line="597" name="example" description=":&#13;&#10;&lt;code&gt;&#13;&#10;$person = new Person(1);&#13;&#10;$person-&gt;populate(array(&#13;&#10; &quot;firstname&quot; =&gt; &quot;Jane&quot;, &quot;lastname&quot; =&gt; &quot;Johnson&quot;&#13;&#10;));&#13;&#10;$person-&gt;commit();&#13;&#10;&lt;/code&gt;"/>
-          <tag line="597" name="param" description="" type="\" variable="$data"/>
-          <tag line="597" name="return" description="" type="bool">
+          <tag line="595" name="example" description=":&#13;&#10;&lt;code&gt;&#13;&#10;$person = new Person(1);&#13;&#10;$person-&gt;populate(array(&#13;&#10; &quot;firstname&quot; =&gt; &quot;Jane&quot;, &quot;lastname&quot; =&gt; &quot;Johnson&quot;&#13;&#10;));&#13;&#10;$person-&gt;commit();&#13;&#10;&lt;/code&gt;"/>
+          <tag line="595" name="param" description="" type="\" variable="$data"/>
+          <tag line="595" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="610">
+        <argument line="608">
           <name>$data</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="633" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="631" package="LudoDB">
         <name>save</name>
         <full_name>save</full_name>
-        <docblock line="622">
+        <docblock line="620">
           <description>Populate and save data.</description>
           <long-description>&lt;p&gt;Returns array "&lt;idField&gt;" =&gt; "&lt;id&gt;"
 Example:&lt;/p&gt;
@@ -3293,21 +3317,21 @@ Example:&lt;/p&gt;
 $data = $city-&gt;save(array("city" =&gt; "Stavanger", "country" =&gt; "Norway"));
 var_dump($data);
 &lt;/code&gt;&lt;/pre&gt;</long-description>
-          <tag line="622" name="param" description="" type="\" variable="$data"/>
-          <tag line="622" name="return" description="" type="array">
+          <tag line="620" name="param" description="" type="\" variable="$data"/>
+          <tag line="620" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="633">
+        <argument line="631">
           <name>$data</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="648" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="649" package="LudoDB">
         <name>delete</name>
         <full_name>delete</full_name>
-        <docblock line="645">
+        <docblock line="646">
           <description>Delete record</description>
           <long-description/>
         </docblock>
@@ -5688,6 +5712,235 @@ valid LudoDBModel class names.&lt;/p&gt;</long-description>
       <todo line="198">implement</todo>
     </markers>
   </file>
+  <file path="LudoDBValidator.php" hash="0438548c54dd16b21183d49c6b8a9ca8" package="LudoDBS">
+    <docblock line="2">
+      <description>Comment pending.</description>
+      <long-description>&lt;p&gt;User: Alf Magne Kalleland
+Date: 17.04.13
+Time: 21:37&lt;/p&gt;</long-description>
+      <tag line="2" name="package" description="LudoDBS"/>
+    </docblock>
+    <class final="false" abstract="false" namespace="global" line="13" package="LudoDB">
+      <extends/>
+      <name>LudoDBValidator</name>
+      <full_name>\LudoDBValidator</full_name>
+      <docblock line="9">
+        <description>Singleton class used to validate data before they are inserted into the database</description>
+        <long-description></long-description>
+        <tag line="9" name="package" description="LudoDB"/>
+      </docblock>
+      <constant namespace="global" line="29" package="LudoDB">
+        <name>REQUIRED</name>
+        <full_name>REQUIRED</full_name>
+        <value>'required'</value>
+        <docblock line="16">
+          <description>Required validator property
+Example:</description>
+          <long-description>&lt;pre&gt;&lt;code&gt;firstName =&gt; array(
+ "db" =&gt; "varchar(64)",
+ "validation" =&gt; array(
+     "required" =&gt; true
+ )
+)
+&lt;/code&gt;&lt;/pre&gt;</long-description>
+        </docblock>
+      </constant>
+      <constant namespace="global" line="44" package="LudoDB">
+        <name>MIN_LENGTH</name>
+        <full_name>MIN_LENGTH</full_name>
+        <value>'minLength'</value>
+        <docblock line="31">
+          <description>Min length validation, i.e.</description>
+          <long-description>&lt;p&gt;length of string
+Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;firstName =&gt; array(
+ "db" =&gt; "varchar(64)",
+ "validation" =&gt; array(
+     "minLength" =&gt; 5
+ )
+)
+&lt;/code&gt;&lt;/pre&gt;</long-description>
+        </docblock>
+      </constant>
+      <constant namespace="global" line="59" package="LudoDB">
+        <name>MAX_LENGTH</name>
+        <full_name>MAX_LENGTH</full_name>
+        <value>'maxLength'</value>
+        <docblock line="46">
+          <description>Max length validation, i.e.</description>
+          <long-description>&lt;p&gt;length of string
+Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;firstName =&gt; array(
+ "db" =&gt; "varchar(64)",
+ "validation" =&gt; array(
+     "maxLength" =&gt; 5
+ )
+)
+&lt;/code&gt;&lt;/pre&gt;</long-description>
+        </docblock>
+      </constant>
+      <constant namespace="global" line="74" package="LudoDB">
+        <name>MIN_VALUE</name>
+        <full_name>MIN_VALUE</full_name>
+        <value>'minValue'</value>
+        <docblock line="60">
+          <description>Minimum value validation, i.e.</description>
+          <long-description>&lt;p&gt;numeric value
+Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;firstName =&gt; array(
+ "db" =&gt; "varchar(64)",
+ "validation" =&gt; array(
+     "minValue" =&gt; 5,
+     "maxValue" =&gt; 10
+ )
+)
+&lt;/code&gt;&lt;/pre&gt;</long-description>
+        </docblock>
+      </constant>
+      <constant namespace="global" line="89" package="LudoDB">
+        <name>MAX_VALUE</name>
+        <full_name>MAX_VALUE</full_name>
+        <value>'maxValue'</value>
+        <docblock line="75">
+          <description>Maximum value validation, i.e.</description>
+          <long-description>&lt;p&gt;numeric value
+Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;firstName =&gt; array(
+ "db" =&gt; "varchar(64)",
+ "validation" =&gt; array(
+     "minValue" =&gt; 5,
+     "maxValue" =&gt; 10
+ )
+)
+&lt;/code&gt;&lt;/pre&gt;</long-description>
+        </docblock>
+      </constant>
+      <constant namespace="global" line="103" package="LudoDB">
+        <name>REGEX</name>
+        <full_name>REGEX</full_name>
+        <value>'regex'</value>
+        <docblock line="90">
+          <description>Regular expression value validation, i.e.</description>
+          <long-description>&lt;p&gt;numeric value
+Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;firstName =&gt; array(
+ "db" =&gt; "varchar(64)",
+ "validation" =&gt; array(
+     "regex" =&gt; "^[0-9]+$"
+ )
+)
+&lt;/code&gt;&lt;/pre&gt;</long-description>
+        </docblock>
+      </constant>
+      <property final="false" static="true" visibility="private" line="109" namespace="global" package="Default">
+        <name>$instance</name>
+        <default></default>
+        <docblock line="105">
+          <description>Singleton LudoDBValidator instance.</description>
+          <long-description></long-description>
+          <tag line="105" name="var" description="" type="\LudoDBValidator">
+            <type by_reference="false">\LudoDBValidator</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="115" package="LudoDB">
+        <name>getInstance</name>
+        <full_name>getInstance</full_name>
+        <docblock line="111">
+          <description>Return singleton instance.</description>
+          <long-description></long-description>
+          <tag line="111" name="return" description="" type="\LudoDBValidator">
+            <type by_reference="false">\LudoDBValidator</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="129" package="LudoDB">
+        <name>validateSave</name>
+        <full_name>validateSave</full_name>
+        <docblock line="123">
+          <description>Validate data for "save statement"</description>
+          <long-description></long-description>
+          <tag line="123" name="param" description="" type="array" variable="$data">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="123" name="param" description="" type="array" variable="$validationDef">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="123" name="throws" description="" type="\LudoDBInvalidModelDataException">
+            <type by_reference="false">\LudoDBInvalidModelDataException</type>
+          </tag>
+        </docblock>
+        <argument line="129">
+          <name>$data</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+        <argument line="129">
+          <name>$validationDef</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="149" package="LudoDB">
+        <name>validateUpdate</name>
+        <full_name>validateUpdate</full_name>
+        <docblock line="144">
+          <description>Validate data for "update" statement</description>
+          <long-description></long-description>
+          <tag line="144" name="param" description="" type="array" variable="$data">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="144" name="param" description="" type="array" variable="$validationDef">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="149">
+          <name>$data</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+        <argument line="149">
+          <name>$validationDef</name>
+          <default></default>
+          <type>array</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="167" package="LudoDB">
+        <name>validateColumn</name>
+        <full_name>validateColumn</full_name>
+        <docblock line="160">
+          <description>Run validation on a column</description>
+          <long-description></long-description>
+          <tag line="160" name="param" description="" type="\" variable="$column"/>
+          <tag line="160" name="param" description="" type="\" variable="$dataValue"/>
+          <tag line="160" name="param" description="" type="\" variable="$def"/>
+          <tag line="160" name="throws" description="" type="\LudoDBInvalidModelDataException">
+            <type by_reference="false">\LudoDBInvalidModelDataException</type>
+          </tag>
+        </docblock>
+        <argument line="167">
+          <name>$column</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="167">
+          <name>$dataValue</name>
+          <default></default>
+          <type/>
+        </argument>
+        <argument line="167">
+          <name>$def</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
   <file path="LudoJS.php" hash="6614161118777d6c26c9ef3e5fd78644" package="LudoDB">
     <docblock line="2">
       <description>Comment pending.</description>
@@ -5974,6 +6227,7 @@ echo $handler-&gt;handle('LudoJS/Person/1/form');
   </file>
   <package name="Default" full_name="Default"/>
   <package name="LudoDB" full_name="LudoDB"/>
+  <package name="LudoDBS" full_name="LudoDBS"/>
   <namespace name="global" full_name="global"/>
   <marker count="4">todo</marker>
   <marker count="0">fixme</marker>

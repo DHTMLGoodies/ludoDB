@@ -784,4 +784,27 @@ class LudoDBConfigParser
         }
         return $ret;
     }
+
+    /**
+     * Cached columns requiring validation
+     * @var array
+     */
+    private $validationColumns;
+
+    /**
+     * Return columns to validate
+     * @return array
+     */
+    public function getColumnsToValidate(){
+        if(!isset($this->validationColumns)){
+            $this->validationColumns = array();
+            $columns = $this->getColumns();
+            foreach($columns as $name=>$def){
+                if(is_array($def) && isset($def['validation'])){
+                    $this->validationColumns[$name] = $def['validation'];
+                }
+            }
+        }
+        return $this->validationColumns;
+    }
 }

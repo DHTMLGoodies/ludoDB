@@ -120,3 +120,7 @@ class LudoDBInvalidServiceException extends Exception{
 class LudoDBInvalidConfigException extends LudoDBException{
 
 }
+
+class LudoDBInvalidModelDataException extends LudoDBException{
+
+}

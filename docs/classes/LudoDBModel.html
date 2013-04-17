@@ -20,6 +20,7 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/LudoDB.html"><i class="icon-folder-open"></i> LudoDB</a></li>
 </ul>
 </li>
@@ -31,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">0</span></a></li>
+                <span class="label label-info">1</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">4</span>
@@ -306,13 +307,7 @@ echo $person->getId();
 <h2>Create DB table</h2>
 <pre>createTable() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>method</th>
-<td>createTable</td>
-</tr></table>
-</div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="method_delete"></a><div class="element clickable method public method_delete" data-toggle="collapse" data-target=".method_delete .collapse">
 <h2>Delete record</h2>
@@ -345,18 +340,12 @@ $person->deleteTableData()->yesImSure();
 <h2>Drop database table.</h2>
 <pre>drop() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"><p>You need to call yesImSure afterwards.
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>You need to call yesImSure afterwards.
 Example:</p>
 
 <pre><code>$person = new Person();
 $person->drop()->yesImSure();
-</code></pre></div>
-<table class="table table-bordered"><tr>
-<th>method</th>
-<td>drop</td>
-</tr></table>
-</div></div>
+</code></pre></div></div></div>
 </div>
 <a id="method_enableCommit"></a><div class="element clickable method public method_enableCommit" data-toggle="collapse" data-target=".method_enableCommit .collapse">
 <h2>Enable commit for this object.</h2>
@@ -543,13 +532,7 @@ given values.</h2>
 <h2>Rollback updates</h2>
 <pre>rollback() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>method</th>
-<td>rollback</td>
-</tr></table>
-</div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="method_save"></a><div class="element clickable method public method_save" data-toggle="collapse" data-target=".method_save .collapse">
 <h2>Populate and save data.</h2>
@@ -641,25 +624,13 @@ $p->drop()->yesImSure();</td>
 <h2>Method executed before new record is saved in db</h2>
 <pre>beforeInsert() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>method</th>
-<td>beforeInsert</td>
-</tr></table>
-</div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="method_beforeUpdate"></a><div class="element clickable method protected method_beforeUpdate" data-toggle="collapse" data-target=".method_beforeUpdate .collapse">
 <h2>Method executed before record is updated</h2>
 <pre>beforeUpdate() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>method</th>
-<td>beforeUpdate</td>
-</tr></table>
-</div></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="method_clearCache"></a><div class="element clickable method protected method_clearCache" data-toggle="collapse" data-target=".method_clearCache .collapse">
 <h2>Clear database cache for this instance.</h2>
@@ -901,10 +872,6 @@ Example:</p>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>method</th>
-<td>getClassName</td>
-</tr></table>
 <h3>Returns</h3>
 <div class="subelement response">
 <code><a href="../classes/LudoDBModel.html">\LudoDBModel</a></code>class</div>
@@ -1132,7 +1099,7 @@ for this object.</p></div></div></div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-04-13T22:00:25+02:00.<br></footer></div>
+            generated on 2013-04-17T23:38:16+02:00.<br></footer></div>
 </div>
 </body>
 </html>
