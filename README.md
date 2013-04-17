@@ -43,6 +43,7 @@ tree format.
 * __LudoDBRequestHandler__: Class handling POST/GET requests and returning data
 in JSON format.
 * __LudoDBService__:Interface for classes/resources available for the LudoDBRequestHandler.
+* __LudoDBValidator__: Class used to validate data before insert into database.
 * __LudoDBProfiler__: LudoDBService class implementing XHPROF profiling. During development, you
 can use this class to profile your PHP code. Example: profile the request Person/1/read, you can
 call this service: ```http://hostname/LudoDBProfiler/Person/1/read/profile```.
@@ -81,7 +82,12 @@ class Person extends LudoDBModel
 		'table' => 'Person',
 		'columns' => array(
 			'id' => 'int auto_increment not null primary key',
-			'firstname' => 'varchar(32)',
+			'firstname' => array(
+			    'db' => 'varchar(32)',
+			    'validation' => array(
+			        'required' => true
+			    )
+			 ),
 			'lastname' => 'varchar(32)',
 			'address' => 'varchar(64)',
 			'zip' => 'varchar(5)'
@@ -437,6 +443,16 @@ to distinguish between different type of rows, example "city" and "country".
 a string specifying the path to a JSON file with the default data, example: game.data.json.
 LudoDB looks for the file inside the JSONConfig sub folder.
 * __indexes__: Array of indexed columns.
+* __validation__ : Array of validation configuration, example:
+```PHP
+"validation" => array(
+    "required" => true,
+    "minLength" => 5,
+    "maxLength" => 10
+)
+```
+When set, validation will be done automatically on insert and update. A LudoDBInvalidModelDataException
+will be thrown on errors.
 
 
 ###LudoDBCollection
