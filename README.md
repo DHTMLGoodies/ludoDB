@@ -444,6 +444,7 @@ a string specifying the path to a JSON file with the default data, example: game
 LudoDB looks for the file inside the JSONConfig sub folder.
 * __indexes__: Array of indexed columns.
 * __validation__ : Array of validation configuration, example:
+
 ```PHP
 "validation" => array(
     "required" => true,
