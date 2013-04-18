@@ -30,6 +30,7 @@ class LudoJS implements LudoDBService
      * @var LudoDBObject
      */
     private $resource;
+
     /**
      * Construct new instance
      */
@@ -42,7 +43,8 @@ class LudoJS implements LudoDBService
      * Return "form" as only valid service
      * @return array
      */
-    public function getValidServices(){
+    public function getValidServices()
+    {
         return array("form");
     }
 
@@ -52,8 +54,9 @@ class LudoJS implements LudoDBService
      * @param Array $arguments
      * @return bool
      */
-    public function validateArguments($service, $arguments){
-        if(count($arguments) === 2)return is_numeric($arguments[1]);
+    public function validateArguments($service, $arguments)
+    {
+        if (count($arguments) === 2) return is_numeric($arguments[1]);
         return count($arguments) > 0;
     }
 
@@ -63,7 +66,8 @@ class LudoJS implements LudoDBService
      * @param array $data
      * @return bool
      */
-    public function validateServiceData($service, $data){
+    public function validateServiceData($service, $data)
+    {
         return empty($data);
     }
 
@@ -72,7 +76,8 @@ class LudoJS implements LudoDBService
      * @param string $service
      * @return bool
      */
-    public function shouldCache($service){
+    public function shouldCache($service)
+    {
         return false;
     }
 
@@ -81,7 +86,8 @@ class LudoJS implements LudoDBService
      * @param String $service
      * @return String
      */
-    public function getOnSuccessMessageFor($service){
+    public function getOnSuccessMessageFor($service)
+    {
         return "";
     }
 
@@ -89,7 +95,8 @@ class LudoJS implements LudoDBService
      * "form" service
      * @return array
      */
-    public function form(){
+    public function form()
+    {
         $this->resource = $this->getModelResource();
 
         $children = $this->resource->configParser()->getLudoJSConfig();
@@ -101,7 +108,11 @@ class LudoJS implements LudoDBService
         $children = $this->getChildrenInRightOrder($children);
 
         return array(
-            'children' => $children
+            'children' => $children,
+            'form' => array(
+                'resource' => $this->arguments[0]
+
+            )
         );
 
     }
@@ -111,10 +122,11 @@ class LudoJS implements LudoDBService
      * @param $children
      * @return mixed
      */
-    private function setMissingProperties($children){
-        foreach($children as $col=>&$def){
-            if(!isset($child['label'])){
-                $def['label'] = ucfirst($col);
+    private function setMissingProperties($children)
+    {
+        foreach ($children as $col => &$def) {
+            if (!isset($child['label'])) {
+                $def['label'] = isset($def['label']) ? $def['label'] : ucfirst($col);
             }
         }
         return $children;
@@ -125,9 +137,10 @@ class LudoJS implements LudoDBService
      * @param $children
      * @return mixed
      */
-    private function createDataSources($children){
-        foreach($children as &$def){
-            if(isset($def['dataSource'])){
+    private function createDataSources($children)
+    {
+        foreach ($children as &$def) {
+            if (isset($def['dataSource'])) {
                 $def['dataSource'] = $this->getDataSourceConfig($def['dataSource']);
             }
         }
@@ -139,15 +152,16 @@ class LudoJS implements LudoDBService
      * @param $source
      * @return array
      */
-    private function getDataSourceConfig($source){
-        if(!is_array($source)){
+    private function getDataSourceConfig($source)
+    {
+        if (!is_array($source)) {
             $source = array('name' => $source);
         }
         $cl = $this->getReflectionClass($source['name']);
-        if(isset($source['args'])){
+        if (isset($source['args'])) {
             $args = is_array($source['args']) ? $source['args'] : array($source['args']);
             $resource = $cl->newInstanceArgs($args);
-        }else{
+        } else {
             $resource = $cl->newInstance();
         }
         return array(
@@ -160,15 +174,18 @@ class LudoJS implements LudoDBService
      * @param array $children
      * @return array
      */
-    private function getChildrenInRightOrder($children){
-        for($i=0, $count=count($children);$i<$count;$i++){
-            if(!isset($children[$i]['order'])){
-                $children[$i]['order'] = $i+100;
+    private function getChildrenInRightOrder($children)
+    {
+        for ($i = 0, $count = count($children); $i < $count; $i++) {
+            if (!isset($children[$i]['order'])) {
+                $children[$i]['order'] = $i + 100;
             }
         }
-        usort($children, function($a,$b) { return $a['order'] > $b['order'] ? 1 : -1; });
+        usort($children, function ($a, $b) {
+            return $a['order'] > $b['order'] ? 1 : -1;
+        });
 
-        foreach($children as & $child){
+        foreach ($children as & $child) {
             unset($child['order']);
         }
         return $children;
@@ -179,11 +196,12 @@ class LudoJS implements LudoDBService
      * @param $children
      * @return mixed
      */
-    private function setChildValues($children){
-        if(isset($this->arguments[1])){
+    private function setChildValues($children)
+    {
+        if (isset($this->arguments[1])) {
             $values = $this->resource->getValues();
-            foreach($values as $key=> $value){
-                if(isset($children[$key])){
+            foreach ($values as $key => $value) {
+                if (isset($children[$key])) {
                     $children[$key]['value'] = $value;
                 }
             }
@@ -196,14 +214,37 @@ class LudoJS implements LudoDBService
      * @param $children
      * @return mixed
      */
-    private function addValidation($children){
-        $validations= $this->resource->configParser()->getColumnsToValidate();
-        foreach($validations as $col=>$validation){
-            foreach($validation as $key=>$value){
-                $children[$col][$key] = $value;
+    private function addValidation($children)
+    {
+        $validations = $this->resource->configParser()->getColumnsToValidate();
+        foreach ($validations as $col => $validation) {
+            foreach ($validation as $key => $value) {
+                switch ($key) {
+                    case "regex":
+                        $tokens = explode("/", $value);
+                        $flag = array_pop($tokens);
+                        if($this->isRegexFlag($flag)){
+                            $flag= str_replace("s", "g", $flag);
+                        }
+                        $tokens[] = $flag;
+                        $children[$col][$key] = implode("/",$tokens);
+                        break;
+                    default:
+                        $children[$col][$key] = $value;
+
+                }
             }
         }
         return $children;
+    }
+
+    /**
+     * Returns true if given string matches pattern for a regex flag/modifiers
+     * @param $token
+     * @return int
+     */
+    private function isRegexFlag($token){
+        return preg_match("/^[si]+?$/", $token);
     }
 
     /**
@@ -211,13 +252,14 @@ class LudoJS implements LudoDBService
      * @return LudoDBObject
      * @throws LudoDBClassNotFoundException
      */
-    private function getModelResource(){
-        if(!class_exists($this->arguments[0])){
-            throw new LudoDBClassNotFoundException("Class ". $this->arguments[0] . " does not exists.");
+    private function getModelResource()
+    {
+        if (!class_exists($this->arguments[0])) {
+            throw new LudoDBClassNotFoundException("Class " . $this->arguments[0] . " does not exists.");
         }
         $resource = $this->getReflectionClass($this->arguments[0]);
 
-        if(isset($this->arguments[1])){
+        if (isset($this->arguments[1])) {
             return $resource->newInstanceArgs(array($this->arguments[1]));
         }
         return $resource->newInstance();

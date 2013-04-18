@@ -35,8 +35,7 @@ class LudoJSPerson extends LudoDBModel implements LudoDBService
                 ),
                 "access" => "rw",
                 "validation" => array(
-                    'required' => true,
-                    'regex' => '/[a-z0-9\s]{5,}/gi'
+                    'required' => true
                 )
             ),
             "country" => array(
@@ -46,7 +45,7 @@ class LudoJSPerson extends LudoDBModel implements LudoDBService
                     'valueKey' => 'id',
                     'textKey' => 'name',
                     'type' => 'form.Select',
-                    'order' => '4',
+                    'order' => '10',
                     'dataSource' => 'LudoJSCountries'
                 ),
                 "access" => "rw"
@@ -61,6 +60,23 @@ class LudoJSPerson extends LudoDBModel implements LudoDBService
                     )
                 ),
                 "access" => "rw"
+            ),
+            "zip" => array(
+                "db" => "varchar(10)",
+                "access" => "rw",
+                "ludoJS" => array(
+                    "label" => "zip code",
+                    "type" => "form.Text",
+                    "order" => 4
+                )
+            ),
+            "city" => array(
+                "db" => "varchar(10)",
+                "access" => "rw",
+                "ludoJS" => array(
+                    "type" => "form.Text",
+                    "order" => 5
+                )
             )
         ),
         "static" => array(

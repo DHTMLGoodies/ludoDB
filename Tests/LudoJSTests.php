@@ -33,8 +33,6 @@ class LudoJSTests extends TestBase
 
     }
 
-
-
     /**
      * @test
      */
@@ -135,6 +133,21 @@ class LudoJSTests extends TestBase
         $child = $this->getLudoJsFor('firstname', $children);
         // then
         $this->assertTrue($child['required']);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnFormConfig(){
+        // given
+        $handler = new LudoDBRequestHandler();
+        // when
+        $form = $handler->handle("LudoJS/LudoJSPerson/1/form");
+        $form = json_decode($form, true);
+
+        $formConfig = $form['response']['form'];
+
+        $this->assertEquals('LudoJSPerson', $formConfig['resource']);
     }
 
     private function getLudoJsFor($column, $children){
