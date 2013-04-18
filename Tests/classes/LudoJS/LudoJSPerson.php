@@ -22,6 +22,9 @@ class LudoJSPerson extends LudoDBModel implements LudoDBService
                     'type' => 'form.Text',
                     'order' => 2
                 ),
+                "validation" => array(
+                    "required" => true
+                ),
                 "access" => "rw"
             ),
             'firstname' => array(
@@ -33,7 +36,7 @@ class LudoJSPerson extends LudoDBModel implements LudoDBService
                 "access" => "rw",
                 "validation" => array(
                     'required' => true,
-                    'regex' => '/[a-z0-9]{5}/gi'
+                    'regex' => '/[a-z0-9\s]{5,}/gi'
                 )
             ),
             "country" => array(
