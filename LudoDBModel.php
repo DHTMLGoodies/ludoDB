@@ -273,7 +273,7 @@ abstract class LudoDBModel extends LudoDBObject
      */
     private function update()
     {
-        LudoDBValidator::getInstance()->validateUpdate($this->updates, $this->configParser()->getColumnsToValidate());
+        LudoDBValidator::getInstance()->validateUpdate($this);
 
         if ($this->isValid()) {
             $this->beforeUpdate();
@@ -296,7 +296,7 @@ abstract class LudoDBModel extends LudoDBObject
      */
     private function insert()
     {
-        LudoDBValidator::getInstance()->validateSave($this->updates, $this->configParser()->getColumnsToValidate());
+        LudoDBValidator::getInstance()->validateSave($this);
 
         if ($this->isValid()) {
             $this->beforeInsert();
