@@ -104,7 +104,6 @@ class LudoJSTests extends TestBase
         // then
         $this->assertNotNull($country['dataSource']);
         $this->assertEquals(196, count($country['dataSource']['data']));
-
     }
     /**
      * @test
@@ -120,6 +119,22 @@ class LudoJSTests extends TestBase
         $child = $this->getLudoJsFor('firstname', $children);
         // then
         $this->assertEquals('John', $child['value']);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldAddValidationProperties(){
+        // given
+        $handler = new LudoDBRequestHandler();
+        // when
+        $form = $handler->handle("LudoJS/LudoJSPerson/1/form");
+        $form = json_decode($form, true);
+
+        $children = $form['response']['children'];
+        $child = $this->getLudoJsFor('firstname', $children);
+        // then
+        $this->assertTrue($child['required']);
     }
 
     private function getLudoJsFor($column, $children){

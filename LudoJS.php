@@ -96,6 +96,7 @@ class LudoJS implements LudoDBService
         $children = $this->setMissingProperties($children);
         $children = $this->setChildValues($children);
         $children = $this->createDataSources($children);
+        $children = $this->addValidation($children);
         $children = array_values($children);
         $children = $this->getChildrenInRightOrder($children);
 
@@ -185,6 +186,21 @@ class LudoJS implements LudoDBService
                 if(isset($children[$key])){
                     $children[$key]['value'] = $value;
                 }
+            }
+        }
+        return $children;
+    }
+
+    /**
+     * Add validation properties to LudoJS column
+     * @param $children
+     * @return mixed
+     */
+    private function addValidation($children){
+        $validations= $this->resource->configParser()->getColumnsToValidate();
+        foreach($validations as $col=>$validation){
+            foreach($validation as $key=>$value){
+                $children[$col][$key] = $value;
             }
         }
         return $children;

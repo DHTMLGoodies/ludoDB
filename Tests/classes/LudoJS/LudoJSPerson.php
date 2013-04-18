@@ -30,7 +30,11 @@ class LudoJSPerson extends LudoDBModel implements LudoDBService
                     'type' => 'form.Text',
                     'order' => 1
                 ),
-                "access" => "rw"
+                "access" => "rw",
+                "validation" => array(
+                    'required' => true,
+                    'regex' => '/[a-z0-9]{5}/gi'
+                )
             ),
             "country" => array(
                 "db" => "int",
