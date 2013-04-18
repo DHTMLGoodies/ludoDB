@@ -1,6 +1,5 @@
 <?php
 /**
- * Comment pending.
  * User: Alf Magne Kalleland
  * Date: 17.04.13
  * Time: 21:37
@@ -122,12 +121,13 @@ class LudoDBValidator
 
     /**
      * Validate data for "save statement"
-     * @param array $data
-     * @param array $validationDef
+     * @param LudoDBModel $model
      * @throws LudoDBInvalidModelDataException
      */
-    public function validateSave(array $data, array $validationDef)
+    public function validateSave($model)
     {
+        $data = $model->getUncommitted();
+        $validationDef = $model->configParser()->getColumnsToValidate();
         if (empty($validationDef)) return;
 
         foreach ($validationDef as $column => $def) {
@@ -143,11 +143,12 @@ class LudoDBValidator
 
     /**
      * Validate data for "update" statement
-     * @param array $data
-     * @param array $validationDef
+     * @param LudoDBModel $model
      */
-    public function validateUpdate(array $data, array $validationDef)
+    public function validateUpdate($model)
     {
+        $data = $model->getUncommitted();
+        $validationDef = $model->configParser()->getColumnsToValidate();
         if (empty($validationDef)) return;
 
         foreach ($validationDef as $column => $def) {
