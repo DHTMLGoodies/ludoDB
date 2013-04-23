@@ -31,7 +31,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">12</span></a></li>
+                <span class="label label-info">1</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">4</span>
@@ -71,8 +71,7 @@
 <li class="method public "><a href="#method_getInsertId" title="getInsertId :: Get last insert id"><span class="description">Get last insert id</span><pre>getInsertId()</pre></a></li>
 <li class="method public inherited"><a href="#method_getInstance" title="getInstance :: Return new LudoDB object with connection to the database."><span class="description">Return new LudoDB object with connection to the database.</span><pre>getInstance()</pre></a></li>
 <li class="method public inherited"><a href="#method_getQueryCount" title="getQueryCount :: Return number of executed SQL queries."><span class="description">Return number of executed SQL queries.</span><pre>getQueryCount()</pre></a></li>
-<li class="method public "><a href="#method_getTableDefinition" title="getTableDefinition :: "><span class="description">getTableDefinition()
-        </span><pre>getTableDefinition()</pre></a></li>
+<li class="method public "><a href="#method_getTableDefinition" title="getTableDefinition :: Return table definition, column names and column types for a table."><span class="description">Return table definition, column names and column types for a table.</span><pre>getTableDefinition()</pre></a></li>
 <li class="method public "><a href="#method_getValue" title="getValue :: Return value of first column in a query"><span class="description">Return value of first column in a query</span><pre>getValue()</pre></a></li>
 <li class="method public inherited"><a href="#method_hasConnection" title="hasConnection :: Returns true if we have a database connection."><span class="description">Returns true if we have a database connection.</span><pre>hasConnection()</pre></a></li>
 <li class="method public inherited"><a href="#method_hasPDO" title="hasPDO :: Returns true if connection type is PDO"><span class="description">Returns true if connection type is PDO</span><pre>hasPDO()</pre></a></li>
@@ -326,10 +325,6 @@ if(!LudoDB::getInstance()->databaseExists('nameOfDatabase')){
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>method</th>
-<td>getInsertId</td>
-</tr></table>
 <h3>Returns</h3>
 <div class="subelement response"><code>int</code></div>
 </div></div>
@@ -369,8 +364,7 @@ if(!LudoDB::getInstance()->databaseExists('nameOfDatabase')){
 </div></div>
 </div>
 <a id="method_getTableDefinition"></a><div class="element clickable method public method_getTableDefinition" data-toggle="collapse" data-target=".method_getTableDefinition .collapse">
-<h2>getTableDefinition()
-        </h2>
+<h2>Return table definition, column names and column types for a table.</h2>
 <pre>getTableDefinition(String $tableName) : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -846,7 +840,7 @@ LudoDB::hasConnection()
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-04-24T00:23:31+02:00.<br></footer></div>
+            generated on 2013-04-24T00:57:02+02:00.<br></footer></div>
 </div>
 </body>
 </html>

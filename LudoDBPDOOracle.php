@@ -140,7 +140,6 @@ class LudoDBPDOOracle extends LudoDB implements LudoDBAdapter
 
     /**
      * Get last insert id
-     * @method getInsertId
      * @return int
      */
     public function getInsertId()
@@ -171,6 +170,11 @@ class LudoDBPDOOracle extends LudoDB implements LudoDBAdapter
         return (isset($row)) ? $row[0] : null;
     }
 
+    /**
+     * Return table definition, column names and column types for a table.
+     * @param String $tableName
+     * @return array
+     */
     public function getTableDefinition($tableName){
         return array();
     }

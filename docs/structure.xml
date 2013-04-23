@@ -2169,7 +2169,7 @@ Thrown by LudoDBRequestHandler</description>
       </docblock>
     </class>
   </file>
-  <file path="LudoDBInterfaces.php" hash="558534851010a96537f841a17dbc4564" package="LudoDB">
+  <file path="LudoDBInterfaces.php" hash="314a1024c3bcd293d6ac3e82702f3419" package="LudoDB">
     <docblock line="2">
       <description>LudoDB interfaces
 User: Alf Magne
@@ -2345,11 +2345,11 @@ Date: 31.01.13</description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="85" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="86" package="LudoDB">
         <name>getTableDefinition</name>
         <full_name>getTableDefinition</full_name>
         <docblock line="81">
-          <description/>
+          <description>Return table definition, column names and column types for a table.</description>
           <long-description/>
           <tag line="81" name="param" description="" type="String" variable="$tableName">
             <type by_reference="false">String</type>
@@ -2358,135 +2358,132 @@ Date: 31.01.13</description>
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="85">
+        <argument line="86">
           <name>$tableName</name>
           <default/>
           <type/>
         </argument>
       </method>
     </interface>
-    <interface namespace="global" line="98" package="LudoDB">
+    <interface namespace="global" line="99" package="LudoDB">
       <name>LudoDBService</name>
       <full_name>\LudoDBService</full_name>
-      <docblock line="88">
+      <docblock line="89">
         <description>Classes for request handlers has to implement the LudoDBService interface</description>
         <long-description>&lt;p&gt;The class also needs to implement a static function called getValidServices
 which returns an array of valid services, example array('read','save','delete');
 Methods with these names also has to be implemented. "read", "save" and "delete"
 are already implemented for LudoDBModel.&lt;/p&gt;</long-description>
-        <tag line="88" name="package" description="LudoDB"/>
-        <tag line="88" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
+        <tag line="89" name="package" description="LudoDB"/>
+        <tag line="89" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="106" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="107" package="LudoDB">
         <name>validateArguments</name>
         <full_name>validateArguments</full_name>
-        <docblock line="100">
+        <docblock line="101">
           <description>Returns true is passed arguments are acceptable for the constructor.</description>
           <long-description/>
-          <tag line="100" name="param" description="" type="String" variable="$service">
+          <tag line="101" name="param" description="" type="String" variable="$service">
             <type by_reference="false">String</type>
           </tag>
-          <tag line="100" name="param" description="" type="Array" variable="$arguments">
+          <tag line="101" name="param" description="" type="Array" variable="$arguments">
             <type by_reference="false">Array</type>
           </tag>
-          <tag line="100" name="return" description="" type="bool">
+          <tag line="101" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="106">
+        <argument line="107">
           <name>$service</name>
           <default/>
           <type/>
         </argument>
-        <argument line="106">
+        <argument line="107">
           <name>$arguments</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="114" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="115" package="LudoDB">
         <name>validateServiceData</name>
         <full_name>validateServiceData</full_name>
-        <docblock line="108">
+        <docblock line="109">
           <description>Validate data sent to service method</description>
           <long-description/>
-          <tag line="108" name="param" description="" type="string" variable="$service">
+          <tag line="109" name="param" description="" type="string" variable="$service">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="108" name="param" description="" type="array" variable="$data">
+          <tag line="109" name="param" description="" type="array" variable="$data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="108" name="return" description="" type="bool">
+          <tag line="109" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="114">
+        <argument line="115">
           <name>$service</name>
           <default/>
           <type/>
         </argument>
-        <argument line="114">
+        <argument line="115">
           <name>$data</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="125" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="126" package="LudoDB">
         <name>shouldCache</name>
         <full_name>shouldCache</full_name>
-        <docblock line="116">
+        <docblock line="117">
           <description>Return true to enable caching in LudoDBRequest handler for the read service.</description>
           <long-description>&lt;p&gt;When true a serialized version of LudoDBModel::read will
 be stored in a caching table. When caching is enabled,
 you should also implement clearCache() to clear cache in
 case Data has been changed.&lt;/p&gt;</long-description>
-          <tag line="116" name="param" description="" type="string" variable="$service">
+          <tag line="117" name="param" description="" type="string" variable="$service">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="116" name="return" description="" type="boolean">
+          <tag line="117" name="return" description="" type="boolean">
             <type by_reference="false">boolean</type>
           </tag>
         </docblock>
-        <argument line="125">
+        <argument line="126">
           <name>$service</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="131" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="132" package="LudoDB">
         <name>getValidServices</name>
         <full_name>getValidServices</full_name>
-        <docblock line="127">
+        <docblock line="128">
           <description>Return array with names of valid services</description>
           <long-description/>
-          <tag line="127" name="return" description="" type="array">
+          <tag line="128" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="138" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="139" package="LudoDB">
         <name>getOnSuccessMessageFor</name>
         <full_name>getOnSuccessMessageFor</full_name>
-        <docblock line="133">
+        <docblock line="134">
           <description>Return on success message for given service</description>
           <long-description/>
-          <tag line="133" name="param" description="" type="String" variable="$service">
+          <tag line="134" name="param" description="" type="String" variable="$service">
             <type by_reference="false">String</type>
           </tag>
-          <tag line="133" name="return" description="" type="String">
+          <tag line="134" name="return" description="" type="String">
             <type by_reference="false">String</type>
           </tag>
         </docblock>
-        <argument line="138">
+        <argument line="139">
           <name>$service</name>
           <default/>
           <type/>
         </argument>
       </method>
     </interface>
-    <parse_markers>
-      <error line="81" code="50012">No short description for method getTableDefinition()</error>
-    </parse_markers>
   </file>
   <file path="LudoDBIterator.php" hash="b175aa4fd4fc97193560be770c5b6486" package="LudoDB">
     <docblock line="2">
@@ -3384,11 +3381,11 @@ var_dump($data);
       </method>
     </class>
   </file>
-  <file path="LudoDBMySqlI.php" hash="2b3e77d84929a5de471f75ab8697686f" package="LudoDB">
+  <file path="LudoDBMySqlI.php" hash="c08d7f1eaf782b7b32418781700f10d2" package="LudoDB">
     <docblock line="2">
       <description>User: Alf Magne
 Date: 01.02.13</description>
-      <long-description/>
+      <long-description></long-description>
       <tag line="2" name="package" description="LudoDB"/>
       <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
     </docblock>
@@ -3406,10 +3403,10 @@ when supported by the server.&lt;/p&gt;</long-description>
       </docblock>
       <property final="false" static="true" visibility="protected" line="20" namespace="global" package="Default">
         <name>$conn</name>
-        <default/>
+        <default></default>
         <docblock line="16">
           <description>Database connection resource reference</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="16" name="var" description="" type="\mysqli">
             <type by_reference="false">\mysqli</type>
           </tag>
@@ -3420,7 +3417,7 @@ when supported by the server.&lt;/p&gt;</long-description>
         <full_name>connect</full_name>
         <docblock line="22">
           <description>Connect to database</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="22" name="return" description="" type="mixed|void">
             <type by_reference="false">mixed</type>
             <type by_reference="false">void</type>
@@ -3435,7 +3432,7 @@ when supported by the server.&lt;/p&gt;</long-description>
         <full_name>query</full_name>
         <docblock line="40">
           <description>Execute query and return resource.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="40" name="param" description="" type="\" variable="$sql"/>
           <tag line="40" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
@@ -3450,7 +3447,7 @@ when supported by the server.&lt;/p&gt;</long-description>
         </docblock>
         <argument line="47">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="47">
@@ -3464,7 +3461,7 @@ when supported by the server.&lt;/p&gt;</long-description>
         <full_name>one</full_name>
         <docblock line="62">
           <description>Get one row</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="62" name="param" description="" type="\" variable="$sql"/>
           <tag line="62" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
@@ -3476,7 +3473,7 @@ when supported by the server.&lt;/p&gt;</long-description>
         </docblock>
         <argument line="68">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="68">
@@ -3490,7 +3487,7 @@ when supported by the server.&lt;/p&gt;</long-description>
         <full_name>countRows</full_name>
         <docblock line="78">
           <description>Return number of rows for given query with given arguments.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="78" name="param" description="" type="\" variable="$sql"/>
           <tag line="78" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
@@ -3501,7 +3498,7 @@ when supported by the server.&lt;/p&gt;</long-description>
         </docblock>
         <argument line="84">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="84">
@@ -3510,101 +3507,107 @@ when supported by the server.&lt;/p&gt;</long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="95" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="94" package="LudoDB">
         <name>getInsertId</name>
         <full_name>getInsertId</full_name>
         <docblock line="90">
           <description>Get last insert id</description>
-          <long-description/>
-          <tag line="90" name="method" description="getInsertId" type="\" method_name=""/>
+          <long-description></long-description>
           <tag line="90" name="return" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="105" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="104" package="LudoDB">
         <name>nextRow</name>
         <full_name>nextRow</full_name>
-        <docblock line="100">
+        <docblock line="99">
           <description>Return reference to next row in result set.</description>
-          <long-description/>
-          <tag line="100" name="param" description="" type="\mysqli_result|resource|\PDOStatement" variable="$result">
+          <long-description></long-description>
+          <tag line="99" name="param" description="" type="\mysqli_result|resource|\PDOStatement" variable="$result">
             <type by_reference="false">\mysqli_result</type>
             <type by_reference="false">resource</type>
             <type by_reference="false">\PDOStatement</type>
           </tag>
-          <tag line="100" name="return" description="" type="array">
+          <tag line="99" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="105">
+        <argument line="104">
           <name>$result</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="116" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="115" package="LudoDB">
         <name>getValue</name>
         <full_name>getValue</full_name>
-        <docblock line="110">
+        <docblock line="109">
           <description>Return value of first column of first row.</description>
-          <long-description/>
-          <tag line="110" name="param" description="" type="\" variable="$sql"/>
-          <tag line="110" name="param" description="" type="array" variable="$params">
+          <long-description></long-description>
+          <tag line="109" name="param" description="" type="\" variable="$sql"/>
+          <tag line="109" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="110" name="return" description="" type="null">
+          <tag line="109" name="return" description="" type="null">
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="116">
+        <argument line="115">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="116">
+        <argument line="115">
           <name>$params</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="128" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="127" package="LudoDB">
         <name>escapeString</name>
         <full_name>escapeString</full_name>
-        <docblock line="123">
+        <docblock line="122">
           <description>Return safe string for insertion into database.</description>
-          <long-description/>
-          <tag line="123" name="param" description="" type="\" variable="$string"/>
-          <tag line="123" name="return" description="" type="mixed|string">
+          <long-description></long-description>
+          <tag line="122" name="param" description="" type="\" variable="$string"/>
+          <tag line="122" name="return" description="" type="mixed|string">
             <type by_reference="false">mixed</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="128">
+        <argument line="127">
           <name>$string</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="133" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="136" package="LudoDB">
         <name>getTableDefinition</name>
         <full_name>getTableDefinition</full_name>
-        <argument line="133">
+        <docblock line="131">
+          <description>Return table definition, column names and column types for a table.</description>
+          <long-description></long-description>
+          <tag line="131" name="param" description="" type="String" variable="$tableName">
+            <type by_reference="false">String</type>
+          </tag>
+          <tag line="131" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="136">
           <name>$tableName</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
     </class>
-    <parse_markers>
-      <error line="133" code="50010">No DocBlock was found for method getTableDefinition()</error>
-    </parse_markers>
   </file>
-  <file path="LudoDBMysql.php" hash="c1f1213fc76f4227b64b4b2e03cddcec" package="LudoDB">
+  <file path="LudoDBMysql.php" hash="bd7e3f1512c571c0e4015d4dc3666d8c" package="LudoDB">
     <docblock line="2">
       <description>User: Alf Magne
 Date: 01.02.13</description>
-      <long-description/>
+      <long-description></long-description>
       <tag line="2" name="package" description="LudoDB"/>
       <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
     </docblock>
@@ -3624,7 +3627,7 @@ PDO or MySqlI is supported on the server.&lt;/p&gt;</long-description>
         <full_name>connect</full_name>
         <docblock line="15">
           <description>Connect to database</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="15" name="throws" description="" type="\LudoDBConnectionException">
             <type by_reference="false">\LudoDBConnectionException</type>
           </tag>
@@ -3635,7 +3638,7 @@ PDO or MySqlI is supported on the server.&lt;/p&gt;</long-description>
         <full_name>escapeString</full_name>
         <docblock line="29">
           <description>Return safe string for insertion into database.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="29" name="param" description="" type="int|string|bool|null" variable="$string">
             <type by_reference="false">int</type>
             <type by_reference="false">string</type>
@@ -3651,7 +3654,7 @@ PDO or MySqlI is supported on the server.&lt;/p&gt;</long-description>
         </docblock>
         <argument line="34">
           <name>$string</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -3660,7 +3663,7 @@ PDO or MySqlI is supported on the server.&lt;/p&gt;</long-description>
         <full_name>query</full_name>
         <docblock line="39">
           <description>Execute query and return resource.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="39" name="param" description="" type="\" variable="$sql"/>
           <tag line="39" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
@@ -3677,7 +3680,7 @@ PDO or MySqlI is supported on the server.&lt;/p&gt;</long-description>
         </docblock>
         <argument line="46">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="46">
@@ -3691,7 +3694,7 @@ PDO or MySqlI is supported on the server.&lt;/p&gt;</long-description>
         <full_name>one</full_name>
         <docblock line="59">
           <description>Get one row.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="59" name="param" description="" type="\" variable="$sql"/>
           <tag line="59" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
@@ -3703,7 +3706,7 @@ PDO or MySqlI is supported on the server.&lt;/p&gt;</long-description>
         </docblock>
         <argument line="65">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="65">
@@ -3717,7 +3720,7 @@ PDO or MySqlI is supported on the server.&lt;/p&gt;</long-description>
         <full_name>countRows</full_name>
         <docblock line="75">
           <description>Return number of rows.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="75" name="param" description="" type="\" variable="$sql"/>
           <tag line="75" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
@@ -3728,7 +3731,7 @@ PDO or MySqlI is supported on the server.&lt;/p&gt;</long-description>
         </docblock>
         <argument line="81">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="81">
@@ -3737,78 +3740,84 @@ PDO or MySqlI is supported on the server.&lt;/p&gt;</long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="92" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="91" package="LudoDB">
         <name>getInsertId</name>
         <full_name>getInsertId</full_name>
         <docblock line="87">
           <description>Get last insert id</description>
-          <long-description/>
-          <tag line="87" name="method" description="getInsertId" type="\" method_name=""/>
+          <long-description></long-description>
           <tag line="87" name="return" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="102" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="101" package="LudoDB">
         <name>nextRow</name>
         <full_name>nextRow</full_name>
-        <docblock line="97">
+        <docblock line="96">
           <description>Go to next row</description>
-          <long-description/>
-          <tag line="97" name="param" description="" type="\mysqli_result|resource|\PDOStatement" variable="$result">
+          <long-description></long-description>
+          <tag line="96" name="param" description="" type="\mysqli_result|resource|\PDOStatement" variable="$result">
             <type by_reference="false">\mysqli_result</type>
             <type by_reference="false">resource</type>
             <type by_reference="false">\PDOStatement</type>
           </tag>
-          <tag line="97" name="return" description="" type="array">
+          <tag line="96" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="102">
+        <argument line="101">
           <name>$result</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="113" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="112" package="LudoDB">
         <name>getValue</name>
         <full_name>getValue</full_name>
-        <docblock line="107">
+        <docblock line="106">
           <description>Return value of first column in a query</description>
-          <long-description/>
-          <tag line="107" name="param" description="" type="\" variable="$sql"/>
-          <tag line="107" name="param" description="" type="array" variable="$params">
+          <long-description></long-description>
+          <tag line="106" name="param" description="" type="\" variable="$sql"/>
+          <tag line="106" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="107" name="return" description="" type="null|array">
+          <tag line="106" name="return" description="" type="null|array">
             <type by_reference="false">null</type>
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="113">
+        <argument line="112">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="113">
+        <argument line="112">
           <name>$params</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="120" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="124" package="LudoDB">
         <name>getTableDefinition</name>
         <full_name>getTableDefinition</full_name>
-        <argument line="120">
+        <docblock line="119">
+          <description>Return table definition, column names and column types for a table.</description>
+          <long-description></long-description>
+          <tag line="119" name="param" description="" type="String" variable="$tableName">
+            <type by_reference="false">String</type>
+          </tag>
+          <tag line="119" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="124">
           <name>$tableName</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
     </class>
-    <parse_markers>
-      <error line="120" code="50010">No DocBlock was found for method getTableDefinition()</error>
-    </parse_markers>
   </file>
   <file path="LudoDBObject.php" hash="c68e6aeea027502678546950f6bff362" package="LudoDB">
     <docblock line="2">
@@ -4178,11 +4187,11 @@ given values.</description>
       </method>
     </class>
   </file>
-  <file path="LudoDBPDO.php" hash="db8427377d104efae11b211987e745aa" package="LudoDB">
+  <file path="LudoDBPDO.php" hash="b189fb627bd55afb8124acd56298173c" package="LudoDB">
     <docblock line="2">
       <description>User: Alf Magne
 Date: 31.01.13</description>
-      <long-description/>
+      <long-description></long-description>
       <tag line="2" name="package" description="LudoDB"/>
       <tag line="2" name="author" description="Alf Magne Kalleland &lt;post@dhtmlgoodies.com&gt;"/>
     </docblock>
@@ -4199,10 +4208,10 @@ Date: 31.01.13</description>
       </docblock>
       <property final="false" static="true" visibility="protected" line="20" namespace="global" package="Default">
         <name>$conn</name>
-        <default/>
+        <default></default>
         <docblock line="16">
           <description>Database connection resource reference</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="16" name="var" description="" type="\PDO">
             <type by_reference="false">\PDO</type>
           </tag>
@@ -4213,7 +4222,7 @@ Date: 31.01.13</description>
         <full_name>connect</full_name>
         <docblock line="22">
           <description>Connect to database</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="22" name="throws" description="" type="\LudoDBConnectionException">
             <type by_reference="false">\LudoDBConnectionException</type>
           </tag>
@@ -4224,7 +4233,7 @@ Date: 31.01.13</description>
         <full_name>escapeString</full_name>
         <docblock line="38">
           <description>Escape string - nothing to do here since we're using prepared statements.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="38" name="param" description="" type="\" variable="$string"/>
           <tag line="38" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
@@ -4232,7 +4241,7 @@ Date: 31.01.13</description>
         </docblock>
         <argument line="43">
           <name>$string</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
@@ -4241,7 +4250,7 @@ Date: 31.01.13</description>
         <full_name>query</full_name>
         <docblock line="48">
           <description>Execute query and return resource.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="48" name="param" description="" type="\" variable="$sql"/>
           <tag line="48" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
@@ -4258,7 +4267,7 @@ Date: 31.01.13</description>
         </docblock>
         <argument line="55">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="55">
@@ -4272,7 +4281,7 @@ Date: 31.01.13</description>
         <full_name>one</full_name>
         <docblock line="69">
           <description>Get one row.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="69" name="param" description="" type="\" variable="$sql"/>
           <tag line="69" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
@@ -4284,7 +4293,7 @@ Date: 31.01.13</description>
         </docblock>
         <argument line="75">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="75">
@@ -4298,7 +4307,7 @@ Date: 31.01.13</description>
         <full_name>countRows</full_name>
         <docblock line="82">
           <description>Return number of rows.</description>
-          <long-description/>
+          <long-description></long-description>
           <tag line="82" name="param" description="" type="\" variable="$sql"/>
           <tag line="82" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
@@ -4309,7 +4318,7 @@ Date: 31.01.13</description>
         </docblock>
         <argument line="88">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
         <argument line="88">
@@ -4318,80 +4327,86 @@ Date: 31.01.13</description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="99" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="98" package="LudoDB">
         <name>getInsertId</name>
         <full_name>getInsertId</full_name>
         <docblock line="94">
           <description>Get last insert id</description>
-          <long-description/>
-          <tag line="94" name="method" description="getInsertId" type="\" method_name=""/>
+          <long-description></long-description>
           <tag line="94" name="return" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="109" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="108" package="LudoDB">
         <name>nextRow</name>
         <full_name>nextRow</full_name>
-        <docblock line="104">
+        <docblock line="103">
           <description>Go to next row</description>
-          <long-description/>
-          <tag line="104" name="param" description="" type="\mysqli_result|resource|\PDOStatement" variable="$result">
+          <long-description></long-description>
+          <tag line="103" name="param" description="" type="\mysqli_result|resource|\PDOStatement" variable="$result">
             <type by_reference="false">\mysqli_result</type>
             <type by_reference="false">resource</type>
             <type by_reference="false">\PDOStatement</type>
           </tag>
-          <tag line="104" name="return" description="" type="array">
+          <tag line="103" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="109">
+        <argument line="108">
           <name>$result</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="120" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="119" package="LudoDB">
         <name>getValue</name>
         <full_name>getValue</full_name>
-        <docblock line="114">
+        <docblock line="113">
           <description>Return value of first column in a query</description>
-          <long-description/>
-          <tag line="114" name="param" description="" type="\" variable="$sql"/>
-          <tag line="114" name="param" description="" type="array" variable="$params">
+          <long-description></long-description>
+          <tag line="113" name="param" description="" type="\" variable="$sql"/>
+          <tag line="113" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="114" name="return" description="" type="null|array">
+          <tag line="113" name="return" description="" type="null|array">
             <type by_reference="false">null</type>
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="120">
+        <argument line="119">
           <name>$sql</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
-        <argument line="120">
+        <argument line="119">
           <name>$params</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="127" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="131" package="LudoDB">
         <name>getTableDefinition</name>
         <full_name>getTableDefinition</full_name>
-        <argument line="127">
+        <docblock line="126">
+          <description>Return table definition, column names and column types for a table.</description>
+          <long-description></long-description>
+          <tag line="126" name="param" description="" type="String" variable="$tableName">
+            <type by_reference="false">String</type>
+          </tag>
+          <tag line="126" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="131">
           <name>$tableName</name>
-          <default/>
+          <default></default>
           <type/>
         </argument>
       </method>
     </class>
-    <parse_markers>
-      <error line="127" code="50010">No DocBlock was found for method getTableDefinition()</error>
-    </parse_markers>
   </file>
-  <file path="LudoDBPDOOracle.php" hash="c57925a66b48e52868da3a174408ac8a" package="LudoDB">
+  <file path="LudoDBPDOOracle.php" hash="7421ae19a8b30f7f20445720857563af" package="LudoDB">
     <docblock line="2">
       <description>User: Alf Magne Kalleland
 Date: 24.04.13
@@ -4432,222 +4447,262 @@ Time: 00:01</description>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="37" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="41" package="LudoDB">
         <name>getPort</name>
         <full_name>getPort</full_name>
+        <docblock line="37">
+          <description>Return port of Oracle conection.</description>
+          <long-description></long-description>
+          <tag line="37" name="return" description="" type="String">
+            <type by_reference="false">String</type>
+          </tag>
+        </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="41" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="49" package="LudoDB">
         <name>setPort</name>
         <full_name>setPort</full_name>
-        <argument line="41">
+        <docblock line="45">
+          <description>Set port for Oracle connection.</description>
+          <long-description></long-description>
+          <tag line="45" name="param" description="" type="int" variable="$port">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="49">
           <name>$port</name>
           <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="45" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="57" package="LudoDB">
         <name>getSID</name>
         <full_name>getSID</full_name>
+        <docblock line="53">
+          <description>Return SID for Oracle connection</description>
+          <long-description></long-description>
+          <tag line="53" name="return" description="" type="String">
+            <type by_reference="false">String</type>
+          </tag>
+        </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="49" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="65" package="LudoDB">
         <name>setSID</name>
         <full_name>setSID</full_name>
-        <argument line="49">
+        <docblock line="61">
+          <description>Set SID for oracle connection</description>
+          <long-description></long-description>
+          <tag line="61" name="param" description="" type="String" variable="$sid">
+            <type by_reference="false">String</type>
+          </tag>
+        </docblock>
+        <argument line="65">
           <name>$sid</name>
           <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="52" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="73" package="LudoDB">
         <name>getInstanceName</name>
         <full_name>getInstanceName</full_name>
+        <docblock line="69">
+          <description>Return instance name for Oracle connectoin</description>
+          <long-description></long-description>
+          <tag line="69" name="return" description="" type="String">
+            <type by_reference="false">String</type>
+          </tag>
+        </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="56" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="81" package="LudoDB">
         <name>setInstanceName</name>
         <full_name>setInstanceName</full_name>
-        <argument line="56">
+        <docblock line="77">
+          <description>Set instance name for Oracle connection</description>
+          <long-description></long-description>
+          <tag line="77" name="param" description="" type="\" variable="$instance"/>
+        </docblock>
+        <argument line="81">
           <name>$instance</name>
           <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="65" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="90" package="LudoDB">
         <name>escapeString</name>
         <full_name>escapeString</full_name>
-        <docblock line="60">
+        <docblock line="85">
           <description>Escape string - nothing to do here since we're using prepared statements.</description>
           <long-description></long-description>
-          <tag line="60" name="param" description="" type="\" variable="$string"/>
-          <tag line="60" name="return" description="" type="mixed">
+          <tag line="85" name="param" description="" type="\" variable="$string"/>
+          <tag line="85" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
-        <argument line="65">
+        <argument line="90">
           <name>$string</name>
           <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="77" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="102" package="LudoDB">
         <name>query</name>
         <full_name>query</full_name>
-        <docblock line="70">
+        <docblock line="95">
           <description>Execute query and return resource.</description>
           <long-description></long-description>
-          <tag line="70" name="param" description="" type="\" variable="$sql"/>
-          <tag line="70" name="param" description="" type="array" variable="$params">
+          <tag line="95" name="param" description="" type="\" variable="$sql"/>
+          <tag line="95" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="70" name="return" description="" type="bool|\mysqli_result|resource|\PDOStatement">
+          <tag line="95" name="return" description="" type="bool|\mysqli_result|resource|\PDOStatement">
             <type by_reference="false">bool</type>
             <type by_reference="false">\mysqli_result</type>
             <type by_reference="false">resource</type>
             <type by_reference="false">\PDOStatement</type>
           </tag>
-          <tag line="70" name="throws" description="" type="\Exception">
+          <tag line="95" name="throws" description="" type="\Exception">
             <type by_reference="false">\Exception</type>
           </tag>
         </docblock>
-        <argument line="77">
+        <argument line="102">
           <name>$sql</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="77">
+        <argument line="102">
           <name>$params</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="97" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="122" package="LudoDB">
         <name>one</name>
         <full_name>one</full_name>
-        <docblock line="91">
+        <docblock line="116">
           <description>Get one row.</description>
           <long-description></long-description>
-          <tag line="91" name="param" description="" type="\" variable="$sql"/>
-          <tag line="91" name="param" description="" type="array" variable="$params">
+          <tag line="116" name="param" description="" type="\" variable="$sql"/>
+          <tag line="116" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="91" name="return" description="" type="array|null">
+          <tag line="116" name="return" description="" type="array|null">
             <type by_reference="false">array</type>
             <type by_reference="false">null</type>
           </tag>
         </docblock>
-        <argument line="97">
+        <argument line="122">
           <name>$sql</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="97">
+        <argument line="122">
           <name>$params</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="110" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="135" package="LudoDB">
         <name>countRows</name>
         <full_name>countRows</full_name>
-        <docblock line="104">
+        <docblock line="129">
           <description>Return number of rows.</description>
           <long-description></long-description>
-          <tag line="104" name="param" description="" type="\" variable="$sql"/>
-          <tag line="104" name="param" description="" type="array" variable="$params">
+          <tag line="129" name="param" description="" type="\" variable="$sql"/>
+          <tag line="129" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="104" name="return" description="" type="int">
+          <tag line="129" name="return" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
         </docblock>
-        <argument line="110">
+        <argument line="135">
           <name>$sql</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="110">
+        <argument line="135">
           <name>$params</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="121" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="145" package="LudoDB">
         <name>getInsertId</name>
         <full_name>getInsertId</full_name>
-        <docblock line="116">
+        <docblock line="141">
           <description>Get last insert id</description>
           <long-description></long-description>
-          <tag line="116" name="method" description="getInsertId" type="\" method_name=""/>
-          <tag line="116" name="return" description="" type="int">
+          <tag line="141" name="return" description="" type="int">
             <type by_reference="false">int</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="131" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="155" package="LudoDB">
         <name>nextRow</name>
         <full_name>nextRow</full_name>
-        <docblock line="126">
+        <docblock line="150">
           <description>Go to next row</description>
           <long-description></long-description>
-          <tag line="126" name="param" description="" type="\mysqli_result|resource|\PDOStatement" variable="$result">
+          <tag line="150" name="param" description="" type="\mysqli_result|resource|\PDOStatement" variable="$result">
             <type by_reference="false">\mysqli_result</type>
             <type by_reference="false">resource</type>
             <type by_reference="false">\PDOStatement</type>
           </tag>
-          <tag line="126" name="return" description="" type="array">
+          <tag line="150" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="131">
+        <argument line="155">
           <name>$result</name>
           <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="142" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="166" package="LudoDB">
         <name>getValue</name>
         <full_name>getValue</full_name>
-        <docblock line="136">
+        <docblock line="160">
           <description>Return value of first column in a query</description>
           <long-description></long-description>
-          <tag line="136" name="param" description="" type="\" variable="$sql"/>
-          <tag line="136" name="param" description="" type="array" variable="$params">
+          <tag line="160" name="param" description="" type="\" variable="$sql"/>
+          <tag line="160" name="param" description="" type="array" variable="$params">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="136" name="return" description="" type="null|array">
+          <tag line="160" name="return" description="" type="null|array">
             <type by_reference="false">null</type>
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="142">
+        <argument line="166">
           <name>$sql</name>
           <default></default>
           <type/>
         </argument>
-        <argument line="142">
+        <argument line="166">
           <name>$params</name>
           <default>array()</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="149" package="LudoDB">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="178" package="LudoDB">
         <name>getTableDefinition</name>
         <full_name>getTableDefinition</full_name>
-        <argument line="149">
+        <docblock line="173">
+          <description>Return table definition, column names and column types for a table.</description>
+          <long-description></long-description>
+          <tag line="173" name="param" description="" type="String" variable="$tableName">
+            <type by_reference="false">String</type>
+          </tag>
+          <tag line="173" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="178">
           <name>$tableName</name>
           <default></default>
           <type/>
         </argument>
       </method>
     </class>
-    <parse_markers>
-      <error line="37" code="50010">No DocBlock was found for method getPort()</error>
-      <error line="41" code="50010">No DocBlock was found for method setPort()</error>
-      <error line="45" code="50010">No DocBlock was found for method getSID()</error>
-      <error line="49" code="50010">No DocBlock was found for method setSID()</error>
-      <error line="52" code="50010">No DocBlock was found for method getInstanceName()</error>
-      <error line="56" code="50010">No DocBlock was found for method setInstanceName()</error>
-      <error line="149" code="50010">No DocBlock was found for method getTableDefinition()</error>
-    </parse_markers>
   </file>
   <file path="LudoDBProfiling.php" hash="cedc61b30ab2516bc7c569976126889e" package="LudoDB">
     <docblock line="2">

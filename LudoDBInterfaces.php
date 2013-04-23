@@ -79,6 +79,7 @@ interface LudoDBAdapter
     public function escapeString($string);
 
     /**
+     * Return table definition, column names and column types for a table.
      * @param String $tableName
      * @return array
      */
