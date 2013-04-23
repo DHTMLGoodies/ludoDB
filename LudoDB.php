@@ -326,4 +326,10 @@ class LudoDB
         }
     }
 
+
+
+    protected function getSqlForTableDef($tableName){
+        return "SHOW COLUMNS FROM ".$tableName;
+    }
+
 }

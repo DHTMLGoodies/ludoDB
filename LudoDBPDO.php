@@ -129,6 +129,11 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
      * @return array
      */
     public function getTableDefinition($tableName){
-        return array();
+        $res = $this->query($this->getSqlForTableDef($tableName));
+        $ret = array();
+        while($row = $this->nextRow($res)){
+            $ret[$row['Field']] = $row['Type'];
+        }
+        return $ret;
     }
 }

@@ -21,6 +21,13 @@ class LudoDBUtilityMock extends LudoDBUtility{
 class LudoDBUtilityTest extends TestBase
 {
 
+    public function setUp(){
+        parent::setUp();
+
+        $p = new PersonForUtility();
+        if($p->exists())$p->drop()->yesImSure();
+        $p->createTable();
+    }
     /**
      * @test
      */
@@ -69,8 +76,19 @@ class LudoDBUtilityTest extends TestBase
         $this->assertEquals($expected, $ludoDBTables);
     }
 
+    /**
+     * @test
+     */
     public function shouldFindUpdatedColumns(){
+        // given
+        $obj = new PersonForUtility();
+        $tableName = $obj->configParser()->getTableName();
 
+        $tableDef = LudoDB::getInstance()->getTableDefinition($tableName);
+
+        $this->assertArrayHasKey("id", $tableDef, json_encode($tableDef));
+        $this->assertArrayHasKey("firstname", $tableDef);
+        $this->assertArrayHasKey("zip", $tableDef);
 
     }
 }
