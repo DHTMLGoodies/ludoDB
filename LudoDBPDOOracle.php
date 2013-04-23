@@ -1,17 +1,17 @@
 <?php
 /**
- * User: Alf Magne
- * Date: 31.01.13
+ * User: Alf Magne Kalleland
+ * Date: 24.04.13
+ * Time: 00:01
  * @package LudoDB
- * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
+ */
 
- */
 /**
- * PDO Mysql Adapter. The default and preferred DB adapter to use.
+ * LudoDB PDO adapter for Oracle database connections.
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */
-class LudoDBPDO extends LudoDB implements LudoDBAdapter
+class LudoDBPDOOracle extends LudoDB implements LudoDBAdapter
 {
     /**
      * Database connection resource reference
@@ -27,12 +27,59 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
     public function connect()
     {
         try{
-            $connectionString = "mysql:host=".self::getHost();
-            if(self::getDb())$connectionString.=";dbname=".self::getDb();
+            $connectionString = "dbname=//". self::getHost().":".self::getPort()."/".self::getSID()."/".self::getInstanceName();
             self::$conn = new PDO($connectionString, self::getUser(), self::getPassword());
         }catch(PDOException $e){
             throw new LudoDBConnectionException("Could not connect to database because ". $e->getMessage(), 400);
         }
+    }
+
+    /**
+     * Return port of Oracle conection.
+     * @return String
+     */
+    public function getPort(){
+        return LudoDBRegistry::get('DB_PORT');
+    }
+
+    /**
+     * Set port for Oracle connection.
+     * @param int $port
+     */
+    public function setPort($port){
+        LudoDBRegistry::set('DB_PORT', $port);
+    }
+
+    /**
+     * Return SID for Oracle connection
+     * @return String
+     */
+    public function getSID(){
+        return LudoDBRegistry::get('DB_SID');
+    }
+
+    /**
+     * Set SID for oracle connection
+     * @param String
+     */
+    public function setSID($sid){
+        LudoDBRegistry::set('DB_SID', $sid);
+    }
+
+    /**
+     * Return instance name for Oracle connectoin
+     * @return String
+     */
+    public function getInstanceName(){
+        return LudoDBRegistry::get('DB_INSTANCE');
+    }
+
+    /**
+     * Set instance name for Oracle connection
+     * @param $instance
+     */
+    public function setInstanceName($instance){
+        LudoDBRegistry::set('DB_INSTANCE', $instance);
     }
 
     /**
@@ -74,7 +121,7 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
      */
     public function one($sql, $params = array())
     {
-        $res = $this->query($sql . " limit 1", $params);
+        $res = $this->query($sql, $params);
         $row = $res->fetch(PDO::FETCH_ASSOC);
         return $row ? $row : null;
     }
@@ -119,7 +166,7 @@ class LudoDBPDO extends LudoDB implements LudoDBAdapter
      */
     public function getValue($sql, $params = array())
     {
-        $result = $this->query($sql . " limit 1", $params);
+        $result = $this->query($sql, $params);
         $row = $result->fetch(PDO::FETCH_NUM);
         return (isset($row)) ? $row[0] : null;
     }

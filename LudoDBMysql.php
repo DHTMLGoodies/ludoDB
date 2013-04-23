@@ -116,4 +116,8 @@ class LudoDBMysql extends LudoDB implements LudoDBAdapter
         $row = mysql_fetch_row($result);
         return (isset($row)) ? $row[0] : null;
     }
+
+    public function getTableDefinition($tableName){
+        return array();
+    }
 }

@@ -68,4 +68,9 @@ class LudoDBUtilityTest extends TestBase
         $this->assertEquals(5, count($ludoDBTables));
         $this->assertEquals($expected, $ludoDBTables);
     }
+
+    public function shouldFindUpdatedColumns(){
+
+
+    }
 }

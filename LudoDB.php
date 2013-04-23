@@ -13,6 +13,12 @@
  */
 class LudoDB
 {
+
+    const ADAPTER_PDO = 'PDO';
+    const ADAPTER_MYSQLI = 'MYSQLI';
+    const ADAPTER_MYSQL = 'MYSQL';
+    const ADAPTER_PDO_ORACLE = 'PDO_ORACLE';
+
     /**
      * True when logging SQL's to file
      * @var bool
@@ -65,7 +71,7 @@ class LudoDB
      * Set connection type,  PDO|MySqlI|MySql
      * @param $type
      */
-    public static function setConnectionType($type = 'PDO')
+    public static function setConnectionType($type = self::ADAPTER_PDO)
     {
         if($type != self::$connectionType){
             self::$conn = null;
@@ -87,7 +93,7 @@ class LudoDB
      * @return bool
      */
     public static function hasPDO(){
-        return self::$connectionType === 'PDO';
+        return self::$connectionType === self::ADAPTER_PDO;
     }
 
     /**
@@ -143,11 +149,14 @@ class LudoDB
     {
         if (!isset(self::$instance)) {
             switch(self::$connectionType){
-                case 'PDO':
+                case self::ADAPTER_PDO:
                     self::$instance = new LudoDBPDO();
                     break;
-                case 'MYSQLI':
+                case self::ADAPTER_MYSQLI:
                     self::$instance = new LudoDBMySqlI();
+                    break;
+                case self::ADAPTER_PDO_ORACLE:
+                    self::$instance = new LudoDBPDOOracle();
                     break;
                 default:
                     self::$instance = new LudoDBMySql();

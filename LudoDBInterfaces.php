@@ -77,6 +77,12 @@ interface LudoDBAdapter
      * @return mixed
      */
     public function escapeString($string);
+
+    /**
+     * @param String $tableName
+     * @return array
+     */
+    public function getTableDefinition($tableName);
 }
 
 /**

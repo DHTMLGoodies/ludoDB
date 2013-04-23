@@ -130,4 +130,8 @@ class LudoDBMySqlI extends LudoDB implements LudoDBAdapter
         return is_string($string) ? self::$conn->escape_string(stripslashes($string)) : $string;
     }
 
+    public function getTableDefinition($tableName){
+        return array();
+    }
+
 }

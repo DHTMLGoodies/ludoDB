@@ -202,4 +202,8 @@ class LudoDBUtility
     public function getAllAvailableServices(){
 
     }
+
+    public function getTableDefinition($className){
+        $class = $this->getClassInstance($className);
+    }
 }
