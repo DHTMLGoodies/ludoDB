@@ -71,7 +71,9 @@ class LudoDBSql
      */
     public function getSql()
     {
-        if (isset($this->config['sql'])) {
+        if(method_exists($this->obj, "getSql")){
+            return vsprintf($this->obj->getSql(), $this->arguments).$this->limit;
+        }else if (isset($this->config['sql'])) {
             return vsprintf($this->config['sql'], $this->arguments).$this->limit;
         } else {
             return $this->getCompiledSql().$this->limit;

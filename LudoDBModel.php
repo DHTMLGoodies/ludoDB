@@ -1,6 +1,6 @@
 <?php
 /**
- * Representation of a ludoDB table
+ * Representation of a ludoDB table.
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */

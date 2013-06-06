@@ -43,6 +43,23 @@
  *    );
  * }
  * </code>
+ *
+ * SQL can also be defined by creating a getSql method in the model
+ *
+ * Example:
+ *
+ * <code>
+ * class Cities extends LudoDBCollection
+ * {
+ *
+ *      public function getSql(){
+ *          return is_numeric($this->arguments[0]) ?
+ *              "select * from city where countryId=?" :
+ *              "select c.* from city c,country o where c.countryId = o.countryId and o.country = ?";
+ *      }
+ *
+ * }
+ * </code>
  * @package LudoDB
  * @author Alf Magne Kalleland <post@dhtmlgoodies.com>
  */

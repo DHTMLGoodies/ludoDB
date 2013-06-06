@@ -268,6 +268,34 @@ class SQLTest extends TestBase{
 
     }
 
+    /**
+     * @test
+     */
+    public function shouldBeAbleToDefineMethodForSql(){
+        // given
+        $obj = new ModelWithSqlMethod(1);
+
+        // when
+        $sql = $obj->sqlHandler()->getSql();
+
+        // then
+        $this->assertEquals("select * from person where id=?", $sql);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToDifferentSqlsBasedOnArguments(){
+        // given
+        $obj = new ModelWithSqlMethod('John');
+
+        // when
+        $sql = $obj->sqlHandler()->getSql();
+
+        // then
+        $this->assertEquals("select * from person where firstname=?", $sql);
+    }
+
 
     private function getSqlObject($config, $constructBy = null)
     {
