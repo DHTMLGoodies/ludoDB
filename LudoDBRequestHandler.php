@@ -119,7 +119,7 @@ class LudoDBRequestHandler
             }
 
             if (!$this->resource->validateServiceData($this->serviceName, $request['data'])) {
-                throw new LudoDBInvalidArgumentsException('Invalid service arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
+                throw new LudoDBInvalidArgumentsException('Invalid service data/arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 
             if ($this->serviceName === 'delete' || $this->serviceName === 'read') {

@@ -89,6 +89,5 @@ class LudoDBUtilityTest extends TestBase
         $this->assertArrayHasKey("id", $tableDef, json_encode($tableDef));
         $this->assertArrayHasKey("firstname", $tableDef);
         $this->assertArrayHasKey("zip", $tableDef);
-
     }
 }
