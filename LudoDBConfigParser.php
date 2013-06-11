@@ -459,6 +459,7 @@ class LudoDBConfigParser
      */
     public function getPublicColumnName($name)
     {
+        if(!isset($this->config['columns'][$name]))return $name;
         $col = $this->config['columns'][$name];
         return is_array($col) && isset($col['alias']) ? $col['alias'] : $name;
     }
