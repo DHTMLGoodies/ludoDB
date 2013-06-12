@@ -13,7 +13,7 @@ class LudoJSTests extends TestBase
         parent::setUp();
 
         $util = new LudoDBUtility();
-        $util->dropAndCreate(array("LudoJSPerson","LudoJSCountry"));
+        $util->dropAndCreate(array("TLudoJSPerson","TLudoJSCountry"));
 
     }
     /**
@@ -21,7 +21,7 @@ class LudoJSTests extends TestBase
      */
     public function shouldBeAbleToGetLudoJSConfigFromObject(){
         // given
-        $person = new LudoJSPerson();
+        $person = new TLudoJSPerson();
 
         // when
         $ludoJSConfig = $person->configParser()->getLudoJSConfig();
@@ -38,7 +38,7 @@ class LudoJSTests extends TestBase
      */
     public function shouldBeAbleToGetLudoJSConfigOfStaticColumns(){
         // given
-        $person = new LudoJSPerson();
+        $person = new TLudoJSPerson();
 
         // when
         $ludoJSConfig = $person->configParser()->getLudoJSConfig();
@@ -54,7 +54,7 @@ class LudoJSTests extends TestBase
         // given
         $handler = new LudoDBRequestHandler();
         // when
-        $form = $handler->handle("LudoJS/LudoJSPerson/form");
+        $form = $handler->handle("LudoJS/TLudoJSPerson/form");
         $form = json_decode($form, true);
 
         // then
@@ -73,7 +73,7 @@ class LudoJSTests extends TestBase
     public function shouldGetChildrenInRightOrder(){
         // given
         $handler = new LudoDBRequestHandler();
-        $form = $handler->handle("LudoJS/LudoJSPerson/1/form");
+        $form = $handler->handle("LudoJS/TLudoJSPerson/1/form");
         $form = json_decode($form, true);
 
         //when
@@ -92,7 +92,7 @@ class LudoJSTests extends TestBase
     public function shouldPopulateDataSourceWhenSetInConfig(){
         // given
         $handler = new LudoDBRequestHandler();
-        $form = $handler->handle("LudoJS/LudoJSPerson/1/form");
+        $form = $handler->handle("LudoJS/TLudoJSPerson/1/form");
         $form = json_decode($form, true);
         $children = $form['response']['children'];
 
@@ -110,7 +110,7 @@ class LudoJSTests extends TestBase
         // given
         $handler = new LudoDBRequestHandler();
         // when
-        $form = $handler->handle("LudoJS/LudoJSPerson/1/form");
+        $form = $handler->handle("LudoJS/TLudoJSPerson/1/form");
         $form = json_decode($form, true);
 
         $children = $form['response']['children'];
@@ -126,7 +126,7 @@ class LudoJSTests extends TestBase
         // given
         $handler = new LudoDBRequestHandler();
         // when
-        $form = $handler->handle("LudoJS/LudoJSPerson/1/form");
+        $form = $handler->handle("LudoJS/TLudoJSPerson/1/form");
         $form = json_decode($form, true);
 
         $children = $form['response']['children'];
@@ -142,7 +142,7 @@ class LudoJSTests extends TestBase
         // given
         $handler = new LudoDBRequestHandler();
         // when
-        $form = $handler->handle("LudoJS/LudoJSPerson/1/form");
+        $form = $handler->handle("LudoJS/TLudoJSPerson/1/form");
         $form = json_decode($form, true);
 
         $formConfig = $form['response']['form'];

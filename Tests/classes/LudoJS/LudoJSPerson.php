@@ -5,7 +5,7 @@
  * Date: 13.04.13
  * Time: 16:37
  */
-class LudoJSPerson extends LudoDBModel implements LudoDBService
+class TLudoJSPerson extends LudoDBModel implements LudoDBService
 {
     protected $config = array(
         'table' => 'LudoJSPerson',

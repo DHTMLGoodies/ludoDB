@@ -5,7 +5,7 @@
  * Date: 13.04.13
  * Time: 19:03
  */
-class LudoJSCountry extends LudoDBModel
+class TLudoJSCountry extends LudoDBModel
 {
     protected $JSONConfig = true;
 }
