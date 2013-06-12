@@ -34,15 +34,14 @@ if(!$bookAuthor->exists())$bookAuthor->createTable();
 
 LudoDB::enableLogging();
 
-$request = array(
-    'request' => $_GET['request'],
-    'data' => array()
-);
+$request = $_GET['request'];
+$data = array();
+
 
 foreach($_POST as $key=>$value){
-    $request['data'][$key] = $value;
+    $data[$key] = $value;
 }
 
 $handler = new LudoDBRequestHandler();
-echo $handler->handle($request);
+echo $handler->handle($request, $data);
 

@@ -87,18 +87,11 @@ class LudoDBRequestHandler
      * LudoDBRegistry::set('DEVELOP_MODE', true);
      * LudoDB::enableLogging();
      *
-     * $request = array('request' => isset($_GET['request']) ? $_GET['request'] : $_POST['request']);
-     *
-     * if(isset($_POST['data'])){
-     *     $request['data'] = isset($_POST['data']) ? $_POST['data'] : null;
-     * }
-     *
-     * if(isset($_POST['arguments'])){
-     *     $request['arguments'] = $_POST['arguments'];
-     * }
+     * $request = isset($_GET['request']) ? $_GET['request'] : $_POST['request'];
+     * $data = isset($_POST['data']) ? $_POST['data'] : null;
      *
      * $handler = new LudoDBRequestHandler();
-     * echo $handler->handle($request);
+     * echo $handler->handle($request, $data);
      * </code>
      *
      * @param String $request
