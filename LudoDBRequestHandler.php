@@ -69,6 +69,8 @@ class LudoDBRequestHandler
 
     private $resourceName;
 
+    private $request;
+
     /**
      * Handle request
      *
@@ -78,8 +80,6 @@ class LudoDBRequestHandler
      *
      * <code>
      * require_once(dirname(__FILE__)."/autoload.php");
-     * require_once("php/jsonwrapper/jsonwrapper.php");
-     * date_default_timezone_set("Europe/Berlin");
      * if(file_exists("connection.php")){
      *     require("connection.php");
      * }
@@ -101,23 +101,25 @@ class LudoDBRequestHandler
      * echo $handler->handle($request);
      * </code>
      *
-     * @param $request
+     * @param String $request
+     * @param Array|Null $data
      * @return string
      * @throws LudoDBObjectNotFoundException
      * @throws LudoDBServiceNotImplementedException
      * @throws LudoDBInvalidServiceException
      * @throws LudoDBInvalidArgumentsException
      */
-    public function handle($request)
+    public function handle($request, $data = null)
     {
-        $request = $this->getParsed($request);
+        $this->request = $request;
+
         try {
 
-            $this->arguments = $this->getArguments($request);
+            $this->arguments = $this->getArguments();
             $this->resourceName = $this->getClassName($request);
-            $this->resource = $this->getResource($request, $this->arguments);
-            $this->validServices = $this->getValidServices($request);
-            $this->serviceName = $this->getServiceName($request);
+            $this->resource = $this->getResource($this->arguments);
+            $this->validServices = $this->getValidServices();
+            $this->serviceName = $this->getServiceName();
 
             if (!in_array($this->serviceName, $this->validServices)) {
                 throw new LudoDBInvalidServiceException('Invalid service ' . $this->serviceName . ', resource: ' . $this->getClassName($request));
@@ -127,7 +129,7 @@ class LudoDBRequestHandler
                 throw new LudoDBInvalidArgumentsException('Invalid constructor arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 
-            if (!$this->resource->validateServiceData($this->serviceName, $request['data'])) {
+            if (!$this->resource->validateServiceData($this->serviceName, $data)) {
                 throw new LudoDBInvalidArgumentsException('Invalid service data/arguments for resource:' . $this->getClassName($request) . ', service:' . $this->serviceName . ", arguments: " . implode(",", $this->arguments));
             }
 
@@ -138,7 +140,7 @@ class LudoDBRequestHandler
             }
 
             if(isset($this->authenticator)){
-                $success = $this->authenticator->authenticate($this->resourceName, $this->serviceName, $this->arguments, $request['data']);
+                $success = $this->authenticator->authenticate($this->resourceName, $this->serviceName, $this->arguments, $data);
                 if(!$success){
                     throw new LudoDBUnauthorizedException('Not authorized');
                 }
@@ -149,9 +151,9 @@ class LudoDBRequestHandler
             }
 
             if($this->resource->shouldCache($this->serviceName)){
-                return $this->toJSON($this->getCached($request['data']));
+                return $this->toJSON($this->getCached($data));
             }else{
-                return $this->toJSON($this->resource->{$this->serviceName}($request['data']));
+                return $this->toJSON($this->resource->{$this->serviceName}($data));
             }
 
 
@@ -179,11 +181,11 @@ class LudoDBRequestHandler
      * @return array
      */
 
-    private function getParsed($request)
+    private function getParsed($request, $data = null)
     {
         if (is_string($request)) $request = array('request' => $request);
         $request['request'] = stripslashes(rtrim($request['request'], '/'));
-        if (!isset($request['data'])) $request['data'] = null;
+        $request['data'] = $data;
         return $request;
     }
 
@@ -218,12 +220,9 @@ class LudoDBRequestHandler
      * @param array $request
      * @return array
      */
-    protected function getArguments(array $request)
+    protected function getArguments()
     {
-        if (isset($request['arguments'])) {
-            return is_array($request['arguments']) ? $request['arguments'] : array($request['arguments']);
-        }
-        $ret = explode("/", $request['request']);
+        $ret = explode("/", $this->request);
         array_shift($ret);
         array_pop($ret);
         return $ret;
@@ -236,7 +235,7 @@ class LudoDBRequestHandler
      * @return null|object
      * @throws LudoDBClassNotFoundException
      */
-    protected function getResource(array $request, $args = array())
+    protected function getResource($args = array())
     {
         if (isset($this->resourceName)) {
             $cl = $this->getReflectionClass($this->resourceName);
@@ -246,7 +245,7 @@ class LudoDBRequestHandler
                 return $cl->newInstanceArgs($args);
             }
         }
-        throw new LudoDBClassNotFoundException('Invalid request for: ' . $request['request']);
+        throw new LudoDBClassNotFoundException('Invalid request for: ' . $this->request);
     }
 
     /**
@@ -254,7 +253,7 @@ class LudoDBRequestHandler
      * @param array $request
      * @return array|mixed
      */
-    private function getValidServices(array $request)
+    private function getValidServices()
     {
         if (isset($this->resourceName)) {
             $servicesMethod = $this->getReflectionClass($this->resourceName)->getMethod('getValidServices');
@@ -285,7 +284,7 @@ class LudoDBRequestHandler
      */
     private function getClassName($request)
     {
-        $tokens = explode("/", $request['request']);
+        $tokens = explode("/", $request);
         return class_exists($tokens[0]) ? $tokens[0] : null;
     }
 
@@ -294,9 +293,9 @@ class LudoDBRequestHandler
      * @param $request
      * @return mixed
      */
-    protected function getServiceName($request)
+    protected function getServiceName()
     {
-        return array_pop(explode("/", $request['request']));
+        return array_pop(explode("/", $this->request));
     }
 
     /**

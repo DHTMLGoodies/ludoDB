@@ -12,16 +12,16 @@ class RequestHandlerMock extends LudoDBRequestHandler
     public $model;
     public $action;
 
-    public function getResource(array $request, $args = array()){
+    public function getResource($request, $args = array()){
 
         return parent::getResource($request, $args);
     }
 
-    public function getServiceName($request){
-        return parent::getServiceName($request);
+    public function getServiceName(){
+        return parent::getServiceName();
     }
 
-    public function getArguments($request){
-        return parent::getArguments($request);
+    public function getArguments(){
+        return parent::getArguments();
     }
 }

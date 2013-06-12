@@ -11,30 +11,6 @@ require_once(__DIR__ . "/../autoload.php");
 class RequestHandlerTest extends TestBase
 {
 
-    private $getRequest = array(
-        'request' => 'Person/1/read',
-        'data' => array(1)
-    );
-
-    private $createRequest = array(
-        'request' => 'Person/create',
-        'data' => array(
-            'firstname' => 'Alf Magne',
-            'lastname' => 'Kalleland'
-        )
-    );
-
-    private $updateRequest = array(
-        'request' => 'Person/2/save',
-        'data' => array(
-            'firstname' => 'Andrea'
-        )
-    );
-
-    private $deleteRequest = array(
-        'request' => 'Person/1/delete'
-    );
-
     public function setUp()
     {
         parent::setUp();
@@ -74,7 +50,8 @@ class RequestHandlerTest extends TestBase
 
 
         // when
-        $crud = $handler->getServiceName($this->getRequest);
+        $handler->handle("Person/1/read");
+        $crud = $handler->getServiceName();
 
         // then
         $this->assertEquals('read', $crud);
@@ -88,46 +65,46 @@ class RequestHandlerTest extends TestBase
         // given
         $handler = new RequestHandlerMock();
 
-        $request = array('request' => 'Person/1/read');
+        $request = 'Person/1/read';
+
         $handler->handle($request);
 
         // when
 
-        $args = $handler->getArguments($request);
+        $args = $handler->getArguments();
 
         // then
         $this->assertEquals(array(1), $args);
 
         // given
-        $request = array('request' => 'Person/1/2/read');
+        $handler->handle('Person/1/2/read');
 
         // when
+        $args = $handler->getArguments();
 
+        // then
+        $this->assertEquals(array(1, 2), $args);
+
+        // given
+        $handler->handle('Person/1/2/read');
+
+        // when
+        $args = $handler->getArguments();
+
+        // then
+        $this->assertEquals(array(1, 2), $args);
+
+        // given
+        $handler->handle('Person/1/2/save');
+
+        // when
         $args = $handler->getArguments($request);
 
         // then
         $this->assertEquals(array(1, 2), $args);
 
         // given
-        $request = array('request' => 'Person/1/2/read');
-
-        // when
-        $args = $handler->getArguments($request);
-
-        // then
-        $this->assertEquals(array(1, 2), $args);
-
-        // given
-        $request = array('request' => 'Person/1/2/save');
-
-        // when
-        $args = $handler->getArguments($request);
-
-        // then
-        $this->assertEquals(array(1, 2), $args);
-
-        // given
-        $request = array('request' => 'Person/1/2/delete');
+        $handler->handle('Person/1/2/delete');
 
         // when
         $args = $handler->getArguments($request);
@@ -142,7 +119,7 @@ class RequestHandlerTest extends TestBase
     public function shouldHandleSimpleGetRequests()
     {
         // given
-        $request = $this->getRequest;
+        $request = 'Person/1/read';
 
         // when
         $returned = new RequestHandlerMock();
@@ -157,16 +134,13 @@ class RequestHandlerTest extends TestBase
      */
     public function shouldHandleUpdateRequests()
     {
-        // given
-        $request = array(
-            'request' => 'Person/2/save',
-            'data' => array(
-                'firstname' => 'Andrea'
-            )
-        );
         // when
         $handler = new RequestHandlerMock();
-        $handler->handle($request);
+        $response = $handler->handle('Person/2/save', array("firstname" => "Andrea"));
+
+        $response = json_decode($response, true);
+        $this->assertTrue($response['success'], json_encode($response));
+
         $person = new Person(2);
 
         // then
@@ -178,16 +152,14 @@ class RequestHandlerTest extends TestBase
      */
     public function shouldBeAbleToSpecifyOnSuccessMessages(){
         // given
-        $request = array(
-            "request" => "Person/1/read"
-        );
+        $request ="Person/1/read";
 
         // when
         $handler = new RequestHandlerMock();
         $data = json_decode($handler->handle($request), true);
 
         // then
-        $this->assertEquals("Succesfully read", $data['message']);
+        $this->assertEquals("Succesfully read", $data['message'], json_encode($data));
 
     }
 
@@ -196,9 +168,7 @@ class RequestHandlerTest extends TestBase
      */
     public function shouldReturnFalseWhenNotAuthenticated(){
         // given
-        $request = array(
-            "request" => "Person/1/read"
-        );
+        $request = "Person/1/read";
 
         $handler = new RequestHandlerMock();
         $handler->setAuthenticator(new AccessDeniedAuthenticator());
@@ -213,9 +183,7 @@ class RequestHandlerTest extends TestBase
      */
     public function shouldReturnQueryWhenAuthenticated(){
         // given
-        $request = array(
-            "request" => "Person/1/read"
-        );
+        $request = "Person/1/read";
 
         $handler = new RequestHandlerMock();
         $handler->setAuthenticator(new AccessGrantedAuthenticator());
