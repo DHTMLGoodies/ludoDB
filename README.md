@@ -242,9 +242,7 @@ the connection point between the GUI of your web application and the server fram
 Example:
 ```PHP
 <?php
-$request = array(
-	'request' => 'Person/2/read'
-);
+$request = 'Person/2/read';
 $handler = new LudoDBRequestHandler();
 echo $handler->handle($request);
 ```
@@ -284,16 +282,12 @@ For save, you can use code like this:
 
 ```PHP
 <?php
-/** Assuming that $_POST['request'] is
-	array(
-		'request' => 'Person/1/save',
-		'data' => array(
-			'firstname' => 'Mike'
-		)
-	);
+/** Assuming that $_POST contains:
+	$_POST['request'] => 'Person/1/save'
+	$_POST['data'] => array('firstname' => 'Mike')
 */
 $handler = new LudoDBRequestHandler();
-echo $handler->handle($_POST['request']);
+echo $handler->handle($_POST['request'], $_POST['data']);
 ```
 
 Which will set first name of person with ID 1 to Mike.
@@ -325,12 +319,8 @@ LudoDB::enableLogging();
 
 $request = $_GET['request'];
 
-if(isset($_POST['data'])){
-	$request['data'] = $_POST['data'];
-}
-
 $handler = new LudoDBRequestHandler();
-echo $handler->handle($request);
+echo $handler->handle($_GET['request'], isset($_POST['data']) ? $_POST['data'] : null);
 ```
 
 For this to work, the mod_rewrite module must be enabled in httpd.conf. You will also need an .htaccess file in the

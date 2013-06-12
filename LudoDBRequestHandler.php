@@ -108,6 +108,10 @@ class LudoDBRequestHandler
 
         try {
 
+            if(!isset($this->request)){
+                throw new LudoDBInvalidArgumentsException("No request");
+            }
+
             $this->arguments = $this->getArguments();
             $this->resourceName = $this->getClassName($request);
             $this->resource = $this->getResource($this->arguments);
@@ -166,20 +170,6 @@ class LudoDBRequestHandler
      */
     public function setAuthenticator(LudoDBAuthenticator $authenticator){
         $this->authenticator = $authenticator;
-    }
-
-    /**
-     * Returned request sent to handler in valid internal format.
-     * @param $request
-     * @return array
-     */
-
-    private function getParsed($request, $data = null)
-    {
-        if (is_string($request)) $request = array('request' => $request);
-        $request['request'] = stripslashes(rtrim($request['request'], '/'));
-        $request['data'] = $data;
-        return $request;
     }
 
     /**
