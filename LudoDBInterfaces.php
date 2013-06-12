@@ -141,3 +141,8 @@ interface LudoDBService
 
 
 }
+
+interface LudoDBAuthenticator
+{
+    public function authenticate($service, $arguments, $data);
+}

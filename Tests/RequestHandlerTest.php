@@ -205,4 +205,22 @@ class RequestHandlerTest extends TestBase
         $this->assertEquals("Succesfully read", $data['message']);
 
     }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToImplementAuthenticationInterface(){
+        // given
+        $request = array(
+            "request" => "Person/1/read"
+        );
+
+        $handler = new RequestHandlerMock();
+        $handler->setAuthenticator(new AccessDeniedAuthenticator());
+        $data = json_decode($handler->handle($request), true);
+
+        // then
+        $this->assertFalse($data['success']);
+    }
+
 }

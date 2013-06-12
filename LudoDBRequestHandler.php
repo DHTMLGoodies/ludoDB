@@ -61,6 +61,12 @@ class LudoDBRequestHandler
      */
     private $responseKey = 'response';
 
+
+    /**
+     * @var LudoDBAuthenticator
+     */
+    private $authenticator;
+
     /**
      * Handle request
      *
@@ -128,6 +134,13 @@ class LudoDBRequestHandler
                 }
             }
 
+            if(isset($this->authenticator)){
+                $success = $this->authenticator->authenticate($this->serviceName, $this->arguments, $request['data']);
+                if(!$success){
+                    throw new LudoDBUnauthorizedException('Not authorized');
+                }
+            }
+
             if (!method_exists($this->resource, $this->serviceName)) {
                 throw new LudoDBServiceNotImplementedException("Service " . $this->serviceName . " not implemented");
             }
@@ -145,6 +158,16 @@ class LudoDBRequestHandler
             $this->success = false;
             return $this->toJSON(array());
         }
+    }
+
+    /**
+     * Set authenticator, a class implementing the LudoDBAuthenticator
+     * interface. When set, the authenticate method of this class will be
+     * called on request. If exception
+     * @param LudoDBAuthenticator $authenticator
+     */
+    public function setAuthenticator(LudoDBAuthenticator $authenticator){
+        $this->authenticator = $authenticator;
     }
 
     /**

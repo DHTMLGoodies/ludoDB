@@ -7,6 +7,7 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
+                'accessdeniedauthenticator' => '/Tests/classes/AccessDeniedAuthenticator.php',
                 'accessortest' => '/Tests/AccessorTest.php',
                 'achild' => '/Tests/classes/Dependencies/AChild.php',
                 'acity' => '/Tests/classes/Dependencies/ACity.php',
@@ -50,6 +51,7 @@ spl_autoload_register(
                 'ludodbadapter' => '/LudoDBInterfaces.php',
                 'ludodbadaptertest' => '/Tests/LudoDBAdapterTest.php',
                 'ludodballtests' => '/Tests/LudoDBAllTests.php',
+                'ludodbauthenticator' => '/LudoDBInterfaces.php',
                 'ludodbcache' => '/LudoDBCache.php',
                 'ludodbclassnotfoundexception' => '/LudoDBExceptions.php',
                 'ludodbcollection' => '/LudoDBCollection.php',
@@ -103,6 +105,7 @@ spl_autoload_register(
                 'person' => '/Tests/classes/Person.php',
                 'personforconfigparser' => '/Tests/classes/PersonForConfigParser.php',
                 'personforutility' => '/Tests/classes/PersonForUtility.php',
+                'personwithauthinterface' => '/Tests/classes/PersonWithAuthInterface.php',
                 'personwithvalidation' => '/Tests/classes/Validation/PersonWithValidation.php',
                 'phone' => '/Tests/classes/Phone.php',
                 'phonecollection' => '/Tests/classes/PhoneCollection.php',
