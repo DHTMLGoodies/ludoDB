@@ -7,7 +7,7 @@
  */
 class AccessDeniedAuthenticator implements LudoDBAuthenticator
 {
-    public function authenticate($service, $arguments, $data){
+    public function authenticate($resource, $service, $arguments, $data){
         return false;
     }
 }

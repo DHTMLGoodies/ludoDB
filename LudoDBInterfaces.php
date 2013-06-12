@@ -144,5 +144,5 @@ interface LudoDBService
 
 interface LudoDBAuthenticator
 {
-    public function authenticate($service, $arguments, $data);
+    public function authenticate($resource, $service, $arguments, $data);
 }

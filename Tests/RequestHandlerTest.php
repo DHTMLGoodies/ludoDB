@@ -139,21 +139,6 @@ class RequestHandlerTest extends TestBase
     /**
      * @test
      */
-    public function shouldFindLudoDBObject()
-    {
-        // given
-        $handler = new RequestHandlerMock();
-
-        // when
-        $model = $handler->getResource($this->getRequest);
-
-        // then
-        $this->assertInstanceOf('Person', $model);
-    }
-
-    /**
-     * @test
-     */
     public function shouldHandleSimpleGetRequests()
     {
         // given

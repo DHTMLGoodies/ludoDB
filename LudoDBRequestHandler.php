@@ -67,6 +67,8 @@ class LudoDBRequestHandler
      */
     private $authenticator;
 
+    private $resourceName;
+
     /**
      * Handle request
      *
@@ -112,6 +114,7 @@ class LudoDBRequestHandler
         try {
 
             $this->arguments = $this->getArguments($request);
+            $this->resourceName = $this->getClassName($request);
             $this->resource = $this->getResource($request, $this->arguments);
             $this->validServices = $this->getValidServices($request);
             $this->serviceName = $this->getServiceName($request);
@@ -135,7 +138,7 @@ class LudoDBRequestHandler
             }
 
             if(isset($this->authenticator)){
-                $success = $this->authenticator->authenticate($this->serviceName, $this->arguments, $request['data']);
+                $success = $this->authenticator->authenticate($this->resourceName, $this->serviceName, $this->arguments, $request['data']);
                 if(!$success){
                     throw new LudoDBUnauthorizedException('Not authorized');
                 }
@@ -235,9 +238,8 @@ class LudoDBRequestHandler
      */
     protected function getResource(array $request, $args = array())
     {
-        $className = $this->getClassName($request);
-        if (isset($className)) {
-            $cl = $this->getReflectionClass($className);
+        if (isset($this->resourceName)) {
+            $cl = $this->getReflectionClass($this->resourceName);
             if (empty($args)) {
                 return $cl->newInstance();
             } else {
@@ -254,9 +256,8 @@ class LudoDBRequestHandler
      */
     private function getValidServices(array $request)
     {
-        $className = $this->getClassName($request);
-        if (isset($className)) {
-            $servicesMethod = $this->getReflectionClass($className)->getMethod('getValidServices');
+        if (isset($this->resourceName)) {
+            $servicesMethod = $this->getReflectionClass($this->resourceName)->getMethod('getValidServices');
             return isset($servicesMethod) ? $servicesMethod->invoke($this->resource) : array();
         }
         return array();
