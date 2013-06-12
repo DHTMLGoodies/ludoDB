@@ -8,6 +8,7 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'accessdeniedauthenticator' => '/Tests/classes/AccessDeniedAuthenticator.php',
+                'accessgrantedauthenticator' => '/Tests/classes/AccessGrantedAuthenticator.php',
                 'accessortest' => '/Tests/AccessorTest.php',
                 'achild' => '/Tests/classes/Dependencies/AChild.php',
                 'acity' => '/Tests/classes/Dependencies/ACity.php',

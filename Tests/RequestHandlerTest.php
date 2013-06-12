@@ -194,7 +194,7 @@ class RequestHandlerTest extends TestBase
     /**
      * @test
      */
-    public function shouldBeAbleToImplementAuthenticationInterface(){
+    public function shouldReturnFalseWhenNotAuthenticated(){
         // given
         $request = array(
             "request" => "Person/1/read"
@@ -206,6 +206,23 @@ class RequestHandlerTest extends TestBase
 
         // then
         $this->assertFalse($data['success']);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnQueryWhenAuthenticated(){
+        // given
+        $request = array(
+            "request" => "Person/1/read"
+        );
+
+        $handler = new RequestHandlerMock();
+        $handler->setAuthenticator(new AccessGrantedAuthenticator());
+        $data = json_decode($handler->handle($request), true);
+
+        // then
+        $this->assertTrue($data['success']);
     }
 
 }
