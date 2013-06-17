@@ -167,7 +167,7 @@ class LudoDBRequestHandler
     private function runAndRemoveProgressBar($data){
 
         if(!empty($data) && is_array($data) && isset($data['LudoDBProgressID'])){
-            $pr = new LudoDBProgress();
+            $pr = LudoDBProgress::getInstance();
             $pr->save($data['LudoDBProgressID']);
             unset($data['LudoDBProgressID']);
 
