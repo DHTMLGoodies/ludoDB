@@ -63,16 +63,21 @@ class LudoDBProgress extends LudoDBModel implements LudoDBService
         return empty($data);
     }
 
-    public function increment($steps = 1){
+    public function increment($steps = 1, $text = null){
         $this->setValue('current', $this->getValue('current') + $steps);
+        if(isset($text))$this->setText($text);
+        $this->commit();
+
     }
 
-    public function setText($text){
+    private function setText($text){
         $this->setValue('text', $text);
     }
 
-    public function setSteps($steps){
+    public function setSteps($steps, $text = null){
         $this->setValue('steps', $steps);
+        if(isset($text))$this->setText($text);
+        $this->commit();
     }
 
     private static $instance;
