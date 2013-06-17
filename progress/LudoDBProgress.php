@@ -43,6 +43,13 @@ class LudoDBProgress extends LudoDBModel implements LudoDBService
         $this->commit();
     }
 
+    public function read(){
+        $ret = parent::read();
+        $ret['percent'] = round($ret['current'] / $ret['steps'] * 100);
+        return $ret;
+
+    }
+
     public function getValidServices(){
         return array('read','save');
     }
