@@ -108,6 +108,8 @@ class LudoDBRequestHandler
 
         try {
 
+            $data = $this->runAndRemoveProgressBar($data);
+
             if(!isset($this->request)){
                 throw new LudoDBInvalidArgumentsException("No request");
             }
@@ -160,6 +162,17 @@ class LudoDBRequestHandler
             $this->success = false;
             return $this->toJSON(array());
         }
+    }
+
+    private function runAndRemoveProgressBar($data){
+
+        if(!empty($data) && is_array($data) && isset($data['LudoDBProgressID'])){
+            $pr = new LudoDBProgress();
+            $pr->save($data['LudoDBProgressID']);
+            unset($data['LudoDBProgressID']);
+
+        }
+        return $data;
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-class Car extends LudoDBModel
+class Car extends LudoDBModel implements LudoDBService
 {
     protected $config = array(
         'idField' => 'id',
@@ -48,5 +48,18 @@ class Car extends LudoDBModel
 
     public function getModel(){
         return $this->getValue('model');
+    }
+
+    public function getValidServices(){
+        return array('read','save');
+    }
+
+    public function validateServiceData($service, $data){
+        if($service === 'read')return empty($data);
+        return true;
+    }
+
+    public function validateArguments($service, $arguments){
+        return true;
     }
 }

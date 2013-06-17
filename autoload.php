@@ -74,6 +74,8 @@ spl_autoload_register(
                 'ludodbpdo' => '/LudoDBPDO.php',
                 'ludodbpdooracle' => '/LudoDBPDOOracle.php',
                 'ludodbprofiling' => '/LudoDBProfiling.php',
+                'ludodbprogress' => '/progress/LudoDBProgress.php',
+                'ludodbprogresstest' => '/Tests/LudoDBProgressTest.php',
                 'ludodbregistry' => '/LudoDBRegistry.php',
                 'ludodbrequesthandler' => '/LudoDBRequestHandler.php',
                 'ludodbrevision' => '/LudoDBRevision.php',
@@ -90,9 +92,6 @@ spl_autoload_register(
                 'ludodbvalidationtest' => '/Tests/LudoDBValidationTest.php',
                 'ludodbvalidator' => '/LudoDBValidator.php',
                 'ludojs' => '/LudoJS.php',
-                'ludojscountries' => '/Tests/classes/LudoJS/LudoJSCountries.php',
-                'ludojscountry' => '/Tests/classes/LudoJS/LudoJSCountry.php',
-                'ludojsperson' => '/Tests/classes/LudoJS/LudoJSPerson.php',
                 'ludojstests' => '/Tests/LudoJSTests.php',
                 'manager' => '/Tests/classes/Manager.php',
                 'modelwithsqlmethod' => '/Tests/classes/ModelWithSqlMethod.php',
@@ -122,6 +121,9 @@ spl_autoload_register(
                 'testnodeswithleafs' => '/Tests/classes/TestNodesWithLeafs.php',
                 'testtable' => '/Tests/classes/TestTable.php',
                 'testtimer' => '/Tests/classes/TestTimer.php',
+                'tludojscountries' => '/Tests/classes/LudoJS/LudoJSCountries.php',
+                'tludojscountry' => '/Tests/classes/LudoJS/LudoJSCountry.php',
+                'tludojsperson' => '/Tests/classes/LudoJS/LudoJSPerson.php',
                 'xhpprofiling' => '/xhprof/XHPProfiling.php',
                 'xhprofruns_default' => '/xhprof/xhprof_lib/utils/xhprof_runs.php'
             );
