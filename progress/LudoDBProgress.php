@@ -36,6 +36,8 @@ class LudoDBProgress extends LudoDBModel implements LudoDBService
         if(!$this->exists()){
             $this->createTable();
         }
+
+        LudoDB::getInstance()->query("delete from ". $this->configParser()->getTableName()." where current=steps");
         $this->setValue('id', $id);
         $this->setValue('steps',1000);
         $this->setValue('text','');
