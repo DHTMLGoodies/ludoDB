@@ -62,4 +62,29 @@ class LudoDBProgress extends LudoDBModel implements LudoDBService
     public function validateServiceData($service, $data){
         return empty($data);
     }
+
+    public function increment($steps = 1){
+        $this->setValue('current', $this->getValue('current') + $steps);
+    }
+
+    public function setText($text){
+        $this->setValue('text', $text);
+    }
+
+    public function setSteps($steps){
+        $this->setValue('steps', $steps);
+    }
+
+    private static $instance;
+
+    /**
+     * Return LudoDBProgress Instance
+     * @return LudoDBProgress
+     */
+    public static function getInstance(){
+        if(!isset(self::$instance)){
+            self::$instance = new LudoDBProgress();
+        }
+        return self::$instance;
+    }
 }
