@@ -72,6 +72,11 @@ class LudoDBProgress extends LudoDBModel implements LudoDBService
 
     }
 
+    public function finish(){
+        $this->setValue('current', $this->getValue('steps'));
+        $this->commit();
+    }
+
     private function setText($text){
         $this->setValue('text', $text);
     }
