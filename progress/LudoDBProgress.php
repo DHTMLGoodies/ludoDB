@@ -66,6 +66,7 @@ class LudoDBProgress extends LudoDBModel implements LudoDBService
     }
 
     public function increment($steps = 1, $text = null){
+        if(!$this->getValue('id'))return;
         $this->setValue('current', $this->getValue('current') + $steps);
         if(isset($text))$this->setText($text);
         $this->commit();
@@ -73,6 +74,7 @@ class LudoDBProgress extends LudoDBModel implements LudoDBService
     }
 
     public function finish(){
+        if(!$this->getValue('id'))return;
         $this->setValue('current', $this->getValue('steps'));
         $this->commit();
     }
@@ -82,6 +84,7 @@ class LudoDBProgress extends LudoDBModel implements LudoDBService
     }
 
     public function setSteps($steps, $text = null){
+        if(!$this->getValue('id'))return;
         $this->setValue('steps', $steps);
         if(isset($text))$this->setText($text);
         $this->commit();
