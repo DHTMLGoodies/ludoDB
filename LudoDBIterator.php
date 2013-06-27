@@ -108,7 +108,7 @@ class LudoDBIterator extends LudoDBObject implements Iterator
      * Execute query and get result set reference.
      */
     private function load(){
-        $this->dbResource = $this->db->query($this->sqlHandler()->getSql(), $this->arguments);
+        $this->dbResource = $this->db->query($this->sqlHandler()->getSql(), $this->sqlHandler()->getArguments());
         $this->loaded = true;
         $this->next();
     }

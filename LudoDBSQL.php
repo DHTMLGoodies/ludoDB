@@ -44,6 +44,8 @@ class LudoDBSql
      */
     private $configParser;
 
+    private $sql;
+
     /**
      * Constructs new SQL handler for given LudoDBModel or LudoDBCollection.
      * @param LudoDBObject $obj
@@ -69,15 +71,24 @@ class LudoDBSql
      * Return "select" sql for it's LudoDBObject
      * @return string
      */
-    public function getSql()
-    {
+    public function getSql(){
         if(method_exists($this->obj, "getSql")){
-            return vsprintf($this->obj->getSql(), $this->arguments).$this->limit;
+            $sql = $this->obj->getSql();
+            if(is_array($sql)){
+                if(count($sql) === 2){
+                    $this->arguments = $sql[1];
+                }
+                $sql = $sql[0];
+            }
+            return vsprintf($sql, $this->arguments).$this->limit;
         }else if (isset($this->config['sql'])) {
             return vsprintf($this->config['sql'], $this->arguments).$this->limit;
-        } else {
-            return $this->getCompiledSql().$this->limit;
         }
+        return $this->getCompiledSql().$this->limit;
+    }
+
+    public function getArguments(){
+        return $this->arguments;
     }
 
     /**

@@ -52,7 +52,7 @@ abstract class LudoDBModel extends LudoDBObject
     {
         $this->populated = true;
         $this->arguments = $this->getValidArguments($this->arguments);
-        $data = $this->db->one($this->sqlHandler()->getSql(), $this->arguments);
+        $data = $this->db->one($this->sqlHandler()->getSql(), $this->sqlHandler()->getArguments());
         if (isset($data)) {
             $this->populateWith($data);
             $this->setId($this->getValue($this->parser->getIdField()));
