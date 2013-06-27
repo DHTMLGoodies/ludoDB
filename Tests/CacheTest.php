@@ -160,9 +160,7 @@ class CacheTest extends TestBase
         $requestString.="/read";
         echo $requestString."\n";
         $request->handle(
-            array(
-                'request' => $requestString
-            )
+            $requestString
         );
     }
 }

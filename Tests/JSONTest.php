@@ -144,9 +144,7 @@ class JSONTest extends TestBase
         $requestString.="/read";
 
         $request->handle(
-            array(
-                'request' => $requestString
-            )
+            $requestString
         );
     }
 }

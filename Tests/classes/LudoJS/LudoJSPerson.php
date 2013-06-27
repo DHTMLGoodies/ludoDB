@@ -46,7 +46,7 @@ class TLudoJSPerson extends LudoDBModel implements LudoDBService
                     'textKey' => 'name',
                     'type' => 'form.Select',
                     'order' => '10',
-                    'dataSource' => 'LudoJSCountries'
+                    'dataSource' => 'TLudoJSCountries'
                 ),
                 "access" => "rw"
             ),

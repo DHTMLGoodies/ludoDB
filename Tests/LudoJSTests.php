@@ -57,8 +57,9 @@ class LudoJSTests extends TestBase
         $form = $handler->handle("LudoJS/TLudoJSPerson/form");
         $form = json_decode($form, true);
 
+
         // then
-        $this->assertNotNull($form['response']['children']);
+        $this->assertNotNull($form['response']['children'], json_encode($form));
 
         $children = $form['response']['children'];
 
@@ -147,7 +148,7 @@ class LudoJSTests extends TestBase
 
         $formConfig = $form['response']['form'];
 
-        $this->assertEquals('LudoJSPerson', $formConfig['resource']);
+        $this->assertEquals('TLudoJSPerson', $formConfig['resource']);
     }
 
     private function getLudoJsFor($column, $children){
