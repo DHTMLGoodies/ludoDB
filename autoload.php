@@ -109,6 +109,8 @@ spl_autoload_register(
                 'personwithvalidation' => '/Tests/classes/Validation/PersonWithValidation.php',
                 'phone' => '/Tests/classes/Phone.php',
                 'phonecollection' => '/Tests/classes/PhoneCollection.php',
+                'project' => '/Tests/classes/Project.php',
+                'projects' => '/Tests/classes/Projects.php',
                 'requesthandlermock' => '/Tests/classes/RequestHandlerMock.php',
                 'requesthandlertest' => '/Tests/RequestHandlerTest.php',
                 'section' => '/Tests/classes/Section.php',
