@@ -18,7 +18,7 @@ class Project extends LudoDBModel
             ),
             'description' => array(
                 'db' => 'varchar(2000)',
-                'acecss' => 'rw'
+                'access' => 'rw'
             )
         ),
         'data' => array(
