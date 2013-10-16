@@ -23,16 +23,9 @@ require_once("connect.php");
 
 LudoDB::enableLogging();
 
-$request = array('request' => isset($_GET['request']) ? $_GET['request'] : $_POST['request']);
+$request = isset($_GET['request']) ? $_GET['request'] : $_POST['request'];
+$requestData = isset($_POST['data']) ? $_POST['data'] : null;
 
-if (isset($_POST['request'])) {
-    $request['data'] = isset($_POST['request']['data']) && is_array($_POST['request']['data']) ? $_POST['request']['data'] : null;
-}
-
-
-if (isset($_POST['arguments'])) {
-    $request['arguments'] = $_POST['arguments'];
-}
 
 $handler = new LudoDBRequestHandler();
-echo $handler->handle($request);
+echo $handler->handle($request, $requestData);
