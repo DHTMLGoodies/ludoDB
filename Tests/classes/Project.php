@@ -14,11 +14,11 @@ class Project extends LudoDBModel
             'id' => 'int auto_increment not null primary key',
             'title' => array(
                 'db' => 'varchar(128)',
-                'access' => 'r'
+                'access' => 'rw'
             ),
             'description' => array(
                 'db' => 'varchar(2000)',
-                'acecss' => 'r'
+                'acecss' => 'rw'
             )
         ),
         'data' => array(
