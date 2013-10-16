@@ -10,7 +10,7 @@ class Projects extends LudoDBCollection implements LudoDBService
     protected $config = array(
         "model" => "Project",
         "sql" => "select * from project order by title",
-        "columns" => array("id","title")
+        "columns" => array("id","title","description")
     );
 
     public function validateServiceData($service, $data){
@@ -27,9 +27,8 @@ class Projects extends LudoDBCollection implements LudoDBService
 
     public function read(){
         $pr = new Project();
-        if(!$pr->exists()){
-            $pr->createTable();
-        }
+        $pr->drop()->yesImSure();
+        $pr->createTable();
 
         return parent::read();
     }

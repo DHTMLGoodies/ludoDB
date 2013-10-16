@@ -14,13 +14,18 @@ class Project extends LudoDBModel
             'id' => 'int auto_increment not null primary key',
             'title' => array(
                 'db' => 'varchar(128)',
-                'access' => 'rw'
+                'access' => 'r'
+            ),
+            'description' => array(
+                'db' => 'varchar(2000)',
+                'acecss' => 'r'
             )
         ),
         'data' => array(
-            array('id' => '1', 'title' => 'Internal project'),
-            array('id' => '2', 'title' => 'Project ACME development'),
-            array('id' => '3', 'title' => 'Project other development')
+            array('id' => '1', 'title' => 'Internal project','description' => 'My internal project'),
+            array('id' => '2', 'title' => 'Project ACME development','description' => 'Software development for the service company ACME'),
+            array('id' => '3', 'title' => 'Project other development','description' => 'Software development for misc clients'),
+            array('id' => '4', 'title' => 'Android training','description' => 'Internal Android development training'),
         )
 
     );
