@@ -200,6 +200,7 @@ class LudoDBRequestHandler
             'message' => $this->message,
             'code' => $this->code,
             'resource' => get_class($this->resource),
+            'service' => $this->serviceName,
             $this->responseKey => $data
         );
         if (LudoDB::isLoggingEnabled()) {
