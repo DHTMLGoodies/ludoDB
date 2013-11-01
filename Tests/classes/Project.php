@@ -22,11 +22,12 @@ class Project extends LudoDBModel
             )
         ),
         'data' => array(
-            array('id' => '1', 'title' => 'Internal project','description' => 'My internal project'),
+            array('id' => '1', 'title' => 'Internal project (updated)','description' => 'My internal project'),
             array('id' => '2', 'title' => 'Project ACME development','description' => 'Software development for the service company ACME'),
             array('id' => '3', 'title' => 'Project other development','description' => 'Software development for misc clients'),
             array('id' => '4', 'title' => 'Android training','description' => 'Internal Android development training'),
             array('id' => '5', 'title' => 'Main product - design development','description' => 'Develop graphic design elements for our main product'),
+            array('id' => '6', 'title' => 'Web site acme-software.com','description' => 'Web development of web site'),
         )
 
     );

@@ -28,10 +28,14 @@ class Projects extends LudoDBCollection implements LudoDBService
     public function read(){
         $pr = new Project();
 
-        if(!$pr->exists()){
-            #$pr->drop()->yesImSure();
-            $pr->createTable();
+        if($pr->exists()){
+            $pr->drop()->yesImSure();
         }
+        $pr->createTable();
+        #if(!$pr->exists()){
+            $pr->drop()->yesImSure();
+            $pr->createTable();
+        #}
         return parent::read();
     }
 
