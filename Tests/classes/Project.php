@@ -29,6 +29,7 @@ class Project extends LudoDBModel
             array('id' => '5', 'title' => 'Main product - design development','description' => 'Develop graphic design elements for our main product'),
             array('id' => '6', 'title' => 'Web site acme-software.com','description' => 'Web development of web site acme-software.com'),
             array('id' => '7', 'title' => 'iOS training project','description' => 'Internal training for iOS development'),
+            array('id' => '8', 'title' => 'Acme CRM','description' => 'Logging of development work.'),
         )
 
     );
