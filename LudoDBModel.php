@@ -361,6 +361,15 @@ abstract class LudoDBModel extends LudoDBObject
         $this->insertDefaultData();
     }
 
+    public function getSQLCreate(){
+        $sql = $this->sqlHandler()->getCreateTableSql();
+        $params = $this->parser->getDefaultValues();
+        if(!empty($params)){
+            $sql = LudoDBSql::fromPrepared($sql, $params);
+        }
+        return $sql;
+    }
+
     /**
      * Returns true if database table exists.
      * @return bool

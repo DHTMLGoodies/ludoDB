@@ -60,6 +60,20 @@ class LudoDBUtility
     }
 
     /**
+     * Returns database create syntax (MySQL) for the selected tables
+     */
+    public function getDatabaseCreate(array $classNames){
+        $ret = array();
+        $classes = $this->getClassesRearranged($classNames);
+        foreach($classes as $class){
+            $inst = $this->getClassInstance($class);
+            $ret[] = $inst->getSQLCreate();
+
+        }
+        return $ret;
+    }
+
+    /**
      * Return database tables for given class names
      * @param array $classNames
      * @return array
