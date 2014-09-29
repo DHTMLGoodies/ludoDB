@@ -292,7 +292,8 @@ class LudoDBRequestHandler
      */
     protected function getServiceName()
     {
-        return array_pop(explode("/", $this->request));
+        $tokens = explode("/", $this->request);
+        return $tokens[count($tokens)-1];
     }
 
     /**
