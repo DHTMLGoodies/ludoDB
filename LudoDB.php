@@ -247,7 +247,7 @@ class LudoDB
      * countRows is implemented in sub classes.
      * @return int
      */
-    protected function countRows(){
+    protected function countRows($sql, $params = array()){
         return 0;
     }
 
