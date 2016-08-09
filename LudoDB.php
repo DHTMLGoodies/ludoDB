@@ -295,6 +295,7 @@ class LudoDB
      */
     public function log($sql, $arguments = array())
     {
+        echo "Logging";
         $fh = fopen("sql.txt", "a+");
         $logText = $sql;
         if(!empty($arguments)){
