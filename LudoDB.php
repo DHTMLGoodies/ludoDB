@@ -270,6 +270,14 @@ class LudoDB
         }
     }
 
+    public function startTransaction(){
+        self::getInstance()->query("START TRANSACTION");
+    }
+
+    public function commitTransaction(){
+        self::getInstance()->query("COMMIT");
+    }
+
     /**
      * Returns true if database with given name exists.
      * Example:
